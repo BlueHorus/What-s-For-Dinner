@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Main from './App.js';
-import 'semantic-ui-css/semantic.min.css'
+// import '/node_modules/semantic-ui-css/semantic.min.css'
 
 
 ReactDOM.render(
