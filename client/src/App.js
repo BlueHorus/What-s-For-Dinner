@@ -20,7 +20,45 @@ class Main extends React.Component {
 
   render() {
     return(
-      <h1><Recipe /></h1>
+      <div>
+        <div>
+        <div className="navigation">
+          <span id="1" onClick={this.viewSwitch}>
+            LOGO
+          </span>
+          <div>
+            🍜
+            <span id="2" onClick={this.viewSwitch}>
+              Find Recipes
+            </span>
+          </div>
+          <div>
+            🍜
+            <span id="3" onClick={this.viewSwitch}>
+              My Ingredients
+            </span>
+          </div>
+          <div>
+            🍜
+            <span id="4" onClick={this.viewSwitch}>
+              My Recipes
+            </span>
+          </div>
+          <div>
+            🍜
+            <span id="5" onClick={this.viewSwitch}>
+              Log In/ Sign Up
+            </span>
+          </div>
+        </div>
+        {this.state.id === "1" ? <div><Featured /></div> : ""}
+        {this.state.id === "2" ? <h1>Find Recipes Placeholder</h1> : ""}
+        {this.state.id === "3" ? <h1>My Ingredients Placeholder</h1> : ""}
+        {this.state.id === "4" ? <h1>My Recipes Placeholder</h1> : ""}
+        {this.state.id === "5" ? <h1>Profile Placeholder</h1> : ""}
+      </div>
+      <div>placeholder</div>
+    </div>
     )
   }
 }

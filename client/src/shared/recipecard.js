@@ -21,31 +21,33 @@ import axios from 'axios';
 
 function Recipe (props) {
   // let categories = [];
-  console.log(Object.keys(sample))
-  console.log(sample.dishTypes)
-  // for (var i = 0; i < sample.results.dishTypes; i++) {
-  //   categories.push(sample.results.dishTypes[i])
+//   console.log((props.recipe))
+//   console.log(props.recipe.dishTypes)
+  // for (var i = 0; i < props.recipe.results.dishTypes; i++) {
+  //   categories.push(props.recipe.results.dishTypes[i])
   // }
   // axios.get('/featuredorsomething', (req, res) => {
   //   console.log(req)
   // })
   return (
     <div className="recipecard">
-      <div>Recipe: {sample.results[0].title}</div>
-      <div><img src={sample.results[0].image}/> </div>
-      <div>link: {sample.spoonacularSourceUrl}</div>
-      <div>Summary: {sample.summary.replace(/<[^>]+>/g, '')}</div>
+        <div className="recipetitle">Recipe: {props.recipe.results[0].title}</div>
+      <div className="recipeimage"><img src={props.recipe.results[0].image}/> </div>
+      <div className="recipelink"><a href={props.recipe.spoonacularSourceUrl}>Full recipe</a></div>
+      <div className="summary">Summary: {props.recipe.summary.replace(/<[^>]+>/g, '').slice(0,240)}...</div>
       <div className="ingredients">
           <ul>Ingredients:
-              {sample.usedIngredients.map(ing => <li>{ing.name}</li>)}
-              {sample.unusedIngredients.map(ing => <li>{ing.name}</li>)}
+              {props.recipe.usedIngredients.map(ing => <li>{ing.name}</li>)}
+              {props.recipe.unusedIngredients.map(ing => <li>{ing.name}</li>)}
           </ul>
       </div>
-      <div>Meal tags:{sample.dishTypes.map(type => <div>{type}</div>)}</div>
-      <div>Diet friendly:{sample.diets.map(type => <div>{type}</div>)}</div>
-      <div className="favoritebutton">PH</div>
-      <div className="likebutton">PH</div>
-      <div className="dislikebutton">PH</div>
+      <div>Meal tags:{props.recipe.dishTypes.map(type => <li>{type}</li>)}</div>
+      <div>Diet friendly:{props.recipe.diets.map(type => <li>{type}</li>)}</div>
+      <div className="opinionbutton">
+        <div className="favoritebutton">PH</div>
+        <div className="likebutton">PH</div>
+        <div className="dislikebutton">PH</div>
+      </div>
     </div>
   )
 }
@@ -108,7 +110,7 @@ var sample = {
               },
           },
           ],
-          "summary": "How To Make Basic Marinara Sauce is a <b>caveman, gluten free, primal, and whole 30</b> sauce. This recipe makes 12 servings with <b>37 calories</b>, <b>2g of protein</b>, and <b>0g of fat</b> each. For <b>61 cents per serving</b>, this recipe <b>covers 7%</b> of your daily requirements of vitamins and minerals. Head to the store and pick up tomatoes, herbs, salt and pepper, and a few other things to make it today. 1 person has made this recipe and would make it again. From preparation to the plate, this recipe takes around <b>45 minutes</b>. All things considered, we decided this recipe <b>deserves a spoonacular score of 68%</b>. This score is solid. Try <a href=\"https://spoonacular.com/recipes/basic-marinara-sauce-634391\">Basic Marinara Sauce</a>, <a href=\"https://spoonacular.com/recipes/how-to-make-homemade-roasted-tomato-basil-marinara-sauce-no-sugar-added-915383\">How to Make Homemade Roasted Tomato Basil Marinara Sauce (no sugar added!)</a>, and <a href=\"https://spoonacular.com/recipes/basic-marinara-245233\">Basic Marinara</a> for similar recipes.",
+          "summary": "How To Make Basic Marinara Sauce is a <b>caveman, gluten free, primal, and whole 30</b> sauce. This recipe makes 12 servings with <b>37 calories</b>, <b>2g of protein</b>, and <b>0g of fat</b> each. For <b>61 cents per serving</b>, recipe <b>covers 7%</b> of your daily requirements of vitamins and minerals. Head to the store and pick up tomatoes, herbs, salt and pepper, and a few other things to make it today. 1 person has made recipe and would make it again. From preparation to the plate, recipe takes around <b>45 minutes</b>. All things considered, we decided recipe <b>deserves a spoonacular score of 68%</b>. This score is solid. Try <a href=\"https://spoonacular.com/recipes/basic-marinara-sauce-634391\">Basic Marinara Sauce</a>, <a href=\"https://spoonacular.com/recipes/how-to-make-homemade-roasted-tomato-basil-marinara-sauce-no-sugar-added-915383\">How to Make Homemade Roasted Tomato Basil Marinara Sauce (no sugar added!)</a>, and <a href=\"https://spoonacular.com/recipes/basic-marinara-245233\">Basic Marinara</a> for similar recipes.",
           "cuisines": [],
           "dishTypes": [
               "sauce"

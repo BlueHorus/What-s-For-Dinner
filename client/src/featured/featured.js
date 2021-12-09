@@ -18,7 +18,8 @@ Recipe
 //featured recipes should be handled by landing page??
 
 import React from 'react';
-import axios from 'axios'
+import axios from 'axios';
+import Recipe from '../shared/recipecard.js'
 
 
 // data request:
@@ -33,22 +34,13 @@ import axios from 'axios'
 
 
 function Featured (props) {
-  // let categories = [];
-  console.log(Object.keys(sample))
-  console.log(sample.dishTypes)
-  // for (var i = 0; i < sample.results.dishTypes; i++) {
-  //   categories.push(sample.results.dishTypes[i])
-  // }
+
   // axios.get('/featuredorsomething', (req, res) => {
   //   console.log(req)
   // })
   return (
-    <div className="recipecard">
-      <div>Recipe: {sample.results[0].title}</div>
-      <div><img src={sample.results[0].image}/> </div>
-      <div>link: {sample.results[0].spoonacularSourceUrl}</div>
-      <div className="ingredients">{sample.usedIngredients.map(ing => {<div>{ing.name}</div>})}</div>
-      <div>{sample.dishTypes.map(type => {<div>{type}</div>})}</div>
+    <div className="featuredrecipes">
+        <div> <Recipe recipe={sample}/> </div>
     </div>
   )
 }

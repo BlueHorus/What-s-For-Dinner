@@ -1,0 +1,36 @@
+
+
+.recipecard {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  border: solid;
+  grid-template-rows:[row1-start] 30px [row1-end]
+}
+
+.recipetitle {
+  grid-column-start: 2;
+  grid-column-end: 4;
+  text-align: center;
+  font-size: larger;
+}
+
+.recipelink {
+  grid-column-start:1;
+  grid-row-start: 4
+}
+
+.recipeimage {
+  grid-row-start: 1;
+  grid-row-end: 4
+}
+
+.summary {
+  grid-row-start:2;
+  grid-column-start: 2;
+  grid-column-end: 4
+}
+
+.opinionbutton {
+  display: flexbox;
+  grid-column-start: 3;
+}
