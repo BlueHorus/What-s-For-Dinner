@@ -1,5 +1,7 @@
 import React from 'react';
 import axios from 'axios';
+import Featured from './featured/featured.js';
+import Recipe from './shared/recipecard.js';
 
 
 class Main extends React.Component {
@@ -7,7 +9,7 @@ class Main extends React.Component {
 
   render() {
     return(
-      <h1>Hello Blue Ocean World!</h1>
+      <h1><Recipe /></h1>
     )
   }
 }
