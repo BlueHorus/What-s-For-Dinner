@@ -1,16 +1,16 @@
-import React from 'react';
-import axios from 'axios';
-
+import React from "react";
+import axios from "axios";
+import Auth from "./login.jsx";
 
 class Main extends React.Component {
-
-
   render() {
-    return(
-      <h1>Hello Blue Ocean World!</h1>
-    )
+    return (
+      <div>
+        <Auth />
+        <h1>Hello Blue Ocean World!</h1>
+      </div>
+    );
   }
 }
 
-
-export default Main
+export default Main;
