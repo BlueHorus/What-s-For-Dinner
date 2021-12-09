@@ -5,7 +5,18 @@ import Recipe from './shared/recipecard.js';
 
 
 class Main extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      id: "1",
+    };
+    this.viewSwitch = this.viewSwitch.bind(this);
+  }
 
+  viewSwitch(e) {
+    var value = e.target.id;
+    this.setState({ id: value });
+  }
 
   render() {
     return(
@@ -14,5 +25,4 @@ class Main extends React.Component {
   }
 }
 
-
-export default Main
+export default Main;
