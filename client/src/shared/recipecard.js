@@ -17,6 +17,7 @@ Recipe
 
 import React from 'react';
 import axios from 'axios';
+import FavoriteButton from './favoriteRecipeButton.js'
 import { PieChart } from 'react-minimal-pie-chart';
 
 
@@ -39,9 +40,9 @@ function Recipe (props) {
             <div className="mealtags">Meal tags:{recipe.dishTypes.map(type => <li>{type}</li>)}</div>
             <div>Diet friendly:{recipe.diets.map(type => <li>{type}</li>)}</div>
             <div className="opinionbutton">
-                <div className="favoritebutton">button </div>
-                <div className="likebutton">button </div>
-                <div className="dislikebutton">button </div>
+                <FavoriteButton />
+                <div className="likebutton">PH</div>
+                <div className="dislikebutton">PH</div>
             </div>
         </div>
         <div className="recipeadditions">
