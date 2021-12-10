@@ -6,6 +6,7 @@ import searchIcon from './shared/SVGS/SearchIcon.svg';
 import ingredientIcon from './shared/SVGS/IngredientIcon.svg'
 import recipeIcon from './shared/SVGS/recipesIcon.svg';
 import profileIcon from './shared/SVGS/profileIcon.svg';
+import Ingredients from './ingredients/ingredients.js'
 
 
 
@@ -55,7 +56,7 @@ class Main extends React.Component {
         <div className='content'>
         {this.state.id === "logo" ? <div><Featured /></div> : ""}
         {this.state.id === "find-recipes" ? <h1>Find Recipes Placeholder</h1> : ""}
-        {this.state.id === "my-ingredients" ? <h1>My Ingredients Placeholder</h1> : ""}
+        {this.state.id === "my-ingredients" ? <h1><Ingredients /></h1> : ""}
         {this.state.id === "my-recipes" ? <h1>My Recipes Placeholder</h1> : ""}
         {this.state.id === "login-signup" ? <h1>Profile Placeholder</h1> : ""}
       </div>
