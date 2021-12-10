@@ -13,9 +13,9 @@ class PanGraphic extends React.Component {
    anime({
      targets: '.wrp svg',
      opacity: [0, 1],
-     duration: 500,
+     duration: 750,
      translateY: ["30%", "0"],
-     easing: 'linear'
+     easing: 'easeOutQuad'
    })
 
    anime({
@@ -23,8 +23,8 @@ class PanGraphic extends React.Component {
     opacity: [0, 1],
     duration: 500,
     translateY: ["30%", "0"],
-    delay: 1000,
-    easing: 'linear'
+    delay: 700,
+    easing: 'easeOutQuad'
   })
 
   anime({
@@ -33,7 +33,7 @@ class PanGraphic extends React.Component {
     duration: 1000,
     translateY: ["60%", "0"],
     delay: 1000,
-    easing: 'linear'
+    easing: 'easeOutQuad'
   })
    anime({
       loop: true,
@@ -68,7 +68,7 @@ class PanGraphic extends React.Component {
     return (
      <div className='wrp'>
        <FryingPan />
-       <span id='tagline'>Cookin Up Some Hot Recipes!</span>
+       <span id='tagline'>Cookin' Up Some Hot Recipes!</span>
        <span id='content-break'></span>
      </div>
     )

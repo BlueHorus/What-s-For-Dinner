@@ -30,7 +30,7 @@ function Recipe (props) {
     <div>
         <div className="recipecard">
             <div className="recipetitle">Recipe: {recipe.title}</div>
-            <img className="recipeimage"src={recipe.image} alt="a picture of food"/>
+            <img className="recipeimage" src={recipe.image} alt="a picture of food"/>
             <div className="recipelink"><a href={recipe.spoonacularSourceUrl}>Full recipe</a></div>
             <div className="summary">Summary: {recipe.summary.replace(/<[^>]+>/g, '').slice(0,240)}...</div>
             <div className="ingredients">Ingredients:
@@ -38,7 +38,7 @@ function Recipe (props) {
                 {recipe.missedIngredients.map(ing => <li className="missingingredients">{ing.name}</li>)}
             </div>
             <div className="mealtags">Meal tags:{recipe.dishTypes.map(type => <li>{type}</li>)}</div>
-            <div>Diet friendly:{recipe.diets.map(type => <li>{type}</li>)}</div>
+            <div className ="diet">Diet friendly:{recipe.diets.map(type => <li>{type}</li>)}</div>
             <div className="opinionbutton">
                 <FavoriteButton />
                 <div className="likebutton">PH</div>
