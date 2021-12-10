@@ -30,7 +30,7 @@ function Recipe (props) {
     <div>
         <div className="recipecard">
             <div className="recipetitle">Recipe: {recipe.title}</div>
-            <div className="recipeimage"><img src={recipe.image} alt="a picture of food"/> </div>
+            <img className="recipeimage"src={recipe.image} alt="a picture of food"/>
             <div className="recipelink"><a href={recipe.spoonacularSourceUrl}>Full recipe</a></div>
             <div className="summary">Summary: {recipe.summary.replace(/<[^>]+>/g, '').slice(0,240)}...</div>
             <div className="ingredients">Ingredients:
