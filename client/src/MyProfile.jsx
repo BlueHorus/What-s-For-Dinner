@@ -1,5 +1,7 @@
 import React from 'react';
 import axios from 'axios';
+import placeholder from './images/placeholder-image.png';
+
 
 class MyProfile extends React.Component {
   constructor(props) {
@@ -8,7 +10,7 @@ class MyProfile extends React.Component {
       value: '',
       diet: '',
       changingProfilePic: false,
-      selectedFile: null,
+      selectedFile: placeholder,
     };
 
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
@@ -35,8 +37,10 @@ class MyProfile extends React.Component {
   }
 
   onFileChange(e) {
+    console.log(e.target.files[0]);
+    console.log(URL.createObjectURL(e.target.files[0]));
     this.setState({
-      selectedFile: e.target.files[0],
+      selectedFile: URL.createObjectURL(e.target.files[0]),
       changingProfilePic: false,
     })
   }
@@ -69,7 +73,7 @@ class MyProfile extends React.Component {
         <div>Welcome Back, [USERNAME HERE]!</div>
 
         <div>
-          <img src='' alt="profile-picture" />
+          <img src={this.state.selectedFile} alt="profile-picture" />
           <button onClick={this.changeProfilePic}>x</button>
           {changingProfilePic === true
             ? <input type="file" onChange={this.onFileChange} />
