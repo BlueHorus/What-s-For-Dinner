@@ -2,11 +2,16 @@ import React from 'react';
 import axios from 'axios';
 import Featured from './featured/featured.js';
 import Recipe from './shared/recipecard.js';
+<<<<<<< HEAD
 import searchIcon from './shared/SVGS/searchIcon.svg';
 import ingredientIcon from './shared/SVGs/IngredientIcon.svg'
 import recipeIcon from './shared/SVGs/recipesIcon.svg';
 import profileIcon from './shared/SVGS/profileIcon.svg';
 
+=======
+import searchIcon from './shared/SVGS/SearchIcon.svg';
+import logo from './shared/SVGS/BlueOceanLogo.svg';
+>>>>>>> 7c391df1842dfbeac6abeef32b3e33b09a872154
 
 
 class Main extends React.Component {

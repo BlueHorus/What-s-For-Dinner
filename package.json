@@ -27,6 +27,11 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-minimal-pie-chart": "^8.2.0",
+<<<<<<< HEAD
+=======
+    "semantic-ui-css": "^2.4.1",
+    "semantic-ui-react": "^2.0.4",
+>>>>>>> 7c391df1842dfbeac6abeef32b3e33b09a872154
     "webpack": "^5.65.0",
     "webpack-cli": "^4.9.1"
   },
@@ -36,6 +41,8 @@
     "@babel/preset-react": "^7.16.0",
     "babel-loader": "^8.2.3",
     "compression": "^1.7.4",
+    "eslint": "^8.4.1",
+    "eslint-plugin-react": "^7.27.1",
     "svg-url-loader": "^7.1.1"
   }
 }
