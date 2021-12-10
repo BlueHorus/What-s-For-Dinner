@@ -97,8 +97,9 @@
   display: grid;
   border: solid;
   padding: 5px;
+  width: 800px;
   background-color: burlywood;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
   grid-template-rows: 175px;
   color: brown
 }
