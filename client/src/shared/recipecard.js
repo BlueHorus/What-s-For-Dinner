@@ -38,7 +38,7 @@ function Recipe (props) {
                 {recipe.missedIngredients.map(ing => <li className="missingingredients">{ing.name}</li>)}
             </div>
             <div className="mealtags">Meal tags:{recipe.dishTypes.map(type => <li>{type}</li>)}</div>
-            <div>Diet friendly:{recipe.diets.map(type => <li>{type}</li>)}</div>
+            <div className ="diet">Diet friendly:{recipe.diets.map(type => <li>{type}</li>)}</div>
             <div className="opinionbutton">
                 <FavoriteButton />
                 <div className="likebutton">PH</div>
