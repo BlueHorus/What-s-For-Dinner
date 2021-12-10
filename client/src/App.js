@@ -2,9 +2,9 @@ import React from 'react';
 import axios from 'axios';
 import Featured from './featured/featured.js';
 import Recipe from './shared/recipecard.js';
-import searchIcon from './shared/SVGS/searchIcon.svg';
-import ingredientIcon from './shared/SVGs/IngredientIcon.svg'
-import recipeIcon from './shared/SVGs/recipesIcon.svg';
+import searchIcon from './shared/SVGS/SearchIcon.svg';
+import ingredientIcon from './shared/SVGS/IngredientIcon.svg'
+import recipeIcon from './shared/SVGS/recipesIcon.svg';
 import profileIcon from './shared/SVGS/profileIcon.svg';
 
 
