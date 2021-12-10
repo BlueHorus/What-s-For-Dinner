@@ -10,7 +10,6 @@ class Main extends React.Component {
   render() {
     return(
       <>
-        <h1>Hello Blue Ocean World!</h1>
         <MyProfile />
       </>
     )

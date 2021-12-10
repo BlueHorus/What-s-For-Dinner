@@ -1,6 +1,5 @@
 import React from 'react';
 import axios from 'axios';
-import placeholder from './images/placeholder-image.png';
 
 
 class MyProfile extends React.Component {
@@ -9,8 +8,9 @@ class MyProfile extends React.Component {
     this.state = {
       value: '',
       diet: '',
+      intolerances: [],
       changingProfilePic: false,
-      selectedFile: placeholder,
+      selectedFile: '',
     };
 
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
@@ -20,14 +20,31 @@ class MyProfile extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleDropdownChange = this.handleDropdownChange.bind(this);
+    this.deleteFood = this.deleteFood.bind(this);
+    this.updateDB = this.updateDB.bind(this);
   }
 
+  // componentDidMount() {
+  //   axios.get('/getUsersInfo')
+  //     .then(info => {
+  //       this.setState({
+  //         diet:
+  //         intolerances:
+  //       })
+  //     })
+  //     .catch(err => {
+  //       console.log(err);
+  //     })
+  // }
+
+  // componentDidUpdate() {
+
+  // }
+
   handleUsernameChange() {
-    //MAKE A MODAL? SEND INFO TO DB, FIREBASE??
   }
 
   handlePasswordChange() {
-    //MAKE A MODAL? SEND INFO TO DB, FIREBASE??
   }
 
   changeProfilePic() {
@@ -52,9 +69,11 @@ class MyProfile extends React.Component {
   }
 
   handleSubmit(e) {
+    const { intolerances, value } = this.state;
     event.preventDefault();
-    axios.post('/SERVER_ROUTE_HERE', {
-      diet: e.target.value,
+    this.setState({
+      intolerances: [...intolerances, value],
+      value: '',
     })
   }
 
@@ -64,9 +83,36 @@ class MyProfile extends React.Component {
     })
   }
 
+  updateIntolerances(e) {
+    const { intolerances } = this.state;
+    this.setState({
+      intolerances: [...intolerances, e.target.value],
+    })
+  }
+
+  deleteFood(e) {
+    console.log(e.target);
+    const { intolerances } = this.state;
+    this.setState({
+      intolerances: intolerances.filter(food => {
+        return food !== e.target.value;
+      })
+    })
+  }
+
+  updateDB() {
+    const { intolerances, diet } = this.state;
+    if (intolerances) {
+      axios.patch('/updateIntolerances')
+    }
+    if (diet) {
+      axios.patch('/updateDiet')
+    }
+  }
+
 
   render() {
-    const { value, diet, changingProfilePic } = this.state;
+    const { value, diet, intolerances, changingProfilePic } = this.state;
     return (
       <div className="profile">
 
@@ -88,33 +134,63 @@ class MyProfile extends React.Component {
 
         <br />
 
+        <div className="diet-list">
+          My Current Diet: {diet}
+        </div>
+
+        <div className="intolerance-list">
+          My Current Intolerances:
+          {intolerances.map(food => {
+            return (
+              <div>
+                <div>{food}</div>
+                <button value={food} onClick={this.deleteFood}>x</button>
+              </div>
+            );
+          })}
+        </div>
+        <br />
+
         <div>Enter any food intolerances below</div>
         <form onSubmit={this.handleSubmit}>
-          <input
-            type="text"
-            value={value}
-            onChange={this.handleChange}
-            placeholder="e.g. 'dairy, nuts'"
-          />
+          <select value={value} onChange={this.handleChange}>
+            <option default> - </option>
+            <option value="Dairy">Dairy</option>
+            <option value="Egg">Egg</option>
+            <option value="Gluten">Gluten</option>
+            <option value="Grain">Grain</option>
+            <option value="Peanut">Peanut</option>
+            <option value="Seafood">Seafood</option>
+            <option value="Sesame">Sesame</option>
+            <option value="Shellfish">Shellfish</option>
+            <option value="Soy">Soy</option>
+            <option value="Sulfite">Sulfite</option>
+            <option value="Tree Nut">Tree Nut</option>
+            <option value="Wheat">Wheat</option>
+          </select>
           <input type="submit" value="Add" />
         </form>
 
         <br />
 
-       <div>Select your diet in the dropdown below</div>
+       <div>Select your diet from the dropdown below</div>
         <select value={diet} onChange={this.handleDropdownChange}>
-            <option default> - </option>
-            <option value="gluten free">Gluten-Free</option>
-            <option value="ketogenic">Ketogenic</option>
-            <option value="vegetarian">Vegetarian</option>
-            <option value="lacto-vegetarian">Lacto-Vegetarian</option>
-            <option value="obo-vegetarian">Obo-Vegetarian</option>
-            <option value="vegan">Vegan</option>
-            <option value="pescetarian">Pescetarian</option>
-            <option value="paleo">Paleo</option>
-            <option value="primal">Primal</option>
-            <option value="whole30">Whole30</option>
-          </select>
+          <option default> - </option>
+          <option value="gluten free">Gluten-Free</option>
+          <option value="ketogenic">Ketogenic</option>
+          <option value="vegetarian">Vegetarian</option>
+          <option value="lacto-vegetarian">Lacto-Vegetarian</option>
+          <option value="obo-vegetarian">Obo-Vegetarian</option>
+          <option value="vegan">Vegan</option>
+          <option value="pescetarian">Pescetarian</option>
+          <option value="paleo">Paleo</option>
+          <option value="primal">Primal</option>
+          <option value="whole30">Whole30</option>
+        </select>
+        <br />
+        <br />
+        <button onClick={this.updateDB}>Confirm Changes!</button>
+
       </div>
     );
   }
