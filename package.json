@@ -26,12 +26,7 @@
     "nodemon": "^2.0.15",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-<<<<<<< HEAD
-=======
     "react-minimal-pie-chart": "^8.2.0",
-    "semantic-ui-css": "^2.4.1",
-    "semantic-ui-react": "^2.0.4",
->>>>>>> c18675f1d32c6a114eeca7915315d204dc4ceb6a
     "webpack": "^5.65.0",
     "webpack-cli": "^4.9.1"
   },

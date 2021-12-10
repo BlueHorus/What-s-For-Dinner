@@ -1,18 +1,51 @@
 * {
   font-family: "Raleway";
 }
+
+* #title {
+  font-family: 'Josefin Sans';
+  font-size: 37px;
+  margin-right: auto;
+}
+
+@media only screen and (max-width : 700px) {
+  #title {
+    display: none;
+  }
+}
+
 #root {
-  background-image: url('./images/Background\ pattern.svg');
+  display: flex;
+  background-image: url('./images/Backgroundpattern.png');
   width: 100vw;
   height: 100vh;
-  background-repeat: round;
+  background-size: contain;
+  padding: 0;
+  margin-left: 0;
+  bleed: 0;
+  justify-content: center;
+  background-repeat: space;
+
 }
 
 .main {
   display: flex;
-  position: relative;
+  flex-wrap: wrap;
+  justify-content: center;
+  background-image: url('./images/Backgroundpattern.png');
+  background-size: contain;
+  background-repeat: repeat-y;
+  padding: 0;
+  margin-left: 0;
+  bleed: 0;
+
+}
+.content {
+  display: flex;
   justify-self: center;
-  width: 1080px;
+  width: 700px;
+  height: 100vh;
+  background-color: #E4EAEA;
 }
 
 #logo {
@@ -33,8 +66,8 @@
 #find-recipes {
   display: flex;
   justify-self: flex-end;
-  margin-right: 10px;
-  background-color: #A6CCCA;
+  margin-right: 20px;
+  background-color: #E4EAEA;
   border-radius: 15px;
   height: 40px;
   width: 150px;
@@ -49,6 +82,7 @@
 .navigation {
   background-color: #4FBABA;
   height: 70px;
+  width: 100vw;
   display: flex;
   flex-direction: row;
   flex-shrink: 0;
@@ -56,7 +90,7 @@
 }
 
 .navigation img {
-  margin-right: 10px;
+  margin-right: 2px;
 }
 
 

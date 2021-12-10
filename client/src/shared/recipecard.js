@@ -17,11 +17,8 @@ Recipe
 
 import React from 'react';
 import axios from 'axios';
-<<<<<<< HEAD
 import FavoriteButton from './favoriteRecipeButton.js'
-=======
 import { PieChart } from 'react-minimal-pie-chart';
->>>>>>> c18675f1d32c6a114eeca7915315d204dc4ceb6a
 
 
 function Recipe (props) {
