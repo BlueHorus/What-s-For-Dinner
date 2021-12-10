@@ -34,23 +34,17 @@ class Main extends React.Component {
             <img  width='30' src={searchIcon}></img>
               Find Recipes
           </div>
-          <div id="my-ingredients">
+          <div id="my-ingredients" onClick={this.viewSwitch}>
             <img width='30' src={ingredientIcon} />
-            <span  onClick={this.viewSwitch}>
               My Ingredients
-            </span>
           </div>
-          <div id="my-recipes">
+          <div id="my-recipes" onClick={this.viewSwitch}>
             <img width='30' src={recipeIcon} />
-            <span onClick={this.viewSwitch}>
               My Recipes
-            </span>
           </div>
-          <div id="login-signup">
+          <div id="login-signup" onClick={this.viewSwitch}>
             <img width='30' src={profileIcon} />
-            <span onClick={this.viewSwitch}>
               Profile
-            </span>
           </div>
         </div>
         <div className='content'>
