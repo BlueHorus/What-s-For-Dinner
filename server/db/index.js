@@ -2,19 +2,6 @@ const mongoose = require("mongoose");
 
 let db = mongoose.connect("mongodb://127.0.0.1:27017/oceanDB");
 
-let userSchema = mongoose.Schema({
-  userName: { type: String },
-  password: { type: String },
-  email: { type: String, unique: true },
-  profilePic: { type: String },
-  sessionToken: { type: String },
-
-  ingredients: [ingredientsSchema],
-  notes: [notesSchema],
-  diet: { type: String },
-  dietaryRestrictions: [dietaryRestrictionsSchema],
-});
-
 let ingredientsSchema = mongoose.Schema({
   ingredient: { type: String },
   email: { type: String },
@@ -30,11 +17,24 @@ let dietaryRestrictionsSchema = mongoose.Schema({
   email: { type: String },
 });
 
+let userSchema = mongoose.Schema({
+  userName: { type: String },
+  password: { type: String },
+  email: { type: String, unique: true },
+  profilePic: { type: String },
+  sessionToken: { type: String },
+
+  ingredients: [ingredientsSchema],
+  notes: [notesSchema],
+  diet: { type: String },
+  dietaryRestrictions: [dietaryRestrictionsSchema],
+});
+
 let recipeSchema = mongoose.Schema({
   id: { type: String },
   upvote: { type: Number },
   downvote: { type: Number },
-  users [String],
+  users: [String],
 });
 
 let Users = mongoose.model("Users", userSchema);
