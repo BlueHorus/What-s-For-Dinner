@@ -9,17 +9,32 @@ let userSchema = mongoose.Schema({
   profilePic: { type: String },
   sessionToken: { type: String },
 
-  ingredients: [String],
-  notes: [String],
+  ingredients: [ingredientsSchema],
+  notes: [notesSchema],
   diet: { type: String },
-  dietaryRestrictions: [String],
+  dietaryRestrictions: [dietaryRestrictionsSchema],
+});
+
+let ingredientsSchema = mongoose.Schema({
+  ingredient: { type: String },
+  email: { type: String },
+});
+
+let notesSchema = mongoose.Schema({
+  note: { type: String },
+  email: { type: String },
+});
+
+let dietaryRestrictionsSchema = mongoose.Schema({
+  dietaryRestriction: { type: String },
+  email: { type: String },
 });
 
 let recipeSchema = mongoose.Schema({
   id: { type: String },
   upvote: { type: Number },
   downvote: { type: Number },
-  users: [String],
+  users [String],
 });
 
 let Users = mongoose.model("Users", userSchema);
