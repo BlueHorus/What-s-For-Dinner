@@ -9,8 +9,8 @@ import Landing from './landing/landing.js'
 
 // Icon imports
 import searchIcon from './shared/SVGS/searchIcon.svg';
-import ingredientIcon from './shared/SVGs/IngredientIcon.svg'
-import recipeIcon from './shared/SVGs/recipesIcon.svg';
+import ingredientIcon from './shared/SVGS/IngredientIcon.svg'
+import recipeIcon from './shared/SVGS/recipesIcon.svg';
 import profileIcon from './shared/SVGS/profileIcon.svg';
 
 

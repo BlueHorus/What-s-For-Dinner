@@ -36,6 +36,7 @@ body {
   background-image: url('./images/Backgroundpattern.png');
   background-size: contain;
   background-repeat: repeat;
+  margin: 0;
 }
 
 .main {
@@ -76,6 +77,8 @@ body {
 
 #tagline {
   font-family: "Josefin Sans";
+  color:tomato;
+  font-style: italic;
 }
 
 #my-ingredients,
@@ -89,12 +92,19 @@ body {
   border-radius: 15px;
   height: 40px;
   width: 150px;
-  justify-content: center;
   align-items: center;
+  text-align: center;
+  font-size: 15px;
 }
-#find-recipes {
-  margin-left: auto;
+
+#my-ingredients img,
+#my-recipes img,
+#login-signup img,
+#find-recipes img {
+  justify-self: flex-start;
+  margin-left: 3px;
 }
+
 
 
 .navigation {
@@ -111,23 +121,65 @@ body {
   margin-right: 2px;
 }
 
+.upvote-button {
+  background-image: url('./images/upVoteButton.svg');
+  width: 40px;
+  height: 40px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  border: 0;
+}
+
+.upvote-button:hover {
+  background-image: url('./images/upVoteButtonHover.svg');
+}
+
+.upvote-button:active {
+  background-image: url('./images/upVoteButtonClicked.svg');
+}
+
+.upvote-button:disabled {
+  background-image: url('./images/upVoteButtonDisabled.svg');
+}
+
+.downvote-button:active {
+  background-image: url('./images/downVoteButtonIconClicked.svg');
+}
+
+
+.downvote-button {
+  background-image: url('./images/downVoteButtonIcon.svg');
+  width: 40px;
+  height: 40px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  border: 0;
+}
+
+.downvote-button:disabled {
+  background-image: url('./images/downVoteButtonIconDisabled.svg');
+}
+
+.downvote-button:hover {
+  background-image: url('./images/downVoteButtonIconHover.svg');
+}
+
 
 
 .favorite-button {
   background-image: url('./images/favoriteButtonIcon.svg');
   width: 40px;
-  height: 50px;
+  height: 40px;
   background-size: contain;
   background-repeat: no-repeat;
   border: 0;
 }
  .favorite-button:hover {
   background-image: url('./images/favoriteButtonIconHover.svg');
-  width: 40px;
-  height: 50px;
-  background-size: contain;
-  background-repeat: no-repeat;
-  border: 0;
+}
+
+.favorite-button:active {
+  background-image: url('/public/images/favoriteButtonIconClicked.svg');
 }
 
 .recipecard {
