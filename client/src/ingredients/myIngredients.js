@@ -16,7 +16,7 @@ import React from 'react';
 // });
 
 
-class MyIngredients extends React.Component(props) {
+class MyIngredients extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
