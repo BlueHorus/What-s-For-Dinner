@@ -55,7 +55,7 @@ class Main extends React.Component {
         {this.state.id === "logo" ? <Featured /> : ""}
         {this.state.id === "landing" ? <Landing /> : ""}
         {this.state.id === "find-recipes" ? <h1>Find Recipes Placeholder</h1> : ""}
-        {this.state.id === "my-ingredients" ? <h1><Ingredients /></h1> : ""}
+        {this.state.id === "my-ingredients" ? <Ingredients /> : ""}
         {this.state.id === "my-recipes" ? <h1>My Recipes Placeholder</h1> : ""}
         {this.state.id === "login-signup" ? <h1>Profile Placeholder</h1> : ""}
       </div>

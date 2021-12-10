@@ -49,7 +49,7 @@ function Featured (props) {
 }
 
 
-export default Featured
+export default Featured;
 
 
 var sample = {

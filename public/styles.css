@@ -149,21 +149,11 @@ body {
   font-size: smaller;
 }
 
-<<<<<<< HEAD
-.recipecard:hover + .recipeadditions {
-  display: flex;
-  width: max-content;
-  border: solid;
-  padding: 5px;
-  margin: 5px;
-  height: 150px;
-=======
 /* .recipecard:hover + .recipeadditions {
   display: grid;
   border: solid;
   padding: 5px;
   width: 90%;
->>>>>>> e4b152aca243e051c3e9d7c3427576584164b903
   background-color: burlywood;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 175px;
