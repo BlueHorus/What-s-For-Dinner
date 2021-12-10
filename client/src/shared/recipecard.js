@@ -17,6 +17,7 @@ Recipe
 
 import React from 'react';
 import axios from 'axios';
+import FavoriteButton from './favoriteRecipeButton.js'
 
 
 function Recipe (props) {
@@ -31,7 +32,7 @@ function Recipe (props) {
   // })
   return (
     <div className="recipecard">
-        <div className="recipetitle">Recipe: {props.recipe.results[0].title}</div>
+        <h3 className="recipetitle">Recipe: {props.recipe.results[0].title}</h3>
       <div className="recipeimage"><img src={props.recipe.results[0].image}/> </div>
       <div className="recipelink"><a href={props.recipe.spoonacularSourceUrl}>Full recipe</a></div>
       <div className="summary">Summary: {props.recipe.summary.replace(/<[^>]+>/g, '').slice(0,240)}...</div>
@@ -44,7 +45,7 @@ function Recipe (props) {
       <div>Meal tags:{props.recipe.dishTypes.map(type => <li>{type}</li>)}</div>
       <div>Diet friendly:{props.recipe.diets.map(type => <li>{type}</li>)}</div>
       <div className="opinionbutton">
-        <div className="favoritebutton">PH</div>
+        <FavoriteButton />
         <div className="likebutton">PH</div>
         <div className="dislikebutton">PH</div>
       </div>

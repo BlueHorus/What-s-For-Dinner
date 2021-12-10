@@ -1,6 +1,86 @@
+* {
+  font-family: "Raleway";
+}
+#root {
+  background-image: url('./images/Background\ pattern.svg');
+  width: 100vw;
+  height: 100vh;
+  background-repeat: round;
+}
 
+.main {
+  display: flex;
+  position: relative;
+  justify-self: center;
+  width: 1080px;
+}
+
+#logo {
+  margin-right: auto;
+  margin-left: 20px;
+  justify-self: flex-start;
+  background-image: url('./images/BlueOceanLogo.svg');
+  width: 65px;
+  height: 65px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  border: 0;
+}
+
+#my-ingredients,
+#my-recipes,
+#login-signup,
+#find-recipes {
+  display: flex;
+  justify-self: flex-end;
+  margin-right: 10px;
+  background-color: #A6CCCA;
+  border-radius: 15px;
+  height: 40px;
+  width: 150px;
+  justify-content: center;
+  align-items: center;
+}
+#find-recipes {
+  margin-left: auto;
+}
+
+
+.navigation {
+  background-color: #4FBABA;
+  height: 70px;
+  display: flex;
+  flex-direction: row;
+  flex-shrink: 0;
+  align-items: center;
+}
+
+.navigation img {
+  margin-right: 10px;
+}
+
+
+
+.favorite-button {
+  background-image: url('./images/favoriteButtonIcon.svg');
+  width: 40px;
+  height: 50px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  border: 0;
+}
+ .favorite-button:hover {
+  background-image: url('./images/favoriteButtonIconHover.svg');
+  width: 40px;
+  height: 50px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  border: 0;
+}
 
 .recipecard {
+  justify-self: center;
+  width: 800px;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   border: solid;
@@ -31,6 +111,6 @@
 }
 
 .opinionbutton {
-  display: flexbox;
+  display: flex;
   grid-column-start: 3;
 }
