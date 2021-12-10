@@ -22,11 +22,11 @@
     "axios": "^0.24.0",
     "babel": "^6.23.0",
     "express": "^4.17.1",
+    "file-loader": "^6.2.0",
     "nodemon": "^2.0.15",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "semantic-ui-css": "^2.4.1",
-    "semantic-ui-react": "^2.0.4",
+    "react-minimal-pie-chart": "^8.2.0",
     "webpack": "^5.65.0",
     "webpack-cli": "^4.9.1"
   },
@@ -35,6 +35,9 @@
     "@babel/preset-env": "^7.16.4",
     "@babel/preset-react": "^7.16.0",
     "babel-loader": "^8.2.3",
-    "compression": "^1.7.4"
+    "compression": "^1.7.4",
+    "eslint": "^8.4.1",
+    "eslint-plugin-react": "^7.27.1",
+    "svg-url-loader": "^7.1.1"
   }
 }

@@ -1,0 +1,195 @@
+* {
+  font-family: "Raleway";
+}
+
+* #title {
+  font-family: 'Josefin Sans';
+  font-size: 37px;
+  margin-right: auto;
+}
+
+@media only screen and (max-width : 700px) {
+  #title {
+    display: none;
+  }
+}
+
+#root {
+  display: flex;
+  background-image: url('./images/Backgroundpattern.png');
+  width: 100vw;
+  height: 100vh;
+  background-size: contain;
+  padding: 0;
+  margin-left: 0;
+  bleed: 0;
+  justify-content: center;
+  background-repeat: space;
+
+}
+
+.main {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  background-image: url('./images/Backgroundpattern.png');
+  background-size: contain;
+  background-repeat: repeat-y;
+  padding: 0;
+  margin-left: 0;
+  bleed: 0;
+
+}
+.content {
+  display: flex;
+  justify-self: center;
+  width: 700px;
+  height: 100vh;
+  background-color: #E4EAEA;
+}
+
+#logo {
+  margin-right: auto;
+  margin-left: 20px;
+  justify-self: flex-start;
+  background-image: url('./images/BlueOceanLogo.svg');
+  width: 65px;
+  height: 65px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  border: 0;
+}
+
+#my-ingredients,
+#my-recipes,
+#login-signup,
+#find-recipes {
+  display: flex;
+  justify-self: flex-end;
+  margin-right: 20px;
+  background-color: #E4EAEA;
+  border-radius: 15px;
+  height: 40px;
+  width: 150px;
+  justify-content: center;
+  align-items: center;
+}
+#find-recipes {
+  margin-left: auto;
+}
+
+
+.navigation {
+  background-color: #4FBABA;
+  height: 70px;
+  width: 100vw;
+  display: flex;
+  flex-direction: row;
+  flex-shrink: 0;
+  align-items: center;
+}
+
+.navigation img {
+  margin-right: 2px;
+}
+
+
+
+.favorite-button {
+  background-image: url('./images/favoriteButtonIcon.svg');
+  width: 40px;
+  height: 50px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  border: 0;
+}
+ .favorite-button:hover {
+  background-image: url('./images/favoriteButtonIconHover.svg');
+  width: 40px;
+  height: 50px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  border: 0;
+}
+
+.recipecard {
+  justify-self: center;
+  width: 800px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  border: solid;
+  padding: 5px;
+  margin: 5px;
+  grid-template-rows:[row1-start] 30px [row1-end];
+}
+
+.recipeadditions {
+  display: none;
+}
+
+.recipecard:hover + .recipeadditions {
+  display: grid;
+  border: solid;
+  padding: 5px;
+  width: 800px;
+  background-color: burlywood;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 175px;
+  color: brown
+}
+
+.recipetitle {
+  grid-column-start: 2;
+  grid-column-end: 5;
+  text-align: center;
+  font-size: larger;
+  padding: 5px;
+}
+
+.recipelink {
+  grid-column-start:1;
+  grid-row-start: 4;
+  text-align: center;
+  padding: 5px;
+}
+
+.mealtags {
+  text-justify: center;
+  text-align: left;
+  margin-left: 1em;
+  grid-row-end: 4;
+  padding: 5px;
+}
+
+.recipeimage {
+  grid-row-start: 1;
+  grid-row-end: 4;
+}
+
+.ingredients {
+  text-align: left;
+  grid-row-end: 4;
+  padding: 5px;
+}
+
+.foundingredients {
+  color: green
+}
+
+.missingingredients {
+  color: red
+}
+
+.summary {
+  grid-row-start:2;
+  grid-column-start: 2;
+  grid-column-end: 5;
+  padding: 5px;
+}
+
+.opinionbutton {
+  display: flex;
+  grid-column-start: 4;
+  flex-grow: 2;
+  padding: 5px;
+}
