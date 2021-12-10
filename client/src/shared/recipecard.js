@@ -17,7 +17,11 @@ Recipe
 
 import React from 'react';
 import axios from 'axios';
+<<<<<<< HEAD
 import FavoriteButton from './favoriteRecipeButton.js'
+=======
+import { PieChart } from 'react-minimal-pie-chart';
+>>>>>>> c18675f1d32c6a114eeca7915315d204dc4ceb6a
 
 
 function Recipe (props) {
@@ -31,24 +35,38 @@ function Recipe (props) {
   //   console.log(req)
   // })
   return (
-    <div className="recipecard">
-        <h3 className="recipetitle">Recipe: {props.recipe.results[0].title}</h3>
-      <div className="recipeimage"><img src={props.recipe.results[0].image}/> </div>
-      <div className="recipelink"><a href={props.recipe.spoonacularSourceUrl}>Full recipe</a></div>
-      <div className="summary">Summary: {props.recipe.summary.replace(/<[^>]+>/g, '').slice(0,240)}...</div>
-      <div className="ingredients">
-          <ul>Ingredients:
-              {props.recipe.usedIngredients.map(ing => <li>{ing.name}</li>)}
-              {props.recipe.unusedIngredients.map(ing => <li>{ing.name}</li>)}
-          </ul>
-      </div>
-      <div>Meal tags:{props.recipe.dishTypes.map(type => <li>{type}</li>)}</div>
-      <div>Diet friendly:{props.recipe.diets.map(type => <li>{type}</li>)}</div>
-      <div className="opinionbutton">
-        <FavoriteButton />
-        <div className="likebutton">PH</div>
-        <div className="dislikebutton">PH</div>
-      </div>
+    <div>
+        <div className="recipecard">
+            <h3 className="recipetitle">Recipe: {props.recipe.results[0].title}</h3>
+            <div className="recipeimage"><img src={props.recipe.results[0].image}/> </div>
+            <div className="recipelink"><a href={props.recipe.spoonacularSourceUrl}>Full recipe</a></div>
+            <div className="summary">Summary: {props.recipe.summary.replace(/<[^>]+>/g, '').slice(0,240)}...</div>
+            <div className="ingredients">Ingredients:
+                {props.recipe.usedIngredients.map(ing => <li className="foundingredients">{ing.name}</li>)}
+                {props.recipe.unusedIngredients.map(ing => <li className="missingingredients">{ing.name}</li>)}
+            </div>
+            <div className="mealtags">Meal tags:{props.recipe.dishTypes.map(type => <li>{type}</li>)}</div>
+            <div>Diet friendly:{props.recipe.diets.map(type => <li>{type}</li>)}</div>
+            <div className="opinionbutton">
+            <FavoriteButton />
+                <div className="likebutton">PH</div>
+                <div className="dislikebutton">PH</div>
+            </div>
+        </div>
+        <div className="recipeadditions">
+            <div>
+                Nutrition: {props.recipe.results[0].nutrition.nutrients.map(info => <li>{info.name},{info.amount}</li>)}
+            </div>
+            <div>
+                Calories: <PieChart
+                                data={[
+                                    { title: "Protein", value: props.recipe.results[0].caloricBreakdown.percentProtein, color: '#E38627' },
+                                    { title: "Fat", value: props.recipe.results[0].caloricBreakdown.percentFat, color: '#C13C37' },
+                                    { title: "Carbs", value: props.recipe.results[0].caloricBreakdown.percentCarbs, color: '#6A2135' },
+                                ]} viewBoxSize={[120, 120]}
+                                />
+            </div>
+        </div>
     </div>
   )
 }

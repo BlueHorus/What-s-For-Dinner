@@ -84,19 +84,40 @@
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   border: solid;
-  grid-template-rows:[row1-start] 30px [row1-end]
+  grid-template-rows:[row1-start] 30px [row1-end];
+}
+
+.recipeadditions {
+  display: none;
+}
+
+.recipecard:hover + .recipeadditions {
+  display: grid;
+  border: solid;
+  background-color: burlywood;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 250px;
+  color: brown
 }
 
 .recipetitle {
   grid-column-start: 2;
-  grid-column-end: 4;
+  grid-column-end: 5;
   text-align: center;
   font-size: larger;
 }
 
 .recipelink {
   grid-column-start:1;
-  grid-row-start: 4
+  grid-row-start: 4;
+  text-align: center
+}
+
+.mealtags {
+  text-justify: center;
+  text-align: left;
+  margin-left: 1em;
+  grid-row-end: 4
 }
 
 .recipeimage {
@@ -104,13 +125,27 @@
   grid-row-end: 4
 }
 
+.ingredients {
+  text-align: left;
+  grid-row-end: 4
+}
+
+.foundingredients {
+  color: green
+}
+
+.missngingredients {
+  color: red
+}
+
 .summary {
   grid-row-start:2;
   grid-column-start: 2;
-  grid-column-end: 4
+  grid-column-end: 5
 }
 
 .opinionbutton {
   display: flex;
-  grid-column-start: 3;
+  grid-column-start: 4;
+  flex-grow: 2
 }
