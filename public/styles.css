@@ -91,13 +91,16 @@
 
 .recipeadditions {
   display: none;
+  font-size: smaller;
 }
 
 .recipecard:hover + .recipeadditions {
-  display: grid;
+  display: flex;
+  width: max-content;
   border: solid;
   padding: 5px;
-  width: 800px;
+  margin: 5px;
+  height: 150px;
   background-color: burlywood;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 175px;
