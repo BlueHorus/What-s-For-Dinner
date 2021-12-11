@@ -27,23 +27,6 @@ class MyProfile extends React.Component {
     this.updateDB = this.updateDB.bind(this);
   }
 
-  // componentDidMount() {
-  //   axios.get('/getUsersInfo')
-  //     .then(info => {
-  //       this.setState({
-  //         diet:
-  //         intolerances:
-  //       })
-  //     })
-  //     .catch(err => {
-  //       console.log(err);
-  //     })
-  // }
-
-  // componentDidUpdate() {
-
-  // }
-
   handleUsernameChange() {
   }
 

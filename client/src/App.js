@@ -19,10 +19,30 @@ class Main extends React.Component {
     super();
     this.state = {
       id: "login-signup",
-      user: sampleUser
+      user: sampleUser,
+      intolerances: '',
+      diet: '',
+      userInfo: {},
     };
     this.viewSwitch = this.viewSwitch.bind(this);
     this.handleButtonPress = this.handleButtonPress.bind(this);
+    this.setInitialData = this.setInitialData.bind(this);
+  }
+
+  componentDidMount() {
+    axios.get('/getUsersInfo')
+      .then(data => {
+        this.setInitialData(data);
+      })
+      .catch(err => {
+        console.log(err);
+      })
+  }
+
+  setInitialData(obj) {
+    this.setState({
+      userInfo: obj,
+    })
   }
 
   viewSwitch(e) {
