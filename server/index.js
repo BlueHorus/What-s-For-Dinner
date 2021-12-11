@@ -1,6 +1,8 @@
 const express = require("express");
 const path = require("path");
 const app = express();
+const Recipes = require("./db/models/recipes.js");
+const Users = require("./db/models/users.js");
 
 const port = 3000;
 
