@@ -300,3 +300,12 @@ body {
     transform-origin: center;
     transform-box: fill-box;
   }
+
+  /*---------------------------------------------
+                  PROFILE PAGE
+  ----------------------------------------------*/
+
+  .profile {
+    width: 100%;
+    height: 100%;
+  }

@@ -21,11 +21,7 @@ class Main extends React.Component {
   constructor() {
     super();
     this.state = {
-<<<<<<< HEAD
-      id: 1,
-=======
       id: "landing",
->>>>>>> 6181f6bae1da07467815ab6120800f51cf8eecbc
     };
     this.viewSwitch = this.viewSwitch.bind(this);
   }
