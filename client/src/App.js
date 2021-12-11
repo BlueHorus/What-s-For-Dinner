@@ -10,6 +10,7 @@ import ingredientIcon from './shared/SVGS/IngredientIcon.svg'
 import recipeIcon from './shared/SVGS/recipesIcon.svg';
 import profileIcon from './shared/SVGS/profileIcon.svg';
 <<<<<<< HEAD
+<<<<<<< HEAD
 import Ingredients from './ingredients/ingredients.js';
 import Landing from './landing/landing.js';
 
@@ -17,6 +18,10 @@ import Landing from './landing/landing.js';
 import Ingredients from './ingredients/ingredients.js'
 import MyProfile from './MyProfile.jsx';
 >>>>>>> dev
+=======
+import Ingredients from './ingredients/ingredients.js'
+import MyProfile from './MyProfile.jsx';
+>>>>>>> 546404d93397aa9d7278fb09af227c07b6551731
 
 
 
@@ -171,4 +176,5 @@ var sampleUser = {
    intolerances: "gluten, dairy",
    favRecipes: [123,234,345]
 }
+
 

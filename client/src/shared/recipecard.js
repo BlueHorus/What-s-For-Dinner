@@ -26,6 +26,10 @@ import { PieChart } from 'react-minimal-pie-chart';
 function Recipe (props) {
     const recipe = props.recipe.results[0]
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 546404d93397aa9d7278fb09af227c07b6551731
   return (
     <div>
         <div className="recipecard">

@@ -194,6 +194,8 @@ body {
   background-image: url('./images/favoriteButtonIconClicked.svg');
 }
 
+/* Recipes */
+
 .recipecard {
   font-size: 12px;
   justify-self: center;
@@ -325,6 +327,9 @@ body {
   }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 546404d93397aa9d7278fb09af227c07b6551731
 
   /*
   Next section: ingredients
@@ -338,8 +343,7 @@ body {
 
 .ingredients-list {
   grid-row-start: 2;
-  grid-column-start: 1;
-  grid-column-end: 3;
+  grid-column-start: 2;
 }
 
 .saved-notes {
@@ -350,7 +354,20 @@ body {
   padding: 5px;
   grid-column-start: 3
 }
+<<<<<<< HEAD
 =======
+=======
+
+.one-ingredient {
+  width: 100%;
+}
+
+.remove-ing-button {
+  border-radius: 15px;
+  background-color: #4FBABA;
+}
+
+>>>>>>> 546404d93397aa9d7278fb09af227c07b6551731
   /*---------------------------------------------
                   PROFILE PAGE
   ----------------------------------------------*/
@@ -472,4 +489,7 @@ body {
   .btn-confirm {
     margin: auto;
   }
+<<<<<<< HEAD
 >>>>>>> dev
+=======
+>>>>>>> 546404d93397aa9d7278fb09af227c07b6551731

@@ -32,12 +32,9 @@ class Ingredients extends React.Component {
     this.setNote = this.setNote.bind(this);
     this.addIngredient = this.addIngredient.bind(this);
     this.setIngredient = this.setIngredient.bind(this);
+    this.removeIngredient = this.removeIngredient.bind(this)
   }
 
-
-  getIngredients() {
-
-  }
 
   addNote(e) {
     e.preventDefault();
@@ -61,6 +58,11 @@ class Ingredients extends React.Component {
     this.setState({ingredient: e.target.value})
   }
 
+  removeIngredient(e) {
+    e.preventDefault();
+    console.log('removing ', e.target.id)
+  }
+
   render() {
     return (
     <div className="user-ingredients">
@@ -70,9 +72,19 @@ class Ingredients extends React.Component {
           <br/>
           <input type="text" name="name" spellcheck="true" value={this.state.note} onChange={this.setNote}/>
         </label>
-        <br/>
+        <br />
         <input type="submit" value={String.fromCodePoint(0x22B9)} className="add-button"/>&nbsp;&nbsp;Add
       </form>
+
+      <form onSubmit={this.addIngredient}>
+        <label>
+          Add ingredient: <br/>
+          <input type="text" name="name" spellcheck="true" value={this.state.ingredient} onChange={this.setIngredient}/>
+        </label>
+        <br />
+        <input type="submit" value={String.fromCodePoint(0x22B9)} className="add-button"/>&nbsp;&nbsp;Add
+      </form>
+
 
       <div className="saved-notes">
          My notes: <br/>
@@ -81,15 +93,10 @@ class Ingredients extends React.Component {
 
 
       <ul className="ingredients-list"> My ingredient list:
-      <div>
-        <form onSubmit={this.addIngredient}>
-          <label>
-            <input type="text" name="name" spellcheck="true" value={this.state.ingredient} onChange={this.setIngredient}/>
-          </label>
-          <input type="submit" value={String.fromCodePoint(0x22B9)} className="add-button"/>&nbsp;&nbsp;Add ingredient
-        </form>
-      </div>
-        {this.props.user.ingredients.split(',').map(ing => <li>{ing}</li>)}
+        {this.props.user.ingredients.split(',').map(ing => <li className="one-ingredient">
+                                                            {ing}
+                                                            <button className="remove-ing-button" id={ing} onClick={this.removeIngredient}>{String.fromCodePoint(0x2715)}</button>
+                                                            </li>)}
 
 
       </ul>
