@@ -55,7 +55,7 @@ class PanGraphic extends React.Component {
       loop: true,
       targets: el,
       opacity: [0, 1, 0],
-      duration: getRndInteger(100, 1000),
+      duration: getRndInteger(400, 1000),
       translateY: getRndInteger(-30, 30),
       translateX: getRndInteger(-30, 30),
       easing: 'easeInOutSine'
@@ -68,7 +68,7 @@ class PanGraphic extends React.Component {
     return (
      <div className='wrp'>
        <FryingPan />
-       <span id='tagline'>Cookin' Up Some Hot Recipes!</span>
+       <span id='tagline' >Cookin' Up Some Hot Recipes!</span>
        <span id='content-break'></span>
      </div>
     )

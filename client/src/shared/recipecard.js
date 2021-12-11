@@ -17,14 +17,17 @@ Recipe
 
 import React from 'react';
 import axios from 'axios';
-import FavoriteButton from './favoriteRecipeButton.js'
+import FavoriteButton from './favoriteRecipeButton.js';
+import UpVoteButton from './upVoteButton.js';
+import DownVoteButton from './downVoteButton.js'
 import { PieChart } from 'react-minimal-pie-chart';
 
 
 function Recipe (props) {
     const recipe = props.recipe.results[0]
 
-    return (
+
+  return (
     <div>
         <div className="recipecard">
             <div className="recipetitle">Recipe: {recipe.title}</div>
@@ -39,8 +42,8 @@ function Recipe (props) {
             <div className ="diet">Diet friendly:{recipe.diets.map(type => <li>{type}</li>)}</div>
             <div className="opinionbutton">
                 <FavoriteButton />
-                <div className="likebutton">PH</div>
-                <div className="dislikebutton">PH</div>
+                <UpVoteButton />
+                <DownVoteButton />
             </div>
         </div>
         <div className="recipeadditions">

@@ -5,6 +5,7 @@ import axios from 'axios';
 import Featured from './featured/featured.js';
 import Recipe from './shared/recipecard.js';
 import searchIcon from './shared/SVGS/SearchIcon.svg';
+import Landing from './landing/landing.js'
 import ingredientIcon from './shared/SVGS/IngredientIcon.svg'
 import recipeIcon from './shared/SVGS/recipesIcon.svg';
 import profileIcon from './shared/SVGS/profileIcon.svg';
