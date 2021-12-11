@@ -3,6 +3,8 @@ const path = require("path");
 const axios = require("axios");
 const e = require("express");
 const app = express();
+const Recipes = require("./db/models/recipes.js");
+const Users = require("./db/models/users.js");
 
 const port = 3000;
 
