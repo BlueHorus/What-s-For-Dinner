@@ -199,18 +199,21 @@ body {
 
 .recipeadditions {
   display: none;
+  font-size: smaller;
 }
 
-/* .recipecard:hover + .recipeadditions {
-  display: grid;
+.recipecard:hover + .recipeadditions {
+  display: flex;
+  width: max-content;
   border: solid;
   padding: 5px;
-  width: 90%;
+  margin: 5px;
+  height: 150px;
   background-color: burlywood;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 175px;
   color: brown
-} */
+}
 
 .recipetitle {
   grid-column-start: 2;
@@ -252,6 +255,10 @@ body {
 .ingredients {
   text-align: left;
   grid-row-end: 4;
+  padding: 5px;
+}
+
+.diet {
   padding: 5px;
 }
 

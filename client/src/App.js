@@ -4,14 +4,12 @@ import axios from 'axios';
 // Page Imorts
 import Featured from './featured/featured.js';
 import Recipe from './shared/recipecard.js';
+import searchIcon from './shared/SVGS/SearchIcon.svg';
 import Landing from './landing/landing.js'
-
-
-// Icon imports
-import searchIcon from './shared/SVGS/searchIcon.svg';
 import ingredientIcon from './shared/SVGS/IngredientIcon.svg'
 import recipeIcon from './shared/SVGS/recipesIcon.svg';
 import profileIcon from './shared/SVGS/profileIcon.svg';
+import Ingredients from './ingredients/ingredients.js'
 
 
 
@@ -39,30 +37,24 @@ class Main extends React.Component {
             <img  width='30' src={searchIcon}></img>
               Find Recipes
           </div>
-          <div id="my-ingredients">
+          <div id="my-ingredients" onClick={this.viewSwitch}>
             <img width='30' src={ingredientIcon} />
-            <span  onClick={this.viewSwitch}>
               My Ingredients
-            </span>
           </div>
-          <div id="my-recipes">
+          <div id="my-recipes" onClick={this.viewSwitch}>
             <img width='30' src={recipeIcon} />
-            <span onClick={this.viewSwitch}>
               My Recipes
-            </span>
           </div>
-          <div id="login-signup">
+          <div id="login-signup" onClick={this.viewSwitch}>
             <img width='30' src={profileIcon} />
-            <span onClick={this.viewSwitch}>
               Profile
-            </span>
           </div>
         </div>
         <div className='content'>
         {this.state.id === "logo" ? <Featured /> : ""}
         {this.state.id === "landing" ? <Landing /> : ""}
         {this.state.id === "find-recipes" ? <h1>Find Recipes Placeholder</h1> : ""}
-        {this.state.id === "my-ingredients" ? <h1>My Ingredients Placeholder</h1> : ""}
+        {this.state.id === "my-ingredients" ? <h1><Ingredients /></h1> : ""}
         {this.state.id === "my-recipes" ? <h1>My Recipes Placeholder</h1> : ""}
         {this.state.id === "login-signup" ? <h1>Profile Placeholder</h1> : ""}
       </div>
