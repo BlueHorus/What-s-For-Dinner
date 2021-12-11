@@ -12,12 +12,14 @@ class MyProfile extends React.Component {
       intolerances: [],
       changingProfilePic: false,
       selectedFile: profilePic,
+      url: '',
     };
 
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
-    this.onFileChange = this.onFileChange.bind(this);
+    this.handleURLChange = this.handleURLChange.bind(this);
     this.changeProfilePic = this.changeProfilePic.bind(this);
+    this.uploadPic = this.uploadPic.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleDropdownChange = this.handleDropdownChange.bind(this);
@@ -54,11 +56,15 @@ class MyProfile extends React.Component {
     });
   }
 
-  onFileChange(e) {
-    console.log(e.target.files[0]);
-    console.log(URL.createObjectURL(e.target.files[0]));
+  handleURLChange(e) {
     this.setState({
-      selectedFile: URL.createObjectURL(e.target.files[0]),
+      url: e.target.value,
+    })
+  }
+
+  uploadPic(e) {
+    this.setState({
+      selectedFile: this.state.url,
       changingProfilePic: false,
     })
   }
@@ -112,84 +118,85 @@ class MyProfile extends React.Component {
   }
 
   render() {
-    const { value, diet, intolerances, changingProfilePic } = this.state;
+    const { value, diet, intolerances, changingProfilePic, url } = this.state;
     return (
       <div className="profile">
-
-        <div>Welcome Back, [USERNAME HERE]!</div>
-
-        <div>
-          <img src={this.state.selectedFile} alt="profile-picture" />
-          <button onClick={this.changeProfilePic}>x</button>
+        <div className="welcome-banner">Welcome Back, [USERNAME HERE]!</div>
+        <div className="profile-left">
+          <img className="profile-pic" src={this.state.selectedFile} alt="profile-picture" />
+          <button className="button-change-pic" onClick={this.changeProfilePic}>x</button>
           {changingProfilePic === true
-            ? <input type="file" onChange={this.onFileChange} />
+            ? <form className="url-form" onSubmit={this.uploadPic}>
+                <label>
+                  Please enter new photo URL:
+                  <input type="text" value={url} onChange={this.handleURLChange}/>
+                </label>
+                <input type="submit" value="Upload" />
+              </form>
             : null
           }
+
+          <br />
+
+          <button className="button-change-name" onClick={this.handleUsernameChange}>Change Username</button>
+          <br />
+          <button className="button-change-pw" onClick={this.handlePasswordChange}>Change Password</button>
         </div>
 
-        <div>
-          <button onClick={this.handleUsernameChange}>Change Username</button>
-          <button onClick={this.handlePasswordChange}>Change Password</button>
-        </div>
+        <div className="profile-right">
+          <div className="diet-list">
+            My Current Diet: {diet}
+          </div>
 
-        <br />
+          <div className="intolerance-list">
+            My Current Intolerances:
+            {intolerances.map(food => {
+              return (
+                <div>
+                  <div>{food}</div>
+                  <button value={food} onClick={this.deleteFood}>x</button>
+                </div>
+              );
+            })}
+          </div>
 
-        <div className="diet-list">
-          My Current Diet: {diet}
-        </div>
+          <div>Enter any food intolerances below</div>
+          <form onSubmit={this.handleSubmit}>
+            <select value={value} onChange={this.handleChange}>
+              <option default> - </option>
+              <option value="Dairy">Dairy</option>
+              <option value="Egg">Egg</option>
+              <option value="Gluten">Gluten</option>
+              <option value="Grain">Grain</option>
+              <option value="Peanut">Peanut</option>
+              <option value="Seafood">Seafood</option>
+              <option value="Sesame">Sesame</option>
+              <option value="Shellfish">Shellfish</option>
+              <option value="Soy">Soy</option>
+              <option value="Sulfite">Sulfite</option>
+              <option value="Tree Nut">Tree Nut</option>
+              <option value="Wheat">Wheat</option>
+            </select>
+            <input type="submit" value="Add" />
+          </form>
 
-        <div className="intolerance-list">
-          My Current Intolerances:
-          {intolerances.map(food => {
-            return (
-              <div>
-                <div>{food}</div>
-                <button value={food} onClick={this.deleteFood}>x</button>
-              </div>
-            );
-          })}
-        </div>
-        <br />
-
-        <div>Enter any food intolerances below</div>
-        <form onSubmit={this.handleSubmit}>
-          <select value={value} onChange={this.handleChange}>
+          <div>Select your diet from the dropdown below</div>
+          <select value={diet} onChange={this.handleDropdownChange}>
             <option default> - </option>
-            <option value="Dairy">Dairy</option>
-            <option value="Egg">Egg</option>
-            <option value="Gluten">Gluten</option>
-            <option value="Grain">Grain</option>
-            <option value="Peanut">Peanut</option>
-            <option value="Seafood">Seafood</option>
-            <option value="Sesame">Sesame</option>
-            <option value="Shellfish">Shellfish</option>
-            <option value="Soy">Soy</option>
-            <option value="Sulfite">Sulfite</option>
-            <option value="Tree Nut">Tree Nut</option>
-            <option value="Wheat">Wheat</option>
+            <option value="gluten free">Gluten-Free</option>
+            <option value="ketogenic">Ketogenic</option>
+            <option value="vegetarian">Vegetarian</option>
+            <option value="lacto-vegetarian">Lacto-Vegetarian</option>
+            <option value="obo-vegetarian">Obo-Vegetarian</option>
+            <option value="vegan">Vegan</option>
+            <option value="pescetarian">Pescetarian</option>
+            <option value="paleo">Paleo</option>
+            <option value="primal">Primal</option>
+            <option value="whole30">Whole30</option>
           </select>
-          <input type="submit" value="Add" />
-        </form>
 
-        <br />
-
-       <div>Select your diet from the dropdown below</div>
-        <select value={diet} onChange={this.handleDropdownChange}>
-          <option default> - </option>
-          <option value="gluten free">Gluten-Free</option>
-          <option value="ketogenic">Ketogenic</option>
-          <option value="vegetarian">Vegetarian</option>
-          <option value="lacto-vegetarian">Lacto-Vegetarian</option>
-          <option value="obo-vegetarian">Obo-Vegetarian</option>
-          <option value="vegan">Vegan</option>
-          <option value="pescetarian">Pescetarian</option>
-          <option value="paleo">Paleo</option>
-          <option value="primal">Primal</option>
-          <option value="whole30">Whole30</option>
-        </select>
-        <br />
-        <br />
-        <button onClick={this.updateDB}>Confirm Changes!</button>
+          <button onClick={this.updateDB}>Confirm Changes!</button>
+        </div>
       </div>
     );
   }
