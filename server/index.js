@@ -2,6 +2,8 @@ const express = require("express");
 const path = require("path");
 
 const db = require("./db/index.js");
+const Users = require("./db/models/users.js");
+const Recipes = require("./db/models/recipes.js");
 const app = express();
 
 const port = 3000;
