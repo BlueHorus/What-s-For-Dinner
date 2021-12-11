@@ -242,13 +242,13 @@ class Main extends React.Component {
 
 export default Main;
 
-// var sampleUser = {
-//   uid: "123",
-//   userName: "user_name",
-//   profilePic: "http://pic.com",
-//   ingredients: "garlic, butter, eggs",
-//   notes: "I am a note",
-//   diet: "paleo",
-//   intolerances: "gluten, dairy",
-//   favRecipes: [647572, 234, 345],
-// };
+var sampleUser = {
+  uid: "123",
+  userName: "user_name",
+  profilePic: "http://pic.com",
+  ingredients: "garlic, butter, eggs",
+  notes: "I am a note",
+  diet: "paleo",
+  intolerances: "gluten, dairy",
+  favRecipes: [647572, 234, 345],
+};
