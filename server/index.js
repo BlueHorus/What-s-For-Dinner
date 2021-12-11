@@ -92,13 +92,13 @@ app.put("/updateFavorites", (req, res) => {
 });
 
 app.put("/updateUsername", (req, res) => {
-  // request should include user id and recipeId
+  // request should include user id
   // query database to update note
   res.send("updateUsername");
 });
 
 app.put("/updateProfilePic", (req, res) => {
-  // request should include user id and recipeId
+  // request should include user id
   // query database to update note
   res.send("updateProfilePic");
 });
