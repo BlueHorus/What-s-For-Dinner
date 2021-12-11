@@ -1,12 +1,16 @@
 import React from 'react'
 
-const DownVoteButton = () => {
+const DownVoteButton = (props) => {
+  if (props.user === null) {
+    return (
+      <button className='downvote-button'  disabled>
+      </button>
+      )
+  } else {
   return (
-    <div className='downvote-button'>
-    </div>
+    <button className='downvote-button' onClick={() => props.handleButtonPress(props.recipe.id)}>
+    </button>
     )
+  }
 }
-
-
-
 export default DownVoteButton

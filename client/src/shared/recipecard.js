@@ -42,9 +42,9 @@ function Recipe (props) {
             <div className="mealtags">Meal tags:{recipe.dishTypes.map(type => <li>{type}</li>)}</div>
             <div className ="diet">Diet friendly:{recipe.diets.map(type => <li>{type}</li>)}</div>
             <div className="opinionbutton">
-                <FavoriteButton />
-                <UpVoteButton />
-                <DownVoteButton />
+                <FavoriteButton recipe={recipe} user={props.user} handleButtonPress={props.handleButtonPress}/>
+                <UpVoteButton recipe={recipe} handleButtonPress={props.handleButtonPress}/>
+                <DownVoteButton recipe={recipe} handleButtonPress={props.handleButtonPress}/>
             </div>
         </div>
         <div className="recipeadditions">
@@ -52,12 +52,20 @@ function Recipe (props) {
                 Nutrition: {recipe.nutrition.nutrients.map(info => <li>{info.name},{info.amount}</li>)}
             </div>
             <div>
-                Calories: <PieChart
+                Calorie % by type: <PieChart
                                 data={[
                                     { title: "Protein", value: recipe.nutrition.caloricBreakdown.percentProtein, color: '#E38627' },
                                     { title: "Fat", value: recipe.nutrition.caloricBreakdown.percentFat, color: '#C13C37' },
                                     { title: "Carbs", value: recipe.nutrition.caloricBreakdown.percentCarbs, color: '#6A2135' },
-                                ]} viewBoxSize={[120, 120]}
+                                ]}
+                                viewBoxSize={[120, 120]}
+                                label={(data) => data.dataEntry.title}
+                                labelPosition={65}
+                                labelStyle={{
+                                    fontSize: "10px",
+                                    fontColor: "FFFFFA",
+                                    fontWeight: "800",
+                                }}
                                 />
             </div>
         </div>

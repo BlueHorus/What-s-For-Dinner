@@ -164,6 +164,9 @@ body {
 .downvote-button:hover {
   background-image: url('./images/downVoteButtonIconHover.svg');
 }
+.downvote-button:active {
+  background-image:url('./images/downVoteButtonIconClicked.svg');
+}
 
 
 
@@ -175,12 +178,20 @@ body {
   background-repeat: no-repeat;
   border: 0;
 }
+.favorite-button-clicked {
+  background-image: url('./images/favoriteButtonIconClicked.svg');
+  width: 40px;
+  height: 40px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  border: 0;
+}
  .favorite-button:hover {
   background-image: url('./images/favoriteButtonIconHover.svg');
 }
 
 .favorite-button:active {
-  background-image: url('/public/images/favoriteButtonIconClicked.svg');
+  background-image: url('./images/favoriteButtonIconClicked.svg');
 }
 
 .recipecard {
@@ -199,18 +210,21 @@ body {
 
 .recipeadditions {
   display: none;
+  font-size: smaller;
 }
 
-/* .recipecard:hover + .recipeadditions {
-  display: grid;
+.recipecard:hover + .recipeadditions {
+  display: flex;
+  width: max-content;
   border: solid;
   padding: 5px;
-  width: 90%;
+  margin: 5px;
+  height: 150px;
   background-color: burlywood;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 175px;
   color: brown
-} */
+}
 
 .recipetitle {
   grid-column-start: 2;
@@ -252,6 +266,10 @@ body {
 .ingredients {
   text-align: left;
   grid-row-end: 4;
+  padding: 5px;
+}
+
+.diet {
   padding: 5px;
 }
 
