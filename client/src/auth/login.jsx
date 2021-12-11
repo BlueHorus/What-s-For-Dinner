@@ -1,5 +1,5 @@
 import React from "react";
-import { app } from "../../firebase_config.js";
+import { app } from "../../../firebase_config.js";
 import axios from "axios";
 
 import {
