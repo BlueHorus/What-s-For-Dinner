@@ -34,7 +34,7 @@
 
 body {
   background-image: url('./images/Backgroundpattern.png');
-  background-size: contain;
+  background-size:cover;
   background-repeat: repeat;
   margin: 0;
 }
