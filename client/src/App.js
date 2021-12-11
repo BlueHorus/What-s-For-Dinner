@@ -14,12 +14,13 @@ import MyProfile from "./MyProfile.jsx";
 import Auth from "./auth/login.jsx";
 import { app } from "../../firebase_config.js";
 import { getAuth, onAuthStateChanged, updateCurrentUser } from "firebase/auth";
+import Reminder from "./auth/reminder.jsx";
 
 class Main extends React.Component {
   constructor() {
     super();
     this.state = {
-      id: "login-signup",
+      id: "landing",
       user: sampleUser,
       intolerances: "",
       diet: "",
@@ -36,16 +37,30 @@ class Main extends React.Component {
   }
 
   componentDidMount() {
-    this.getStatus();
     //need to send verifitcation before getting user info back from the server
-    axios
-      .get("/getUsersInfo")
-      .then((data) => {
-        this.setInitialData(data);
-      })
-      .catch((err) => {
-        console.log(err);
+    this.getStatus(() => {
+      this.getAuthentication(() => {
+        if (this.state.authenticated === true) {
+          axios
+            .get("/getUsersInfo")
+            .then((data) => {
+              this.setInitialData(data);
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        }
       });
+    });
+
+    // axios
+    //   .get("/getUsersInfo")
+    //   .then((data) => {
+    //     this.setInitialData(data);
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
   }
 
   setInitialData(obj) {
@@ -157,7 +172,7 @@ class Main extends React.Component {
 
   // call this function to validate user request before going to "my recipt/ my incredient"
   //need to comeback to test this function with funcitonal api end points
-  getAuthentication() {
+  getAuthentication(func) {
     if (this.state.uid === "") {
       console.log("Please Sign in first");
     } else {
@@ -171,7 +186,9 @@ class Main extends React.Component {
           response.data === "successfully authenticated"
             ? this.setState({ authenticated: true })
             : this.setState({ authenticated: false });
-        });
+        })
+        .then(func)
+        .catch((err) => console.log(err.message));
     }
   }
 
@@ -235,6 +252,8 @@ class Main extends React.Component {
           )}
           {this.state.id === "login-signup" ? <MyProfile /> : ""}
         </div>
+
+        {/* {this.state.login === false ? <Reminder /> : ""} */}
       </div>
     );
   }
