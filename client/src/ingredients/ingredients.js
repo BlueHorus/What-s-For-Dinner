@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 // import MyIngredients from './myIngredients.js'
 
 
@@ -50,7 +51,9 @@ class Ingredients extends React.Component {
 
   addIngredient(e) {
     e.preventDefault();
-    console.log('clicked, ', this.state.note)
+    console.log('clicked, ', this.state.ingredient);
+    axios.get("/updateIngredients", this.state.ingredient)
+      .then(console.log('ing added'))
   }
 
   setIngredient(e) {
@@ -63,26 +66,29 @@ class Ingredients extends React.Component {
     <div>
       <form onSubmit={this.addNote}>
         <label>
-          Take notes:
+          Notes:
+          <br/>
           <input type="text" name="name" spellcheck="true" value={this.state.note} onChange={this.setNote}/>
         </label>
-        <input type="submit" value={String.fromCodePoint(0x22B9)}/>Add note
+        <br/>
+        <input type="submit" value={String.fromCodePoint(0x22B9)} className="add-button"/>&nbsp;&nbsp;Add note
       </form>
       <br/>
       <br/>
       <br/>
-      <form onSubmit={this.addIngredient}>
-        <label>
-          Add ingredient:
-          <input type="text" name="name" spellcheck="true" value={this.state.ingredient} onChange={this.setIngredient}/>
-        </label>
-        <input type="submit" value={String.fromCodePoint(0x22B9)}/>Add ingredient
-      </form>
       <ul> My ingredient list
         <li>sugar</li>
         <li>salt</li>
         <li>pepper</li>
         <li>endangered animal meat</li>
+        <li>
+          <form onSubmit={this.addIngredient}>
+            <label>
+              <input type="text" name="name" spellcheck="true" value={this.state.ingredient} onChange={this.setIngredient}/>
+            </label>
+            <input type="submit" value={String.fromCodePoint(0x22B9)} className="add-button"/>&nbsp;&nbsp;Add ingredient
+          </form>
+        </li>
       </ul>
     </div>
     )

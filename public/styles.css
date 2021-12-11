@@ -160,6 +160,11 @@ body {
   color: brown
 } */
 
+.add-button {
+  border-radius: 15px;
+  background-color: #4FBABA;
+}
+
 .recipetitle {
   grid-column-start: 2;
   grid-column-end: 5;
