@@ -1,4 +1,5 @@
 bundle.js
 node_modules/
+bundle.js.map
 package-lock.json
 firebase_config.js
