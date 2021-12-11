@@ -70,17 +70,19 @@ class Ingredients extends React.Component {
           <br/>
           <input type="text" name="name" spellcheck="true" value={this.state.note} onChange={this.setNote}/>
         </label>
-        <br/>
+        <br />
         <input type="submit" value={String.fromCodePoint(0x22B9)} className="add-button"/>&nbsp;&nbsp;Add
       </form>
-      <div>
-        <form onSubmit={this.addIngredient}>
-          <label>
-            <input type="text" name="name" spellcheck="true" value={this.state.ingredient} onChange={this.setIngredient}/>
-          </label>
-          <input type="submit" value={String.fromCodePoint(0x22B9)} className="add-button"/>&nbsp;&nbsp;Add ingredient
-        </form>
-      </div>
+
+      <form onSubmit={this.addIngredient}>
+        <label>
+          Add ingredient: <br/>
+          <input type="text" name="name" spellcheck="true" value={this.state.ingredient} onChange={this.setIngredient}/>
+        </label>
+        <br />
+        <input type="submit" value={String.fromCodePoint(0x22B9)} className="add-button"/>&nbsp;&nbsp;Add
+      </form>
+
 
       <div className="saved-notes">
          My notes: <br/>
