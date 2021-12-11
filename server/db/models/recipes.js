@@ -24,16 +24,4 @@ module.exports = {
       { upsert: true }
     );
   },
-
-  saveUserToRecipe: (uid, recipe_id) => {
-    return db.recipes.findOneAndUpdate(
-      { id: recipe_id },
-      { $push: { users: uid } },
-      { upsert: true }
-    );
-  },
-
-  removeUserFromRecipe: (uid, recipe_id) => {
-    return db.recipes.update({ id: recipe_id }, { $pull: { users: uid } });
-  },
 };

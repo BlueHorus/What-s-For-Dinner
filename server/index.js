@@ -14,8 +14,6 @@ app.use(express.json());
 var parseResponse = function (response) {
   // parse response down to example object in team folder
   // return parsed response
-  console.log("Made it to parse Response");
-  console.log(response);
 
   var parsedResponse = {
     results: [],
@@ -87,14 +85,6 @@ var parseResponse = function (response) {
   return parsedResponse;
 };
 
-var getRecipesbyId = function (recipeIds) {
-  // get user's favorites from db
-  // hit spoonacular api
-  // parse each recipe object with parseResponse function
-  // return parsed response
-  // api url: https://api.spoonacular.com/recipes/informationBulk$ids=(comma separated list of recipe ids)
-};
-
 app.get("/getRecipesFromIngredients", (req, res) => {
   // request should include diet, dietary restrictions, and ingredients
   // send request to spoonacular
@@ -133,10 +123,10 @@ app.get("/getRecipesFromIngredients", (req, res) => {
       )
       .then(({ data }) => {
         var parsedData = parseResponse(data);
-        res.send(parsedData);
+        res.status(200).send(parsedData);
       })
       .catch((error) => {
-        console.log("There was an error", error);
+        res.status(500).send(error);
       });
   } else if (
     ingredientsParam !== null &&
@@ -149,10 +139,10 @@ app.get("/getRecipesFromIngredients", (req, res) => {
       )
       .then(({ data }) => {
         var parsedData = parseResponse(data);
-        res.send(parsedData);
+        res.status(200).send(parsedData);
       })
       .catch((error) => {
-        console.log("There was an error", error);
+        res.status(500).send(error);
       });
   } else if (
     ingredientsParam === null &&
@@ -165,10 +155,10 @@ app.get("/getRecipesFromIngredients", (req, res) => {
       )
       .then(({ data }) => {
         var parsedData = parseResponse(data);
-        res.send(parsedData);
+        res.status(200).send(parsedData);
       })
       .catch((error) => {
-        console.log("There was an error", error);
+        res.status(500).send(error);
       });
   } else if (
     ingredientsParam === null &&
@@ -181,10 +171,10 @@ app.get("/getRecipesFromIngredients", (req, res) => {
       )
       .then(({ data }) => {
         var parsedData = parseResponse(data);
-        res.send(parsedData);
+        res.status(200).send(parsedData);
       })
       .catch((error) => {
-        console.log("There was an error", error);
+        res.status(500).send(error);
       });
   } else if (
     ingredientsParam !== null &&
@@ -197,10 +187,10 @@ app.get("/getRecipesFromIngredients", (req, res) => {
       )
       .then(({ data }) => {
         var parsedData = parseResponse(data);
-        res.send(parsedData);
+        res.status(200).send(parsedData);
       })
       .catch((error) => {
-        console.log("There was an error", error);
+        res.status(500).send(error);
       });
   } else if (
     ingredientsParam !== null &&
@@ -213,10 +203,10 @@ app.get("/getRecipesFromIngredients", (req, res) => {
       )
       .then(({ data }) => {
         var parsedData = parseResponse(data);
-        res.send(parsedData);
+        res.status(200).send(parsedData);
       })
       .catch((error) => {
-        console.log("There was an error", error);
+        res.status(500).send(error);
       });
   } else if (
     ingredientsParam === null &&
@@ -229,10 +219,10 @@ app.get("/getRecipesFromIngredients", (req, res) => {
       )
       .then(({ data }) => {
         var parsedData = parseResponse(data);
-        res.send(parsedData);
+        res.status(200).send(parsedData);
       })
       .catch((error) => {
-        console.log("There was an error", error);
+        res.status(500).send(error);
       });
   } else if (
     ingredientsParam !== null &&
@@ -245,23 +235,105 @@ app.get("/getRecipesFromIngredients", (req, res) => {
       )
       .then(({ data }) => {
         var parsedData = parseResponse(data);
-        res.send(parsedData);
+        res.status(200).send(parsedData);
       })
       .catch((error) => {
-        console.log("There was an error", error);
+        res.status(500).send(error);
       });
   }
-  //req.body.ingredients
-  //var intolerances = req.body.intolerances;
-  //var diet = req.body.diet;
-  //res.send("getRecipesFromIngredients");
+});
+
+app.get("/getUsersFavorites", (req, res) => {
+  // request body should include uid
+  var userId = req.body.uid;
+  Users.getUserById(userId).then((response) => {
+    console.log(response);
+    if (response.favoriteRecipes.length < 1) {
+      res.status(400).send("User doesn't have any favorites");
+    } else if (response.favoriteRecipes.length === 1) {
+      var recipeIdString = response.favoriteRecipes.toString();
+      axios
+        .get(
+          `https://api.spoonacular.com/recipes/${recipeIdString}/information?&includeNutrition=true&apiKey=5eb864cd4c9b47b282c6ec757f5dd0b7&sortDirection=desc`
+        )
+        .then(({ data }) => {
+          console.log("THIS IS THE DATA", data);
+          var array = [];
+          array.push(data);
+          var object = {
+            results: array,
+          };
+          console.log(object);
+          var parsedData = parseResponse(object);
+
+          res.status(200).send(parsedData);
+        })
+        .catch((err) => {
+          res.status(500).send(err);
+        });
+    } else {
+      var recipeIdString = response.favoriteRecipes.toString();
+      var queryString = `?ids=${recipeIdString},`;
+      axios
+        .get(
+          `https://api.spoonacular.com/recipes/informationBulk?&includeNutrition=true&apiKey=5eb864cd4c9b47b282c6ec757f5dd0b7&sortDirection=desc${queryString}`
+        )
+        .then(({ data }) => {
+          var parsedData = parseResponse(data);
+          res.status(200).send(parsedData);
+        })
+        .catch((err) => {
+          res.status(500).send(err);
+        });
+    }
+  });
 });
 
 app.get("/getFeaturedRecipes", (req, res) => {
   // queries database for most upvoted recipes
   // send ids to spoonacular
   // send back most upvoted recipes
-  res.send("getFeaturedRecipes");
+  Recipes.getTopVotedRecipes().then((result) => {
+    var array = result.map((recipe) => {
+      return recipe.id;
+    });
+    if (array.length === 1) {
+      var recipeIdString = array.toString();
+      axios
+        .get(
+          `https://api.spoonacular.com/recipes/${recipeIdString}/information?&includeNutrition=true&apiKey=5eb864cd4c9b47b282c6ec757f5dd0b7&sortDirection=desc`
+        )
+        .then(({ data }) => {
+          console.log("THIS IS THE DATA", data);
+          var array = [];
+          array.push(data);
+          var object = {
+            results: array,
+          };
+          console.log(object);
+          var parsedData = parseResponse(object);
+
+          res.status(200).send(parsedData);
+        })
+        .catch((err) => {
+          res.status(500).send(err);
+        });
+    } else {
+      var recipeIdString = array.toString();
+      var queryString = `?ids=${recipeIdString},`;
+      axios
+        .get(
+          `https://api.spoonacular.com/recipes/informationBulk?&includeNutrition=true&apiKey=5eb864cd4c9b47b282c6ec757f5dd0b7&sortDirection=desc${queryString}`
+        )
+        .then(({ data }) => {
+          var parsedData = parseResponse(data);
+          res.status(200).send(parsedData);
+        })
+        .catch((err) => {
+          res.status(500).send(err);
+        });
+    }
+  });
 });
 
 app.post("/createUser", (req, res) => {
@@ -271,7 +343,13 @@ app.post("/createUser", (req, res) => {
   var userId = req.body.uid;
   var profilePicUrl = req.body.profilePic;
   var username = req.body.username;
-  res.send("Successfully created user!");
+  Users.createUser(userId, username, profilePicUrl)
+    .then((response) => {
+      res.status(201).send(response);
+    })
+    .catch((err) => {
+      res.status(500).send(err);
+    });
 });
 
 app.get("/authenticate", (req, res) => {
@@ -288,7 +366,13 @@ app.get("/getUserInfo", (req, res) => {
   // queries database for user object
   // send user object back to front-end
   var userId = req.body.uid;
-  res.send("getUserInfo");
+  Users.getUserById(userId)
+    .then((response) => {
+      res.status(200).send(response);
+    })
+    .catch((err) => {
+      res.status(500).send(err);
+    });
 });
 
 app.put("/updateIngredients", (req, res) => {
@@ -297,7 +381,13 @@ app.put("/updateIngredients", (req, res) => {
   // send "successfully updated ingredients"
   var userId = req.body.uid;
   var ingredients = req.body.ingredients;
-  res.send("Successfully updated ingredients!", ingredients);
+  Users.updateIngredients(userId, ingredients)
+    .then((response) => {
+      res.status(200).send(response);
+    })
+    .catch((err) => {
+      res.status(500).send(err);
+    });
 });
 
 app.put("/updateDiet", (req, res) => {
@@ -306,7 +396,13 @@ app.put("/updateDiet", (req, res) => {
   // send "successfully updated diet"
   var userId = req.body.uid;
   var diet = req.body.diet;
-  res.send("Successfully updated diet!", diet);
+  Users.updateDiet(userId, diet)
+    .then((response) => {
+      res.status(200).send(response);
+    })
+    .catch((err) => {
+      res.status(500).send(err);
+    });
 });
 
 app.put("/updateIntolerances", (req, res) => {
@@ -315,15 +411,41 @@ app.put("/updateIntolerances", (req, res) => {
   // send "successfully updated intolerances"
   var userId = req.body.uid;
   var intolerances = req.body.intolerances;
-  res.send("Successfully updated intolerances!", intolerances);
+  Users.updateIntolerances(userId, intolerances)
+    .then((response) => {
+      res.status(200).send(response);
+    })
+    .catch((err) => {
+      res.status(500).send(err);
+    });
 });
 
-app.put("/updateFavorites", (req, res) => {
+app.post("/addToFavorites", (req, res) => {
   // request should include user id and recipeId
   // query database to update note
   var userId = req.body.uid;
   var recipeId = req.body.recipeId;
-  res.send("Successfully updates favorites!", recipeId);
+  Users.saveRecipeToUser(userId, recipeId)
+    .then((response) => {
+      res.status(200).send(response);
+    })
+    .catch((err) => {
+      res.status(500).send(err);
+    });
+});
+
+app.delete("/removeFromFavorites", (req, res) => {
+  // request should include user id and recipeId
+  // query database to update note
+  var userId = req.body.uid;
+  var recipeId = req.body.recipeId;
+  Users.removeRecipeFromUser(userId, recipeId)
+    .then((response) => {
+      res.status(200).send(response);
+    })
+    .catch((err) => {
+      res.status(500).send(err);
+    });
 });
 
 app.put("/updateUsername", (req, res) => {
@@ -331,7 +453,13 @@ app.put("/updateUsername", (req, res) => {
   // query database to update note
   var userId = req.body.uid;
   var newUsername = req.body.newUsername;
-  res.send("Successfully updated username!", newUsername);
+  Users.updateUsername(userId, newUsername)
+    .then((response) => {
+      res.status(200).send(response);
+    })
+    .catch((err) => {
+      res.status(500).send(err);
+    });
 });
 
 app.put("/updateProfilePic", (req, res) => {
@@ -339,6 +467,13 @@ app.put("/updateProfilePic", (req, res) => {
   // query database to update note
   var userId = req.body.uid;
   var newProfilePicUrl = req.body.newProfilePic;
+  Users.updateProfilePic(userId, newProfilePicUrl)
+    .then((response) => {
+      res.status(200).send(response);
+    })
+    .catch((err) => {
+      res.status(500).send(err);
+    });
   res.send("Successfully updated profile pic!", newProfilePic);
 });
 
@@ -347,21 +482,49 @@ app.put("/updateNote", (req, res) => {
   // query database to update note
   var userId = req.body.uid;
   var newNote = req.body.note;
-  res.send("Successfully updated note!", newNote);
+  Users.updateNote(userId, newNote)
+    .then((response) => {
+      res.status(200).send(response);
+    })
+    .catch((err) => {
+      res.status(500).send(err);
+    });
 });
 
 app.put("/updateUpvote", (req, res) => {
   // request should include recipe id
   // query database to update upvote
   var recipeId = req.body.recipeId;
-  res.send("Successfully updated upvote count!");
+  Recipes.upVote(recipeId)
+    .then((response) => {
+      res.status(200).send(response);
+    })
+    .catch((err) => {
+      res.status(500).send(err);
+    });
+});
+
+app.get("/getRecipes", (req, res) => {
+  Recipes.getRecipes()
+    .then((response) => {
+      res.status(200).send(response);
+    })
+    .catch((err) => {
+      res.status(500).send(err);
+    });
 });
 
 app.put("/updateDownvote", (req, res) => {
   // request should include recipe id
   // query database to update downvote
   var recipeId = req.body.recipeId;
-  res.send("Successfully updated downvote count!");
+  Recipes.downVote(recipeId)
+    .then((response) => {
+      res.status(200).send(response);
+    })
+    .catch((err) => {
+      res.status(500).send(err);
+    });
 });
 
 app.listen(port, () => {

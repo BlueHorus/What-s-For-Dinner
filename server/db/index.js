@@ -6,8 +6,8 @@ let userSchema = mongoose.Schema({
   uid: { type: String },
   userName: { type: String },
   profilePic: { type: String },
-
   ingredients: { type: String },
+  favoriteRecipes: [String],
   notes: { type: String },
   diet: { type: String },
   intolerances: { type: String },
@@ -16,7 +16,6 @@ let userSchema = mongoose.Schema({
 let recipeSchema = mongoose.Schema({
   id: { type: String },
   vote: { type: Number },
-  users: [String],
 });
 
 let Users = mongoose.model("Users", userSchema);
