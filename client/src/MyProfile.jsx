@@ -123,8 +123,10 @@ class MyProfile extends React.Component {
       <div className="profile">
         <div className="welcome-banner">Welcome Back, [USERNAME HERE]!</div>
         <div className="profile-left">
-          <img className="profile-pic" src={this.state.selectedFile} alt="profile-picture" />
-          <button className="button-change-pic" onClick={this.changeProfilePic}>x</button>
+          {/* <div className="photo-area"> */}
+            <img className="profile-pic" src={this.state.selectedFile} alt="profile-picture" />
+            <button className="button-change-pic" onClick={this.changeProfilePic}>x</button>
+          {/* </div> */}
           {changingProfilePic === true
             ? <form className="url-form" onSubmit={this.uploadPic}>
                 <label>
@@ -137,14 +139,16 @@ class MyProfile extends React.Component {
           }
 
           <br />
+          <br />
 
           <button className="button-change-name" onClick={this.handleUsernameChange}>Change Username</button>
+          <br />
           <br />
           <button className="button-change-pw" onClick={this.handlePasswordChange}>Change Password</button>
         </div>
 
         <div className="profile-right">
-          <div className="diet-list">
+          <div className="diet">
             My Current Diet: {diet}
           </div>
 
@@ -152,16 +156,19 @@ class MyProfile extends React.Component {
             My Current Intolerances:
             {intolerances.map(food => {
               return (
-                <div>
-                  <div>{food}</div>
-                  <button value={food} onClick={this.deleteFood}>x</button>
+                <div className="intolerance-tile">
+                  <span className="intolerance">{food}</span>
+                  <button className="button-delete-intolerance" value={food} onClick={this.deleteFood}>x</button>
                 </div>
               );
             })}
           </div>
 
-          <div>Enter any food intolerances below</div>
-          <form onSubmit={this.handleSubmit}>
+          {/* <div>Enter any food intolerances below</div> */}
+          <form className="intolerance-form" onSubmit={this.handleSubmit}>
+            <label>
+              Enter any food intolerances below
+            <br />
             <select value={value} onChange={this.handleChange}>
               <option default> - </option>
               <option value="Dairy">Dairy</option>
@@ -177,11 +184,12 @@ class MyProfile extends React.Component {
               <option value="Tree Nut">Tree Nut</option>
               <option value="Wheat">Wheat</option>
             </select>
+            </label>
             <input type="submit" value="Add" />
           </form>
 
           <div>Select your diet from the dropdown below</div>
-          <select value={diet} onChange={this.handleDropdownChange}>
+          <select className="diet-form" value={diet} onChange={this.handleDropdownChange}>
             <option default> - </option>
             <option value="gluten free">Gluten-Free</option>
             <option value="ketogenic">Ketogenic</option>
@@ -194,8 +202,8 @@ class MyProfile extends React.Component {
             <option value="primal">Primal</option>
             <option value="whole30">Whole30</option>
           </select>
-
-          <button onClick={this.updateDB}>Confirm Changes!</button>
+          <br />
+          <button className="btn-confirm" onClick={this.updateDB}>Confirm Changes!</button>
         </div>
       </div>
     );

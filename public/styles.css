@@ -329,6 +329,12 @@ body {
     display: block;
   }
 
+  /* .photo-area {
+    width: 100%;
+    height: 30%;
+    position: absolute;
+  } */
+
   .profile-pic {
     width: 240px;
     height: 240px;
@@ -340,8 +346,8 @@ body {
   }
 
   .button-change-pic {
-    position: relative;
-    top: 8%;
+    position: absolute;
+    top: 44%;
     left: 77%;
     height: 40px;
     width: 40px;
@@ -351,20 +357,24 @@ body {
 
   .button-change-pw {
     position: relative;
-    top: 20%;
+    top: 25%;
     justify-self: center;
     left: 25%;
+    margin: auto;
   }
 
   .button-change-name {
     position: relative;
-    top: 20%;
+    top: 25%;
     left: 25%;
+    margin: auto;
   }
 
   .url-form {
-    position: relative;
-    top: 30%;
+    position: absolute;
+    top: 55%;
+    left: 15%;
+    margin: auto;
   }
 
   .profile-right {
@@ -375,5 +385,40 @@ body {
     position: relative;
     top: -100%;
     padding: auto;
+  }
 
+  .diet {
+    height: 10%;
+    margin: auto;
+  }
+
+  .intolerance-list {
+    height: auto;
+    margin-bottom: 20%;
+  }
+
+  .intolerance-tile {
+    height: 30px;
+    width: 80%;
+    margin: auto;
+    display: flex;
+  }
+
+  .intolerance {
+  }
+
+  .button-delete-intolerance {
+  }
+
+  .intolerance-form {
+    margin-bottom: 6%;
+  }
+
+  .diet-form {
+    margin: auto;
+    margin-bottom: 10%;
+  }
+
+  .btn-confirm {
+    margin: auto;
   }
