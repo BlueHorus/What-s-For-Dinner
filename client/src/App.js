@@ -2,6 +2,20 @@ import React from "react";
 import axios from "axios";
 
 // Page Imorts
+<<<<<<< HEAD
+import Featured from './featured/featured.js';
+import Recipe from './shared/recipecard.js';
+import searchIcon from './shared/SVGS/SearchIcon.svg';
+import Landing from './landing/landing.js'
+import title from '../../public/images/title.svg'
+import ingredientIcon from './shared/SVGS/IngredientIcon.svg'
+import recipeIcon from './shared/SVGS/recipesIcon.svg';
+import profileIcon from './shared/SVGS/profileIcon.svg';
+import Ingredients from './ingredients/ingredients.js'
+import MyProfile from './MyProfile.jsx';
+
+
+=======
 import Featured from "./featured/featured.js";
 import Recipe from "./shared/recipecard.js";
 import searchIcon from "./shared/SVGS/SearchIcon.svg";
@@ -14,6 +28,7 @@ import MyProfile from "./MyProfile.jsx";
 import Auth from "./auth/login.jsx";
 import { app } from "../../firebase_config.js";
 import { getAuth, onAuthStateChanged, updateCurrentUser } from "firebase/auth";
+>>>>>>> dev
 
 class Main extends React.Component {
   constructor() {
@@ -87,18 +102,31 @@ class Main extends React.Component {
   }
 
   handleButtonPress(recipeId) {
+    console.log(recipeId);
+    let id = recipeId.toString();
     switch (event.target.className) {
+<<<<<<< HEAD
+      case 'upvote-button':
+=======
       case "upvote-button":
         console.log("test upvote");
+>>>>>>> dev
         ((recipeId) => {
           let config = {
             method: "put",
             url: "/updateUpvote",
             data: {
+<<<<<<< HEAD
+              recipeId: id
+            }
+          }
+          axios(config)
+=======
               recipeId: recipeId,
             },
           };
           axios(config);
+>>>>>>> dev
         })();
         break;
       case "downvote-button":
@@ -108,10 +136,17 @@ class Main extends React.Component {
             method: "put",
             url: "/updateDownvote",
             data: {
+<<<<<<< HEAD
+              recipeId: id
+            }
+          }
+          axios(config)
+=======
               recipeId: recipeId,
             },
           };
           axios(config);
+>>>>>>> dev
         })();
         break;
       default:
@@ -180,8 +215,24 @@ class Main extends React.Component {
       <div className="main">
         <div className="navigation">
           <span id="landing" className="logo" onClick={this.viewSwitch} />
-          <span id="title">What's For Dinner?</span>
+          <img id="title" src={title}/>
           <div id="find-recipes" onClick={this.viewSwitch}>
+<<<<<<< HEAD
+            <img  width='30' src={searchIcon}></img>
+             <span>Find Recipes</span>
+          </div>
+          <div id="my-ingredients" onClick={this.viewSwitch}>
+            <img width='30' src={ingredientIcon} />
+            <span>My Ingredients</span>
+          </div>
+          <div id="my-recipes" onClick={this.viewSwitch}>
+            <img width='30' src={recipeIcon} />
+            <span>My Recipes</span>
+          </div>
+          <div id="login-signup" onClick={this.viewSwitch}>
+            <img width='30' src={profileIcon} />
+            <span>Profile</span>
+=======
             <img width="30" src={searchIcon}></img>
             Find Recipes
           </div>
@@ -196,6 +247,7 @@ class Main extends React.Component {
           <div id="login-signup" onClick={this.viewSwitch}>
             <img width="30" src={profileIcon} />
             Profile
+>>>>>>> dev
           </div>
           <Auth status={this.getStatus} login={this.state.login} />
         </div>
