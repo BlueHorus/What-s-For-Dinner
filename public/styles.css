@@ -329,3 +329,125 @@ body {
     transform-origin: center;
     transform-box: fill-box;
   }
+
+  /*---------------------------------------------
+                  PROFILE PAGE
+  ----------------------------------------------*/
+
+  .profile {
+    width: 100%;
+    height: 100%;
+  }
+
+  .welcome-banner {
+    width: 100%;
+    height: 120px;
+    font-size: 35px;
+    text-align: center;
+    padding-top: 3%;
+  }
+
+  .profile-left {
+    float: left;
+    width: 38%;
+    height: 100%;
+    justify-content: center;
+    position: relative;
+    top: -20%;
+    margin-right: 5%;
+    display: block;
+  }
+
+  /* .photo-area {
+    width: 100%;
+    height: 30%;
+    position: absolute;
+  } */
+
+  .profile-pic {
+    width: 240px;
+    height: 240px;
+    justify-self: center;
+    position: relative;
+    top: 18%;
+    padding-left: 5%;
+    padding-right: 2%;
+  }
+
+  .button-change-pic {
+    position: absolute;
+    top: 44%;
+    left: 77%;
+    height: 40px;
+    width: 40px;
+    justify-content: center;
+    border-radius: 50%;
+  }
+
+  .button-change-pw {
+    position: relative;
+    top: 25%;
+    justify-self: center;
+    left: 25%;
+    margin: auto;
+  }
+
+  .button-change-name {
+    position: relative;
+    top: 25%;
+    left: 25%;
+    margin: auto;
+  }
+
+  .url-form {
+    position: absolute;
+    top: 55%;
+    left: 15%;
+    margin: auto;
+  }
+
+  .profile-right {
+    float: right;
+    width: 62%;
+    height: 100%;
+    justify-content: center;
+    position: relative;
+    top: -100%;
+    padding: auto;
+  }
+
+  .diet {
+    height: 10%;
+    margin: auto;
+  }
+
+  .intolerance-list {
+    height: auto;
+    margin-bottom: 20%;
+  }
+
+  .intolerance-tile {
+    height: 30px;
+    width: 80%;
+    margin: auto;
+    display: flex;
+  }
+
+  .intolerance {
+  }
+
+  .button-delete-intolerance {
+  }
+
+  .intolerance-form {
+    margin-bottom: 6%;
+  }
+
+  .diet-form {
+    margin: auto;
+    margin-bottom: 10%;
+  }
+
+  .btn-confirm {
+    margin: auto;
+  }

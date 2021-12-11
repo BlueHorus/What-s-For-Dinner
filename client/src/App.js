@@ -11,6 +11,7 @@ import ingredientIcon from './shared/SVGS/IngredientIcon.svg'
 import recipeIcon from './shared/SVGS/recipesIcon.svg';
 import profileIcon from './shared/SVGS/profileIcon.svg';
 import Ingredients from './ingredients/ingredients.js'
+import MyProfile from './MyProfile.jsx';
 
 
 
@@ -18,11 +19,31 @@ class Main extends React.Component {
   constructor() {
     super();
     this.state = {
-      id: "landing",
-      user: sampleUser
+      id: "login-signup",
+      user: sampleUser,
+      intolerances: '',
+      diet: '',
+      userInfo: {},
     };
     this.viewSwitch = this.viewSwitch.bind(this);
     this.handleButtonPress = this.handleButtonPress.bind(this);
+    this.setInitialData = this.setInitialData.bind(this);
+  }
+
+  componentDidMount() {
+    axios.get('/getUsersInfo')
+      .then(data => {
+        this.setInitialData(data);
+      })
+      .catch(err => {
+        console.log(err);
+      })
+  }
+
+  setInitialData(obj) {
+    this.setState({
+      userInfo: obj,
+    })
   }
 
   viewSwitch(e) {
@@ -126,7 +147,7 @@ class Main extends React.Component {
         {this.state.id === "find-recipes" ? <h1>Find Recipes Placeholder</h1> : ""}
         {this.state.id === "my-ingredients" ? <h1><Ingredients /></h1> : ""}
         {this.state.id === "my-recipes" ? <h1>My Recipes Placeholder</h1> : ""}
-        {this.state.id === "login-signup" ? <h1>Profile Placeholder</h1> : ""}
+        {this.state.id === "login-signup" ? <MyProfile /> : ""}
       </div>
     </div>
     )
