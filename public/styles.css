@@ -4,8 +4,10 @@
 
 * #title {
   font-family: 'Josefin Sans';
-  font-size: 37px;
+  height: 90%;
+  width: auto;
   margin-right: auto;
+  color: white
 }
 
 @media only screen and (max-width : 700px) {
@@ -103,13 +105,22 @@ body {
 #login-signup img,
 #find-recipes img {
   justify-self: flex-start;
-  margin-left: 3px;
+  margin-left: 5px;
+}
+
+#my-ingredients span,
+#my-recipes span,
+#login-signup span,
+#find-recipes span {
+  justify-self: center;
 }
 
 
 
+
+
 .navigation {
-  background-color: #4FBABA;
+  background-color: #39D3BD;
   height: 70px;
   width: 100vw;
   display: flex;
@@ -304,7 +315,7 @@ body {
   transform-box: fill-box;
   justify-content: center;
   background: linear-gradient(
-0deg, rgba(34,193,195,0) 0%, rgba(79,186,186,1) 100%);
+0deg, rgba(34,193,195,0) 0%, #39D3BD 100%);
   border-top: solid 2px black;
   flex-wrap: wrap;
   flex-direction: row;

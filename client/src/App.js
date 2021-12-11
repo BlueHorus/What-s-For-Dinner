@@ -6,6 +6,7 @@ import Featured from './featured/featured.js';
 import Recipe from './shared/recipecard.js';
 import searchIcon from './shared/SVGS/SearchIcon.svg';
 import Landing from './landing/landing.js'
+import title from '../../public/images/title.svg'
 import ingredientIcon from './shared/SVGS/IngredientIcon.svg'
 import recipeIcon from './shared/SVGS/recipesIcon.svg';
 import profileIcon from './shared/SVGS/profileIcon.svg';
@@ -101,22 +102,22 @@ class Main extends React.Component {
       <div className='main'>
         <div className="navigation">
           <span id="landing" className="logo" onClick={this.viewSwitch} />
-          <span id="title">What's For Dinner?</span>
+          <img id="title" src={title}/>
           <div id="find-recipes" onClick={this.viewSwitch}>
             <img  width='30' src={searchIcon}></img>
-              Find Recipes
+             <span>Find Recipes</span>
           </div>
           <div id="my-ingredients" onClick={this.viewSwitch}>
             <img width='30' src={ingredientIcon} />
-              My Ingredients
+            <span>My Ingredients</span>
           </div>
           <div id="my-recipes" onClick={this.viewSwitch}>
             <img width='30' src={recipeIcon} />
-              My Recipes
+            <span>My Recipes</span>
           </div>
           <div id="login-signup" onClick={this.viewSwitch}>
             <img width='30' src={profileIcon} />
-              Profile
+            <span>Profile</span>
           </div>
         </div>
         <div className='content'>
