@@ -20,7 +20,7 @@ class Main extends React.Component {
   }
 
   //show whether user is login in or not
-  getStatus() {
+  getStatus(func) {
     const auth = getAuth(app);
     onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -31,10 +31,12 @@ class Main extends React.Component {
           .then((id) => {
             this.setState({ token: id });
           })
+          .then(func)
           .catch((err) => {
             console.log(err);
           });
       } else {
+        this.setState({ login: false });
         console.log("Not sign in");
       }
     });
@@ -63,7 +65,7 @@ class Main extends React.Component {
       axios
         .get("/authenticate", {
           headers: {
-            Authorization: this.state.token,
+            Authorization: this.state.token + " " + this.state.uid,
           },
         })
         .then((response) => {
@@ -77,7 +79,7 @@ class Main extends React.Component {
   render() {
     return (
       <div>
-        <Auth status={this.getStatus} />
+        <Auth status={this.getStatus} login={this.state.login} />
         <h1>Hello Blue Ocean World!</h1>
       </div>
     );
