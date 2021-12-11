@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import profilePic from './shared/SVGS/profileIcon.svg';
 
 
 class MyProfile extends React.Component {
@@ -10,7 +11,7 @@ class MyProfile extends React.Component {
       diet: '',
       intolerances: [],
       changingProfilePic: false,
-      selectedFile: '',
+      selectedFile: profilePic,
     };
 
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
