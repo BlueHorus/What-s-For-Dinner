@@ -17,7 +17,9 @@ Recipe
 
 import React from 'react';
 import axios from 'axios';
-import FavoriteButton from './favoriteRecipeButton.js'
+import FavoriteButton from './favoriteRecipeButton.js';
+import UpVoteButton from './upVoteButton.js';
+import DownVoteButton from './downVoteButton.js'
 import { PieChart } from 'react-minimal-pie-chart';
 
 
@@ -26,11 +28,13 @@ function Recipe (props) {
     const recipe = props.recipe.results[0]
     console.log(recipe)
 
+    const 
+
   return (
     <div>
         <div className="recipecard">
             <div className="recipetitle">Recipe: {recipe.title}</div>
-            <div className="recipeimage"><img src={recipe.image} alt="a picture of food"/> </div>
+            <img className="recipeimage" src={recipe.image} alt="a picture of food"/>
             <div className="recipelink"><a href={recipe.spoonacularSourceUrl}>Full recipe</a></div>
             <div className="summary">Summary: {recipe.summary.replace(/<[^>]+>/g, '').slice(0,240)}...</div>
             <div className="ingredients">Ingredients:
@@ -41,8 +45,8 @@ function Recipe (props) {
             <div className ="diet">Diet friendly:{recipe.diets.map(type => <li>{type}</li>)}</div>
             <div className="opinionbutton">
                 <FavoriteButton />
-                <div className="likebutton">PH</div>
-                <div className="dislikebutton">PH</div>
+                <UpVoteButton />
+                <DownVoteButton />
             </div>
         </div>
         <div className="recipeadditions">
