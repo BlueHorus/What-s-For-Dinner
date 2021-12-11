@@ -178,6 +178,14 @@ body {
   background-repeat: no-repeat;
   border: 0;
 }
+.favorite-button-clicked {
+  background-image: url('./images/favoriteButtonIconClicked.svg');
+  width: 40px;
+  height: 40px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  border: 0;
+}
  .favorite-button:hover {
   background-image: url('./images/favoriteButtonIconHover.svg');
 }

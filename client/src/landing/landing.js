@@ -2,13 +2,13 @@ import React from 'react';
 import PanGraphic from './panGraphic.js'
 import Recipe from '../shared/recipecard.js';
 
-const Landing = () => {
+const Landing = (props) => {
   return (
     <>
     <PanGraphic />
-    <Recipe recipe={sample}/>
-    <Recipe recipe={sample}/>
-    <Recipe recipe={sample}/>
+    <Recipe handleButtonPress={props.handleButtonPress} user={props.user} recipe={sample}/>
+    <Recipe handleButtonPress={props.handleButtonPress} user={props.user} recipe={sample}/>
+    <Recipe handleButtonPress={props.handleButtonPress} user={props.user} recipe={sample}/>
     </>
   )
 }

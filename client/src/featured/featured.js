@@ -41,7 +41,7 @@ function Featured (props) {
   return (
     <div className="featuredrecipes">
         <h3>Community favorites:</h3>
-        <div> <Recipe recipe={sample}/> </div>
+        <div> <Recipe user={props.user} handleButtonPress={props.handleButtonPress} recipe={sample}/> </div>
         <div> <Recipe recipe={sample}/> </div>
         <div> <Recipe recipe={sample}/> </div>
     </div>
