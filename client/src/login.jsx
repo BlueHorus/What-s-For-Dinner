@@ -1,6 +1,7 @@
 import React from "react";
 import { app } from "../../firebase_config.js";
 import axios from "axios";
+
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -49,30 +50,52 @@ class Auth extends React.Component {
 
   //create an user
   //need to test the post request part
-  createUser() {
-    const auth = getAuth(app);
-    createUserWithEmailAndPassword(auth, this.state.email, this.state.password)
-      .then((info) => {
-        this.setState({ uid: info.user.uid });
-        // axios.post("/createUser", {
-        //   uid: this.state.uid,
-        //   username: this.state.username,
-        //   url: this.state.url,
-        // });
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
+  createUser(e) {
+    if (this.props.login === true) {
+      this.signout();
+    } else {
+      event.preventDefault();
+      console.log("invoking this");
+      const auth = getAuth(app);
+      createUserWithEmailAndPassword(
+        auth,
+        this.state.email,
+        this.state.password
+      )
+        .then((info) => {
+          this.setState({ uid: info.user.uid });
+          console.log(this.state.uid);
+
+          // axios.post("/createUser", {
+          //   uid: this.state.uid,
+          //   username: this.state.username,
+          //   url: this.state.url,
+          // });
+          alert("Thanks you! ");
+          e.target.reset();
+          this.setState({ click: false });
+        })
+        .catch((err) => {
+          alert("Please try again!" + err);
+          console.log(err.message);
+        });
+    }
   }
 
   //sign in
-  signin() {
+  signin(e) {
+    event.preventDefault();
     const auth = getAuth(app);
     signInWithEmailAndPassword(auth, this.state.email, this.state.password)
       .then((user) => {
-        this.props.status();
+        this.props.status(() => {
+          alert("Welcome Back");
+          e.target.reset();
+          this.setState({ click: false });
+        });
       })
       .catch((err) => {
+        alert("Please try again");
         console.log(err.message);
       });
   }
@@ -92,11 +115,22 @@ class Auth extends React.Component {
   render() {
     return (
       <div>
-        <button onClick={this.click}>Log In</button>
-        <button onClick={this.click}>Sign Up</button>
-        <button onClick={this.signout}>Sign Out</button>
+        {this.props.login === false ? (
+          <div>
+            <button onClick={this.click}>Log In</button>
+            <button onClick={this.click}>Sign Up</button>
+          </div>
+        ) : (
+          <button onClick={this.signout}>Sign Out</button>
+        )}
+
         {this.state.click === true ? (
-          <div className="modal">
+          <form
+            className="modal"
+            onSubmit={
+              this.state.create === true ? this.createUser : this.signin
+            }
+          >
             <input
               onChange={(e) => {
                 this.submit(e, "email");
@@ -133,9 +167,13 @@ class Auth extends React.Component {
               placeholder="Password"
             />
             {this.state.create === false ? (
-              <button onClick={this.signin}>Sign In</button>
+              <div>
+                <button type="submit">Sign In</button>
+                <span> </span>
+                <span>Forgot?</span>
+              </div>
             ) : (
-              <button onClick={this.createUser}>Create</button>
+              <button type="submit">Create</button>
             )}
 
             {this.state.create === true ? (
@@ -147,7 +185,7 @@ class Auth extends React.Component {
                 Don't have an account? <u onClick={this.click}>Sign Up</u>
               </div>
             )}
-          </div>
+          </form>
         ) : (
           ""
         )}
