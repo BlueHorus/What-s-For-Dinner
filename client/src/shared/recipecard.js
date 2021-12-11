@@ -28,8 +28,6 @@ function Recipe (props) {
     const recipe = props.recipe.results[0]
     console.log(recipe)
 
-    const 
-
   return (
     <div>
         <div className="recipecard">

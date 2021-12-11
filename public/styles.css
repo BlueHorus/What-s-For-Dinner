@@ -164,6 +164,9 @@ body {
 .downvote-button:hover {
   background-image: url('./images/downVoteButtonIconHover.svg');
 }
+.downvote-button:active {
+  background-image:url('./images/downVoteButtonIconClicked.svg');
+}
 
 
 
@@ -180,7 +183,7 @@ body {
 }
 
 .favorite-button:active {
-  background-image: url('/public/images/favoriteButtonIconClicked.svg');
+  background-image: url('./images/favoriteButtonIconClicked.svg');
 }
 
 .recipecard {
