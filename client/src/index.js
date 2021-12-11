@@ -1,8 +1,8 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import Main from './App.js';
-import firebase from 'firebase/app';
+import React from "react";
+import ReactDOM from "react-dom";
+import Main from "./App.js";
 
+<<<<<<< HEAD
 
 // firebase.initializeApp({
 //   apiKey: "AIzaSyDfjkH0RspPPEb3OBQs0emN1yZgSb-LDrA",
@@ -19,3 +19,6 @@ ReactDOM.render(
   <Main/>,
   document.getElementById('root')
 );
+=======
+ReactDOM.render(<Main />, document.getElementById("root"));
+>>>>>>> dev
