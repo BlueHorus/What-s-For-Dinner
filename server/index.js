@@ -1,19 +1,5 @@
 const express = require("express");
 const path = require("path");
-<<<<<<< HEAD
-
-const db = require("./db/index.js");
-const Users = require("./db/models/users.js");
-const Recipes = require("./db/models/recipes.js");
-const app = express();
-
-const port = 3000;
-
-app.use(express.static(path.join(__dirname, "../public")));
-
-app.get("/", (req, res) => {
-  res.send("Hello World!");
-=======
 const app = express();
 
 const port = 3000;
@@ -115,7 +101,6 @@ app.put("/updateProfilePic", (req, res) => {
   // request should include user id
   // query database to update note
   res.send("updateProfilePic");
->>>>>>> 9412740ec18459dc99e6208b7d2a25bb1b80f8d3
 });
 
 app.listen(port, () => {
