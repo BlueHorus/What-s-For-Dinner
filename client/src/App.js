@@ -82,15 +82,16 @@ class Main extends React.Component {
   }
 
   handleButtonPress(recipeId) {
+    console.log(recipeId);
+    let id = recipeId.toString();
     switch (event.target.className) {
       case 'upvote-button':
-        console.log('test upvote');
         ((recipeId) => {
           let config = {
             method: 'put',
             url: '/updateUpvote',
             data: {
-              recipeId: recipeId
+              recipeId: id
             }
           }
           axios(config)
@@ -103,7 +104,7 @@ class Main extends React.Component {
             method: 'put',
             url: '/updateDownvote',
             data: {
-              recipeId:recipeId
+              recipeId: id
             }
           }
           axios(config)
