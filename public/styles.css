@@ -56,11 +56,12 @@ body {
   flex-direction: row;
   width: 700px;
   height: 100%;
+  margin-top: 2em ;
+  border: solid 2px black;
   background-color: #E4EAEA;
 }
 
 .logo {
-  margin-right: auto;
   margin-left: 20px;
   justify-self: flex-start;
   background-image: url('./images/BlueOceanLogo.svg');
@@ -228,6 +229,7 @@ body {
   grid-row-start: 4;
   text-align: center;
   padding: 5px;
+  font-size: 25px;
 }
 
 .mealtags {
