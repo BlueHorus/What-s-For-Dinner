@@ -28,19 +28,26 @@ class Auth extends React.Component {
     this.createUser = this.createUser.bind(this);
     this.signin = this.signin.bind(this);
     this.signout = this.signout.bind(this);
+    this.renderModal = this.renderModal.bind(this);
   }
 
   //logic to switch to different forms
   click(e) {
-    if (e.target.innerHTML === "Log In") {
-      this.setState({ click: true });
-      this.setState({ signin: true });
-      this.setState({ create: false });
+    if (e.target.className === "login") {
+      console.log('sign up test')
+      this.setState({
+        click: true,
+        signin: true,
+        create: false, });
+
     }
-    if (e.target.innerHTML === "Sign Up") {
-      this.setState({ click: true });
-      this.setState({ create: true });
-      this.setState({ signin: false });
+    if (e.target.className === "signup") {
+      this.setState({
+        click: true,
+        create: true,
+        signin: false
+    });
+
     }
   }
 
@@ -112,83 +119,110 @@ class Auth extends React.Component {
       });
   }
 
+  renderModal() {
+    console.log('render modal test inside')
+    if (this.state.click === true) {
+      if (this.state.create === true) {
+      return (
+          <div
+            className="modal"
+           style={{display: 'block'}}
+          >
+            <div className='modal-content'>
+            <form onSubmit={
+              this.state.create === true ? this.createUser : this.signin
+            }>
+              <input
+                onChange={(e) => {
+                  this.submit(e, "email");
+                }}
+                placeholder="Email"
+              />
+              <input
+                  onChange={(e) => {
+                    this.submit(e, "username");
+                  }}
+                  placeholder="Username"
+                />
+                <input
+                  onChange={(e) => {
+                    this.submit(e, "url");
+                  }}
+                  placeholder="Photo URL"
+                />
+                <input
+                onChange={(e) => {
+                  this.submit(e, "password");
+                }}
+                placeholder="Password"
+              />
+              <button type="submit">Create</button>
+            </form>
+            <div>
+                Already have an account? <u onClick={this.click}>Log In</u>
+            </div>
+
+            </div>
+
+            </div>
+          )
+      } else {
+        return (
+         <div className='modal'>
+           <div className='modal-content'>
+             <form onSubmit={this.state.create === true ? this.createUser : this.signin}>
+                <input
+                  onChange={(e) => {
+                    this.submit(e, "email");
+                  }}
+                  placeholder="Email"
+                />
+                <input
+                onChange={(e) => {
+                  this.submit(e, "password");
+                }}
+                placeholder="Password"
+              />
+              <button type="submit">Sign In</button>
+             </form>
+
+               <span> </span>
+               <span>Forgot?</span>
+               <div>
+               Don't have an account? <u className='signup' onClick={this.click}>Sign Up</u>
+               </div>
+            </div>
+         </div>
+        )
+    }
+   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+  }
+
   render() {
     return (
       <div>
         {this.props.login === false ? (
           <div>
-            <button onClick={this.click}>Log In</button>
-            <button onClick={this.click}>Sign Up</button>
+            <button className='login' onClick={this.click}>Log In</button>
+            <button className='signup' onClick={this.click}>Sign Up</button>
           </div>
         ) : (
           <button onClick={this.signout}>Sign Out</button>
         )}
-
-        {this.state.click === true ? (
-          <form
-            className="modal"
-            onSubmit={
-              this.state.create === true ? this.createUser : this.signin
-            }
-          >
-            <input
-              onChange={(e) => {
-                this.submit(e, "email");
-              }}
-              placeholder="Email"
-            />
-
-            {this.state.create === true ? (
-              <input
-                onChange={(e) => {
-                  this.submit(e, "username");
-                }}
-                placeholder="Username"
-              />
-            ) : (
-              ""
-            )}
-
-            {this.state.create === true ? (
-              <input
-                onChange={(e) => {
-                  this.submit(e, "url");
-                }}
-                placeholder="Photo URL"
-              />
-            ) : (
-              ""
-            )}
-
-            <input
-              onChange={(e) => {
-                this.submit(e, "password");
-              }}
-              placeholder="Password"
-            />
-            {this.state.create === false ? (
-              <div>
-                <button type="submit">Sign In</button>
-                <span> </span>
-                <span>Forgot?</span>
-              </div>
-            ) : (
-              <button type="submit">Create</button>
-            )}
-
-            {this.state.create === true ? (
-              <div>
-                Already have an account? <u onClick={this.click}>Log In</u>
-              </div>
-            ) : (
-              <div>
-                Don't have an account? <u onClick={this.click}>Sign Up</u>
-              </div>
-            )}
-          </form>
-        ) : (
-          ""
-        )}
+      {this.renderModal()}
       </div>
     );
   }

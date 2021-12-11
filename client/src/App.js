@@ -19,7 +19,7 @@ class Main extends React.Component {
   constructor() {
     super();
     this.state = {
-      id: "login-signup",
+      id: "landing",
       user: sampleUser,
       intolerances: "",
       diet: "",
