@@ -20,9 +20,7 @@ class Main extends React.Component {
     this.state = {
       id: "login-signup",
       user: sampleUser,
-      intolerances: '',
-      diet: '',
-      userInfo: {},
+      // userInfo: {},
     };
     this.viewSwitch = this.viewSwitch.bind(this);
     this.handleButtonPress = this.handleButtonPress.bind(this);
@@ -108,6 +106,19 @@ class Main extends React.Component {
           axios(config)
         })();
         break;
+        // case 'update-diet':
+        //   ((recipeId) => {
+        //     console.log('test updating diet')
+        //     let config = {
+        //       method: 'patch',
+        //       url: '/updateDiet',
+        //       data: {
+        //         diet: this.state.diet,
+        //       }
+        //     }
+        //     axios(config)
+        //   })();
+        //   break;
         default: console.log('test default');
     }
 
@@ -146,7 +157,7 @@ class Main extends React.Component {
         {this.state.id === "find-recipes" ? <h1>Find Recipes Placeholder</h1> : ""}
         {this.state.id === "my-ingredients" ? <h1><Ingredients /></h1> : ""}
         {this.state.id === "my-recipes" ? <h1>My Recipes Placeholder</h1> : ""}
-        {this.state.id === "login-signup" ? <MyProfile /> : ""}
+        {this.state.id === "login-signup" ? <MyProfile userInfo={this.state.user} handleButtonPress={this.handleButtonPress} /> : ""}
       </div>
     </div>
     )

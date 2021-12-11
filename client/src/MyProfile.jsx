@@ -1,20 +1,22 @@
 import React from 'react';
 import axios from 'axios';
-import profilePic from './shared/SVGS/profileIcon.svg';
+import defaultPic from './shared/SVGS/profileIcon.svg';
 
 
 class MyProfile extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      userInfo: this.props.userInfo,
       value: '',
       diet: '',
       intolerances: [],
       changingProfilePic: false,
-      selectedFile: profilePic,
+      selectedFile: defaultPic,
       url: '',
     };
 
+    this.setUserInfo = this.setUserInfo.bind(this);
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
     this.handleURLChange = this.handleURLChange.bind(this);
@@ -25,6 +27,20 @@ class MyProfile extends React.Component {
     this.handleDropdownChange = this.handleDropdownChange.bind(this);
     this.deleteFood = this.deleteFood.bind(this);
     this.updateDB = this.updateDB.bind(this);
+  }
+
+  componentDidMount() {
+    this.setUserInfo(this.props.userInfo);
+  }
+
+  setUserInfo(info) {
+    const { userInfo } = this.props;
+    this.setState({
+      userInfo: info,
+      // selectedFile: userInfo.profilePic ? userInfo.profilePic : defaultPic,
+      diet: userInfo.diet,
+      intolerances: userInfo.intolerances.split(', '),
+    })
   }
 
   handleUsernameChange() {
@@ -81,7 +97,6 @@ class MyProfile extends React.Component {
   }
 
   deleteFood(e) {
-    console.log(e.target);
     const { intolerances } = this.state;
     this.setState({
       intolerances: intolerances.filter(food => {
@@ -101,19 +116,20 @@ class MyProfile extends React.Component {
   }
 
   render() {
-    const { value, diet, intolerances, changingProfilePic, url } = this.state;
+    const { value, diet, intolerances, changingProfilePic, url, userInfo } = this.state;
     return (
       <div className="profile">
-        <div className="welcome-banner">Welcome Back, [USERNAME HERE]!</div>
+        <div className="welcome-banner">Welcome Back, {userInfo.userName}!</div>
         <div className="profile-left">
-          {/* <div className="photo-area"> */}
+          <div className="profile-pic-block">
             <img className="profile-pic" src={this.state.selectedFile} alt="profile-picture" />
             <button className="button-change-pic" onClick={this.changeProfilePic}>x</button>
-          {/* </div> */}
+          </div>
           {changingProfilePic === true
             ? <form className="url-form" onSubmit={this.uploadPic}>
                 <label>
-                  Please enter new photo URL:
+                  Please enter new photo URL
+                  <br />
                   <input type="text" value={url} onChange={this.handleURLChange}/>
                 </label>
                 <input type="submit" value="Upload" />
@@ -125,7 +141,6 @@ class MyProfile extends React.Component {
           <br />
 
           <button className="button-change-name" onClick={this.handleUsernameChange}>Change Username</button>
-          <br />
           <br />
           <button className="button-change-pw" onClick={this.handlePasswordChange}>Change Password</button>
         </div>
