@@ -1,11 +1,24 @@
 import React from 'react'
 
-const FavoriteButton = () => {
+const FavoriteButton = (props) => {
+  if (props.user === null) {
+    return (
+      <button className='favorite-button'  disabled>
+      </button>
+      )
+    }
+  if (props.user.favRecipes.indexOf(props.recipe.id) !== 0) {
   return (
-    <div className='favorite-button'>
-    </div>
+    <button className='favorite-button' onClick={() => props.handleButtonPress(props.recipe.id)}>
+    </button>
     )
+  } else {
+    return (<button className='favorite-button-clicked' onClick={() => props.handleButtonPress(props.recipe.id)}>
+    </button>
+    )
+  }
 }
+
 
 
 

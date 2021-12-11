@@ -26,7 +26,6 @@ import { PieChart } from 'react-minimal-pie-chart';
 function Recipe (props) {
     const recipe = props.recipe.results[0]
 
-
   return (
     <div>
         <div className="recipecard">
@@ -41,9 +40,9 @@ function Recipe (props) {
             <div className="mealtags">Meal tags:{recipe.dishTypes.map(type => <li>{type}</li>)}</div>
             <div className ="diet">Diet friendly:{recipe.diets.map(type => <li>{type}</li>)}</div>
             <div className="opinionbutton">
-                <FavoriteButton />
-                <UpVoteButton />
-                <DownVoteButton />
+                <FavoriteButton recipe={recipe} user={props.user} handleButtonPress={props.handleButtonPress}/>
+                <UpVoteButton recipe={recipe} handleButtonPress={props.handleButtonPress}/>
+                <DownVoteButton recipe={recipe} handleButtonPress={props.handleButtonPress}/>
             </div>
         </div>
         <div className="recipeadditions">
