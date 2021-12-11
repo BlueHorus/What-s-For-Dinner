@@ -10,10 +10,6 @@ import ingredientIcon from './shared/SVGS/IngredientIcon.svg'
 import recipeIcon from './shared/SVGS/recipesIcon.svg';
 import profileIcon from './shared/SVGS/profileIcon.svg';
 import Ingredients from './ingredients/ingredients.js';
-import Landing from './landing/landing.js';
-
-
-
 
 class Main extends React.Component {
   constructor() {

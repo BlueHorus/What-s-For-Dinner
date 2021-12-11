@@ -73,14 +73,6 @@ class Ingredients extends React.Component {
         <br/>
         <input type="submit" value={String.fromCodePoint(0x22B9)} className="add-button"/>&nbsp;&nbsp;Add
       </form>
-
-      <div className="saved-notes">
-         My notes: <br/>
-         {this.props.user.notes}
-      </div>
-
-
-      <ul className="ingredients-list"> My ingredient list:
       <div>
         <form onSubmit={this.addIngredient}>
           <label>
@@ -89,6 +81,14 @@ class Ingredients extends React.Component {
           <input type="submit" value={String.fromCodePoint(0x22B9)} className="add-button"/>&nbsp;&nbsp;Add ingredient
         </form>
       </div>
+
+      <div className="saved-notes">
+         My notes: <br/>
+         {this.props.user.notes}
+      </div>
+
+
+      <ul className="ingredients-list"> My ingredient list:
         {this.props.user.ingredients.split(',').map(ing => <li>{ing}</li>)}
 
 
