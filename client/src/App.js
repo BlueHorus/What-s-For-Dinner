@@ -18,14 +18,83 @@ class Main extends React.Component {
     super();
     this.state = {
       id: "landing",
+      user: sampleUser
     };
     this.viewSwitch = this.viewSwitch.bind(this);
+    this.handleButtonPress = this.handleButtonPress.bind(this);
   }
 
   viewSwitch(e) {
     var value = e.target.id;
     this.setState({ id: value });
   }
+
+  addFavorite(recipeId) {
+    let config = {
+      method: 'put',
+      url: '/updateFavorites',
+      data: {
+        recipeId: recipeId,
+        uid: this.state.user.uid
+      }
+    }
+    axios(config)
+    .then((result) => {
+      let newFavRecipes = this.state.recipes
+      newFavRecipes.push(recipeId)
+      this.setState({
+        user: {
+        uid: this.state.uid,
+        userName: this.state.userName,
+        profilePic: this.state.profilePic,
+        ingredients: this.state.ingredients,
+        notes: this.state.notes,
+        diet: this.state.diet,
+        intolerances: this.state.intolerances,
+        favRecipes: newFavFecipes
+
+        }
+      })
+      .catch((err) => console.log(err))
+    })
+  }
+
+  handleButtonPress(recipeId) {
+    switch (event.target.className) {
+      case 'upvote-button':
+        console.log('test upvote');
+        ((recipeId) => {
+          let config = {
+            method: 'put',
+            url: '/updateUpvote',
+            data: {
+              recipeId: recipeId
+            }
+          }
+          axios(config)
+        })();
+        break;
+      case 'downvote-button':
+        ((recipeId) => {
+          console.log('test downvote')
+          let config = {
+            method: 'put',
+            url: '/updateDownvote',
+            data: {
+              recipeId:recipeId
+            }
+          }
+          axios(config)
+        })();
+        break;
+        default: console.log('test default');
+    }
+
+  }
+
+
+
+
 
   render() {
     return(
@@ -51,8 +120,8 @@ class Main extends React.Component {
           </div>
         </div>
         <div className='content'>
-        {this.state.id === "logo" ? <Featured /> : ""}
-        {this.state.id === "landing" ? <Landing /> : ""}
+        {this.state.id === "logo" ? <Featured handleButtonPress={this.handleButtonPress} user={this.state.user}/> : ""}
+        {this.state.id === "landing" ? <Landing handleButtonPress={this.handleButtonPress} user={this.state.user}/> : ""}
         {this.state.id === "find-recipes" ? <h1>Find Recipes Placeholder</h1> : ""}
         {this.state.id === "my-ingredients" ? <h1><Ingredients /></h1> : ""}
         {this.state.id === "my-recipes" ? <h1>My Recipes Placeholder</h1> : ""}
@@ -64,3 +133,14 @@ class Main extends React.Component {
 }
 
 export default Main;
+
+var sampleUser = {
+  uid: "123",
+   userName: "user_name",
+   profilePic: "http://pic.com",
+   ingredients: "garlic, butter, eggs",
+   notes: "I am a note",
+   diet: "paleo",
+   intolerances: "gluten, dairy",
+   favRecipes: [647572,234,345]
+}
