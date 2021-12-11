@@ -256,3 +256,29 @@ body {
     transform-origin: center;
     transform-box: fill-box;
   }
+
+
+  /*
+  Next section: ingredients
+  */
+
+.user-ingredients {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 2fr
+}
+
+.ingredients-list {
+  grid-row-start: 2;
+  grid-column-start: 1;
+  grid-column-end: 3;
+}
+
+.saved-notes {
+  background-image: url("https://images.all-free-download.com/images/graphicwebp/sticky_note_pad_clip_art_12192.webp");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: violet;
+  padding: 5px;
+  grid-column-start: 3
+}

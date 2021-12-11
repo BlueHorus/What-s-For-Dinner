@@ -63,32 +63,35 @@ class Ingredients extends React.Component {
 
   render() {
     return (
-    <div>
-      <form onSubmit={this.addNote}>
+    <div className="user-ingredients">
+      <form onSubmit={this.addNote} className="user-notes">
         <label>
-          Notes:
+          Add note:
           <br/>
           <input type="text" name="name" spellcheck="true" value={this.state.note} onChange={this.setNote}/>
         </label>
         <br/>
-        <input type="submit" value={String.fromCodePoint(0x22B9)} className="add-button"/>&nbsp;&nbsp;Add note
+        <input type="submit" value={String.fromCodePoint(0x22B9)} className="add-button"/>&nbsp;&nbsp;Add
       </form>
-      <br/>
-      <br/>
-      <br/>
-      <ul> My ingredient list
-        <li>sugar</li>
-        <li>salt</li>
-        <li>pepper</li>
-        <li>endangered animal meat</li>
-        <li>
-          <form onSubmit={this.addIngredient}>
-            <label>
-              <input type="text" name="name" spellcheck="true" value={this.state.ingredient} onChange={this.setIngredient}/>
-            </label>
-            <input type="submit" value={String.fromCodePoint(0x22B9)} className="add-button"/>&nbsp;&nbsp;Add ingredient
-          </form>
-        </li>
+
+      <div className="saved-notes">
+         My notes: <br/>
+         {this.props.user.notes}
+      </div>
+
+
+      <ul className="ingredients-list"> My ingredient list:
+      <div>
+        <form onSubmit={this.addIngredient}>
+          <label>
+            <input type="text" name="name" spellcheck="true" value={this.state.ingredient} onChange={this.setIngredient}/>
+          </label>
+          <input type="submit" value={String.fromCodePoint(0x22B9)} className="add-button"/>&nbsp;&nbsp;Add ingredient
+        </form>
+      </div>
+        {this.props.user.ingredients.split(',').map(ing => <li>{ing}</li>)}
+
+
       </ul>
     </div>
     )

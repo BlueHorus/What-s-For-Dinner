@@ -73,7 +73,7 @@ var sampleUser = {
    userName: "user_name",
    profilePic: "http://pic.com",
    ingredients: "garlic, butter, eggs",
-   notes: "I am a note",
+   notes: "I am a note.  I am a crazy long set of notes actually.  I mean I'm not sure how much there is to say about all this food, but I can't think of a quicker way to  test out this sweet sticky note.  Have you ever tried brownies?  Just the box stuff.  Nothing fancy.  Hey app, go get me brownies.",
    diet: "paleo",
    intolerances: "gluten, dairy",
    favRecipes: [123,234,345]
