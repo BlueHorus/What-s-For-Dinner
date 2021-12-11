@@ -15,7 +15,7 @@ class Main extends React.Component {
   constructor() {
     super();
     this.state = {
-      id: "1",
+      id: 1,
     };
     this.viewSwitch = this.viewSwitch.bind(this);
   }
@@ -48,8 +48,8 @@ class Main extends React.Component {
             </span>
           </div>
           <div id="login-signup">
-            <img width='30' src={profileIcon} />
-            <span onClick={this.viewSwitch}>
+            <img id="login-signup" width='30' src={profileIcon} onClick={this.viewSwitch}/>
+            <span id="login-signup" onClick={this.viewSwitch}>
               Profile
             </span>
           </div>
@@ -59,7 +59,7 @@ class Main extends React.Component {
         {this.state.id === "find-recipes" ? <h1>Find Recipes Placeholder</h1> : ""}
         {this.state.id === "my-ingredients" ? <h1>My Ingredients Placeholder</h1> : ""}
         {this.state.id === "my-recipes" ? <h1>My Recipes Placeholder</h1> : ""}
-        {this.state.id === "login-signup" ? <h1><MyProfile /></h1> : ""}
+        {this.state.id === "login-signup" ? <div><MyProfile /></div> : ""}
       </div>
     </div>
     )

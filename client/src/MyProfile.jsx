@@ -110,7 +110,6 @@ class MyProfile extends React.Component {
     }
   }
 
-
   render() {
     const { value, diet, intolerances, changingProfilePic } = this.state;
     return (
@@ -190,7 +189,6 @@ class MyProfile extends React.Component {
         <br />
         <br />
         <button onClick={this.updateDB}>Confirm Changes!</button>
-
       </div>
     );
   }
