@@ -32,12 +32,9 @@ class Ingredients extends React.Component {
     this.setNote = this.setNote.bind(this);
     this.addIngredient = this.addIngredient.bind(this);
     this.setIngredient = this.setIngredient.bind(this);
+    this.removeIngredient = this.removeIngredient.bind(this)
   }
 
-
-  getIngredients() {
-
-  }
 
   addNote(e) {
     e.preventDefault();
@@ -59,6 +56,11 @@ class Ingredients extends React.Component {
   setIngredient(e) {
     e.preventDefault();
     this.setState({ingredient: e.target.value})
+  }
+
+  removeIngredient(e) {
+    e.preventDefault();
+    console.log('removing ', e.target.id)
   }
 
   render() {
@@ -91,7 +93,10 @@ class Ingredients extends React.Component {
 
 
       <ul className="ingredients-list"> My ingredient list:
-        {this.props.user.ingredients.split(',').map(ing => <li>{ing}</li>)}
+        {this.props.user.ingredients.split(',').map(ing => <li className="one-ingredient">
+                                                            {ing}
+                                                            <button className="remove-ing-button" id={ing} onClick={this.removeIngredient}>{String.fromCodePoint(0x2715)}</button>
+                                                            </li>)}
 
 
       </ul>

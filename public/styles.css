@@ -351,6 +351,14 @@ body {
   grid-column-start: 3
 }
 
+.one-ingredient {
+  width: 100%;
+}
+
+.remove-ing-button {
+  border-radius: 15px;
+  background-color: #4FBABA;
+}
 
   /*---------------------------------------------
                   PROFILE PAGE
