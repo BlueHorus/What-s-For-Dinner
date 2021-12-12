@@ -82,7 +82,7 @@ class Main extends React.Component {
     switch (event.target.className) {
       case 'upvote-button':
         console.log('test upvote');
-        ((recipeId) => {
+        (() => {
           let config = {
             method: 'put',
             url: '/updateUpvote',
@@ -94,7 +94,7 @@ class Main extends React.Component {
         })();
         break;
       case 'downvote-button':
-        ((recipeId) => {
+        (() => {
           console.log('test downvote')
           let config = {
             method: 'put',
@@ -106,25 +106,31 @@ class Main extends React.Component {
           axios(config)
         })();
         break;
-        // case 'update-diet':
-        //   ((recipeId) => {
-        //     console.log('test updating diet')
-        //     let config = {
-        //       method: 'patch',
-        //       url: '/updateDiet',
-        //       data: {
-        //         diet: this.state.diet,
-        //       }
-        //     }
-        //     axios(config)
-        //   })();
-        //   break;
+      case 'update-diet':
+        (() => {
+          console.log('test updating diet: ', recipeId);
+          let config = {
+            method: 'put',
+            url: '/updateDiet',
+            data: recipeId,
+          }
+          axios(config)
+        })();
+        break;
+      case 'update-intolerances':
+        (() => {
+          console.log('test updating intolerances: ', recipeId);
+          let config = {
+            method: 'put',
+            url: '/updateIntolerances',
+            data: recipeId,
+          }
+          axios(config)
+        })();
+        break;
         default: console.log('test default');
     }
-
   }
-
-
 
 
 

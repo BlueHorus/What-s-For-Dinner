@@ -10,6 +10,7 @@ class MyProfile extends React.Component {
       userInfo: this.props.userInfo,
       value: '',
       diet: '',
+      dietChanged: false,
       intolerances: [],
       changingProfilePic: false,
       selectedFile: defaultPic,
@@ -24,10 +25,9 @@ class MyProfile extends React.Component {
     this.uploadPic = this.uploadPic.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    // this.handleDietSubmit = this.handleDietSubmit.bind(this);
+    this.changeDiet = this.changeDiet.bind(this);
     this.handleDropdownChange = this.handleDropdownChange.bind(this);
     this.deleteFood = this.deleteFood.bind(this);
-    this.updateDB = this.updateDB.bind(this);
   }
 
   componentDidMount() {
@@ -38,7 +38,7 @@ class MyProfile extends React.Component {
     const { userInfo } = this.props;
     this.setState({
       userInfo: info,
-      // selectedFile: userInfo.profilePic ? userInfo.profilePic : defaultPic,
+      selectedFile: userInfo.profilePic ? userInfo.profilePic : defaultPic,
       diet: userInfo.diet,
       intolerances: userInfo.intolerances.split(', '),
     })
@@ -84,24 +84,23 @@ class MyProfile extends React.Component {
     })
   }
 
-  // handleDietSubmit(e) {
-  //   const { diet } = this.state;
-  //   event.preventDefault();
-  //   this.setState({
-  //     diet: e.target.value,
-  //   })
-  // }
+  changeDiet(e) {
+    const { diet, userInfo } = this.state;
+    event.preventDefault();
+    this.props.handleButtonPress(
+      {
+        uid: userInfo.uid,
+        diet: diet,
+      }
+    );
+    this.setState({
+      dietChanged: true,
+    })
+  }
 
   handleDropdownChange(e) {
     this.setState({
       diet: e.target.value,
-    })
-  }
-
-  updateIntolerances(e) {
-    const { intolerances } = this.state;
-    this.setState({
-      intolerances: [...intolerances, e.target.value],
     })
   }
 
@@ -114,21 +113,11 @@ class MyProfile extends React.Component {
     })
   }
 
-  updateDB() {
-    const { intolerances, diet } = this.state;
-    if (intolerances) {
-      axios.patch('/updateIntolerances')
-    }
-    if (diet) {
-      axios.patch('/updateDiet')
-    }
-  }
-
   render() {
     const { value, diet, intolerances, changingProfilePic, url, userInfo } = this.state;
     return (
       <div className="profile">
-        <div className="welcome-banner">Welcome Back, {userInfo.userName}!</div>
+        <div className="welcome-banner">Welcome Back, <b>{userInfo.userName}!</b></div>
         <div className="profile-left">
           <div className="profile-pic-block">
             <img className="profile-pic" src={this.state.selectedFile} alt="profile-picture" />
@@ -152,11 +141,13 @@ class MyProfile extends React.Component {
         </div>
 
         <div className="profile-right">
+          {this.state.dietChanged ? <div style={{color: "green"}}><b>Successfully saved new diet!</b></div> : null}
+          <br />
           <div className="diet">
             My Current Diet: <b>{diet}</b>
           </div>
 
-          <form className="diet-form">
+          <form className="update-diet" onSubmit={this.changeDiet}>
             <label>
               Change your diet in the dropdown below!
             <br />
@@ -213,7 +204,15 @@ class MyProfile extends React.Component {
           </form>
 
           <br />
-          <button className="btn-confirm" onClick={this.updateDB}>Confirm Changes!</button>
+          <button
+            className="update-intolerances"
+            onClick={(e) => this.props.handleButtonPress({
+              uid: userInfo.uid,
+              intolerances: intolerances.join(','),
+            })}
+          >
+            Confirm Intolerance Changes!
+          </button>
         </div>
       </div>
     );
