@@ -263,12 +263,13 @@ class Main extends React.Component {
           {this.state.id === "login-signup" ? <MyProfile /> : ""}
         </div>
         <div className='content'>
-        {this.state.id === "logo" ? <Featured handleButtonPress={this.handleButtonPress} user={this.state.user}/> : ""}
-        {this.state.id === "landing" ? <Landing handleButtonPress={this.handleButtonPress} user={this.state.user}/> : ""}
-        {this.state.id === "find-recipes" ? <h1>Find Recipes Placeholder</h1> : ""}
-        {this.state.id === "my-ingredients" ? <h1><Ingredients /></h1> : ""}
-        {this.state.id === "my-recipes" ? <h1>My Recipes Placeholder</h1> : ""}
-        {this.state.id === "login-signup" ? <MyProfile userInfo={this.state.user} handleButtonPress={this.handleButtonPress} /> : ""}
+          {this.state.id === "logo" ? <Featured handleButtonPress={this.handleButtonPress} user={this.state.user}/> : ""}
+          {this.state.id === "landing" ? <Landing handleButtonPress={this.handleButtonPress} user={this.state.user}/> : ""}
+          {this.state.id === "find-recipes" ? <h1>Find Recipes Placeholder</h1> : ""}
+          {this.state.id === "my-ingredients" ? <h1><Ingredients /></h1> : ""}
+          {this.state.id === "my-recipes" ? <h1>My Recipes Placeholder</h1> : ""}
+          {this.state.id === "login-signup" ? <MyProfile userInfo={this.state.user} handleButtonPress={this.handleButtonPress} /> : ""}
+        </div>
       </div>
     );
   }
