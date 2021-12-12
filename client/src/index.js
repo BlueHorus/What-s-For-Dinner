@@ -1,7 +1,6 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import Main from './App.js';
-import firebase from 'firebase/app';
+import React from "react";
+import ReactDOM from "react-dom";
+import Main from "./App.js";
 
 
 // firebase.initializeApp({
