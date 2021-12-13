@@ -173,6 +173,7 @@ class Main extends React.Component {
     const auth = getAuth(app);
     onAuthStateChanged(auth, (user) => {
       if (user) {
+        console.log(user);
         this.setState({ uid: user.uid });
         this.setState({ login: true });
         auth.currentUser
@@ -327,6 +328,7 @@ class Main extends React.Component {
             <MyProfile
               userInfo={this.state.user}
               handleButtonPress={this.handleButtonPress}
+              getStatus={this.getStatus}
             />
             : ""
           }
