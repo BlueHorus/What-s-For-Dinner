@@ -1,16 +1,33 @@
 import React from 'react';
 import PanGraphic from './panGraphic.js'
 import Recipe from '../shared/recipecard.js';
+import axios from 'axios'
 
-const Landing = (props) => {
+class Landing extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+
+        }
+    }
+
+    componentDidMount() {
+        axios.get('/getFeaturedRecipes')
+        .then((results) => {
+            console.log(results);
+        })
+    }
+
+    render() {
   return (
     <>
     <PanGraphic />
-    <Recipe handleButtonPress={props.handleButtonPress} user={props.user} recipe={sample}/>
-    <Recipe handleButtonPress={props.handleButtonPress} user={props.user} recipe={sample}/>
-    <Recipe handleButtonPress={props.handleButtonPress} user={props.user} recipe={sample}/>
+    <Recipe handleButtonPress={this.props.handleButtonPress} user={this.props.user} recipe={sample}/>
+    <Recipe handleButtonPress={this.props.handleButtonPress} user={this.props.user} recipe={sample}/>
+    <Recipe handleButtonPress={this.props.handleButtonPress} user={this.props.user} recipe={sample}/>
     </>
   )
+    }
 }
 
 export default Landing;
