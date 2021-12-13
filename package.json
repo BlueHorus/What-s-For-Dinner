@@ -19,11 +19,17 @@
   },
   "homepage": "https://github.com/BlueHorus/Ocean#readme",
   "dependencies": {
+<<<<<<< HEAD
+=======
+    "@babel/preset-react": "^7.16.0",
+>>>>>>> 465aaa255f8ee3856728e877fbb0b973d44143ee
     "animejs": "^3.2.1",
     "axios": "^0.24.0",
     "babel": "^6.23.0",
     "express": "^4.17.1",
     "file-loader": "^6.2.0",
+    "firebase": "^9.6.1",
+    "firebase-admin": "^10.0.0",
     "mongoose": "^6.1.0",
     "node": "^17.2.0",
     "nodemon": "^2.0.15",
