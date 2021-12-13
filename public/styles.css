@@ -1,11 +1,4 @@
-.modal {
-  position: fixed;
-  height: 50%;
-  width: 50%;
-  margin-top: 10%;
-  margin-left: 20%;
-  background-color: blanchedalmond;
-}
+
 
 * {
   font-family: "Raleway";
@@ -89,9 +82,30 @@ body {
   font-style: italic;
 }
 
+#login-signup {
+  display: flex;
+  flex-direction: row;
+  }
+
+#sign-out,
+.login,
+.signup {
+display: flex;
+justify-self: flex-end;
+margin-right: 20px;
+background-color: #e4eaea;
+border-radius: 15px;
+height: 40px;
+width: 150px;
+align-items: center;
+text-align: center;
+font-size: 15px;
+justify-content: center;
+}
+
 #my-ingredients,
 #my-recipes,
-#login-signup,
+#profile,
 #find-recipes {
   display: flex;
   justify-self: flex-end;
@@ -107,7 +121,7 @@ body {
 
 #my-ingredients img,
 #my-recipes img,
-#login-signup img,
+#profile img,
 #find-recipes img {
   justify-self: flex-start;
   margin-left: 5px;
@@ -115,7 +129,7 @@ body {
 
 #my-ingredients span,
 #my-recipes span,
-#login-signup span,
+#profile span,
 #find-recipes span {
   justify-self: center;
 }
@@ -466,6 +480,7 @@ body {
 
 .diet {
   margin-bottom: 7%;
+  margin: auto;
 }
 
 .intolerance-list {
@@ -504,22 +519,60 @@ body {
 
 .modal {
   display: block; /* Hidden by default */
+  display: flex; /* Hidden by default */
   position: fixed; /* Stay in place */
   z-index: 1; /* Sit on top */
+  width: 100%;
+  height: 100%;
   left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
   overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0, 0, 0); /* Fallback color */
-  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
-}
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.4);
+  justify-content: center;
+  }
+
+#modal-logo {
+  justify-self: center;
+  align-self: center;
+  width: 200px;
+  height: auto;
+  }
 
 /* Modal Content/Box */
 .modal-content {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-wrap: wrap;
+  flex-direction: column;
   background-color: #fefefe;
   margin: 15% auto; /* 15% from the top and centered */
   padding: 20px;
   border: 1px solid #888;
-  width: 80%; /* Could be more or less, depending on screen size */
+  width: 30%; /* Could be more or less, depending on screen size */
+  height: auto;
+  text-align: center;
+}
+
+
+form {
+  width: 50%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+form * {
+  padding: 10px;
+  margin-top: 10px;
+}
+
+.modal #close {
+  align-self: flex-end;
+  width: 5%;
+}
+
+#login-container,
+#signup-container {
+  align-self: center;
 }
