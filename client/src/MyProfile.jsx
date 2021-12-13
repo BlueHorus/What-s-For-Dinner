@@ -68,20 +68,17 @@ class MyProfile extends React.Component {
     })
   }
 
-  changePassword(newPass) {
+  changePassword() {
     event.preventDefault();
     const auth = getAuth(app);
-    onAuthStateChanged(auth, (user) => {
-      console.log('NEW PASSWORD >> ', newPass);
-      console.log('USER HERE >> ', user);
-      updatePassword(user, newPass)
+    const user = auth.currentUser;
+      updatePassword(user, this.state.newPass)
         .then(() => {
           console.log('password changed!');
         })
         .catch(err => {
           console.log(err);
-        })
-    });
+        });
   }
 
   changeProfilePic() {
@@ -190,7 +187,7 @@ class MyProfile extends React.Component {
                     <br />
                     <input type="text" value={newPass} onChange={this.passwordInput} />
                   </label>
-                  <button type="submit" value="Confirm" onClick={this.changePassword(newPass)} />
+                  <button type="submit" value="Confirm" onClick={this.changePassword} />
                 </div>
             )
             : null
