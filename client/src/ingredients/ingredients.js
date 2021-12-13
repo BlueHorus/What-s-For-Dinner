@@ -30,7 +30,7 @@ class Ingredients extends React.Component {
 
     this.addNote = this.addNote.bind(this);
     this.setNote = this.setNote.bind(this);
-    this.addIngredient = this.addIngredient.bind(this);
+    // this.addIngredient = this.addIngredient.bind(this);
     this.setIngredient = this.setIngredient.bind(this);
     this.removeIngredient = this.removeIngredient.bind(this)
   }
@@ -46,12 +46,12 @@ class Ingredients extends React.Component {
     this.setState({note: e.target.value})
   }
 
-  addIngredient(e) {
-    e.preventDefault();
-    console.log('clicked, ', this.state.ingredient);
-    axios.get("/updateIngredients", this.state.ingredient)
-      .then(console.log('ing added'))
-  }
+  // addIngredient(e) {
+  //   e.preventDefault();
+  //   console.log('clicked, ', this.state.ingredient);
+  //   axios.get("/updateIngredients", this.state.ingredient)
+  //     .then(console.log('ing added'))
+  // }
 
   setIngredient(e) {
     e.preventDefault();
@@ -72,19 +72,19 @@ class Ingredients extends React.Component {
         <label>
           Add note:
           <br/>
-          <input type="text" name="name" spellcheck="true" value={this.state.note} onChange={this.setNote}/>
+          <input type="text" name="name" spellCheck="true" value={this.state.note} onChange={this.setNote}/>
         </label>
         <br />
-        <input type="submit" value={String.fromCodePoint(0x22B9)} className="add-button"/>&nbsp;&nbsp;Add
+        <input type="submit" value={String.fromCodePoint(0x22B9)} className="add-note"/>&nbsp;&nbsp;Add
       </form>
 
-      <form onSubmit={this.addIngredient}>
+      <form onSubmit={this.props.handleIngredient} className="add-ingredient" name={this.state.ingredient}>
         <label>
           Add ingredient: <br/>
-          <input type="text" name="name" spellcheck="true" value={this.state.ingredient} onChange={this.setIngredient}/>
+          <input type="text"  spellCheck="true" value={this.state.ingredient} onChange={this.setIngredient}/>
         </label>
         <br />
-        <input type="submit" value={String.fromCodePoint(0x22B9)} className="add-button"/>&nbsp;&nbsp;Add
+        <input type="submit" value={String.fromCodePoint(0x22B9)} />&nbsp;&nbsp;Add
       </form>
 
 
@@ -95,6 +95,7 @@ class Ingredients extends React.Component {
 
 
       <ul className="ingredients-list"> My ingredient list:
+        {console.log(this.props.user.ingredients)};
         {this.props.user.ingredients.split(',').map(ing => <li className="one-ingredient">
                                                             {ing}
                                                             <button className="remove-ing-button" id={ing} onClick={this.removeIngredient}>{String.fromCodePoint(0x2715)}</button>

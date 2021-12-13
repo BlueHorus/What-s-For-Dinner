@@ -35,6 +35,7 @@ class Main extends React.Component {
     this.handleButtonPress = this.handleButtonPress.bind(this);
     this.setInitialData = this.setInitialData.bind(this);
     this.getStatus = this.getStatus.bind(this);
+    this.handleIngredient = this.handleIngredient.bind(this);
   }
 
   componentDidMount() {
@@ -154,7 +155,7 @@ class Main extends React.Component {
           });
       } else {
         this.setState({ login: false });
-        console.log("Not sign in");
+        // console.log("Not sign in");
       }
     });
   }
@@ -174,22 +175,29 @@ class Main extends React.Component {
   }
 
 
-  handleIngredient(ingredient) {
+  handleIngredient(event) {
+    console.log(event.target)
+    // debugger;
+    event.preventDefault();
+    const ingredient = event.target.name;
     let config = {
       method: 'put',
       url: '/updateIngredients',
       data: {
-        ingredient: ingredient,
+        ingredient: this.state.user.ingredients,
         uid: this.state.user.uid
       }
-    }
+    };
     switch (event.target.className) {
-      case 'add-ingredient': (
-        //add to list
-        console.log('add ing'),
-        axios(config)
-      );
+      case 'add-ingredient':
+        console.log('ing being added: ', ingredient);
+        this.setState(function(addIng) {
+          return {ingredients: this.state.user.ingredients.concat(', ', ingredient)}
+        });
+        axios(config);
+        console.log(this.state.user.ingredients)
       break;
+
       case 'delete-ingredient': (
         //remove from list
         console.log('remove ing')
@@ -268,7 +276,8 @@ class Main extends React.Component {
             ""
           )}
           {this.state.id === "my-ingredients" ? (
-               <Ingredients user={this.state.user}/>
+               <Ingredients user={this.state.user}
+               handleIngredient={this.handleIngredient}/>
           ) : (
             ""
           )}
