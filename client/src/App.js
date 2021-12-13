@@ -104,12 +104,11 @@ class Main extends React.Component {
   }
 
   handleButtonPress(recipeId) {
-    console.log(recipeId);
     let id = recipeId.toString();
     switch (event.target.className) {
       case "upvote-button":
         console.log("test upvote");
-        ((recipeId) => {
+        (() => {
           let config = {
             method: "put",
             url: "/updateUpvote",
@@ -121,7 +120,7 @@ class Main extends React.Component {
         })();
         break;
       case "downvote-button":
-        ((recipeId) => {
+        (() => {
           console.log("test downvote");
           let config = {
             method: "put",
@@ -133,10 +132,44 @@ class Main extends React.Component {
           axios(config);
         })();
         break;
+      case "update-diet":
+        (() => {
+          console.log("test updating diet: ", recipeId);
+          let config = {
+            method: "put",
+            url: "/updateDiet",
+            data: recipeId,
+          };
+          axios(config);
+        })();
+        break;
+      case "update-intolerances":
+        (() => {
+          console.log("test updating intolerances: ", recipeId);
+          let config = {
+            method: "put",
+            url: "/updateIntolerances",
+            data: recipeId,
+          };
+          axios(config);
+        })();
+        break;
+      case "url-form":
+        (() => {
+          console.log("test updating profile pic: ", recipeId);
+          let config = {
+            method: "put",
+            url: "/updateProfilePic",
+            data: recipeId,
+          };
+          axios(config);
+        })();
+        break;
       default:
         console.log("test default");
     }
   }
+
   //show whether user is login in or not
   getStatus(func) {
     const auth = getAuth(app);
@@ -171,6 +204,26 @@ class Main extends React.Component {
         .catch((err) => {
           console.log(err);
         });
+    }
+  }
+
+  handleIngredient(ingredient) {
+    let config = {
+      method: "put",
+      url: "/updateIngredients",
+      data: {
+        ingredient: ingredient,
+        uid: this.state.user.uid,
+      },
+    };
+    switch (event.target.className) {
+      case "add-ingredient":
+        //add to list
+        console.log("add ing"), axios(config);
+        break;
+      case "delete-ingredient":
+        //remove from list
+        console.log("remove ing");
     }
   }
 
@@ -218,6 +271,10 @@ class Main extends React.Component {
             <img id="login-signup" width="30" src={profileIcon} />
             Profile
           </div>
+          {/* <button id="profile" disabled>
+            <img width="30" src={ingredientIcon} />
+            Profile
+          </button> */}
           <Auth status={this.getStatus} login={this.state.login} />
         </div>
         <div className="content">
@@ -243,9 +300,7 @@ class Main extends React.Component {
             ""
           )}
           {this.state.id === "my-ingredients" ? (
-            <h1>
-              <Ingredients />
-            </h1>
+            <Ingredients user={this.state.user} />
           ) : (
             ""
           )}
@@ -254,7 +309,14 @@ class Main extends React.Component {
           ) : (
             ""
           )}
-          {this.state.id === "login-signup" ? <MyProfile /> : ""}
+          {this.state.id === "login-signup" ? (
+            <MyProfile
+              userInfo={this.state.user}
+              handleButtonPress={this.handleButtonPress}
+            />
+          ) : (
+            ""
+          )}
         </div>
 
         {/* {this.state.login === false ? <Reminder /> : ""} */}
@@ -270,8 +332,9 @@ var sampleUser = {
   userName: "user_name",
   profilePic: "http://pic.com",
   ingredients: "garlic, butter, eggs",
-  notes: "I am a note",
+  notes:
+    "I am a note.  I am a crazy long set of notes actually.  I mean I'm not sure how much there is to say about all this food, but I can't think of a quicker way to  test out this sweet sticky note.  Have you ever tried brownies?  Just the box stuff.  Nothing fancy.  Hey computer, go build me some brownies.",
   diet: "paleo",
   intolerances: "gluten, dairy",
-  favRecipes: [647572, 234, 345],
+  favRecipes: [123, 234, 345],
 };

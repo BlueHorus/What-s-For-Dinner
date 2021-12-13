@@ -24,9 +24,8 @@ import { PieChart } from 'react-minimal-pie-chart';
 
 
 function Recipe (props) {
+    const recipe = props.recipe
 
-    const recipe = props.recipe.results[0]
-    console.log(recipe)
 
   return (
     <div>
@@ -35,16 +34,16 @@ function Recipe (props) {
             <img className="recipeimage" src={recipe.image} alt="a picture of food"/>
             <div className="recipelink"><a href={recipe.spoonacularSourceUrl}>Full recipe</a></div>
             <div className="summary">Summary: {recipe.summary.replace(/<[^>]+>/g, '').slice(0,240)}...</div>
-            <div className="ingredients">Ingredients:
+            {/* <div className="ingredients">Ingredients:
                 {recipe.usedIngredients.map(ing => <li className="foundingredients">{ing.name}</li>)}
                 {recipe.missedIngredients.map(ing => <li className="missingingredients">{ing.name}</li>)}
-            </div>
+            </div> */}
             <div className="mealtags">Meal tags:{recipe.dishTypes.map(type => <li>{type}</li>)}</div>
             <div className ="diet">Diet friendly:{recipe.diets.map(type => <li>{type}</li>)}</div>
             <div className="opinionbutton">
                 <FavoriteButton recipe={recipe} user={props.user} handleButtonPress={props.handleButtonPress}/>
-                <UpVoteButton recipe={recipe} handleButtonPress={props.handleButtonPress}/>
-                <DownVoteButton recipe={recipe} handleButtonPress={props.handleButtonPress}/>
+                <UpVoteButton buttonId={Math.floor(Math.random() * 100000)} recipe={recipe} handleButtonPress={props.handleButtonPress}/>
+                <DownVoteButton buttonId={Math.floor(Math.random() * 100000)} recipe={recipe} handleButtonPress={props.handleButtonPress}/>
             </div>
         </div>
         <div className="recipeadditions">
