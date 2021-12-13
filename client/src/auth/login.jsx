@@ -2,6 +2,7 @@ import React from "react";
 import { app } from "../../../firebase_config.js";
 import axios from "axios";
 import logo from '../../../public/images/BlueOceanLogo.svg'
+import Button from '@mui/material/Button';
 
 import {
   getAuth,
@@ -34,14 +35,14 @@ class Auth extends React.Component {
 
   //logic to switch to different forms
   click(e) {
-    if (e.target.className === "login") {
+    if (e.target.id === "login") {
       this.setState({
         click: true,
         signin: true,
         create: false,
       });
     }
-    if (e.target.className === "signup") {
+    if (e.target.id === "signup") {
       this.setState({
         click: true,
         create: true,
@@ -132,13 +133,13 @@ class Auth extends React.Component {
         return (
           <div id="modal" className="modal">
             <div className="modal-content">
-              <button id='close' onClick={() => {
+              <Button variant='contained' id='close' onClick={() => {
                 document.getElementById('modal').style.display = 'none';
                 this.setState({
                   click: false,
                 })
               }}>
-                X</button>
+                X</Button>
               <img src={logo} className='logo' id='modal-logo' />
               <form
                 onSubmit={
@@ -169,7 +170,7 @@ class Auth extends React.Component {
                   }}
                   placeholder="Password"
                 />
-                <button type="submit">Create</button>
+                <Button id='submit-button' variant='contained' type="submit">Create</Button>
               </form>
               <div id='login-container'>
                 Already have an account?{" "}
@@ -184,13 +185,13 @@ class Auth extends React.Component {
         return (
           <div id='modal' className="modal">
             <div className="modal-content">
-            <button id='close' onClick={() => {
+            <Button variant='contained' id='close' onClick={() => {
                 document.getElementById('modal').style.display = 'none';
                 this.setState({
                   click: false,
                 })
               }}>
-                X</button>
+                X</Button>
             <img src={logo} className='logo' id='modal-logo' />
               <form
                 onSubmit={
@@ -209,7 +210,7 @@ class Auth extends React.Component {
                   }}
                   placeholder="Password"
                 />
-                <button type="submit">Sign In</button>
+                <Button id='submit-button' variant='contained' type="submit">Sign In</Button>
               </form>
 
               <span> </span>
@@ -232,15 +233,15 @@ class Auth extends React.Component {
       <div >
         {this.props.login === false ? (
           <div id='login-signup'>
-            <button className="login" onClick={this.click}>
+            <Button variant='contained' id="login" onClick={this.click}>
               Log In
-            </button>
-            <button className="signup" onClick={this.click}>
+            </Button>
+            <Button variant='contained' id="signup" onClick={this.click}>
               Sign Up
-            </button>
+            </Button>
           </div>
         ) : (
-          <button id="sign-out" onClick={this.signout}>Sign Out</button>
+          <Button variant='contained' id="sign-out" onClick={this.signout}>Sign Out</Button>
         )}
         {this.renderModal()}
       </div>
