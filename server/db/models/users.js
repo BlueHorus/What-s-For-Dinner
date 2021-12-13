@@ -39,4 +39,27 @@ module.exports = {
   updateNote: (uid, notes) => {
     return db.users.findOneAndUpdate({ uid: uid }, { notes: notes });
   },
+
+  saveRecipeToUser: (uid, recipe_id) => {
+    return db.users.findOneAndUpdate(
+      { uid: uid },
+      { $push: { favoriteRecipes: recipe_id } },
+      { upsert: true }
+    );
+  },
+
+  removeRecipeFromUser: (uid, recipe_id) => {
+    return db.users.update(
+      { uid: uid },
+      { $pull: { favoriteRecipes: recipe_id } }
+    );
+  },
+
+  updateProfilePic: (uid, url) => {
+    return db.users.findOneAndUpdate({ uid: uid }, { profilePic: url });
+  },
+
+  updateUsername: (uid, username) => {
+    return db.users.findOneAndUpdate({ uid: uid }, { userName: username });
+  },
 };
