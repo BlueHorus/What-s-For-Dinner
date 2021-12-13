@@ -44,7 +44,7 @@ class Main extends React.Component {
       this.getAuthentication(() => {
         if (this.state.authenticated === true) {
           axios
-            .get("/getUsersInfo")
+            .get("/getUserInfo")
             .then((data) => {
               this.setInitialData(data);
             })
@@ -184,17 +184,17 @@ class Main extends React.Component {
       method: 'put',
       url: '/updateIngredients',
       data: {
-        ingredient: this.state.user.ingredients,
-        uid: this.state.user.uid
+        uid: this.state.user.uid,
+        ingredients: this.state.user.ingredients
       }
     };
     switch (event.target.className) {
       case 'add-ingredient':
         console.log('ing being added: ', ingredient);
-        this.setState(function(addIng) {
-          return {ingredients: this.state.user.ingredients.concat(', ', ingredient)}
-        });
-        axios(config);
+        config.data.ingredients = this.state.user.ingredients.concat(', ', ingredient);
+        axios(config)
+          .then(axios.get('/getUserInfo')
+            .then);
         console.log(this.state.user.ingredients)
       break;
 
