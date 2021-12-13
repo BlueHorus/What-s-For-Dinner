@@ -301,7 +301,13 @@ class Main extends React.Component {
           ) : (
             ""
           )}
-          {this.state.id === "login-signup" ? <MyProfile userInfo={this.state.user}/> : ""}
+          {this.state.id === "login-signup" ?
+            <MyProfile
+              userInfo={this.state.user}
+              handleButtonPress={this.handleButtonPress}
+            />
+            : ""
+          }
         </div>
 
         {/* {this.state.login === false ? <Reminder /> : ""} */}
