@@ -34,20 +34,18 @@ class Auth extends React.Component {
   //logic to switch to different forms
   click(e) {
     if (e.target.className === "login") {
-      console.log('sign up test')
       this.setState({
         click: true,
         signin: true,
-        create: false, });
-
+        create: false,
+      });
     }
     if (e.target.className === "signup") {
       this.setState({
         click: true,
         create: true,
-        signin: false
-    });
-
+        signin: false,
+      });
     }
   }
 
@@ -120,25 +118,24 @@ class Auth extends React.Component {
   }
 
   renderModal() {
-    console.log('render modal test inside')
+    console.log("render modal test inside");
     if (this.state.click === true) {
       if (this.state.create === true) {
-      return (
-          <div
-            className="modal"
-           style={{display: 'block'}}
-          >
-            <div className='modal-content'>
-            <form onSubmit={
-              this.state.create === true ? this.createUser : this.signin
-            }>
-              <input
-                onChange={(e) => {
-                  this.submit(e, "email");
-                }}
-                placeholder="Email"
-              />
-              <input
+        return (
+          <div className="modal" style={{ display: "block" }}>
+            <div className="modal-content">
+              <form
+                onSubmit={
+                  this.state.create === true ? this.createUser : this.signin
+                }
+              >
+                <input
+                  onChange={(e) => {
+                    this.submit(e, "email");
+                  }}
+                  placeholder="Email"
+                />
+                <input
                   onChange={(e) => {
                     this.submit(e, "username");
                   }}
@@ -151,26 +148,31 @@ class Auth extends React.Component {
                   placeholder="Photo URL"
                 />
                 <input
-                onChange={(e) => {
-                  this.submit(e, "password");
-                }}
-                placeholder="Password"
-              />
-              <button type="submit">Create</button>
-            </form>
-            <div>
-                Already have an account? <u onClick={this.click}>Log In</u>
+                  onChange={(e) => {
+                    this.submit(e, "password");
+                  }}
+                  placeholder="Password"
+                />
+                <button type="submit">Create</button>
+              </form>
+              <div>
+                Already have an account?{" "}
+                <u className="login" onClick={this.click}>
+                  Log In
+                </u>
+              </div>
             </div>
-
-            </div>
-
-            </div>
-          )
+          </div>
+        );
       } else {
         return (
-         <div className='modal'>
-           <div className='modal-content'>
-             <form onSubmit={this.state.create === true ? this.createUser : this.signin}>
+          <div className="modal">
+            <div className="modal-content">
+              <form
+                onSubmit={
+                  this.state.create === true ? this.createUser : this.signin
+                }
+              >
                 <input
                   onChange={(e) => {
                     this.submit(e, "email");
@@ -178,37 +180,27 @@ class Auth extends React.Component {
                   placeholder="Email"
                 />
                 <input
-                onChange={(e) => {
-                  this.submit(e, "password");
-                }}
-                placeholder="Password"
-              />
-              <button type="submit">Sign In</button>
-             </form>
+                  onChange={(e) => {
+                    this.submit(e, "password");
+                  }}
+                  placeholder="Password"
+                />
+                <button type="submit">Sign In</button>
+              </form>
 
-               <span> </span>
-               <span>Forgot?</span>
-               <div>
-               Don't have an account? <u className='signup' onClick={this.click}>Sign Up</u>
-               </div>
+              <span> </span>
+              <span>Forgot?</span>
+              <div>
+                Don't have an account?{" "}
+                <u className="signup" onClick={this.click}>
+                  Sign Up
+                </u>
+              </div>
             </div>
-         </div>
-        )
+          </div>
+        );
+      }
     }
-   }
-
-
-
-
-
-
-
-
-
-
-
-
-
   }
 
   render() {
@@ -216,13 +208,17 @@ class Auth extends React.Component {
       <div>
         {this.props.login === false ? (
           <div>
-            <button className='login' onClick={this.click}>Log In</button>
-            <button className='signup' onClick={this.click}>Sign Up</button>
+            <button className="login" onClick={this.click}>
+              Log In
+            </button>
+            <button className="signup" onClick={this.click}>
+              Sign Up
+            </button>
           </div>
         ) : (
           <button onClick={this.signout}>Sign Out</button>
         )}
-      {this.renderModal()}
+        {this.renderModal()}
       </div>
     );
   }

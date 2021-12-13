@@ -12,6 +12,7 @@ import profileIcon from "./shared/SVGS/profileIcon.svg";
 import Ingredients from "./ingredients/ingredients.js";
 import MyProfile from "./MyProfile.jsx";
 import Auth from "./auth/login.jsx";
+import title from '../../public/images/title.svg'
 import { app } from "../../firebase_config.js";
 import { getAuth, onAuthStateChanged, updateCurrentUser } from "firebase/auth";
 import Reminder from "./auth/reminder.jsx";
@@ -102,6 +103,8 @@ class Main extends React.Component {
   }
 
   handleButtonPress(recipeId) {
+    console.log(recipeId);
+    let id = recipeId.toString();
     switch (event.target.className) {
       case "upvote-button":
         console.log("test upvote");
@@ -110,10 +113,10 @@ class Main extends React.Component {
             method: "put",
             url: "/updateUpvote",
             data: {
-              recipeId: recipeId,
-            },
-          };
-          axios(config);
+              recipeId: id
+            }
+          }
+          axios(config)
         })();
         break;
       case "downvote-button":
@@ -123,10 +126,10 @@ class Main extends React.Component {
             method: "put",
             url: "/updateDownvote",
             data: {
-              recipeId: recipeId,
-            },
-          };
-          axios(config);
+              recipeId: id
+            }
+          }
+          axios(config)
         })();
         break;
       default:
@@ -197,7 +200,7 @@ class Main extends React.Component {
       <div className="main">
         <div className="navigation">
           <span id="landing" className="logo" onClick={this.viewSwitch} />
-          <span id="title">What's For Dinner?</span>
+          <img id="title" src={title}/>
           <div id="find-recipes" onClick={this.viewSwitch}>
             <img width="30" src={searchIcon}></img>
             Find Recipes
