@@ -1,5 +1,5 @@
 bundle.js
 node_modules/
-package-lock.json
 bundle.js.map
-.eslintrc.json
+package-lock.json
+firebase_config.js
