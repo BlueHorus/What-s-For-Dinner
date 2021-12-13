@@ -103,7 +103,6 @@ class Main extends React.Component {
   }
 
   handleButtonPress(recipeId) {
-    console.log(recipeId);
     let id = recipeId.toString();
     switch (event.target.className) {
       case 'upvote-button':
@@ -263,22 +262,34 @@ class Main extends React.Component {
         <div className="navigation">
           <span id="landing" className="logo" onClick={this.viewSwitch} />
           <img id="title" src={title}/>
-          <div id="find-recipes" onClick={this.viewSwitch}>
+          <button id="find-recipes" onClick={this.viewSwitch}>
             <img width="30" src={searchIcon}></img>
             Find Recipes
-          </div>
-          <div id="my-ingredients" onClick={this.viewSwitch}>
+          </button>
+          {this.state.login ? <button id="my-ingredients" onClick={this.viewSwitch}>
             <img width="30" src={ingredientIcon} />
             My Ingredients
-          </div>
-          <div id="my-recipes" onClick={this.viewSwitch}>
-            <img width="30" src={recipeIcon} />
+          </button> :
+          <button id="my-ingredients" disabled>
+            <img width="30" src={ingredientIcon} />
+            My Ingredients
+          </button>}
+          {this.state.login ? <button id="my-recipes" onClick={this.viewSwitch}>
+            <img width="30" src={ingredientIcon} />
             My Recipes
-          </div>
-          <div id="login-signup" onClick={this.viewSwitch}>
-            <img width="30" src={profileIcon} />
+          </button> :
+          <button id="my-recipes" disabled>
+            <img width="30" src={ingredientIcon} />
+            My Recipes
+          </button>}
+          {this.state.login ? <button id="profile" onClick={this.viewSwitch}>
+            <img width="30" src={ingredientIcon} />
             Profile
-          </div>
+          </button> :
+          <button id="profile" disabled>
+            <img width="30" src={ingredientIcon} />
+            Profile
+          </button>}
           <Auth status={this.getStatus} login={this.state.login} />
         </div>
         <div className="content">

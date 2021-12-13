@@ -8,7 +8,10 @@ const DownVoteButton = (props) => {
       )
   } else {
   return (
-    <button className='downvote-button' onClick={() => props.handleButtonPress(props.recipe.id)}>
+    <button id={props.buttonId} className='downvote-button' onClick={() => {
+      document.getElementById(`${props.buttonId}`).disabled = true;
+      props.handleButtonPress(props.recipe.id)
+    }}>
     </button>
     )
   }

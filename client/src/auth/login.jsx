@@ -1,6 +1,7 @@
 import React from "react";
 import { app } from "../../../firebase_config.js";
 import axios from "axios";
+import logo from '../../../public/images/BlueOceanLogo.svg'
 
 import {
   getAuth,
@@ -118,12 +119,27 @@ class Auth extends React.Component {
   }
 
   renderModal() {
-    console.log("render modal test inside");
     if (this.state.click === true) {
       if (this.state.create === true) {
+        // window.onclick = function(event) {
+        //   if (event.target == modal) {
+        //     document.getElementById('modal').style.display = 'none';
+        //     this.setState({
+        //       click: false,
+        //     })
+        //   }
+        // }
         return (
-          <div className="modal" style={{ display: "block" }}>
+          <div id="modal" className="modal">
             <div className="modal-content">
+              <button id='close' onClick={() => {
+                document.getElementById('modal').style.display = 'none';
+                this.setState({
+                  click: false,
+                })
+              }}>
+                X</button>
+              <img src={logo} className='logo' id='modal-logo' />
               <form
                 onSubmit={
                   this.state.create === true ? this.createUser : this.signin
@@ -155,7 +171,7 @@ class Auth extends React.Component {
                 />
                 <button type="submit">Create</button>
               </form>
-              <div>
+              <div id='login-container'>
                 Already have an account?{" "}
                 <u className="login" onClick={this.click}>
                   Log In
@@ -166,8 +182,16 @@ class Auth extends React.Component {
         );
       } else {
         return (
-          <div className="modal">
+          <div id='modal' className="modal">
             <div className="modal-content">
+            <button id='close' onClick={() => {
+                document.getElementById('modal').style.display = 'none';
+                this.setState({
+                  click: false,
+                })
+              }}>
+                X</button>
+            <img src={logo} className='logo' id='modal-logo' />
               <form
                 onSubmit={
                   this.state.create === true ? this.createUser : this.signin
@@ -190,7 +214,7 @@ class Auth extends React.Component {
 
               <span> </span>
               <span>Forgot?</span>
-              <div>
+              <div id='signup-container'>
                 Don't have an account?{" "}
                 <u className="signup" onClick={this.click}>
                   Sign Up
@@ -205,9 +229,9 @@ class Auth extends React.Component {
 
   render() {
     return (
-      <div>
+      <div >
         {this.props.login === false ? (
-          <div>
+          <div id='login-signup'>
             <button className="login" onClick={this.click}>
               Log In
             </button>
@@ -216,7 +240,7 @@ class Auth extends React.Component {
             </button>
           </div>
         ) : (
-          <button onClick={this.signout}>Sign Out</button>
+          <button id="sign-out" onClick={this.signout}>Sign Out</button>
         )}
         {this.renderModal()}
       </div>
