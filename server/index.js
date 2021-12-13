@@ -254,10 +254,9 @@ app.get("/getUsersFavorites", (req, res) => {
       var recipeIdString = response.favoriteRecipes.toString();
       axios
         .get(
-          `https://api.spoonacular.com/recipes/${recipeIdString}/information?&includeNutrition=true&apiKey=5eb864cd4c9b47b282c6ec757f5dd0b7&sortDirection=desc`
+          `https://api.spoonacular.com/recipes/${recipeIdString}/information?&includeNutrition=true&apiKey=5eb864cd4c9b47b282c6ec757f5dd0b7`
         )
         .then(({ data }) => {
-          console.log("THIS IS THE DATA", data);
           var array = [];
           array.push(data);
           var object = {
@@ -273,13 +272,17 @@ app.get("/getUsersFavorites", (req, res) => {
         });
     } else {
       var recipeIdString = response.favoriteRecipes.toString();
-      var queryString = `?ids=${recipeIdString},`;
+      var queryString = `&ids=${recipeIdString},`;
       axios
         .get(
-          `https://api.spoonacular.com/recipes/informationBulk?&includeNutrition=true&apiKey=5eb864cd4c9b47b282c6ec757f5dd0b7&sortDirection=desc${queryString}`
+          `https://api.spoonacular.com/recipes/informationBulk?&includeNutrition=true&apiKey=5eb864cd4c9b47b282c6ec757f5dd0b7${queryString}`
         )
         .then(({ data }) => {
-          var parsedData = parseResponse(data);
+          console.log(data);
+          var object = {
+            results: data,
+          };
+          var parsedData = parseResponse(object);
           res.status(200).send(parsedData);
         })
         .catch((err) => {
@@ -297,8 +300,10 @@ app.get("/getFeaturedRecipes", (req, res) => {
     var array = result.map((recipe) => {
       return recipe.id;
     });
+    console.log(array);
     if (array.length === 1) {
       var recipeIdString = array.toString();
+      console.log(recipeIdString);
       axios
         .get(
           `https://api.spoonacular.com/recipes/${recipeIdString}/information?&includeNutrition=true&apiKey=5eb864cd4c9b47b282c6ec757f5dd0b7&sortDirection=desc`
@@ -320,13 +325,19 @@ app.get("/getFeaturedRecipes", (req, res) => {
         });
     } else {
       var recipeIdString = array.toString();
-      var queryString = `?ids=${recipeIdString},`;
+      console.log(recipeIdString);
+      var queryString = `&ids=${recipeIdString}`;
       axios
         .get(
-          `https://api.spoonacular.com/recipes/informationBulk?&includeNutrition=true&apiKey=5eb864cd4c9b47b282c6ec757f5dd0b7&sortDirection=desc${queryString}`
+          `https://api.spoonacular.com/recipes/informationBulk?includeNutrition=true&apiKey=5eb864cd4c9b47b282c6ec757f5dd0b7&sortDirection=desc${queryString}`
         )
         .then(({ data }) => {
-          var parsedData = parseResponse(data);
+          console.log(data);
+          var object = {
+            results: data,
+          };
+          console.log("this is the right one", object);
+          var parsedData = parseResponse(object);
           res.status(200).send(parsedData);
         })
         .catch((err) => {
