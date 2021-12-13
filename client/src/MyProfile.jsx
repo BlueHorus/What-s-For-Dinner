@@ -38,7 +38,8 @@ class MyProfile extends React.Component {
     const { userInfo } = this.props;
     this.setState({
       userInfo: info,
-      selectedFile: userInfo.profilePic ? userInfo.profilePic : defaultPic,
+      // selectedFile: userInfo.profilePic ? userInfo.profilePic : defaultPic,
+      selectedFile: defaultPic,
       diet: userInfo.diet,
       intolerances: userInfo.intolerances.split(', '),
     })
