@@ -206,6 +206,8 @@ body {
   background-image: url("./images/favoriteButtonIconClicked.svg");
 }
 
+/* Recipes */
+
 .recipecard {
   font-size: 12px;
   justify-self: center;
@@ -236,6 +238,11 @@ body {
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 175px;
   color: brown;
+}
+
+.add-button {
+  border-radius: 15px;
+  background-color: #4FBABA;
 }
 
 .recipetitle {
@@ -331,7 +338,47 @@ body {
   transform-box: fill-box;
 }
 
-/*---------------------------------------------
+
+  /*
+  Next section: ingredients
+  */
+
+#fridge {
+  z-index: -3;
+  width: 700px;
+  height: 700px;
+}
+
+.user-ingredients {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 2fr;
+}
+
+.ingredients-list {
+  grid-row-start: 2;
+  grid-column-start: 2;
+}
+
+.saved-notes {
+  background-image: url("https://images.all-free-download.com/images/graphicwebp/sticky_note_pad_clip_art_12192.webp");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: violet;
+  padding: 5px;
+  grid-column-start: 3;
+}
+
+.one-ingredient {
+  width: 100%;
+}
+
+.remove-ing-button {
+  border-radius: 15px;
+  background-color: #4FBABA;
+}
+
+  /*---------------------------------------------
                   PROFILE PAGE
   ----------------------------------------------*/
 
@@ -459,6 +506,7 @@ body {
 .btn-confirm {
   margin: auto;
 }
+
 
 
 .modal {

@@ -1,5 +1,8 @@
-bundle.js
+public/bundle.js
 node_modules/
+package-lock.json
+public/bundle.js.map
+.eslintrc.json
 bundle.js.map
 package-lock.json
 firebase_config.js
