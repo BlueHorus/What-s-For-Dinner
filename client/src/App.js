@@ -106,9 +106,9 @@ class Main extends React.Component {
     console.log(recipeId);
     let id = recipeId.toString();
     switch (event.target.className) {
-      case "upvote-button":
-        console.log("test upvote");
-        ((recipeId) => {
+      case 'upvote-button':
+        console.log('test upvote');
+        (() => {
           let config = {
             method: "put",
             url: "/updateUpvote",
@@ -119,9 +119,9 @@ class Main extends React.Component {
           axios(config)
         })();
         break;
-      case "downvote-button":
-        ((recipeId) => {
-          console.log("test downvote");
+      case 'downvote-button':
+        (() => {
+          console.log('test downvote')
           let config = {
             method: "put",
             url: "/updateDownvote",
@@ -132,10 +132,32 @@ class Main extends React.Component {
           axios(config)
         })();
         break;
-      default:
-        console.log("test default");
+      case 'update-diet':
+        (() => {
+          console.log('test updating diet: ', recipeId);
+          let config = {
+            method: 'put',
+            url: '/updateDiet',
+            data: recipeId,
+          }
+          axios(config)
+        })();
+        break;
+      case 'update-intolerances':
+        (() => {
+          console.log('test updating intolerances: ', recipeId);
+          let config = {
+            method: 'put',
+            url: '/updateIntolerances',
+            data: recipeId,
+          }
+          axios(config)
+        })();
+        break;
+        default: console.log('test default');
     }
   }
+
   //show whether user is login in or not
   getStatus(func) {
     const auth = getAuth(app);
@@ -220,6 +242,8 @@ class Main extends React.Component {
         .catch((err) => console.log(err.message));
     }
   }
+
+
 
   render() {
     return (
