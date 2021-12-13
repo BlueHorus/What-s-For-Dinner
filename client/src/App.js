@@ -154,6 +154,17 @@ class Main extends React.Component {
           axios(config)
         })();
         break;
+      case 'url-form':
+        (() => {
+          console.log('test updating profile pic: ', recipeId);
+          let config = {
+            method: 'put',
+            url: '/updateProfilePic',
+            data: recipeId,
+          }
+          axios(config)
+        })();
+        break;
         default: console.log('test default');
     }
   }
