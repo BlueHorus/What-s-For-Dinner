@@ -103,7 +103,6 @@ class Main extends React.Component {
   }
 
   handleButtonPress(recipeId) {
-    console.log(recipeId);
     let id = recipeId.toString();
     switch (event.target.className) {
       case "upvote-button":

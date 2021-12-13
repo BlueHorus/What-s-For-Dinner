@@ -24,7 +24,6 @@ import { PieChart } from 'react-minimal-pie-chart';
 
 
 function Recipe (props) {
-    console.log(props.recipe)
     const recipe = props.recipe
 
 

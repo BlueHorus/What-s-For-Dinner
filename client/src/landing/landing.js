@@ -14,7 +14,6 @@ class Landing extends React.Component {
     componentDidMount() {
         axios.get('/getFeaturedRecipes')
         .then((data) => {
-            console.log(data);
             this.setState({
                 featuredRecipes: data.data.results
             })

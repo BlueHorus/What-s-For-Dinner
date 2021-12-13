@@ -118,7 +118,6 @@ class Auth extends React.Component {
   }
 
   renderModal() {
-    console.log("render modal test inside");
     if (this.state.click === true) {
       if (this.state.create === true) {
         return (
