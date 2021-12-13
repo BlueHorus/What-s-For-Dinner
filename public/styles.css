@@ -326,19 +326,21 @@ body {
     transform-box: fill-box;
   }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 546404d93397aa9d7278fb09af227c07b6551731
 
   /*
   Next section: ingredients
   */
 
+#fridge {
+  z-index: -3;
+  width: 700px;
+  height: 700px;
+}
+
 .user-ingredients {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 2fr
+  grid-template-rows: 2fr;
 }
 
 .ingredients-list {
@@ -352,11 +354,8 @@ body {
   background-size: cover;
   background-color: violet;
   padding: 5px;
-  grid-column-start: 3
+  grid-column-start: 3;
 }
-<<<<<<< HEAD
-=======
-=======
 
 .one-ingredient {
   width: 100%;
@@ -367,7 +366,6 @@ body {
   background-color: #4FBABA;
 }
 
->>>>>>> 546404d93397aa9d7278fb09af227c07b6551731
   /*---------------------------------------------
                   PROFILE PAGE
   ----------------------------------------------*/
@@ -489,7 +487,4 @@ body {
   .btn-confirm {
     margin: auto;
   }
-<<<<<<< HEAD
->>>>>>> dev
-=======
->>>>>>> 546404d93397aa9d7278fb09af227c07b6551731
+

@@ -9,19 +9,8 @@ import Landing from './landing/landing.js'
 import ingredientIcon from './shared/SVGS/IngredientIcon.svg'
 import recipeIcon from './shared/SVGS/recipesIcon.svg';
 import profileIcon from './shared/SVGS/profileIcon.svg';
-<<<<<<< HEAD
-<<<<<<< HEAD
 import Ingredients from './ingredients/ingredients.js';
-import Landing from './landing/landing.js';
-
-=======
-import Ingredients from './ingredients/ingredients.js'
 import MyProfile from './MyProfile.jsx';
->>>>>>> dev
-=======
-import Ingredients from './ingredients/ingredients.js'
-import MyProfile from './MyProfile.jsx';
->>>>>>> 546404d93397aa9d7278fb09af227c07b6551731
 
 
 
@@ -84,7 +73,6 @@ class Main extends React.Component {
         diet: this.state.diet,
         intolerances: this.state.intolerances,
         favRecipes: newFavFecipes
-
         }
       })
       .catch((err) => console.log(err))
@@ -121,9 +109,31 @@ class Main extends React.Component {
         break;
         default: console.log('test default');
     }
-
   }
 
+
+  handleIngredient(ingredient) {
+    let config = {
+      method: 'put',
+      url: '/updateIngredients',
+      data: {
+        ingredient: ingredient,
+        uid: this.state.user.uid
+      }
+    }
+    switch (event.target.className) {
+      case 'add-ingredient': (
+        //add to list
+        console.log('add ing'),
+        axios(config)
+      );
+      break;
+      case 'delete-ingredient': (
+        //remove from list
+        console.log('remove ing')
+      )
+    }
+  }
 
 
 
@@ -155,7 +165,7 @@ class Main extends React.Component {
         {this.state.id === "logo" ? <Featured handleButtonPress={this.handleButtonPress} user={this.state.user}/> : ""}
         {this.state.id === "landing" ? <Landing handleButtonPress={this.handleButtonPress} user={this.state.user}/> : ""}
         {this.state.id === "find-recipes" ? <h1>Find Recipes Placeholder</h1> : ""}
-        {this.state.id === "my-ingredients" ? <Ingredients user={this.state.user}/> : ""}
+        {this.state.id === "my-ingredients" ? <Ingredients user={this.state.user} /> : ""}
         {this.state.id === "my-recipes" ? <h1>My Recipes Placeholder</h1> : ""}
         {this.state.id === "login-signup" ? <MyProfile /> : ""}
       </div>
@@ -171,7 +181,7 @@ var sampleUser = {
    userName: "user_name",
    profilePic: "http://pic.com",
    ingredients: "garlic, butter, eggs",
-   notes: "I am a note.  I am a crazy long set of notes actually.  I mean I'm not sure how much there is to say about all this food, but I can't think of a quicker way to  test out this sweet sticky note.  Have you ever tried brownies?  Just the box stuff.  Nothing fancy.  Hey app, go get me brownies.",
+   notes: "I am a note.  I am a crazy long set of notes actually.  I mean I'm not sure how much there is to say about all this food, but I can't think of a quicker way to  test out this sweet sticky note.  Have you ever tried brownies?  Just the box stuff.  Nothing fancy.  Hey computer, go build me some brownies.",
    diet: "paleo",
    intolerances: "gluten, dairy",
    favRecipes: [123,234,345]

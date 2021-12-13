@@ -65,6 +65,8 @@ class Ingredients extends React.Component {
 
   render() {
     return (
+      <div>
+      {/* <img src="./images/fridge.svg" id="fridge" /> */}
     <div className="user-ingredients">
       <form onSubmit={this.addNote} className="user-notes">
         <label>
@@ -101,6 +103,7 @@ class Ingredients extends React.Component {
 
       </ul>
     </div>
+      </div>
     )
   }
 
