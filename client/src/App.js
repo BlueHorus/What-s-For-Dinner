@@ -12,7 +12,7 @@ import profileIcon from "./shared/SVGS/profileIcon.svg";
 import Ingredients from "./ingredients/ingredients.js";
 import MyProfile from "./MyProfile.jsx";
 import Auth from "./auth/login.jsx";
-import title from '../../public/images/title.svg'
+import title from "../../public/images/title.svg";
 import { app } from "../../firebase_config.js";
 import { getAuth, onAuthStateChanged, updateCurrentUser } from "firebase/auth";
 import Reminder from "./auth/reminder.jsx";
@@ -72,6 +72,7 @@ class Main extends React.Component {
 
   viewSwitch(e) {
     var value = e.target.id;
+    console.log(e.target.id);
     this.setState({ id: value });
   }
 
@@ -113,10 +114,10 @@ class Main extends React.Component {
             method: "put",
             url: "/updateUpvote",
             data: {
-              recipeId: id
-            }
-          }
-          axios(config)
+              recipeId: id,
+            },
+          };
+          axios(config);
         })();
         break;
       case "downvote-button":
@@ -126,10 +127,10 @@ class Main extends React.Component {
             method: "put",
             url: "/updateDownvote",
             data: {
-              recipeId: id
-            }
-          }
-          axios(config)
+              recipeId: id,
+            },
+          };
+          axios(config);
         })();
         break;
       default:
@@ -200,21 +201,21 @@ class Main extends React.Component {
       <div className="main">
         <div className="navigation">
           <span id="landing" className="logo" onClick={this.viewSwitch} />
-          <img id="title" src={title}/>
+          <img id="title" src={title} />
           <div id="find-recipes" onClick={this.viewSwitch}>
-            <img width="30" src={searchIcon}></img>
+            <img id="find-recipes" width="30" src={searchIcon}></img>
             Find Recipes
           </div>
           <div id="my-ingredients" onClick={this.viewSwitch}>
-            <img width="30" src={ingredientIcon} />
+            <img id="my-ingredients" width="30" src={ingredientIcon} />
             My Ingredients
           </div>
           <div id="my-recipes" onClick={this.viewSwitch}>
-            <img width="30" src={recipeIcon} />
+            <img id="my-recipes" width="30" src={recipeIcon} />
             My Recipes
           </div>
           <div id="login-signup" onClick={this.viewSwitch}>
-            <img width="30" src={profileIcon} />
+            <img id="login-signup" width="30" src={profileIcon} />
             Profile
           </div>
           <Auth status={this.getStatus} login={this.state.login} />
