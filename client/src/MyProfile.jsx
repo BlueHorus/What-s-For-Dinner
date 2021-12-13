@@ -116,6 +116,8 @@ class MyProfile extends React.Component {
 
   render() {
     const { value, diet, intolerances, changingProfilePic, url, userInfo } = this.state;
+    const intoleranceList = ['dairy', 'egg', 'gluten', 'grain', 'peanut', 'seafood', 'sesame', 'shellfish', 'soy', 'sulfite', 'tree nut', 'wheat'];
+    const dietsList = ['gluten free', 'ketogenic', 'vegetarian', 'lacto-vegetarian', 'obo-vegetarian', 'vegan', 'pescetarian', 'paleo', 'primal', 'whole30'];
     return (
       <div className="profile">
         <div className="welcome-banner">Welcome Back, <b>{userInfo.userName}!</b></div>
@@ -154,16 +156,9 @@ class MyProfile extends React.Component {
             <br />
           <select value={diet} onChange={this.handleDropdownChange}>
             <option default> - </option>
-            <option value="gluten free">gluten-Free</option>
-            <option value="ketogenic">ketogenic</option>
-            <option value="vegetarian">vegetarian</option>
-            <option value="lacto-vegetarian">lacto-vegetarian</option>
-            <option value="obo-vegetarian">obo-vegetarian</option>
-            <option value="vegan">vegan</option>
-            <option value="pescetarian">pescetarian</option>
-            <option value="paleo">paleo</option>
-            <option value="primal">primal</option>
-            <option value="whole30">whole30</option>
+            {dietsList.map(diet => {
+              return <option value={diet}>{diet}</option>
+            })}
           </select>
           </label>
             <input type="submit" value="Confirm" />
@@ -187,18 +182,9 @@ class MyProfile extends React.Component {
             <br />
             <select value={value} onChange={this.handleChange}>
               <option default> - </option>
-              <option value="dairy">Dairy</option>
-              <option value="egg">Egg</option>
-              <option value="gluten">Gluten</option>
-              <option value="grain">Grain</option>
-              <option value="peanut">Peanut</option>
-              <option value="seafood">Seafood</option>
-              <option value="sesame">Sesame</option>
-              <option value="shellfish">Shellfish</option>
-              <option value="soy">Soy</option>
-              <option value="sulfite">Sulfite</option>
-              <option value="tree Nut">Tree Nut</option>
-              <option value="wheat">Wheat</option>
+              {intoleranceList.map(intolerance => {
+                return <option value={intolerance}>{intolerance}</option>
+              })}
             </select>
             </label>
             <input type="submit" value="Add" />
