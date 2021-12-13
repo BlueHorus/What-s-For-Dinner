@@ -171,7 +171,7 @@ class Auth extends React.Component {
                 />
                 <button type="submit">Create</button>
               </form>
-              <div>
+              <div id='login-container'>
                 Already have an account?{" "}
                 <u className="login" onClick={this.click}>
                   Log In
@@ -214,7 +214,7 @@ class Auth extends React.Component {
 
               <span> </span>
               <span>Forgot?</span>
-              <div>
+              <div id='signup-container'>
                 Don't have an account?{" "}
                 <u className="signup" onClick={this.click}>
                   Sign Up
@@ -240,7 +240,7 @@ class Auth extends React.Component {
             </button>
           </div>
         ) : (
-          <button onClick={this.signout}>Sign Out</button>
+          <button id="sign-out" onClick={this.signout}>Sign Out</button>
         )}
         {this.renderModal()}
       </div>

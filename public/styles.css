@@ -87,6 +87,7 @@ body {
   flex-direction: row;
 }
 
+#sign-out,
 .login,
 .signup {
   display: flex;
@@ -481,6 +482,7 @@ body {
 
 #modal-logo {
   justify-self: center;
+  align-self: center;
   width: 200px;
   height: auto;
 }
@@ -521,4 +523,9 @@ form button {
 .modal #close {
   align-self: flex-end;
   width: 5%;
+}
+
+#login-container,
+#signup-container {
+  align-self: center;
 }
