@@ -120,9 +120,9 @@ color: black;
   color: black;
 }
 
-#my-ingredients,
-#my-recipes,
-#profile,
+#my-ingredients:disabled,
+#my-recipes:disabled,
+#profile:disabled,
 #find-recipes:disabled {
   color: grey
 }

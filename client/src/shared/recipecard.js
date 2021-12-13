@@ -58,7 +58,7 @@ function Recipe (props) {
 
 
   return (
-    <Card sx={{ maxWidth: 900, display: 'flex', 'flex-direction': 'row' }}>
+    <Card sx={{ maxWidth: 900, margin: '15px', display: 'flex', 'flex-direction': 'row' }}>
     <CardMedia
       component="img"
       height="194"
@@ -83,7 +83,33 @@ function Recipe (props) {
                 Diets:
                 {recipe.diets.map(type => <li>{type}</li>)}
             </Typography>
+            {recipe.usedIngredients && recipe.missedIngredients ? <Typography>
+              Ingredients:
+                {recipe.usedIngredients.map(ing => <li className="foundingredients">{ing.name}</li>)}
+                {recipe.missedIngredients.map(ing => <li className="missingingredients">{ing.name}</li>)}
+            </Typography> :
+            null}
           </div>
+          <div>
+                Calorie % by type:
+                <PieChart style={{
+                    marginTop: '10px'
+                }}
+                                data={[
+                                    { title: "Protein", value: recipe.nutrition.caloricBreakdown.percentProtein, color: '#8f4fba' },
+                                    { title: "Fat", value: recipe.nutrition.caloricBreakdown.percentFat, color: '#4fbaba' },
+                                    { title: "Carbs", value: recipe.nutrition.caloricBreakdown.percentCarbs, color: '#4fba7a' },
+                                ]}
+                                viewBoxSize={[120, 120]}
+                                label={(data) => data.dataEntry.title}
+                                labelPosition={65}
+                                labelStyle={{
+                                    fontSize: "10px",
+                                    fontColor: "FFFFFA",
+                                    fontWeight: "800",
+                                }}
+                                />
+            </div>
         </CardContent>
       </Collapse>
 
