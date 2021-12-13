@@ -268,9 +268,7 @@ class Main extends React.Component {
             ""
           )}
           {this.state.id === "my-ingredients" ? (
-            <h1>
-              <Ingredients />
-            </h1>
+               <Ingredients user={this.state.user}/>
           ) : (
             ""
           )}
