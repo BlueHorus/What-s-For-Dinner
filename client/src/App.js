@@ -63,10 +63,14 @@ class Main extends React.Component {
     //   });
   }
 
-  getUser(userId) {
-    axios.get('/getUserInfo', {uid: userId})
+  getUser() {
+    axios('/getUserInfo', {
+      params: {
+        'uid': this.state.user.uid
+      }
+    })
       .then((data) => {
-        this.setInitialData(data);
+        this.setInitialData(data.data);
       })
   }
 
@@ -109,12 +113,11 @@ class Main extends React.Component {
   }
 
   handleButtonPress(recipeId) {
-    console.log(recipeId);
     let id = recipeId.toString();
     switch (event.target.className) {
-      case "upvote-button":
-        console.log("test upvote");
-        ((recipeId) => {
+      case 'upvote-button':
+        console.log('test upvote');
+        (() => {
           let config = {
             method: "put",
             url: "/updateUpvote",
@@ -125,9 +128,9 @@ class Main extends React.Component {
           axios(config)
         })();
         break;
-      case "downvote-button":
-        ((recipeId) => {
-          console.log("test downvote");
+      case 'downvote-button':
+        (() => {
+          console.log('test downvote')
           let config = {
             method: "put",
             url: "/updateDownvote",
@@ -138,10 +141,43 @@ class Main extends React.Component {
           axios(config)
         })();
         break;
-      default:
-        console.log("test default");
+      case 'update-diet':
+        (() => {
+          console.log('test updating diet: ', recipeId);
+          let config = {
+            method: 'put',
+            url: '/updateDiet',
+            data: recipeId,
+          }
+          axios(config)
+        })();
+        break;
+      case 'update-intolerances':
+        (() => {
+          console.log('test updating intolerances: ', recipeId);
+          let config = {
+            method: 'put',
+            url: '/updateIntolerances',
+            data: recipeId,
+          }
+          axios(config)
+        })();
+        break;
+      case 'url-form':
+        (() => {
+          console.log('test updating profile pic: ', recipeId);
+          let config = {
+            method: 'put',
+            url: '/updateProfilePic',
+            data: recipeId,
+          }
+          axios(config)
+        })();
+        break;
+        default: console.log('test default');
     }
   }
+
   //show whether user is login in or not
   getStatus(func) {
     const auth = getAuth(app);
@@ -181,7 +217,6 @@ class Main extends React.Component {
 
 
   handleIngredient(event) {
-    console.log(event.target)
     // debugger;
     event.preventDefault();
     const ingredient = event.target.name;
@@ -195,17 +230,22 @@ class Main extends React.Component {
     };
     switch (event.target.className) {
       case 'add-ingredient':
-        console.log('ing being added: ', ingredient);
-        config.data.ingredients = this.state.user.ingredients.concat(', ', ingredient);
+        config.data.ingredients = this.state.user.ingredients.concat(',', ingredient);
         axios(config)
-          .then( () => {this.getUser(this.state.user.uid)} )
-        console.log(this.state.user.ingredients)
+          .then( () => {this.getUser()})
+          .catch(err => console.log(err))
       break;
 
-      case 'delete-ingredient': (
+      case 'remove-ing-button':
         //remove from list
-        console.log('remove ing')
-      )
+        config.data.ingredients = this.state.user.ingredients.replace(ingredient, '');
+        config.data.ingredients = config.data.ingredients.replace(/,{2,}/, ',')
+        config.data.ingredients = config.data.ingredients.replace(/^,/, '')
+        config.data.ingredients = config.data.ingredients.replace(/,$/, '')
+        console.log('newlist: ', config.data.ingredients)
+        axios(config)
+          .then( () => {this.getUser()})
+          .catch(err => console.log(err))
     }
   }
 
@@ -233,28 +273,42 @@ class Main extends React.Component {
     }
   }
 
+
+
   render() {
     return (
       <div className="main">
         <div className="navigation">
           <span id="landing" className="logo" onClick={this.viewSwitch} />
           <img id="title" src={title}/>
-          <div id="find-recipes" onClick={this.viewSwitch}>
+          <button id="find-recipes" onClick={this.viewSwitch}>
             <img width="30" src={searchIcon}></img>
             Find Recipes
-          </div>
-          <div id="my-ingredients" onClick={this.viewSwitch}>
+          </button>
+          {this.state.login ? <button id="my-ingredients" onClick={this.viewSwitch}>
             <img width="30" src={ingredientIcon} />
             My Ingredients
-          </div>
-          <div id="my-recipes" onClick={this.viewSwitch}>
-            <img width="30" src={recipeIcon} />
+          </button> :
+          <button id="my-ingredients" disabled>
+            <img width="30" src={ingredientIcon} />
+            My Ingredients
+          </button>}
+          {this.state.login ? <button id="my-recipes" onClick={this.viewSwitch}>
+            <img width="30" src={ingredientIcon} />
             My Recipes
-          </div>
-          <div id="login-signup" onClick={this.viewSwitch}>
-            <img width="30" src={profileIcon} />
+          </button> :
+          <button id="my-recipes" disabled>
+            <img width="30" src={ingredientIcon} />
+            My Recipes
+          </button>}
+          {this.state.login ? <button id="profile" onClick={this.viewSwitch}>
+            <img width="30" src={ingredientIcon} />
             Profile
-          </div>
+          </button> :
+          <button id="profile" disabled>
+            <img width="30" src={ingredientIcon} />
+            Profile
+          </button>}
           <Auth status={this.getStatus} login={this.state.login} />
         </div>
         <div className="content">
@@ -290,7 +344,13 @@ class Main extends React.Component {
           ) : (
             ""
           )}
-          {this.state.id === "login-signup" ? <MyProfile /> : ""}
+          {this.state.id === "login-signup" ?
+            <MyProfile
+              userInfo={this.state.user}
+              handleButtonPress={this.handleButtonPress}
+            />
+            : ""
+          }
         </div>
 
         {/* {this.state.login === false ? <Reminder /> : ""} */}

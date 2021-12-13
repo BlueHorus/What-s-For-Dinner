@@ -95,10 +95,10 @@ class Ingredients extends React.Component {
 
 
       <ul className="ingredients-list"> My ingredient list:
-        {console.log(this.props.user.ingredients)};
+        {/* {console.log(this.props.user.ingredients)}; */}
         {this.props.user.ingredients.split(',').map(ing => <li className="one-ingredient">
                                                             {ing}
-                                                            <button className="remove-ing-button" id={ing} onClick={this.removeIngredient}>{String.fromCodePoint(0x2715)}</button>
+                                                            <button className="remove-ing-button" name={ing} onClick={this.props.handleIngredient}>{String.fromCodePoint(0x2715)}</button>
                                                             </li>)}
 
 
