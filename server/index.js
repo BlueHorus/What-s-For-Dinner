@@ -528,7 +528,6 @@ app.get("/getRecipes", (req, res) => {
 app.put("/updateDownvote", (req, res) => {
   // request should include recipe id
   // query database to update downvote
-  console.log(req.body);
   var recipeId = req.body.recipeId;
   Recipes.downVote(recipeId)
     .then((response) => {

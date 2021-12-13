@@ -7,24 +7,32 @@ class Landing extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-
+            featuredRecipes: null,
         }
     }
 
     componentDidMount() {
         axios.get('/getFeaturedRecipes')
-        .then((results) => {
-            console.log(results);
+        .then((data) => {
+            console.log(data);
+            this.setState({
+                featuredRecipes: data.data.results
+            })
         })
     }
 
     render() {
+        if (this.state.featuredRecipes === null) {
+            return null;
+        }
   return (
     <>
     <PanGraphic />
-    <Recipe handleButtonPress={this.props.handleButtonPress} user={this.props.user} recipe={sample}/>
-    <Recipe handleButtonPress={this.props.handleButtonPress} user={this.props.user} recipe={sample}/>
-    <Recipe handleButtonPress={this.props.handleButtonPress} user={this.props.user} recipe={sample}/>
+    <div>
+        {this.state.featuredRecipes.map((recipe) => {
+            return  <Recipe handleButtonPress={this.props.handleButtonPress} user={this.props.user} recipe={recipe}/>
+        })}
+    </div>
     </>
   )
     }
