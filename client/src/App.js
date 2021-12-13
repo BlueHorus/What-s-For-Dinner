@@ -23,9 +23,6 @@ class Main extends React.Component {
     this.state = {
       id: "landing",
       user: sampleUser,
-      intolerances: "",
-      diet: "",
-      userInfo: {},
       uid: "",
       login: false,
       token: "",
@@ -36,6 +33,7 @@ class Main extends React.Component {
     this.setInitialData = this.setInitialData.bind(this);
     this.getStatus = this.getStatus.bind(this);
     this.handleIngredient = this.handleIngredient.bind(this);
+    this.getUser = this.getUser.bind(this);
   }
 
   componentDidMount() {
@@ -65,9 +63,16 @@ class Main extends React.Component {
     //   });
   }
 
+  getUser(userId) {
+    axios.get('/getUserInfo', {uid: userId})
+      .then((data) => {
+        this.setInitialData(data);
+      })
+  }
+
   setInitialData(obj) {
     this.setState({
-      userInfo: obj,
+      user: obj,
     });
   }
 
@@ -193,8 +198,7 @@ class Main extends React.Component {
         console.log('ing being added: ', ingredient);
         config.data.ingredients = this.state.user.ingredients.concat(', ', ingredient);
         axios(config)
-          .then(axios.get('/getUserInfo')
-            .then);
+          .then( () => {this.getUser(this.state.user.uid)} )
         console.log(this.state.user.ingredients)
       break;
 
