@@ -82,10 +82,30 @@ body {
   font-style: italic;
 }
 
+#login-signup {
+  display: flex;
+  flex-direction: row;
+}
+
+.login,
+.signup {
+  display: flex;
+  justify-self: flex-end;
+  margin-right: 20px;
+  background-color: #e4eaea;
+  border-radius: 15px;
+  height: 40px;
+  width: 150px;
+  align-items: center;
+  text-align: center;
+  font-size: 15px;
+  justify-content: center;
+}
+
 #my-ingredients,
 #my-recipes,
-#login-signup,
-#find-recipes {
+#find-recipes,
+#profile {
   display: flex;
   justify-self: flex-end;
   margin-right: 20px;
@@ -100,16 +120,16 @@ body {
 
 #my-ingredients img,
 #my-recipes img,
-#login-signup img,
-#find-recipes img {
+#find-recipes img,
+#profile img {
   justify-self: flex-start;
   margin-left: 5px;
 }
 
 #my-ingredients span,
 #my-recipes span,
-#login-signup span,
-#find-recipes span {
+#find-recipes span,
+#profile span {
   justify-self: center;
 }
 
@@ -424,11 +444,11 @@ body {
   display: flex;
 }
 
-.intolerance {
+/* .intolerance {
 }
 
 .button-delete-intolerance {
-}
+} */
 
 .intolerance-form {
   margin-bottom: 6%;
@@ -476,7 +496,7 @@ body {
   padding: 20px;
   border: 1px solid #888;
   width: 30%; /* Could be more or less, depending on screen size */
-  height: auto%;
+  height: auto;
   text-align: center;
 }
 
@@ -495,4 +515,9 @@ form * {
 
 form button {
   margin-bottom: 10px;
+}
+
+.modal #close {
+  align-self: flex-end;
+  width: 5%;
 }

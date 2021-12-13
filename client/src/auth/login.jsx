@@ -121,9 +121,18 @@ class Auth extends React.Component {
   renderModal() {
     if (this.state.click === true) {
       if (this.state.create === true) {
+        // window.onclick = function(event) {
+        //   if (event.target == modal) {
+        //     document.getElementById('modal').style.display = 'none';
+        //   }
+        // }
         return (
-          <div className="modal" style={{ display: "block" }}>
+          <div id="modal" className="modal">
             <div className="modal-content">
+              <button id='close' onClick={() => {
+                document.getElementById('modal').style.display = 'none';
+              }}>
+                X</button>
               <img src={logo} className='logo' id='modal-logo' />
               <form
                 onSubmit={
@@ -167,8 +176,12 @@ class Auth extends React.Component {
         );
       } else {
         return (
-          <div className="modal">
+          <div id='modal' className="modal">
             <div className="modal-content">
+            <button id='close' onClick={() => {
+                document.getElementById('modal').style.display = 'none';
+              }}>
+                X</button>
             <img src={logo} className='logo' id='modal-logo' />
               <form
                 onSubmit={
@@ -207,15 +220,15 @@ class Auth extends React.Component {
 
   render() {
     return (
-      <div>
+      <div >
         {this.props.login === false ? (
-          <div>
-            <button className="login" onClick={this.click}>
+          <div id='login-signup'>
+            <div className="login" onClick={this.click}>
               Log In
-            </button>
-            <button className="signup" onClick={this.click}>
+            </div>
+            <div className="signup" onClick={this.click}>
               Sign Up
-            </button>
+            </div>
           </div>
         ) : (
           <button onClick={this.signout}>Sign Out</button>

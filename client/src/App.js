@@ -212,7 +212,7 @@ class Main extends React.Component {
             <img width="30" src={recipeIcon} />
             My Recipes
           </div>
-          <div id="login-signup" onClick={this.viewSwitch}>
+          <div id="profile" onClick={this.viewSwitch}>
             <img width="30" src={profileIcon} />
             Profile
           </div>
@@ -252,7 +252,7 @@ class Main extends React.Component {
           ) : (
             ""
           )}
-          {this.state.id === "login-signup" ? <MyProfile /> : ""}
+          {this.state.id === "profile" ? <MyProfile /> : ""}
         </div>
 
         {/* {this.state.login === false ? <Reminder /> : ""} */}
