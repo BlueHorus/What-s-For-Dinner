@@ -247,7 +247,6 @@ app.get("/getUsersFavorites", (req, res) => {
   // request body should include uid
   var userId = req.body.uid;
   Users.getUserById(userId).then((response) => {
-    console.log(response);
     if (response.favoriteRecipes.length < 1) {
       res.status(400).send("User doesn't have any favorites");
     } else if (response.favoriteRecipes.length === 1) {
@@ -262,7 +261,6 @@ app.get("/getUsersFavorites", (req, res) => {
           var object = {
             results: array,
           };
-          console.log(object);
           var parsedData = parseResponse(object);
 
           res.status(200).send(parsedData);
@@ -278,7 +276,6 @@ app.get("/getUsersFavorites", (req, res) => {
           `https://api.spoonacular.com/recipes/informationBulk?&includeNutrition=true&apiKey=5eb864cd4c9b47b282c6ec757f5dd0b7${queryString}`
         )
         .then(({ data }) => {
-          console.log(data);
           var object = {
             results: data,
           };
@@ -300,22 +297,18 @@ app.get("/getFeaturedRecipes", (req, res) => {
     var array = result.map((recipe) => {
       return recipe.id;
     });
-    console.log(array);
     if (array.length === 1) {
       var recipeIdString = array.toString();
-      console.log(recipeIdString);
       axios
         .get(
           `https://api.spoonacular.com/recipes/${recipeIdString}/information?&includeNutrition=true&apiKey=5eb864cd4c9b47b282c6ec757f5dd0b7&sortDirection=desc`
         )
         .then(({ data }) => {
-          console.log("THIS IS THE DATA", data);
           var array = [];
           array.push(data);
           var object = {
             results: array,
           };
-          console.log(object);
           var parsedData = parseResponse(object);
 
           res.status(200).send(parsedData);
@@ -325,18 +318,16 @@ app.get("/getFeaturedRecipes", (req, res) => {
         });
     } else {
       var recipeIdString = array.toString();
-      console.log(recipeIdString);
+
       var queryString = `&ids=${recipeIdString}`;
       axios
         .get(
           `https://api.spoonacular.com/recipes/informationBulk?includeNutrition=true&apiKey=5eb864cd4c9b47b282c6ec757f5dd0b7&sortDirection=desc${queryString}`
         )
         .then(({ data }) => {
-          console.log(data);
           var object = {
             results: data,
           };
-          console.log("this is the right one", object);
           var parsedData = parseResponse(object);
           res.status(200).send(parsedData);
         })
