@@ -1,6 +1,9 @@
 import React from 'react';
 import axios from 'axios';
 import defaultPic from './shared/SVGS/profileIcon.svg';
+import { app } from "../../firebase_config.js";
+import { getAuth, onAuthStateChanged, updateCurrentUser, reauthenticateWithCredential, updatePassword, EmailAuthProvider } from "firebase/auth";
+// import * as firebase from 'firebase/app';
 
 
 class MyProfile extends React.Component {
@@ -15,6 +18,9 @@ class MyProfile extends React.Component {
       changingProfilePic: false,
       selectedFile: defaultPic,
       url: '',
+      changingPassword: false,
+      newPass: '',
+      currentPass: '',
     };
 
     this.setUserInfo = this.setUserInfo.bind(this);
@@ -28,6 +34,8 @@ class MyProfile extends React.Component {
     this.changeDiet = this.changeDiet.bind(this);
     this.handleDropdownChange = this.handleDropdownChange.bind(this);
     this.deleteFood = this.deleteFood.bind(this);
+    this.changePassword = this.changePassword.bind(this);
+    this.passwordInput = this.passwordInput.bind(this);
   }
 
   componentDidMount() {
@@ -49,6 +57,31 @@ class MyProfile extends React.Component {
   }
 
   handlePasswordChange() {
+    this.setState({
+      changingPassword: true,
+    })
+  }
+
+  passwordInput(e) {
+    this.setState({
+      newPass: e.target.value,
+    })
+  }
+
+  changePassword(newPass) {
+    event.preventDefault();
+    const auth = getAuth(app);
+    onAuthStateChanged(auth, (user) => {
+      console.log('NEW PASSWORD >> ', newPass);
+      console.log('USER HERE >> ', user);
+      updatePassword(user, newPass)
+        .then(() => {
+          console.log('password changed!');
+        })
+        .catch(err => {
+          console.log(err);
+        })
+    });
   }
 
   changeProfilePic() {
@@ -121,7 +154,8 @@ class MyProfile extends React.Component {
   }
 
   render() {
-    const { value, diet, intolerances, changingProfilePic, url, userInfo } = this.state;
+    const { value, diet, intolerances, changingProfilePic, url, userInfo, changingPassword, newPass, currentPass } = this.state;
+
     const intoleranceList = ['dairy', 'egg', 'gluten', 'grain', 'peanut', 'seafood', 'sesame', 'shellfish', 'soy', 'sulfite', 'tree nut', 'wheat'];
     const dietsList = ['gluten free', 'ketogenic', 'vegetarian', 'lacto-vegetarian', 'obo-vegetarian', 'vegan', 'pescetarian', 'paleo', 'primal', 'whole30'];
     return (
@@ -147,6 +181,21 @@ class MyProfile extends React.Component {
           <button className="button-change-name" onClick={this.handleUsernameChange}>Change Username</button>
           <br />
           <button className="button-change-pw" onClick={this.handlePasswordChange}>Change Password</button>
+
+          {changingPassword === true
+            ? (
+              <div className="password-form">
+                  <label>
+                    Please enter new password:
+                    <br />
+                    <input type="text" value={newPass} onChange={this.passwordInput} />
+                  </label>
+                  <button type="submit" value="Confirm" onClick={this.changePassword(newPass)} />
+                </div>
+            )
+            : null
+          }
+
         </div>
 
         <div className="profile-right">
