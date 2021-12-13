@@ -1,13 +1,14 @@
 import React from "react";
 import { app } from "../../../firebase_config.js";
 import axios from "axios";
-
 import {
   getAuth,
   createUserWithEmailAndPassword,
   onAuthStateChanged,
   signInWithEmailAndPassword,
   signOut,
+  GoogleAuthProvider,
+  signInWithPopup,
 } from "firebase/auth";
 
 class Auth extends React.Component {
@@ -29,6 +30,7 @@ class Auth extends React.Component {
     this.signin = this.signin.bind(this);
     this.signout = this.signout.bind(this);
     this.renderModal = this.renderModal.bind(this);
+    this.signinwihgoogle = this.signinwihgoogle.bind(this);
   }
 
   //logic to switch to different forms
@@ -105,6 +107,16 @@ class Auth extends React.Component {
       });
   }
 
+  signinwihgoogle() {
+    const provider = new GoogleAuthProvider();
+    const auth = getAuth();
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        this.props.status();
+      })
+      .catch((err) => console.log(err.message));
+  }
+
   //sign out
   signout() {
     const auth = getAuth(app);
@@ -118,7 +130,6 @@ class Auth extends React.Component {
   }
 
   renderModal() {
-    console.log("render modal test inside");
     if (this.state.click === true) {
       if (this.state.create === true) {
         return (
@@ -161,6 +172,9 @@ class Auth extends React.Component {
                   Log In
                 </u>
               </div>
+              <div>
+                <img src="/images/google.png" onClick={this.signinwihgoogle} />
+              </div>
             </div>
           </div>
         );
@@ -195,6 +209,9 @@ class Auth extends React.Component {
                 <u className="signup" onClick={this.click}>
                   Sign Up
                 </u>
+              </div>
+              <div>
+                <img src="/images/google.png" onClick={this.signinwihgoogle} />
               </div>
             </div>
           </div>
