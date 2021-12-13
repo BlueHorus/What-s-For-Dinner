@@ -485,7 +485,6 @@ app.put("/updateProfilePic", (req, res) => {
     .catch((err) => {
       res.status(500).send(err);
     });
-  res.send("Successfully updated profile pic!", newProfilePic);
 });
 
 app.put("/updateNote", (req, res) => {

@@ -70,8 +70,8 @@ class MyProfile extends React.Component {
     });
     this.props.handleButtonPress(
       {
-        uid: userInfo.uid,
-        profilePic: this.state.url,
+        uid: 2,
+        newProfilePic: this.state.url,
       }
     );
   }
