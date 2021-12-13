@@ -67,7 +67,13 @@ class MyProfile extends React.Component {
     this.setState({
       selectedFile: this.state.url ? this.state.url : defaultPic,
       changingProfilePic: false,
-    })
+    });
+    this.props.handleButtonPress(
+      {
+        uid: userInfo.uid,
+        profilePic: this.state.url,
+      }
+    );
   }
 
   handleChange(e) {

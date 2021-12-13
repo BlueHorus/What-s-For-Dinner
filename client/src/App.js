@@ -154,6 +154,17 @@ class Main extends React.Component {
           axios(config)
         })();
         break;
+      case 'url-form':
+        (() => {
+          console.log('test updating profile pic: ', recipeId);
+          let config = {
+            method: 'put',
+            url: '/updateProfilePic',
+            data: recipeId,
+          }
+          axios(config)
+        })();
+        break;
         default: console.log('test default');
     }
   }
@@ -301,7 +312,13 @@ class Main extends React.Component {
           ) : (
             ""
           )}
-          {this.state.id === "login-signup" ? <MyProfile userInfo={this.state.user}/> : ""}
+          {this.state.id === "login-signup" ?
+            <MyProfile
+              userInfo={this.state.user}
+              handleButtonPress={this.handleButtonPress}
+            />
+            : ""
+          }
         </div>
 
         {/* {this.state.login === false ? <Reminder /> : ""} */}
