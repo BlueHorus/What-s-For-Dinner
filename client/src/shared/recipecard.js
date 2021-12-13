@@ -43,8 +43,8 @@ function Recipe (props) {
             <div className ="diet">Diet friendly:{recipe.diets.map(type => <li>{type}</li>)}</div>
             <div className="opinionbutton">
                 <FavoriteButton recipe={recipe} user={props.user} handleButtonPress={props.handleButtonPress}/>
-                <UpVoteButton recipe={recipe} handleButtonPress={props.handleButtonPress}/>
-                <DownVoteButton recipe={recipe} handleButtonPress={props.handleButtonPress}/>
+                <UpVoteButton buttonId={Math.floor(Math.random() * 100000)} recipe={recipe} handleButtonPress={props.handleButtonPress}/>
+                <DownVoteButton buttonId={Math.floor(Math.random() * 100000)} recipe={recipe} handleButtonPress={props.handleButtonPress}/>
             </div>
         </div>
         <div className="recipeadditions">

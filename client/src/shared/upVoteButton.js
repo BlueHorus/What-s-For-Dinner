@@ -8,9 +8,13 @@ const UpVoteButton = (props) => {
       )
   }
   return (
-    <button className='upvote-button' onClick={() => props.handleButtonPress(props.recipe.recipeId)}>
+    <button id={props.buttonId} className='upvote-button' onClick={() => {
+      document.getElementById(`${props.buttonId}`).disabled = true;
+      props.handleButtonPress(props.recipe.id)
+    }}>
     </button>
     )
+
 }
 
 

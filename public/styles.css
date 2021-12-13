@@ -216,7 +216,7 @@ body {
   border-radius: 25px;
   background-color: white;
   padding: 5px;
-  margin: auto;
+  margin: 15px;
   grid-template-rows: [row1-start] 30px [row1-end];
 }
 
@@ -225,7 +225,7 @@ body {
   font-size: smaller;
 }
 
-.recipecard:hover + .recipeadditions {
+/* .recipecard:hover + .recipeadditions {
   display: flex;
   width: max-content;
   border: solid;
@@ -236,7 +236,7 @@ body {
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 175px;
   color: brown;
-}
+} */
 
 .recipetitle {
   grid-column-start: 2;
