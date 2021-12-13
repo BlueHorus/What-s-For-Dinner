@@ -1,6 +1,7 @@
 import React from "react";
 import { app } from "../../../firebase_config.js";
 import axios from "axios";
+import logo from '../../../public/images/BlueOceanLogo.svg'
 
 import {
   getAuth,
@@ -123,6 +124,7 @@ class Auth extends React.Component {
         return (
           <div className="modal" style={{ display: "block" }}>
             <div className="modal-content">
+              <img src={logo} className='logo' id='modal-logo' />
               <form
                 onSubmit={
                   this.state.create === true ? this.createUser : this.signin
@@ -167,6 +169,7 @@ class Auth extends React.Component {
         return (
           <div className="modal">
             <div className="modal-content">
+            <img src={logo} className='logo' id='modal-logo' />
               <form
                 onSubmit={
                   this.state.create === true ? this.createUser : this.signin
