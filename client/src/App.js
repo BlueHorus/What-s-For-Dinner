@@ -173,6 +173,32 @@ class Main extends React.Component {
     }
   }
 
+
+  handleIngredient(ingredient) {
+    let config = {
+      method: 'put',
+      url: '/updateIngredients',
+      data: {
+        ingredient: ingredient,
+        uid: this.state.user.uid
+      }
+    }
+    switch (event.target.className) {
+      case 'add-ingredient': (
+        //add to list
+        console.log('add ing'),
+        axios(config)
+      );
+      break;
+      case 'delete-ingredient': (
+        //remove from list
+        console.log('remove ing')
+      )
+    }
+  }
+
+
+
   // call this function to validate user request before going to "my recipt/ my incredient"
   //need to comeback to test this function with funcitonal api end points
   getAuthentication(func) {
@@ -242,9 +268,7 @@ class Main extends React.Component {
             ""
           )}
           {this.state.id === "my-ingredients" ? (
-            <h1>
-              <Ingredients />
-            </h1>
+               <Ingredients user={this.state.user}/>
           ) : (
             ""
           )}
@@ -266,11 +290,13 @@ export default Main;
 
 var sampleUser = {
   uid: "123",
-  userName: "user_name",
-  profilePic: "http://pic.com",
-  ingredients: "garlic, butter, eggs",
-  notes: "I am a note",
-  diet: "paleo",
-  intolerances: "gluten, dairy",
-  favRecipes: [647572, 234, 345],
-};
+   userName: "user_name",
+   profilePic: "http://pic.com",
+   ingredients: "garlic, butter, eggs",
+   notes: "I am a note.  I am a crazy long set of notes actually.  I mean I'm not sure how much there is to say about all this food, but I can't think of a quicker way to  test out this sweet sticky note.  Have you ever tried brownies?  Just the box stuff.  Nothing fancy.  Hey computer, go build me some brownies.",
+   diet: "paleo",
+   intolerances: "gluten, dairy",
+   favRecipes: [123,234,345]
+}
+
+
