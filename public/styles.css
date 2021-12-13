@@ -116,6 +116,7 @@ body {
   align-items: center;
   text-align: center;
   font-size: 15px;
+  justify-content: center;
 }
 
 #my-ingredients img,

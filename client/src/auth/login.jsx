@@ -124,6 +124,9 @@ class Auth extends React.Component {
         // window.onclick = function(event) {
         //   if (event.target == modal) {
         //     document.getElementById('modal').style.display = 'none';
+        //     this.setState({
+        //       click: false,
+        //     })
         //   }
         // }
         return (
@@ -131,6 +134,9 @@ class Auth extends React.Component {
             <div className="modal-content">
               <button id='close' onClick={() => {
                 document.getElementById('modal').style.display = 'none';
+                this.setState({
+                  click: false,
+                })
               }}>
                 X</button>
               <img src={logo} className='logo' id='modal-logo' />
@@ -180,6 +186,9 @@ class Auth extends React.Component {
             <div className="modal-content">
             <button id='close' onClick={() => {
                 document.getElementById('modal').style.display = 'none';
+                this.setState({
+                  click: false,
+                })
               }}>
                 X</button>
             <img src={logo} className='logo' id='modal-logo' />
@@ -223,12 +232,12 @@ class Auth extends React.Component {
       <div >
         {this.props.login === false ? (
           <div id='login-signup'>
-            <div className="login" onClick={this.click}>
+            <button className="login" onClick={this.click}>
               Log In
-            </div>
-            <div className="signup" onClick={this.click}>
+            </button>
+            <button className="signup" onClick={this.click}>
               Sign Up
-            </div>
+            </button>
           </div>
         ) : (
           <button onClick={this.signout}>Sign Out</button>
