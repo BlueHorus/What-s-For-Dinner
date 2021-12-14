@@ -16,6 +16,15 @@ import title from '../../public/images/title.svg'
 import { app } from "../../firebase_config.js";
 import { getAuth, onAuthStateChanged, updateCurrentUser } from "firebase/auth";
 import Reminder from "./auth/reminder.jsx";
+import Button from '@mui/material/Button';
+import FaceIcon from '@mui/icons-material/Face';
+import LocalDiningIcon from '@mui/icons-material/LocalDining';
+import LunchDiningIcon from '@mui/icons-material/LunchDining';
+import SearchIcon from '@mui/icons-material/Search';
+import CssBaseline from '@mui/material/CssBaseline';
+import Box from '@mui/material/Box';
+import Container from '@mui/material/Container';
+import FindRecipes from './findRecipes/findRecipes.js'
 
 class Main extends React.Component {
   constructor() {
@@ -23,9 +32,6 @@ class Main extends React.Component {
     this.state = {
       id: "landing",
       user: sampleUser,
-      intolerances: "",
-      diet: "",
-      userInfo: {},
       uid: "",
       login: false,
       token: "",
@@ -35,6 +41,9 @@ class Main extends React.Component {
     this.handleButtonPress = this.handleButtonPress.bind(this);
     this.setInitialData = this.setInitialData.bind(this);
     this.getStatus = this.getStatus.bind(this);
+    this.handleIngredient = this.handleIngredient.bind(this);
+    this.getUser = this.getUser.bind(this);
+    this.handleNote = this.handleNote.bind(this);
   }
 
   componentDidMount() {
@@ -43,7 +52,7 @@ class Main extends React.Component {
       this.getAuthentication(() => {
         if (this.state.authenticated === true) {
           axios
-            .get("/getUsersInfo")
+            .get("/getUserInfo")
             .then((data) => {
               this.setInitialData(data);
             })
@@ -64,9 +73,20 @@ class Main extends React.Component {
     //   });
   }
 
+  getUser() {
+    axios('/getUserInfo', {
+      params: {
+        'uid': this.state.user.uid
+      }
+    })
+      .then((data) => {
+        this.setInitialData(data.data);
+      })
+  }
+
   setInitialData(obj) {
     this.setState({
-      userInfo: obj,
+      user: obj,
     });
   }
 
@@ -103,7 +123,6 @@ class Main extends React.Component {
   }
 
   handleButtonPress(recipeId) {
-    console.log(recipeId);
     let id = recipeId.toString();
     switch (event.target.className) {
       case 'upvote-button':
@@ -211,7 +230,7 @@ class Main extends React.Component {
           });
       } else {
         this.setState({ login: false });
-        console.log("Not sign in");
+        // console.log("Not sign in");
       }
     });
   }
@@ -231,26 +250,63 @@ class Main extends React.Component {
   }
 
 
-  handleIngredient(ingredient) {
+  handleIngredient(event) {
+    event.preventDefault();
+    const ingredient = event.target.name;
     let config = {
       method: 'put',
       url: '/updateIngredients',
       data: {
-        ingredient: ingredient,
-        uid: this.state.user.uid
+        uid: this.state.user.uid,
+        ingredients: this.state.user.ingredients
       }
-    }
+    };
     switch (event.target.className) {
-      case 'add-ingredient': (
-        //add to list
-        console.log('add ing'),
+      case 'add-ingredient':
+        config.data.ingredients = this.state.user.ingredients.concat(',', ingredient);
         axios(config)
-      );
+          .then( () => {this.getUser()})
+          .catch(err => console.log(err))
       break;
-      case 'delete-ingredient': (
+
+      case 'remove-ing-button':
+        config.data.ingredients = this.state.user.ingredients.replace(ingredient, '');
+        config.data.ingredients = config.data.ingredients.replace(/,{2,}/, ',')
+        config.data.ingredients = config.data.ingredients.replace(/^,/, '')
+        config.data.ingredients = config.data.ingredients.replace(/,$/, '')
+        console.log('newlist: ', config.data.ingredients)
+        axios(config)
+          .then( () => {this.getUser()})
+          .catch(err => console.log(err))
+    }
+  }
+
+  handleNote(event) {
+    event.preventDefault();
+    const note = event.target.name;
+    let config = {
+      method: 'put',
+      url: '/updateNote',
+      data: {
+        uid: this.state.user.uid,
+        note: this.state.user.notes
+      }
+    };
+    switch (event.target.className) {
+      case 'add-note':
+        config.data.note = this.state.user.notes.concat(', ', note.value);
+        axios(config)
+          .then( () => {this.getUser()})
+          .catch(err => console.log(err))
+      break;
+
+      case 'remove-notes':
         //remove from list
-        console.log('remove ing')
-      )
+        config.data.note = '';
+        axios(config)
+          .then( () => {this.getUser()})
+          .catch(err => console.log(err));
+        break;
     }
   }
 
@@ -286,25 +342,37 @@ class Main extends React.Component {
         <div className="navigation">
           <span id="landing" className="logo" onClick={this.viewSwitch} />
           <img id="title" src={title}/>
-          <div id="find-recipes" onClick={this.viewSwitch}>
-            <img width="30" src={searchIcon}></img>
+          <Button id="find-recipes" startIcon={<SearchIcon />}variant='contained' onClick={this.viewSwitch}>
             Find Recipes
-          </div>
-          <div id="my-ingredients" onClick={this.viewSwitch}>
-            <img width="30" src={ingredientIcon} />
+          </Button>
+          {this.state.login ? <Button variant='contained' id="my-ingredients" startIcon={<LocalDiningIcon />} onClick={this.viewSwitch}>
             My Ingredients
-          </div>
-          <div id="my-recipes" onClick={this.viewSwitch}>
-            <img width="30" src={recipeIcon} />
+          </Button> :
+          <Button variant='contained' id="my-ingredients" startIcon={<LocalDiningIcon />} onClick={() => alert('Please sign up or log in to use this feature')}>
+          My Ingredients
+        </Button>
+         }
+          {this.state.login ? <Button startIcon={<LunchDiningIcon />}  variant='contained' id="my-recipes" onClick={this.viewSwitch}>
             My Recipes
-          </div>
-          <div id="login-signup" onClick={this.viewSwitch}>
-            <img width="30" src={profileIcon} />
+          </Button> :
+          <Button startIcon={<LunchDiningIcon />}  variant='contained' id="my-recipes" onClick={() => alert('Please sign up or log in to use this feature')}>
+          My Recipes
+        </Button>
+          }
+
+          {this.state.login ? <Button id="profile" onClick={this.viewSwitch} startIcon={<FaceIcon />} >
             Profile
-          </div>
+          </Button> :
+          <Button id="profile" onClick={() => alert('Please sign up or log in to use this feature')} startIcon={<FaceIcon />}>
+          Profile
+        </Button> }
           <Auth status={this.getStatus} login={this.state.login} />
         </div>
-        <div className="content">
+        <React.Fragment>
+          <CssBaseline />
+          <Container maxWidth='lg'>
+            <Box sx={{ bgcolor: 'white', minHeight: '100vh', height: '100%', width: '100%', marginTop: '10px', alignItems: 'center',
+              display: 'flex', flexDirection: 'column'}}>
           {this.state.id === "logo" ? (
             <Featured
               handleButtonPress={this.handleButtonPress}
@@ -322,12 +390,14 @@ class Main extends React.Component {
             ""
           )}
           {this.state.id === "find-recipes" ? (
-            <h1>Find Recipes Placeholder</h1>
+            <FindRecipes user={this.state.user} handleButtonPress={this.handleButtonPress}/>
           ) : (
             ""
           )}
           {this.state.id === "my-ingredients" ? (
-               <Ingredients user={this.state.user}/>
+               <Ingredients user={this.state.user}
+               handleIngredient={this.handleIngredient}
+               handleNote={this.handleNote}/>
           ) : (
             ""
           )}
@@ -344,10 +414,11 @@ class Main extends React.Component {
             />
             : ""
           }
-        </div>
+          </Box>
+          </Container>
+        </React.Fragment>
 
-        {/* {this.state.login === false ? <Reminder /> : ""} */}
-      </div>
+        </div>
     );
   }
 }

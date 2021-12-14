@@ -1,6 +1,8 @@
 import React from "react";
 import { app } from "../../../firebase_config.js";
 import axios from "axios";
+import logo from '../../../public/images/BlueOceanLogo.svg'
+import Button from '@mui/material/Button';
 
 import {
   getAuth,
@@ -33,14 +35,14 @@ class Auth extends React.Component {
 
   //logic to switch to different forms
   click(e) {
-    if (e.target.className === "login") {
+    if (e.target.id === "login") {
       this.setState({
         click: true,
         signin: true,
         create: false,
       });
     }
-    if (e.target.className === "signup") {
+    if (e.target.id === "signup") {
       this.setState({
         click: true,
         create: true,
@@ -118,12 +120,27 @@ class Auth extends React.Component {
   }
 
   renderModal() {
-    console.log("render modal test inside");
     if (this.state.click === true) {
       if (this.state.create === true) {
+        // window.onclick = function(event) {
+        //   if (event.target == modal) {
+        //     document.getElementById('modal').style.display = 'none';
+        //     this.setState({
+        //       click: false,
+        //     })
+        //   }
+        // }
         return (
-          <div className="modal" style={{ display: "block" }}>
+          <div id="modal" className="modal">
             <div className="modal-content">
+              <Button variant='contained' id='close' onClick={() => {
+                document.getElementById('modal').style.display = 'none';
+                this.setState({
+                  click: false,
+                })
+              }}>
+                X</Button>
+              <img src={logo} className='logo' id='modal-logo' />
               <form
                 onSubmit={
                   this.state.create === true ? this.createUser : this.signin
@@ -153,21 +170,29 @@ class Auth extends React.Component {
                   }}
                   placeholder="Password"
                 />
-                <button type="submit">Create</button>
+                <Button id='submit-button' variant='contained' type="submit">Create</Button>
               </form>
-              <div>
+              <div id='login-container'>
                 Already have an account?{" "}
-                <u className="login" onClick={this.click}>
+                <Button id="login" onClick={this.click}>
                   Log In
-                </u>
+                </Button>
               </div>
             </div>
           </div>
         );
       } else {
         return (
-          <div className="modal">
+          <div id='modal' className="modal">
             <div className="modal-content">
+            <Button variant='contained' id='close' onClick={() => {
+                document.getElementById('modal').style.display = 'none';
+                this.setState({
+                  click: false,
+                })
+              }}>
+                X</Button>
+            <img src={logo} className='logo' id='modal-logo' />
               <form
                 onSubmit={
                   this.state.create === true ? this.createUser : this.signin
@@ -185,16 +210,16 @@ class Auth extends React.Component {
                   }}
                   placeholder="Password"
                 />
-                <button type="submit">Sign In</button>
+                <Button id='submit-button' variant='contained' type="submit">Sign In</Button>
               </form>
 
               <span> </span>
               <span>Forgot?</span>
-              <div>
+              <div id='signup-container'>
                 Don't have an account?{" "}
-                <u className="signup" onClick={this.click}>
+                <Button id="signup" onClick={this.click}>
                   Sign Up
-                </u>
+                </Button>
               </div>
             </div>
           </div>
@@ -205,18 +230,18 @@ class Auth extends React.Component {
 
   render() {
     return (
-      <div>
+      <div >
         {this.props.login === false ? (
-          <div>
-            <button className="login" onClick={this.click}>
+          <div id='login-signup'>
+            <Button variant='contained' id="login" onClick={this.click}>
               Log In
-            </button>
-            <button className="signup" onClick={this.click}>
+            </Button>
+            <Button variant='contained' id="signup" onClick={this.click}>
               Sign Up
-            </button>
+            </Button>
           </div>
         ) : (
-          <button onClick={this.signout}>Sign Out</button>
+          <Button variant='contained' id="sign-out" onClick={this.signout}>Sign Out</Button>
         )}
         {this.renderModal()}
       </div>
