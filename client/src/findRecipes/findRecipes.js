@@ -27,32 +27,54 @@ class FindRecipes extends React.Component {
     this.state = {
       recipes: null,
       ingredients: [],
-      ingredientForm: ''
+      ingredientForm: '',
+      diet: '',
+      intolerances: [],
+      intolerancesForm: ''
     }
 
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleIngredientSubmit = this.handleIngredientSubmit.bind(this);
     this.onChange = this.onChange.bind(this);
     this.handleIngredientSearch = this.handleIngredientSearch.bind(this);
+    this.handleIntoleranceSubmit = this.handleIntoleranceSubmit.bind(this);
   }
 
   onChange() {
+    if (event.target.id === 'intolerances-form') {
+    this.setState({
+      intolerancesForm: event.target.value
+    })
+  }
+
+  if (event.target.id === 'ingredient-form') {
     this.setState({
       ingredientForm: event.target.value
     })
   }
+}
 
-  handleSubmit() {
-
+  handleIngredientSubmit() {
     if (this.state.ingredientForm === '') {
       alert('Form cannot be empty');
       return;
     }
-
     let tempArray = this.state.ingredients;
     tempArray.push(this.state.ingredientForm);
     this.setState({
       ingredients: tempArray,
       ingredientForm: ''
+    })
+  }
+  handleIntoleranceSubmit() {
+    if (this.state.intolerancesForm === '') {
+      alert('Form cannot be empty');
+      return;
+    }
+    let tempArray = this.state.intolerances;
+    tempArray.push(this.state.intolerancesForm);
+    this.setState({
+      intolerances: tempArray,
+      intolerancesForm: ''
     })
   }
 
@@ -83,32 +105,62 @@ class FindRecipes extends React.Component {
     element.remove();
 
   }
+  handleRemoveIntolerance(intolerance) {
+    let element = document.getElementById(`${intolerance}`)
+    element.remove();
+
+  }
 
   render() {
     return (
       <>
     <Box sx={{ maxWidth: 900, margin: '15px', display: 'flex', 'flex-direction': 'column', alignItems: 'center' }}>
-      <List>
-        {this.state.ingredients.map((ingredient) => {
-          return (
-            <ListItem id={ingredient}
-            secondaryAction={
-              <IconButton edge='end' onClick={() => this.handleRemoveIngredient(ingredient)}>
-                <DeleteIcon />
-              </IconButton>
-            }
-            >
-              <ListItemText primary={ingredient} required/>
-            </ListItem>
-          )
-        })
-      }
-      </List>
-      <FormControl sx={{m: 1}} variant="standard">
-        <InputLabel htmlFor='ingredient-form'></InputLabel>
-        <TextField autoComplete='on' spellCheck='true' onChange={this.onChange} id='ingredient-form' label='Ingredient' varient='filled' value={this.state.ingredientForm} />
-        <Button type='submit' onClick={this.handleSubmit} varient='filled'>Add Ingredient</Button>
-      </FormControl>
+      <div id='list-container' style={{display: 'flex', alignItems: 'center', flexDirection: 'row', justifyContent: 'space-evenly'}}>
+        <List>Ingredients:
+          {this.state.ingredients.map((ingredient) => {
+            return (
+              <ListItem id={ingredient}
+              secondaryAction={
+                <IconButton edge='end' onClick={() => this.handleRemoveIngredient(ingredient)}>
+                  <DeleteIcon />
+                </IconButton>
+              }
+              >
+                <ListItemText primary={ingredient} required/>
+              </ListItem>
+            )
+          })
+        }
+        </List>
+        <List>Intolerances:
+          {this.state.intolerances.map((intolerance) => {
+            return (
+              <ListItem id={intolerance}
+              secondaryAction={
+                <IconButton edge='end' onClick={() => this.handleRemoveIntolerance(intolerance)}>
+                  <DeleteIcon />
+                </IconButton>
+              }
+              >
+                <ListItemText primary={intolerance} required/>
+              </ListItem>
+            )
+          })
+        }
+        </List>
+      </div>
+      <div id='add-on-container'>
+        <FormControl sx={{m: 1}} variant="standard">
+          <InputLabel htmlFor='ingredient-form'></InputLabel>
+          <TextField autoComplete='on' spellCheck='true' onChange={this.onChange} id='ingredient-form' label='Ingredient' varient='filled' value={this.state.ingredientForm} />
+          <Button type='submit' onClick={this.handleIngredientSubmit} varient='filled'>Add Ingredient</Button>
+        </FormControl>
+        <FormControl sx={{m: 1}} variant="standard">
+          <InputLabel htmlFor='intolerances-form'></InputLabel>
+          <TextField autoComplete='on' spellCheck='true' onChange={this.onChange} id='intolerances-form' label='Intolerance' varient='filled' value={this.state.intolerancesForm} />
+          <Button type='submit' onClick={this.handleIntoleranceSubmit} varient='filled'>Add Intolerance</Button>
+        </FormControl>
+      </div>
     </Box>
       <Button onClick={this.handleIngredientSearch} startIcon={<SearchIcon />} varient='filled'> Search </Button>
       <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>{
