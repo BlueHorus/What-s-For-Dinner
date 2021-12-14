@@ -76,9 +76,6 @@ class Main extends React.Component {
   getUser() {
     axios('/getUserInfo', {
       headers: {Authorization: this.state.token},
-      params: {
-        'uid': this.state.user.uid
-      }
     })
       .then((data) => {
         this.setInitialData(data.data);
