@@ -1,15 +1,19 @@
+<<<<<<< HEAD
 import React from 'react';
 import axios from 'axios';
 import { Card } from '@mui/material';
 import { CardContent } from '@mui/material';
-
+=======
+import React from "react";
+import axios from "axios";
+// import MyIngredients from './myIngredients.js'
+>>>>>>> b189e238001855a1cf1289c61b9969b984775c15
 
 // add ingredient	"1. As a user, i want to upload ingredients
 // 2. As a user, i want the app to check if my input ingredient is valid
 // 3. As a user, i want to take notes for my ingredient "
 // delete ingredient	"1. As a user, i want to delete ingredients
 // 2. As a user, i want to take notes for my ingredient "
-
 
 // app.patch("/updateIngredients", (req, res) => {
 //   // request should contain ingredients
@@ -22,30 +26,26 @@ import { CardContent } from '@mui/material';
 
 class Ingredients extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
-      note: '',
-      ingredient: '',
-      myIngredients: []
+      note: "",
+      ingredient: "",
+      myIngredients: [],
     };
 
     this.setNote = this.setNote.bind(this);
     this.setIngredient = this.setIngredient.bind(this);
   }
 
-
-
   setNote(e) {
     e.preventDefault();
-    this.setState({note: e.target.value})
+    this.setState({ note: e.target.value });
   }
-
 
   setIngredient(e) {
     e.preventDefault();
-    this.setState({ingredient: e.target.value})
+    this.setState({ ingredient: e.target.value });
   }
-
 
   render() {
     const ingredientsList = (this.props.user.ingredients === '') ? '' : this.props.user.ingredients;
@@ -98,9 +98,6 @@ class Ingredients extends React.Component {
       </div>
     )
   }
-
-
 }
-
 
 export default Ingredients;
