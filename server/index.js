@@ -508,7 +508,6 @@ app.put("/updateNote", (req, res) => {
   // query database to update note
   var userId = req.body.uid;
   var newNote = req.body.note;
-  console.log(newNote)
   Users.updateNote(userId, newNote)
     .then((response) => {
       res.status(200).send(response);
