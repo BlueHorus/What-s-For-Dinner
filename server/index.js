@@ -280,6 +280,14 @@ app.get("/getRecipesFromIngredients", (req, res) => {
   }
 });
 
+app.get("/authenticate", (req, res) => {
+  if (req.body.uid) {
+    res.send("successfully authenticated");
+  } else {
+    res.send(false);
+  }
+});
+
 app.get("/getUsersFavorites", (req, res) => {
   // request body should include uid
   var userId = req.body.uid;
