@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
 import defaultPic from "./shared/SVGS/profileIcon.svg";
+import EditProfile from "./EditProfile.js";
 import { app } from "../../firebase_config.js";
 import {
   getAuth,
@@ -10,7 +11,6 @@ import {
   updatePassword,
   EmailAuthProvider,
 } from "firebase/auth";
-// import * as firebase from 'firebase/app';
 
 class MyProfile extends React.Component {
   constructor(props) {
@@ -25,23 +25,27 @@ class MyProfile extends React.Component {
       selectedFile: defaultPic,
       url: "",
       changingPassword: false,
+      changingUsername: false,
       newPass: "",
-      currentPass: "",
+      newUsername: "",
+      // editingProfile: false,
     };
 
     this.setUserInfo = this.setUserInfo.bind(this);
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
     this.handleURLChange = this.handleURLChange.bind(this);
+    this.changePassword = this.changePassword.bind(this);
+    this.passwordInput = this.passwordInput.bind(this);
+    this.usernameInput = this.usernameInput.bind(this);
     this.changeProfilePic = this.changeProfilePic.bind(this);
     this.uploadPic = this.uploadPic.bind(this);
+    this.uploadUsername = this.uploadUsername.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.changeDiet = this.changeDiet.bind(this);
     this.handleDropdownChange = this.handleDropdownChange.bind(this);
     this.deleteFood = this.deleteFood.bind(this);
-    this.changePassword = this.changePassword.bind(this);
-    this.passwordInput = this.passwordInput.bind(this);
   }
 
   componentDidMount() {
@@ -59,7 +63,11 @@ class MyProfile extends React.Component {
     });
   }
 
-  handleUsernameChange() {}
+  handleUsernameChange() {
+    this.setState({
+      changingUsername: true,
+    });
+  }
 
   handlePasswordChange() {
     this.setState({
@@ -73,13 +81,27 @@ class MyProfile extends React.Component {
     });
   }
 
+  usernameInput(e) {
+    this.setState({
+      newUsername: e.target.value,
+    });
+  }
+
+  uploadUsername(e) {
+    event.preventDefault();
+    this.setState({
+      changingUsername: false,
+    });
+    this.props.handleButtonPress({
+      // uid: 2,
+      newUsername: this.state.newUsername,
+    });
+  }
+
   changePassword() {
     event.preventDefault();
     const auth = getAuth(app);
     const user = auth.currentUser;
-    // onAuthStateChanged(auth, (user) => {
-    // console.log("NEW PASSWORD >> ", newPass);
-    // console.log("USER HERE >> ", user);
     updatePassword(user, this.state.newPass)
       .then(() => {
         console.log("password changed!");
@@ -87,7 +109,6 @@ class MyProfile extends React.Component {
       .catch((err) => {
         console.log(err);
       });
-    // });
   }
 
   changeProfilePic() {
@@ -108,7 +129,7 @@ class MyProfile extends React.Component {
       changingProfilePic: false,
     });
     this.props.handleButtonPress({
-      uid: 2,
+      // uid: 2,
       newProfilePic: this.state.url,
     });
   }
@@ -132,7 +153,7 @@ class MyProfile extends React.Component {
     const { diet, userInfo } = this.state;
     event.preventDefault();
     this.props.handleButtonPress({
-      uid: userInfo.uid,
+      // uid: userInfo.uid,
       diet: diet,
     });
     this.setState({
@@ -164,8 +185,9 @@ class MyProfile extends React.Component {
       url,
       userInfo,
       changingPassword,
+      changingUsername,
+      newUsername,
       newPass,
-      currentPass,
     } = this.state;
 
     const intoleranceList = [
@@ -241,6 +263,38 @@ class MyProfile extends React.Component {
           >
             Change Password
           </button>
+
+          {changingUsername === true ? (
+            <div className="username-form">
+              <label>
+                Please enter new username:
+                <br />
+                <input
+                  type="text"
+                  value={newUsername}
+                  onChange={this.usernameInput}
+                />
+              </label>
+              <button className="username-form" onClick={this.uploadUsername}>
+                Confirm!
+              </button>
+            </div>
+          ) : null}
+
+          {changingPassword === true ? (
+            <div className="password-form">
+              <label>
+                Please enter new password:
+                <br />
+                <input
+                  type="text"
+                  value={newPass}
+                  onChange={this.passwordInput}
+                />
+              </label>
+              <button onClick={this.changePassword}>Confirm!</button>
+            </div>
+          ) : null}
 
           {changingPassword === true ? (
             <div className="password-form">
@@ -326,7 +380,7 @@ class MyProfile extends React.Component {
             className="update-intolerances"
             onClick={(e) =>
               this.props.handleButtonPress({
-                uid: userInfo.uid,
+                // uid: userInfo.uid,
                 intolerances: intolerances.join(","),
               })
             }

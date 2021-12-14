@@ -153,8 +153,16 @@ class Main extends React.Component {
         (() => {
           console.log("test updating diet: ", recipeId);
           let config = {
+<<<<<<< HEAD
             method: "put",
             url: "/updateDiet",
+=======
+            headers: {
+              Authorization: this.state.token,
+            },
+            method: 'put',
+            url: '/updateDiet',
+>>>>>>> 5f6d11cd67fb6984527c6aa11a40595d0040294b
             data: recipeId,
           };
           axios(config);
@@ -164,8 +172,11 @@ class Main extends React.Component {
         (() => {
           console.log("test updating intolerances: ", recipeId);
           let config = {
-            method: "put",
-            url: "/updateIntolerances",
+            headers: {
+              Authorization: this.state.token,
+            },
+            method: 'put',
+            url: '/updateIntolerances',
             data: recipeId,
           };
           axios(config);
@@ -175,15 +186,36 @@ class Main extends React.Component {
         (() => {
           console.log("test updating profile pic: ", recipeId);
           let config = {
+<<<<<<< HEAD
             method: "put",
             url: "/updateProfilePic",
+=======
+            headers: {
+              Authorization: this.state.token,
+            },
+            method: 'put',
+            url: '/updateProfilePic',
+>>>>>>> 5f6d11cd67fb6984527c6aa11a40595d0040294b
             data: recipeId,
           };
           axios(config);
         })();
         break;
-      default:
-        console.log("test default");
+      case 'username-form':
+        (() => {
+          console.log('test updating username: ', recipeId);
+          let config = {
+            headers: {
+              Authorization: this.state.token,
+            },
+            method: 'put',
+            url: '/updateUsername',
+            data: recipeId,
+          }
+          axios(config)
+        })();
+        break;
+        default: console.log('test default');
     }
   }
 
