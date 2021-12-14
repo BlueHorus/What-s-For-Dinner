@@ -12,6 +12,12 @@ const port = 3000;
 //93ee5206be4141f4a761b7f459af4c69 key 3
 //3a15e063e87b46579969ef7bb2d841e3 key 2
 //5eb864cd4c9b47b282c6ec757f5dd0b7 key 1
+var unless = function (middleware, ...paths) {
+  return function (req, res, next) {
+    const pathCheck = paths.some((path) => path === req.path);
+    pathCheck ? next() : middleware(req, res, next);
+  };
+};
 
 app.use(express.static(path.join(__dirname, "../public")));
 app.use(express.json());
@@ -38,13 +44,6 @@ async function verifyToken(req, res, next) {
     return res.status(401).send("You are not authorized!");
   }
 }
-
-var unless = function (middleware, ...paths) {
-  return function (req, res, next) {
-    const pathCheck = paths.some((path) => path === req.path);
-    pathCheck ? next() : middleware(req, res, next);
-  };
-};
 
 var parseResponse = function (response) {
   // parse response down to example object in team folder
