@@ -2,11 +2,12 @@
 
 * {
   font-family: "Raleway";
+  text-size-adjust: auto;
 }
 
-* #title {
+#title {
   font-family: "Josefin Sans";
-  height: 90%;
+  height: 80%;
   width: auto;
   margin-right: auto;
   color: white;
@@ -15,6 +16,7 @@
 @media only screen and (max-width: 700px) {
   #title {
     display: none;
+    width: auto;
   }
 }
 
@@ -95,10 +97,10 @@ justify-self: flex-end;
 margin-right: 20px;
 background-color: #e4eaea;
 height: 40px;
-width: 150px;
+width: auto;
 align-items: center;
 text-align: center;
-font-size: 15px;
+font-size: 1vw;
 justify-content: center;
 color: black;
 }
@@ -116,7 +118,7 @@ color: black;
   width: auto;
   align-items: center;
   text-align: center;
-  font-size: 15px;
+  font-size: 1vw;
   color: black;
 }
 
@@ -284,7 +286,7 @@ color: black;
 .wrp {
   align-items: center;
   display: flex;
-  height: 30%;
+  height: 400px;
   width: 100%;
   transform-origin: center;
   transform-box: fill-box;
@@ -296,12 +298,17 @@ color: black;
   font-family: "Josefin Sans";
 }
 
+.wrp img {
+  margin-left: 0;
+}
+
 .wrp svg {
   height: 70%;
   width: 70%;
   transform-origin: center;
   transform-box: fill-box;
 }
+
 
 /*
   Next section: ingredients
@@ -486,6 +493,7 @@ color: black;
   }
 
 #modal-logo {
+  margin-left: 0;
   justify-self: center;
   align-self: center;
   width: 200px;
@@ -531,7 +539,10 @@ form * {
 
 #login-container,
 #signup-container {
-  align-self: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 #submit-button {
