@@ -5,13 +5,21 @@ const e = require("express");
 const app = express();
 const Recipes = require("./db/models/recipes.js");
 const Users = require("./db/models/users.js");
-const admin = require("./foldername/admin.js");
+// const admin = require("./foldername/admin.js");
 
 const port = 3000;
 
 //93ee5206be4141f4a761b7f459af4c69 key 3
 //3a15e063e87b46579969ef7bb2d841e3 key 2
 //5eb864cd4c9b47b282c6ec757f5dd0b7 key 1
+
+// console.log("this is our private key:", admin.private_key);
+var unless = function (middleware, ...paths) {
+  return function (req, res, next) {
+    const pathCheck = paths.some((path) => path === req.path);
+    pathCheck ? next() : middleware(req, res, next);
+  };
+};
 
 app.use(express.static(path.join(__dirname, "../public")));
 app.use(express.json());
@@ -38,13 +46,6 @@ async function verifyToken(req, res, next) {
     return res.status(401).send("You are not authorized!");
   }
 }
-
-var unless = function (middleware, ...paths) {
-  return function (req, res, next) {
-    const pathCheck = paths.some((path) => path === req.path);
-    pathCheck ? next() : middleware(req, res, next);
-  };
-};
 
 var parseResponse = function (response) {
   // parse response down to example object in team folder
@@ -280,7 +281,6 @@ app.get("/getRecipesFromIngredients", (req, res) => {
 
 app.get("/getUsersFavorites", (req, res) => {
   // request body should include uid
-  console.log(req.body);
   var userId = req.body.uid;
   Users.getUserById(userId).then((response) => {
     if (response.favoriteRecipes.length < 1) {
@@ -393,7 +393,6 @@ app.get("/getUserInfo", (req, res) => {
   // request should include uid
   // queries database for user object
   // send user object back to front-end
-  console.log(req.body);
   var userId = req.query.uid;
   Users.getUserById(userId)
     .then((response) => {
