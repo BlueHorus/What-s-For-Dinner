@@ -6,3 +6,4 @@ public/bundle.js.map
 bundle.js.map
 package-lock.json
 firebase_config.js
+admin.env

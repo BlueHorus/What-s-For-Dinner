@@ -5,7 +5,7 @@ const e = require("express");
 const app = express();
 const Recipes = require("./db/models/recipes.js");
 const Users = require("./db/models/users.js");
-const admin = require("./admin.js");
+const admin = require("./foldername/admin.js");
 
 const port = 3000;
 
@@ -15,36 +15,36 @@ const port = 3000;
 
 app.use(express.static(path.join(__dirname, "../public")));
 app.use(express.json());
+app.use(
+  unless(verifyToken, "/updateUpvote", "/updateDownvote", "/getFeaturedRecipes")
+);
 
-// app.get("/authenticate", (req, res) => {
-//   // request should include UID from firebase and token
-//   // query database to create a new user
-//   // send "successfully created new user"
-//   var joinedTokens = req.headers.Authorization;
-//   var arrayOfTokens = joinedTokens.split(" ");
-//   verifyToken(req.headers.Authorization);
-//   var userId = req.body.uid;
-//   var token = req.body.token;
-//   res.send("Successfully authenticated user!");
-// });
+//might have to change req.query to req.body, might not work at all who knows
 
-// async function verifyToken(token) {
-//   const idToken = token;
+async function verifyToken(req, res, next) {
+  const idToken = req.headers.Authorization;
 
-//   try {
-//     const decodedToken = await admin.auth().verifyIdToken(idToken);
+  try {
+    const decodedToken = await admin.auth().verifyIdToken(idToken);
 
-//     if (decodedToken) {
-//       var uid = decodedToken.uid;
+    if (decodedToken) {
+      req.body.uid = decodedToken.uid;
 
-//       return uid;
-//     } else {
-//       return res.status(401).send("You are not authorized!");
-//     }
-//   } catch (err) {
-//     return res.status(401).send("You are not authorized!");
-//   }
-// }
+      return next();
+    } else {
+      return res.status(401).send("You are not authorized!");
+    }
+  } catch (e) {
+    return res.status(401).send("You are not authorized!");
+  }
+}
+
+var unless = function (middleware, ...paths) {
+  return function (req, res, next) {
+    const pathCheck = paths.some((path) => path === req.path);
+    pathCheck ? next() : middleware(req, res, next);
+  };
+};
 
 var parseResponse = function (response) {
   // parse response down to example object in team folder
@@ -280,6 +280,7 @@ app.get("/getRecipesFromIngredients", (req, res) => {
 
 app.get("/getUsersFavorites", (req, res) => {
   // request body should include uid
+  console.log(req.body);
   var userId = req.body.uid;
   Users.getUserById(userId).then((response) => {
     if (response.favoriteRecipes.length < 1) {
@@ -392,10 +393,11 @@ app.get("/getUserInfo", (req, res) => {
   // request should include uid
   // queries database for user object
   // send user object back to front-end
+  console.log(req.body);
   var userId = req.query.uid;
   Users.getUserById(userId)
     .then((response) => {
-      console.log(response)
+      console.log(response);
       res.status(200).send(response);
     })
     .catch((err) => {
