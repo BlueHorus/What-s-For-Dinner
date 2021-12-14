@@ -14,6 +14,7 @@ import {
   sendSignInLinkToEmail,
   isSignInWithEmailLink,
   signInWithEmailLink,
+  sendEmailVerification,
 } from "firebase/auth";
 
 class Auth extends React.Component {
@@ -60,30 +61,19 @@ class Auth extends React.Component {
     this.setState({ [item]: e.target.value });
   }
 
-  verifyEmail(email) {
+  //use to verify email
+  verifyEmail() {
     const auth = getAuth(app);
+    console.log(auth.currentUser);
     const actionCodeSetting = {
       url: "http://localhost:3000",
       handleCodeInApp: true,
     };
-    sendSignInLinkToEmail(auth, this.state.email, actionCodeSetting)
-      .then(() => {
-        alert("An verification link was successfully sent to your email!");
-        window.localStorage.setItem("email", email);
+    sendEmailVerification(auth.currentUser, actionCodeSetting)
+      .then((res) => {
+        alert("Email verification sent!");
       })
-      .then(() => {
-        if (isSignInWithEmailLink(auth, window.location.href)) {
-          let email = window.localStorage.getItem("email");
-          if (!email) {
-            email = window.prompt("Please provide your email for confirmation");
-          }
-          signInWithEmailLink(auth, email, window.location.href).then(
-            (result) => {
-              window.localStorage.removeItem("email");
-            }
-          );
-        }
-      })
+
       .catch((err) => {
         console.log(err.message);
       });
@@ -96,33 +86,32 @@ class Auth extends React.Component {
     } else {
       event.preventDefault();
       const auth = getAuth(app);
-      this.verifyEmail(this.state.email);
-      // , (response) => {
-      // if (response === true) {
-      //   createUserWithEmailAndPassword(
-      //     auth,
-      //     this.state.email,
-      //     this.state.password
-      //   ).then((info) => {
-      //     this.setState({ uid: info.user.uid });
-      //     console.log(this.state.uid);
+      createUserWithEmailAndPassword(
+        auth,
+        this.state.email,
+        this.state.password
+      )
+        .then((info) => {
+          this.setState({ uid: info.user.uid });
+          console.log(this.state.uid);
 
-      //     // axios.post("/createUser", {
-      //     //   uid: this.state.uid,
-      //     //   username: this.state.username,
-      //     //   url: this.state.url,
-      //     // });
-      //     alert("Thanks you! ");
-      //     e.target.reset();
-      //     this.setState({ click: false });
-      //   });
-      // }
+          // axios.post("/createUser", {
+          //   uid: this.state.uid,
+          //   username: this.state.username,
+          //   url: this.state.url,
+          // });
+          alert("Thanks you! ");
+          e.target.reset();
+          this.setState({ click: false });
+        })
+        .then(() => {
+          this.verifyEmail();
+        })
+        .catch((err) => {
+          alert("Please try again!" + err);
+          console.log(err.message);
+        });
     }
-    // ).catch((err) => {
-    //   alert("Please try again!" + err);
-    //   console.log(err.message);
-    // });
-    // }
   }
 
   //sign in
@@ -131,11 +120,17 @@ class Auth extends React.Component {
     const auth = getAuth(app);
     signInWithEmailAndPassword(auth, this.state.email, this.state.password)
       .then((user) => {
-        this.props.status(() => {
-          alert("Welcome Back");
-          e.target.reset();
-          this.setState({ click: false });
-        });
+        console.log(user.user.emailVerified);
+        if (user.user.emailVerified === false) {
+          alert("Please verify your email first");
+          this.signout();
+        } else {
+          this.props.status(() => {
+            alert("Welcome Back");
+            e.target.reset();
+            this.setState({ click: false });
+          });
+        }
       })
       .catch((err) => {
         alert("Please try again");
