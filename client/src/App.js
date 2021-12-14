@@ -294,7 +294,6 @@ class Main extends React.Component {
           <Button id="profile" onClick={() => alert('Please sign up or log in to use this feature')} startIcon={<FaceIcon />}>
           Profile
         </Button> }
-            }
           <Auth status={this.getStatus} login={this.state.login} />
         </div>
         <React.Fragment>
