@@ -9,6 +9,8 @@ const admin = require("./admin.js");
 
 const port = 3000;
 
+//10b44c84b9192c1452635abd85a02bcf02482b02 key 4
+//93ee5206be4141f4a761b7f459af4c69 key 3
 //3a15e063e87b46579969ef7bb2d841e3 key 2
 //5eb864cd4c9b47b282c6ec757f5dd0b7 key 1
 
@@ -395,6 +397,7 @@ app.get("/getUserInfo", (req, res) => {
   var userId = req.query.uid;
   Users.getUserById(userId)
     .then((response) => {
+      console.log(response)
       res.status(200).send(response);
     })
     .catch((err) => {
