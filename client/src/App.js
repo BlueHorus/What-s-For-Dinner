@@ -31,7 +31,7 @@ class Main extends React.Component {
     super();
     this.state = {
       id: "landing",
-      user: sampleUser,
+      user: null,
       login: false,
       token: "",
       authenticated: false,
@@ -66,21 +66,24 @@ class Main extends React.Component {
     });
   }
 
-  getUser() {
-    axios
-      .get("/getUserInfo", {
-        headers: {
-          Authorization: this.state.token,
-        },
-      })
-      .then((data) => {
-        this.setInitialData(data.data);
-      });
-  }
+  // getUser() {
+  //   axios
+  //     .get("/getUserInfo", {
+  //       headers: {
+  //         Authorization: this.state.token,
+  //       },
+  //     })
+  //     .then((data) => {
+  //       let config = {
+  //         method: 'get',
+  //         url:
+  //       }
+  //     });
+  // }
 
   setInitialData(obj) {
     this.setState({
-      user: this.state.user,
+      user: obj,
     });
   }
 
@@ -97,8 +100,9 @@ class Main extends React.Component {
       url: "/updateFavorites",
       data: {
         recipeId: recipeId,
-        //  uid: this.state.user.uid,
-        token: this.state.token,
+      },
+      headers: {
+        Authorization: this.state.token,
       },
     };
 
@@ -110,23 +114,21 @@ class Main extends React.Component {
       let Id = recipeId.toString();
       switch (event.target.id) {
         case 'upvote-button':
-        axios(config).then((result) => {
-          let newFavRecipes = this.state.recipes;
-          newFavRecipes.push(recipeId);
-          this.setState({
-            user: {
-              // uid: this.state.uid,
-              //need to update this funciton
-              userName: this.state.userName,
-              profilePic: this.state.profilePic,
-              ingredients: this.state.ingredients,
-              notes: this.state.notes,
-              diet: this.state.diet,
-              intolerances: this.state.intolerances,
-              favRecipes: newFavFecipes,
-            },
-          }).catch((err) => console.log(err));
-        });
+          (() => {
+            let config = {
+              method: "put",
+              url: "/updateUpvote",
+              data: {
+                recipeId: Id
+              },
+              headers: {
+                Authorization: this.state.token
+              }
+            }
+            axios(config)
+          })();
+          break;
+
       break;
       case "downvote-button":
         (() => {
@@ -135,6 +137,9 @@ class Main extends React.Component {
             url: "/updateDownvote",
             data: {
               recipeId: Id
+            },
+            headers: {
+              Authorization: this.state.token
             }
           }
           axios(config)
@@ -188,24 +193,13 @@ class Main extends React.Component {
           url: "/addToFavorites",
           data: {
             recipeId: recipeId,
-            uid: this.state.user.uid,
           },
+          headers: {
+            Authorization: this.state.token,
+          }
         };
         axios(config).then((result) => {
-          let newFavRecipes = this.state.user.favRecipes;
-          newFavRecipes.push(recipeId);
-          this.setState({
-            user: {
-              uid: this.state.uid,
-              userName: this.state.userName,
-              profilePic: this.state.profilePic,
-              ingredients: this.state.ingredients,
-              notes: this.state.notes,
-              diet: this.state.diet,
-              intolerances: this.state.intolerances,
-              favRecipes: newFavRecipes,
-            },
-          })
+          console.log('still needs to be figured out')
         })
         .catch((err) => console.log(err));;
        })()
@@ -216,22 +210,10 @@ class Main extends React.Component {
             url: "/removeFromFavorites",
             data: {
               recipeId: recipeId,
-              uid: this.state.user.uid,
+              token: this.state.token,
             },
           };
           axios(config).then((result) => {
-            this.setState({
-              user: {
-                uid: this.state.uid,
-                userName: this.state.userName,
-                profilePic: this.state.profilePic,
-                ingredients: this.state.ingredients,
-                notes: this.state.notes,
-                diet: this.state.diet,
-                intolerances: this.state.intolerances,
-                favRecipes: this.state.favRecipes,
-              },
-            })
           })
           .catch((err) => console.log(err));;
          })()
@@ -347,30 +329,6 @@ class Main extends React.Component {
         break;
     }
   }
-
-  // call this function to validate user request before going to "my recipt/ my incredient"
-  //need to comeback to test this function with funcitonal api end points
-  getAuthentication(func) {
-    if (this.state.uid === "") {
-      console.log("Please Sign in first");
-    } else {
-      axios
-        .get("/authenticate", {
-          headers: {
-            Authorization: this.state.token + " " + this.state.uid,
-          },
-        })
-        .then((response) => {
-          // response data is incorrect'
-          response.data === "Successfully authenticated user!"
-            ? this.setState({ authenticated: true })
-            : this.setState({ authenticated: false });
-        })
-        .then(func)
-        .catch((err) => console.log(err.message));
-    }
-  }
-
 
 
   render() {
