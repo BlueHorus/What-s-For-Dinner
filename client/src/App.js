@@ -261,7 +261,6 @@ class Main extends React.Component {
     };
     switch (event.target.className) {
       case 'add-note':
-        console.log('new note is:$$$$$$$$$', note.value)
         config.data.note = this.state.user.notes.concat(', ', note.value);
         axios(config)
           .then( () => {this.getUser()})
@@ -270,7 +269,6 @@ class Main extends React.Component {
 
       case 'remove-notes':
         //remove from list
-        console.log('remove note is note is:$$$$$$$$$', note.value)
         config.data.note = '';
         axios(config)
           .then( () => {this.getUser()})
