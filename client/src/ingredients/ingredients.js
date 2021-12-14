@@ -28,47 +28,30 @@ class Ingredients extends React.Component {
       myIngredients: []
     };
 
-    this.addNote = this.addNote.bind(this);
     this.setNote = this.setNote.bind(this);
-    // this.addIngredient = this.addIngredient.bind(this);
     this.setIngredient = this.setIngredient.bind(this);
-    this.removeIngredient = this.removeIngredient.bind(this)
   }
 
 
-  addNote(e) {
-    e.preventDefault();
-    console.log('clicked, ', this.state.note)
-  }
 
   setNote(e) {
     e.preventDefault();
     this.setState({note: e.target.value})
   }
 
-  // addIngredient(e) {
-  //   e.preventDefault();
-  //   console.log('clicked, ', this.state.ingredient);
-  //   axios.get("/updateIngredients", this.state.ingredient)
-  //     .then(console.log('ing added'))
-  // }
 
   setIngredient(e) {
     e.preventDefault();
     this.setState({ingredient: e.target.value})
   }
 
-  removeIngredient(e) {
-    e.preventDefault();
-    console.log('removing ', e.target.id)
-  }
 
   render() {
     return (
       <div>
       {/* <img src="./images/fridge.svg" id="fridge" /> */}
     <div className="user-ingredients">
-      <form onSubmit={this.addNote} className="user-notes">
+      <form onSubmit={this.props.handleNote} className="add-note" name={this.state.note}>
         <label>
           Add note:
           <br/>
@@ -90,7 +73,8 @@ class Ingredients extends React.Component {
 
       <div className="saved-notes">
          My notes: <br/>
-         {this.props.user.notes}
+         {this.props.user.notes} <br/>
+         <button className="remove-notes" name="notes" onClick={this.props.handleNote}>{String.fromCodePoint(0x2715)}</button>
       </div>
 
 

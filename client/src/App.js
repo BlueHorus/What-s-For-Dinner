@@ -34,6 +34,7 @@ class Main extends React.Component {
     this.getStatus = this.getStatus.bind(this);
     this.handleIngredient = this.handleIngredient.bind(this);
     this.getUser = this.getUser.bind(this);
+    this.handleNote = this.handleNote.bind(this);
   }
 
   componentDidMount() {
@@ -217,7 +218,6 @@ class Main extends React.Component {
 
 
   handleIngredient(event) {
-    // debugger;
     event.preventDefault();
     const ingredient = event.target.name;
     let config = {
@@ -237,7 +237,6 @@ class Main extends React.Component {
       break;
 
       case 'remove-ing-button':
-        //remove from list
         config.data.ingredients = this.state.user.ingredients.replace(ingredient, '');
         config.data.ingredients = config.data.ingredients.replace(/,{2,}/, ',')
         config.data.ingredients = config.data.ingredients.replace(/^,/, '')
@@ -246,6 +245,37 @@ class Main extends React.Component {
         axios(config)
           .then( () => {this.getUser()})
           .catch(err => console.log(err))
+    }
+  }
+
+  handleNote(event) {
+    event.preventDefault();
+    const note = event.target.name;
+    let config = {
+      method: 'put',
+      url: '/updateNote',
+      data: {
+        uid: this.state.user.uid,
+        note: this.state.user.notes
+      }
+    };
+    switch (event.target.className) {
+      case 'add-note':
+        console.log('new note is:$$$$$$$$$', note.value)
+        config.data.note = this.state.user.notes.concat(', ', note.value);
+        axios(config)
+          .then( () => {this.getUser()})
+          .catch(err => console.log(err))
+      break;
+
+      case 'remove-notes':
+        //remove from list
+        console.log('remove note is note is:$$$$$$$$$', note.value)
+        config.data.note = '';
+        axios(config)
+          .then( () => {this.getUser()})
+          .catch(err => console.log(err));
+        break;
     }
   }
 
@@ -335,7 +365,8 @@ class Main extends React.Component {
           )}
           {this.state.id === "my-ingredients" ? (
                <Ingredients user={this.state.user}
-               handleIngredient={this.handleIngredient}/>
+               handleIngredient={this.handleIngredient}
+               handleNote={this.handleNote}/>
           ) : (
             ""
           )}
