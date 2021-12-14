@@ -300,7 +300,8 @@ class Main extends React.Component {
         <React.Fragment>
           <CssBaseline />
           <Container maxWidth='lg'>
-            <Box sx={{ bgcolor: 'white', minHeight: '100vh', height: '100%', width: '100%', marginTop: '10px'}}>
+            <Box sx={{ bgcolor: 'white', minHeight: '100vh', height: '100%', width: '100%', marginTop: '10px', alignItems: 'center',
+              display: 'flex', flexDirection: 'column'}}>
           {this.state.id === "logo" ? (
             <Featured
               handleButtonPress={this.handleButtonPress}
