@@ -4,6 +4,7 @@ import defaultPic from './shared/SVGS/profileIcon.svg';
 import EditProfile from './EditProfile.js';
 import { app } from "../../firebase_config.js";
 import { getAuth, onAuthStateChanged, updateCurrentUser, reauthenticateWithCredential, updatePassword, EmailAuthProvider } from "firebase/auth";
+// import Grid from '@mui/material/Grid';
 
 class MyProfile extends React.Component {
   constructor(props) {
@@ -51,8 +52,8 @@ class MyProfile extends React.Component {
       userInfo: info,
       // selectedFile: userInfo.profilePic ? userInfo.profilePic : defaultPic,
       selectedFile: defaultPic,
-      diet: userInfo.diet,
-      intolerances: userInfo.intolerances.split(', '),
+      diet: userInfo.diet ? userInfo.diet : 'No diet selected',
+      intolerances: userInfo.intolerances ? userInfo.intolerances.split(', ') : [],
     })
   }
 
@@ -180,10 +181,12 @@ class MyProfile extends React.Component {
 
     const intoleranceList = ['dairy', 'egg', 'gluten', 'grain', 'peanut', 'seafood', 'sesame', 'shellfish', 'soy', 'sulfite', 'tree nut', 'wheat'];
     const dietsList = ['gluten free', 'ketogenic', 'vegetarian', 'lacto-vegetarian', 'obo-vegetarian', 'vegan', 'pescetarian', 'paleo', 'primal', 'whole30'];
+
+
     return (
       <div className="profile">
         <div className="welcome-banner">Welcome Back, <b>{userInfo.userName}!</b></div>
-        <div className="profile-left">
+        <div className="profile-third">
           <div className="profile-pic-block">
             <img className="profile-pic" src={this.state.selectedFile} alt="profile-picture" />
             <button className="button-change-pic" onClick={this.changeProfilePic}>x</button>
@@ -234,7 +237,7 @@ class MyProfile extends React.Component {
 
         </div>
 
-        <div className="profile-right">
+        <div className="diet-third">
           {this.state.dietChanged ? <div style={{color: "green"}}><b>Successfully saved new diet!</b></div> : null}
           <br />
           <div className="diet">
@@ -254,7 +257,9 @@ class MyProfile extends React.Component {
           </label>
             <input type="submit" value="Confirm" />
           </form>
+        </div>
 
+        <div className="intolerance-third">
           <div className="intolerance-list">
             My Current Intolerances:
             {intolerances.map(food => {
@@ -268,8 +273,7 @@ class MyProfile extends React.Component {
           </div>
 
           <form className="intolerance-form" onSubmit={this.handleSubmit}>
-            <label>
-              Enter any food intolerances below
+            Enter any food intolerances below
             <br />
             <select value={value} onChange={this.handleChange}>
               <option default> - </option>
@@ -277,7 +281,6 @@ class MyProfile extends React.Component {
                 return <option value={intolerance}>{intolerance}</option>
               })}
             </select>
-            </label>
             <input type="submit" value="Add" />
           </form>
 
