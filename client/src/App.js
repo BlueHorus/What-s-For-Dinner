@@ -16,6 +16,14 @@ import title from '../../public/images/title.svg'
 import { app } from "../../firebase_config.js";
 import { getAuth, onAuthStateChanged, updateCurrentUser } from "firebase/auth";
 import Reminder from "./auth/reminder.jsx";
+import Button from '@mui/material/Button';
+import FaceIcon from '@mui/icons-material/Face';
+import LocalDiningIcon from '@mui/icons-material/LocalDining';
+import LunchDiningIcon from '@mui/icons-material/LunchDining';
+import SearchIcon from '@mui/icons-material/Search';
+import CssBaseline from '@mui/material/CssBaseline';
+import Box from '@mui/material/Box';
+import Container from '@mui/material/Container';
 
 class Main extends React.Component {
   constructor() {
@@ -103,7 +111,6 @@ class Main extends React.Component {
   }
 
   handleButtonPress(recipeId) {
-    console.log(recipeId);
     let id = recipeId.toString();
     switch (event.target.className) {
       case 'upvote-button':
@@ -174,6 +181,7 @@ class Main extends React.Component {
     const auth = getAuth(app);
     onAuthStateChanged(auth, (user) => {
       if (user) {
+        console.log(user);
         this.setState({ uid: user.uid });
         this.setState({ login: true });
         auth.currentUser
@@ -262,25 +270,33 @@ class Main extends React.Component {
         <div className="navigation">
           <span id="landing" className="logo" onClick={this.viewSwitch} />
           <img id="title" src={title}/>
-          <div id="find-recipes" onClick={this.viewSwitch}>
-            <img width="30" src={searchIcon}></img>
+          <Button id="find-recipes" startIcon={<SearchIcon />}variant='contained' onClick={this.viewSwitch}>
             Find Recipes
-          </div>
-          <div id="my-ingredients" onClick={this.viewSwitch}>
-            <img width="30" src={ingredientIcon} />
+          </Button>
+          {this.state.login ? <Button variant='contained' id="my-ingredients" startIcon={<LocalDiningIcon />} onClick={this.viewSwitch}>
             My Ingredients
-          </div>
-          <div id="my-recipes" onClick={this.viewSwitch}>
-            <img width="30" src={recipeIcon} />
+          </Button> :
+          <Button id="my-ingredients" startIcon={<LocalDiningIcon />} variant='contained' disabled>
+            My Ingredients
+          </Button>}
+          {this.state.login ? <Button startIcon={<LunchDiningIcon />}  variant='contained' id="my-recipes" onClick={this.viewSwitch}>
             My Recipes
-          </div>
-          <div id="login-signup" onClick={this.viewSwitch}>
-            <img width="30" src={profileIcon} />
+          </Button> :
+          <Button startIcon={<LunchDiningIcon />} variant='contained' id="my-recipes" disabled>
+            My Recipes
+          </Button>}
+          {this.state.login ? <Button id="profile" onClick={this.viewSwitch} startIcon={<FaceIcon />} >
             Profile
-          </div>
+          </Button> :
+          <Button startIcon={<FaceIcon />} variant='contained' id="profile" disabled>
+            Profile
+          </Button>}
           <Auth status={this.getStatus} login={this.state.login} />
         </div>
-        <div className="content">
+        <React.Fragment>
+          <CssBaseline />
+          <Container maxWidth='sm'>
+            <Box sx={{ bgcolor: 'white', height: '100vh', width: '60vh'}}>
           {this.state.id === "logo" ? (
             <Featured
               handleButtonPress={this.handleButtonPress}
@@ -316,13 +332,15 @@ class Main extends React.Component {
             <MyProfile
               userInfo={this.state.user}
               handleButtonPress={this.handleButtonPress}
+              getStatus={this.getStatus}
             />
             : ""
           }
-        </div>
+          </Box>
+          </Container>
+        </React.Fragment>
 
-        {/* {this.state.login === false ? <Reminder /> : ""} */}
-      </div>
+        </div>
     );
   }
 }
