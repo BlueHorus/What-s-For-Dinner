@@ -31,9 +31,6 @@ class Main extends React.Component {
     this.state = {
       id: "landing",
       user: sampleUser,
-      intolerances: "",
-      diet: "",
-      userInfo: {},
       uid: "",
       login: false,
       token: "",
@@ -43,6 +40,9 @@ class Main extends React.Component {
     this.handleButtonPress = this.handleButtonPress.bind(this);
     this.setInitialData = this.setInitialData.bind(this);
     this.getStatus = this.getStatus.bind(this);
+    this.handleIngredient = this.handleIngredient.bind(this);
+    this.getUser = this.getUser.bind(this);
+    this.handleNote = this.handleNote.bind(this);
   }
 
   componentDidMount() {
@@ -51,7 +51,7 @@ class Main extends React.Component {
       this.getAuthentication(() => {
         if (this.state.authenticated === true) {
           axios
-            .get("/getUsersInfo")
+            .get("/getUserInfo")
             .then((data) => {
               this.setInitialData(data);
             })
@@ -72,9 +72,20 @@ class Main extends React.Component {
     //   });
   }
 
+  getUser() {
+    axios('/getUserInfo', {
+      params: {
+        'uid': this.state.user.uid
+      }
+    })
+      .then((data) => {
+        this.setInitialData(data.data);
+      })
+  }
+
   setInitialData(obj) {
     this.setState({
-      userInfo: obj,
+      user: obj,
     });
   }
 
@@ -195,7 +206,7 @@ class Main extends React.Component {
           });
       } else {
         this.setState({ login: false });
-        console.log("Not sign in");
+        // console.log("Not sign in");
       }
     });
   }
@@ -215,26 +226,63 @@ class Main extends React.Component {
   }
 
 
-  handleIngredient(ingredient) {
+  handleIngredient(event) {
+    event.preventDefault();
+    const ingredient = event.target.name;
     let config = {
       method: 'put',
       url: '/updateIngredients',
       data: {
-        ingredient: ingredient,
-        uid: this.state.user.uid
+        uid: this.state.user.uid,
+        ingredients: this.state.user.ingredients
       }
-    }
+    };
     switch (event.target.className) {
-      case 'add-ingredient': (
-        //add to list
-        console.log('add ing'),
+      case 'add-ingredient':
+        config.data.ingredients = this.state.user.ingredients.concat(',', ingredient);
         axios(config)
-      );
+          .then( () => {this.getUser()})
+          .catch(err => console.log(err))
       break;
-      case 'delete-ingredient': (
+
+      case 'remove-ing-button':
+        config.data.ingredients = this.state.user.ingredients.replace(ingredient, '');
+        config.data.ingredients = config.data.ingredients.replace(/,{2,}/, ',')
+        config.data.ingredients = config.data.ingredients.replace(/^,/, '')
+        config.data.ingredients = config.data.ingredients.replace(/,$/, '')
+        console.log('newlist: ', config.data.ingredients)
+        axios(config)
+          .then( () => {this.getUser()})
+          .catch(err => console.log(err))
+    }
+  }
+
+  handleNote(event) {
+    event.preventDefault();
+    const note = event.target.name;
+    let config = {
+      method: 'put',
+      url: '/updateNote',
+      data: {
+        uid: this.state.user.uid,
+        note: this.state.user.notes
+      }
+    };
+    switch (event.target.className) {
+      case 'add-note':
+        config.data.note = this.state.user.notes.concat(', ', note.value);
+        axios(config)
+          .then( () => {this.getUser()})
+          .catch(err => console.log(err))
+      break;
+
+      case 'remove-notes':
         //remove from list
-        console.log('remove ing')
-      )
+        config.data.note = '';
+        axios(config)
+          .then( () => {this.getUser()})
+          .catch(err => console.log(err));
+        break;
     }
   }
 
@@ -319,7 +367,9 @@ class Main extends React.Component {
             ""
           )}
           {this.state.id === "my-ingredients" ? (
-               <Ingredients user={this.state.user}/>
+               <Ingredients user={this.state.user}
+               handleIngredient={this.handleIngredient}
+               handleNote={this.handleNote}/>
           ) : (
             ""
           )}
