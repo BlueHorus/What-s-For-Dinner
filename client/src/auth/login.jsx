@@ -174,9 +174,9 @@ class Auth extends React.Component {
               </form>
               <div id='login-container'>
                 Already have an account?{" "}
-                <u className="login" onClick={this.click}>
+                <Button id="login" onClick={this.click}>
                   Log In
-                </u>
+                </Button>
               </div>
             </div>
           </div>
@@ -217,9 +217,9 @@ class Auth extends React.Component {
               <span>Forgot?</span>
               <div id='signup-container'>
                 Don't have an account?{" "}
-                <u className="signup" onClick={this.click}>
+                <Button id="signup" onClick={this.click}>
                   Sign Up
-                </u>
+                </Button>
               </div>
             </div>
           </div>
