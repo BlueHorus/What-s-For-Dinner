@@ -344,7 +344,7 @@ class Main extends React.Component {
         <React.Fragment>
           <CssBaseline />
           <Container maxWidth='sm'>
-            <Box sx={{ bgcolor: 'white', height: '100vh', width: '60vh'}}>
+            <Box sx={{ bgcolor: 'white', height: '100vh', width: '100%'}}>
           {this.state.id === "logo" ? (
             <Featured
               handleButtonPress={this.handleButtonPress}
