@@ -2,6 +2,8 @@ import React from "react";
 import { app } from "../../../firebase_config.js";
 import axios from "axios";
 import logo from "../../../public/images/BlueOceanLogo.svg";
+import Button from "@mui/material/Button";
+
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -16,6 +18,7 @@ import {
   signInWithEmailLink,
   sendEmailVerification,
 } from "firebase/auth";
+import { LocalConvenienceStoreOutlined } from "@mui/icons-material";
 
 class Auth extends React.Component {
   constructor() {
@@ -27,7 +30,7 @@ class Auth extends React.Component {
       create: false,
       signin: false,
       click: false,
-      uid: "",
+      token: "",
       url: "",
     };
     this.click = this.click.bind(this);
@@ -41,14 +44,14 @@ class Auth extends React.Component {
 
   //logic to switch to different forms
   click(e) {
-    if (e.target.className === "login") {
+    if (e.target.id === "login") {
       this.setState({
         click: true,
         signin: true,
         create: false,
       });
     }
-    if (e.target.className === "signup") {
+    if (e.target.id === "signup") {
       this.setState({
         click: true,
         create: true,
@@ -64,7 +67,6 @@ class Auth extends React.Component {
   //use to verify email
   verifyEmail() {
     const auth = getAuth(app);
-    console.log(auth.currentUser);
     const actionCodeSetting = {
       url: "http://localhost:3000",
       handleCodeInApp: true,
@@ -92,19 +94,26 @@ class Auth extends React.Component {
         this.state.password
       )
         .then((info) => {
-          this.setState({ uid: info.user.uid });
-          console.log(this.state.uid);
+          this.setState({ token: info.user.accessToken });
 
-          // axios.post("/createUser", {
-          //   uid: this.state.uid,
-          //   username: this.state.username,
-          //   url: this.state.url,
-          // });
+          axios.post(
+            "/createUser",
+
+            {
+              username: this.state.username,
+              url: this.state.url,
+            },
+            {
+              headers: {
+                Authorization: this.state.token,
+              },
+            }
+          );
+        })
+        .then(() => {
           alert("Thanks you! ");
           e.target.reset();
           this.setState({ click: false });
-        })
-        .then(() => {
           this.verifyEmail();
         })
         .catch((err) => {
@@ -120,7 +129,6 @@ class Auth extends React.Component {
     const auth = getAuth(app);
     signInWithEmailAndPassword(auth, this.state.email, this.state.password)
       .then((user) => {
-        console.log(user.user.emailVerified);
         if (user.user.emailVerified === false) {
           alert("Please verify your email first");
           this.signout();
@@ -174,7 +182,8 @@ class Auth extends React.Component {
         return (
           <div id="modal" className="modal">
             <div className="modal-content">
-              <button
+              <Button
+                variant="contained"
                 id="close"
                 onClick={() => {
                   document.getElementById("modal").style.display = "none";
@@ -184,7 +193,7 @@ class Auth extends React.Component {
                 }}
               >
                 X
-              </button>
+              </Button>
               <img src={logo} className="logo" id="modal-logo" />
               <form
                 onSubmit={
@@ -215,13 +224,15 @@ class Auth extends React.Component {
                   }}
                   placeholder="Password"
                 />
-                <button type="submit">Create</button>
+                <Button id="submit-button" variant="contained" type="submit">
+                  Create
+                </Button>
               </form>
               <div id="login-container">
                 Already have an account?{" "}
-                <u className="login" onClick={this.click}>
+                <Button id="login" onClick={this.click}>
                   Log In
-                </u>
+                </Button>
               </div>
               <div>
                 <img src="/images/google.png" onClick={this.signinwihgoogle} />
@@ -233,7 +244,8 @@ class Auth extends React.Component {
         return (
           <div id="modal" className="modal">
             <div className="modal-content">
-              <button
+              <Button
+                variant="contained"
                 id="close"
                 onClick={() => {
                   document.getElementById("modal").style.display = "none";
@@ -243,7 +255,7 @@ class Auth extends React.Component {
                 }}
               >
                 X
-              </button>
+              </Button>
               <img src={logo} className="logo" id="modal-logo" />
               <form
                 onSubmit={
@@ -262,16 +274,18 @@ class Auth extends React.Component {
                   }}
                   placeholder="Password"
                 />
-                <button type="submit">Sign In</button>
+                <Button id="submit-button" variant="contained" type="submit">
+                  Sign In
+                </Button>
               </form>
 
               <span> </span>
               <span>Forgot?</span>
               <div id="signup-container">
                 Don't have an account?{" "}
-                <u className="signup" onClick={this.click}>
+                <Button id="signup" onClick={this.click}>
                   Sign Up
-                </u>
+                </Button>
               </div>
               <div>
                 <img src="/images/google.png" onClick={this.signinwihgoogle} />
@@ -288,17 +302,17 @@ class Auth extends React.Component {
       <div>
         {this.props.login === false ? (
           <div id="login-signup">
-            <button className="login" onClick={this.click}>
+            <Button variant="contained" id="login" onClick={this.click}>
               Log In
-            </button>
-            <button className="signup" onClick={this.click}>
+            </Button>
+            <Button variant="contained" id="signup" onClick={this.click}>
               Sign Up
-            </button>
+            </Button>
           </div>
         ) : (
-          <button id="sign-out" onClick={this.signout}>
+          <Button variant="contained" id="sign-out" onClick={this.signout}>
             Sign Out
-          </button>
+          </Button>
         )}
         {this.renderModal()}
       </div>
