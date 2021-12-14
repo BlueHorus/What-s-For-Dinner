@@ -52,7 +52,7 @@ class Main extends React.Component {
       this.getAuthentication(() => {
         if (this.state.authenticated === true) {
           axios
-            .get("/getUsersInfo")
+            .get("/getUserInfo")
             .then((data) => {
               this.setInitialData(data);
             })
@@ -63,14 +63,14 @@ class Main extends React.Component {
       });
     });
 
-    // axios
-    //   .get("/getUsersInfo")
-    //   .then((data) => {
-    //     this.setInitialData(data);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
+    axios
+      .get("/getUserInfo")
+      .then((data) => {
+        this.setInitialData(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   setInitialData(obj) {
@@ -84,44 +84,17 @@ class Main extends React.Component {
     this.setState({ id: value });
   }
 
-  addFavorite(recipeId) {
-    let config = {
-      method: "put",
-      url: "/updateFavorites",
-      data: {
-        recipeId: recipeId,
-        uid: this.state.user.uid,
-      },
-    };
-    axios(config).then((result) => {
-      let newFavRecipes = this.state.recipes;
-      newFavRecipes.push(recipeId);
-      this.setState({
-        user: {
-          uid: this.state.uid,
-          userName: this.state.userName,
-          profilePic: this.state.profilePic,
-          ingredients: this.state.ingredients,
-          notes: this.state.notes,
-          diet: this.state.diet,
-          intolerances: this.state.intolerances,
-          favRecipes: newFavFecipes,
-        },
-      }).catch((err) => console.log(err));
-    });
-  }
-
   handleButtonPress(recipeId) {
-    let id = recipeId.toString();
-    switch (event.target.className) {
+    let Id = recipeId.toString();
+    console.log(event.target.id)
+    switch (event.target.id) {
       case 'upvote-button':
-        console.log('test upvote');
         (() => {
           let config = {
             method: "put",
             url: "/updateUpvote",
             data: {
-              recipeId: id
+              recipeId: Id
             }
           }
           axios(config)
@@ -129,12 +102,11 @@ class Main extends React.Component {
         break;
       case 'downvote-button':
         (() => {
-          console.log('test downvote')
           let config = {
             method: "put",
             url: "/updateDownvote",
             data: {
-              recipeId: id
+              recipeId: Id
             }
           }
           axios(config)
@@ -142,7 +114,6 @@ class Main extends React.Component {
         break;
       case 'update-diet':
         (() => {
-          console.log('test updating diet: ', recipeId);
           let config = {
             method: 'put',
             url: '/updateDiet',
@@ -153,7 +124,6 @@ class Main extends React.Component {
         break;
       case 'update-intolerances':
         (() => {
-          console.log('test updating intolerances: ', recipeId);
           let config = {
             method: 'put',
             url: '/updateIntolerances',
@@ -164,7 +134,6 @@ class Main extends React.Component {
         break;
       case 'url-form':
         (() => {
-          console.log('test updating profile pic: ', recipeId);
           let config = {
             method: 'put',
             url: '/updateProfilePic',
@@ -173,6 +142,64 @@ class Main extends React.Component {
           axios(config)
         })();
         break;
+      case 'favorite-button':
+        console.log(this.state.user.favRecipes);
+      if (this.state.user.favRecipes.indexOf(recipeId) === -1) {
+        (() => {
+        let config = {
+          method: "post",
+          url: "/addToFavorites",
+          data: {
+            recipeId: recipeId,
+            uid: this.state.user.uid,
+          },
+        };
+        axios(config).then((result) => {
+          let newFavRecipes = this.state.user.favRecipes;
+          newFavRecipes.push(recipeId);
+          this.setState({
+            user: {
+              uid: this.state.uid,
+              userName: this.state.userName,
+              profilePic: this.state.profilePic,
+              ingredients: this.state.ingredients,
+              notes: this.state.notes,
+              diet: this.state.diet,
+              intolerances: this.state.intolerances,
+              favRecipes: newFavRecipes,
+            },
+          })
+        })
+        .catch((err) => console.log(err));;
+       })()
+      } else {
+        (() => {
+          let config = {
+            method: "delete",
+            url: "/removeFromFavorites",
+            data: {
+              recipeId: recipeId,
+              uid: this.state.user.uid,
+            },
+          };
+          axios(config).then((result) => {
+            this.setState({
+              user: {
+                uid: this.state.uid,
+                userName: this.state.userName,
+                profilePic: this.state.profilePic,
+                ingredients: this.state.ingredients,
+                notes: this.state.notes,
+                diet: this.state.diet,
+                intolerances: this.state.intolerances,
+                favRecipes: this.state.favRecipes,
+              },
+            })
+          })
+          .catch((err) => console.log(err));;
+         })()
+      }
+       break;
         default: console.log('test default');
     }
   }
@@ -332,7 +359,7 @@ class Main extends React.Component {
           ) : (
             ""
           )}
-          {this.state.id === "login-signup" ?
+          {this.state.id === "profile" ?
             <MyProfile
               userInfo={this.state.user}
               handleButtonPress={this.handleButtonPress}

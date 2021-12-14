@@ -392,7 +392,7 @@ app.get("/getUserInfo", (req, res) => {
   // request should include uid
   // queries database for user object
   // send user object back to front-end
-  var userId = req.body.uid;
+  var userId = req.query.uid;
   Users.getUserById(userId)
     .then((response) => {
       res.status(200).send(response);
