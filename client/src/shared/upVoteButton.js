@@ -1,6 +1,7 @@
 import React from 'react'
 import IconButton from '@mui/material/IconButton';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
+import Tooltip from '@mui/material/Tooltip';
 
 const UpVoteButton = (props) => {
   if (props.user === null) {
@@ -11,11 +12,13 @@ const UpVoteButton = (props) => {
       )
   }
   return (
-    <IconButton  id='upvote-button' size='large' onClick={() => {
-      props.handleButtonPress(props.recipe.id)
-    }}>
-      <ThumbUpIcon></ThumbUpIcon>
-    </IconButton>
+    <Tooltip title='Upvote'>
+      <IconButton  id='upvote-button' size='large' onClick={() => {
+        props.handleButtonPress(props.recipe.id)
+      }}>
+        <ThumbUpIcon></ThumbUpIcon>
+      </IconButton>
+    </Tooltip>
     )
 
 }
