@@ -27,7 +27,7 @@ class Landing extends React.Component {
   return (
     <>
     <PanGraphic />
-    <div>
+    <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
         {this.state.featuredRecipes.map((recipe) => {
             return  <Recipe handleButtonPress={this.props.handleButtonPress} user={this.props.user} recipe={recipe}/>
         })}

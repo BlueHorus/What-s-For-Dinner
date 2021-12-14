@@ -72,6 +72,7 @@ function Recipe (props) {
         <Typography variant='body2' color='black'>
         {recipe.summary.replace(/<[^>]+>/g, '').slice(0,240)}
         </Typography>
+        <Typography className="recipelink"><a href={recipe.spoonacularSourceUrl}>Full recipe</a></Typography>
         <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
           <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly'}}>

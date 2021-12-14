@@ -120,29 +120,30 @@ var parseResponse = function (response) {
 };
 
 app.get("/getRecipesFromIngredients", (req, res) => {
+  console.log(req.query);
   // request should include diet, dietary restrictions, and ingredients
   // send request to spoonacular
   // parse response into example object
   // send example object back to the front-end
   // api url: https://api.spoonacular.com/recipes/complexSearch?fillIngredients=true&sort=max-used-ingredients&addRecipeNutrition=true&apiKey=5eb864cd4c9b47b282c6ec757f5dd0b7&sortDirection=desc&includeIngredients=garlic,tomato&diet=vegan
-  if (req.body.ingredients === undefined) {
+  if (req.query.ingredients === undefined) {
     var ingredientsParam = null;
   } else {
-    var ingredients = req.body.ingredients;
+    var ingredients = req.query.ingredients;
     var ingredientsParam = `&includeIngredients=${ingredients}`;
   }
 
-  if (req.body.intolerances === undefined) {
+  if (req.query.intolerances === undefined) {
     var intolerancesParam = null;
   } else {
-    var intolerances = req.body.intolerances;
+    var intolerances = req.query.intolerances;
     var intolerancesParam = `&intolerances=${intolerances}`;
   }
 
-  if (req.body.diet === undefined) {
+  if (req.query.diet === undefined) {
     var dietParam = null;
   } else {
-    var diet = req.body.diet;
+    var diet = req.query.diet;
     var dietParam = `&diet=${diet}`;
   }
 
@@ -335,7 +336,7 @@ app.get("/getFeaturedRecipes", (req, res) => {
       var recipeIdString = array.toString();
       axios
         .get(
-          `https://api.spoonacular.com/recipes/${recipeIdString}/information?&includeNutrition=true&apiKey=fc0905d03c4742939e7ca4f117940af1&sortDirection=desc`
+          `https://api.spoonacular.com/recipes/${recipeIdString}/information?&includeNutrition=true&apiKey=964fe6a9184d489ea9492f169e7e9fd8&sortDirection=desc`
         )
         .then(({ data }) => {
           var array = [];
@@ -355,7 +356,7 @@ app.get("/getFeaturedRecipes", (req, res) => {
       var queryString = `&ids=${recipeIdString}`;
       axios
         .get(
-          `https://api.spoonacular.com/recipes/informationBulk?includeNutrition=true&apiKey=fc0905d03c4742939e7ca4f117940af1&sortDirection=desc${queryString}`
+          `https://api.spoonacular.com/recipes/informationBulk?includeNutrition=true&apiKey=964fe6a9184d489ea9492f169e7e9fd8&sortDirection=desc${queryString}`
         )
         .then(({ data }) => {
           var object = {

@@ -24,6 +24,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
+import FindRecipes from './findRecipes/findRecipes.js'
 
 class Main extends React.Component {
   constructor() {
@@ -275,27 +276,31 @@ class Main extends React.Component {
           {this.state.login ? <Button variant='contained' id="my-ingredients" startIcon={<LocalDiningIcon />} onClick={this.viewSwitch}>
             My Ingredients
           </Button> :
-          <Button id="my-ingredients" startIcon={<LocalDiningIcon />} variant='contained' disabled>
-            My Ingredients
-          </Button>}
+          <Button variant='contained' id="my-ingredients" startIcon={<LocalDiningIcon />} onClick={() => alert('Please sign up or log in to use this feature')}>
+          My Ingredients
+        </Button>
+         }
           {this.state.login ? <Button startIcon={<LunchDiningIcon />}  variant='contained' id="my-recipes" onClick={this.viewSwitch}>
             My Recipes
           </Button> :
-          <Button startIcon={<LunchDiningIcon />} variant='contained' id="my-recipes" disabled>
-            My Recipes
-          </Button>}
+          <Button startIcon={<LunchDiningIcon />}  variant='contained' id="my-recipes" onClick={() => alert('Please sign up or log in to use this feature')}>
+          My Recipes
+        </Button>
+          }
+
           {this.state.login ? <Button id="profile" onClick={this.viewSwitch} startIcon={<FaceIcon />} >
             Profile
           </Button> :
-          <Button startIcon={<FaceIcon />} variant='contained' id="profile" disabled>
-            Profile
-          </Button>}
+          <Button id="profile" onClick={() => alert('Please sign up or log in to use this feature')} startIcon={<FaceIcon />}>
+          Profile
+        </Button> }
+            }
           <Auth status={this.getStatus} login={this.state.login} />
         </div>
         <React.Fragment>
           <CssBaseline />
-          <Container maxWidth='sm'>
-            <Box sx={{ bgcolor: 'white', height: '100vh', width: '60vh'}}>
+          <Container maxWidth='lg'>
+            <Box sx={{ bgcolor: 'white', minHeight: '100vh', height: '100%', width: '100%', marginTop: '10px'}}>
           {this.state.id === "logo" ? (
             <Featured
               handleButtonPress={this.handleButtonPress}
@@ -313,7 +318,7 @@ class Main extends React.Component {
             ""
           )}
           {this.state.id === "find-recipes" ? (
-            <h1>Find Recipes Placeholder</h1>
+            <FindRecipes user={this.state.user} handleButtonPress={this.handleButtonPress}/>
           ) : (
             ""
           )}
