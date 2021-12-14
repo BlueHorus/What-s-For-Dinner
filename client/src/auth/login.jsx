@@ -17,6 +17,8 @@ import {
   isSignInWithEmailLink,
   signInWithEmailLink,
   sendEmailVerification,
+  sendPasswordResetEmail,
+  reauthenticateWithCredential,
 } from "firebase/auth";
 import { LocalConvenienceStoreOutlined } from "@mui/icons-material";
 
@@ -32,6 +34,7 @@ class Auth extends React.Component {
       click: false,
       token: "",
       url: "",
+      sendPasswordResetEmail,
     };
     this.click = this.click.bind(this);
     this.submit = this.submit.bind(this);
@@ -40,6 +43,7 @@ class Auth extends React.Component {
     this.signout = this.signout.bind(this);
     this.renderModal = this.renderModal.bind(this);
     this.signinwihgoogle = this.signinwihgoogle.bind(this);
+    this.forgetPassword = this.forgetPassword.bind(this);
   }
 
   //logic to switch to different forms
@@ -80,6 +84,22 @@ class Auth extends React.Component {
         console.log(err.message);
       });
   }
+
+  //logic for resetting a password
+  forgetPassword() {
+    let email = window.prompt("Please input you email");
+
+    const auth = getAuth();
+    console.log(auth);
+    sendPasswordResetEmail(auth, email)
+      .then(() => {
+        alert("Password reset email sent");
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  }
+
   //create an user
   //need to test the post request part
   createUser(e) {
@@ -117,7 +137,7 @@ class Auth extends React.Component {
           this.verifyEmail();
         })
         .catch((err) => {
-          alert("Please try again!" + err);
+          alert("Please try again!");
           console.log(err.message);
         });
     }
@@ -280,7 +300,7 @@ class Auth extends React.Component {
               </form>
 
               <span> </span>
-              <span>Forgot?</span>
+              <span onClick={this.forgetPassword}>Forgot?</span>
               <div id="signup-container">
                 Don't have an account?{" "}
                 <Button id="signup" onClick={this.click}>
