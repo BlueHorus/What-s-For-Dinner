@@ -86,7 +86,7 @@ class Main extends React.Component {
 
   setInitialData(obj) {
     this.setState({
-      user: obj,
+      user: this.state.user,
     });
   }
 
@@ -329,6 +329,7 @@ class Main extends React.Component {
           },
         })
         .then((response) => {
+          // response data is incorrect'
           response.data === "successfully authenticated"
             ? this.setState({ authenticated: true })
             : this.setState({ authenticated: false });

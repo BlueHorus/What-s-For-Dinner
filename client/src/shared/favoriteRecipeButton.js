@@ -12,15 +12,15 @@ const FavoriteButton = (props) => {
       </IconButton>
       )
     }
-  if (props.user.favRecipes.indexOf(props.recipe.id) === -1) {
-  return (
-    <Tooltip title="Add to Favorites">
-      <IconButton id='favorite-button' size='large'  onClick={() => props.handleButtonPress(props.recipe.id)}>
-        <StarOutlineIcon id='favorite-button' style={{width: '20px', height: '20px'}} onClick={() => props.handleButtonPress(props.recipe.id)}/>
-      </IconButton>
-    </Tooltip>
-    )
- } else {
+//   if (props.user.favRecipes.indexOf(props.recipe.id) === -1) {
+//   return (
+//     <Tooltip title="Add to Favorites">
+//       <IconButton id='favorite-button' size='large'  onClick={() => props.handleButtonPress(props.recipe.id)}>
+//         <StarOutlineIcon id='favorite-button' style={{width: '20px', height: '20px'}} onClick={() => props.handleButtonPress(props.recipe.id)}/>
+//       </IconButton>
+//     </Tooltip>
+//     )
+//  } else {
    return (
      <Tooltip title="Remove Favorite">
        <IconButton id='favorite-button' size='large'  onClick={() => props.handleButtonPress(props.recipe.id)}>
@@ -30,7 +30,7 @@ const FavoriteButton = (props) => {
    )
  }
 
-}
+
 
 
 
