@@ -391,13 +391,14 @@ app.post("/createUser", (req, res) => {
 });
 
 app.get("/getUserInfo", (req, res) => {
+  console.log("headers", req.headers);
   // request should include uid
   // queries database for user object
   // send user object back to front-end
   var userId = req.query.uid;
   Users.getUserById(userId)
     .then((response) => {
-      console.log(response)
+      console.log(response);
       res.status(200).send(response);
     })
     .catch((err) => {
