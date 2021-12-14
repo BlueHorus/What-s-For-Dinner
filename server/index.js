@@ -9,6 +9,7 @@ const admin = require("./admin.js");
 
 const port = 3000;
 
+//93ee5206be4141f4a761b7f459af4c69 key 3
 //3a15e063e87b46579969ef7bb2d841e3 key 2
 //5eb864cd4c9b47b282c6ec757f5dd0b7 key 1
 
@@ -125,24 +126,24 @@ app.get("/getRecipesFromIngredients", (req, res) => {
   // parse response into example object
   // send example object back to the front-end
   // api url: https://api.spoonacular.com/recipes/complexSearch?fillIngredients=true&sort=max-used-ingredients&addRecipeNutrition=true&apiKey=5eb864cd4c9b47b282c6ec757f5dd0b7&sortDirection=desc&includeIngredients=garlic,tomato&diet=vegan
-  if (req.body.ingredients === undefined) {
+  if (req.query.ingredients === undefined) {
     var ingredientsParam = null;
   } else {
-    var ingredients = req.body.ingredients;
+    var ingredients = req.query.ingredients;
     var ingredientsParam = `&includeIngredients=${ingredients}`;
   }
 
-  if (req.body.intolerances === undefined) {
+  if (req.query.intolerances === undefined) {
     var intolerancesParam = null;
   } else {
-    var intolerances = req.body.intolerances;
+    var intolerances = req.query.intolerances;
     var intolerancesParam = `&intolerances=${intolerances}`;
   }
 
-  if (req.body.diet === undefined) {
+  if (req.query.diet === undefined) {
     var dietParam = null;
   } else {
-    var diet = req.body.diet;
+    var diet = req.query.diet;
     var dietParam = `&diet=${diet}`;
   }
 
