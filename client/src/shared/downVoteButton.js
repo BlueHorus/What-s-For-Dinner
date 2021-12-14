@@ -1,18 +1,22 @@
 import React from 'react'
+import Button from '@mui/material/Button';
+import IconButton from '@mui/material/IconButton';
+import ThumbDownIcon from '@mui/icons-material/ThumbDown';
 
 const DownVoteButton = (props) => {
   if (props.user === null) {
     return (
-      <button className='downvote-button'  disabled>
-      </button>
+      <IconButton id='downvote-button'  disabled>
+        <ThumbDownIcon/>
+      </IconButton>
       )
   } else {
   return (
-    <button id={props.buttonId} className='downvote-button' onClick={() => {
-      document.getElementById(`${props.buttonId}`).disabled = true;
+    <IconButton id='downvote-button' size='large' onClick={() => {
       props.handleButtonPress(props.recipe.id)
     }}>
-    </button>
+      <ThumbDownIcon />
+    </IconButton>
     )
   }
 }

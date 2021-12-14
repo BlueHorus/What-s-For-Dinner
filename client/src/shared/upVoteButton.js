@@ -1,18 +1,21 @@
 import React from 'react'
+import IconButton from '@mui/material/IconButton';
+import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 
 const UpVoteButton = (props) => {
   if (props.user === null) {
     return (
-      <button className='upvote-button'  disabled>
-      </button>
+      <IconButton id='upvote-button'  disabled>
+        <ThumbUpIcon />
+      </IconButton>
       )
   }
   return (
-    <button id={props.buttonId} className='upvote-button' onClick={() => {
-      document.getElementById(`${props.buttonId}`).disabled = true;
+    <IconButton  id='upvote-button' size='large' onClick={() => {
       props.handleButtonPress(props.recipe.id)
     }}>
-    </button>
+      <ThumbUpIcon></ThumbUpIcon>
+    </IconButton>
     )
 
 }

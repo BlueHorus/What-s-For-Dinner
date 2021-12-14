@@ -1,11 +1,4 @@
-.modal {
-  position: fixed;
-  height: 50%;
-  width: 50%;
-  margin-top: 10%;
-  margin-left: 20%;
-  background-color: blanchedalmond;
-}
+
 
 * {
   font-family: "Raleway";
@@ -64,8 +57,8 @@ body {
   width: 700px;
   height: 100%;
   margin-top: 2em;
-  border: solid 2px black;
-  background-color: #e4eaea;
+  border: solid 2px rgb(137, 137, 137);
+  background-color: #ffffff;
 }
 
 .logo {
@@ -89,33 +82,54 @@ body {
   font-style: italic;
 }
 
+#login-signup {
+  display: flex;
+  flex-direction: row;
+  }
+
+#sign-out,
+#login,
+#signup {
+display: flex;
+justify-self: flex-end;
+margin-right: 20px;
+background-color: #e4eaea;
+height: 40px;
+width: 150px;
+align-items: center;
+text-align: center;
+font-size: 15px;
+justify-content: center;
+color: black;
+}
+
 #my-ingredients,
 #my-recipes,
-#login-signup,
+#profile,
 #find-recipes {
   display: flex;
   justify-self: flex-end;
   margin-right: 20px;
   background-color: #e4eaea;
-  border-radius: 15px;
+  /* border-radius: 15px; */
   height: 40px;
-  width: 150px;
+  width: auto;
   align-items: center;
   text-align: center;
   font-size: 15px;
+  color: black;
 }
 
-#my-ingredients img,
-#my-recipes img,
-#login-signup img,
-#find-recipes img {
-  justify-self: flex-start;
-  margin-left: 5px;
+#my-ingredients:disabled,
+#my-recipes:disabled,
+#profile:disabled,
+#find-recipes:disabled {
+  color: grey
 }
 
 #my-ingredients span,
 #my-recipes span,
-#login-signup span,
+#profile span,
 #find-recipes span {
   justify-self: center;
 }
@@ -134,73 +148,28 @@ body {
   margin-right: 2px;
 }
 
-.upvote-button {
-  background-image: url("./images/upVoteButton.svg");
-  width: 40px;
-  height: 40px;
-  background-size: contain;
-  background-repeat: no-repeat;
-  border: 0;
+#upvote-button {
+  height: 50px;
+  width: auto;
+  background-color: rgb(230, 230, 230);
+  color: #4fbaba;
+  margin-bottom: 5px;
 }
 
-.upvote-button:hover {
-  background-image: url("./images/upVoteButtonHover.svg");
+ #downvote-button {
+  height: 50px;
+  width: auto;
+  background-color: rgb(230, 230, 230);
+  color: #4fbaba;
+  margin-bottom: 5px;
 }
 
-.upvote-button:active {
-  background-image: url("./images/upVoteButtonClicked.svg");
-}
-
-.upvote-button:disabled {
-  background-image: url("./images/upVoteButtonDisabled.svg");
-}
-
-.downvote-button:active {
-  background-image: url("./images/downVoteButtonIconClicked.svg");
-}
-
-.downvote-button {
-  background-image: url("./images/downVoteButtonIcon.svg");
-  width: 40px;
-  height: 40px;
-  background-size: contain;
-  background-repeat: no-repeat;
-  border: 0;
-}
-
-.downvote-button:disabled {
-  background-image: url("./images/downVoteButtonIconDisabled.svg");
-}
-
-.downvote-button:hover {
-  background-image: url("./images/downVoteButtonIconHover.svg");
-}
-.downvote-button:active {
-  background-image: url("./images/downVoteButtonIconClicked.svg");
-}
-
-.favorite-button {
-  background-image: url("./images/favoriteButtonIcon.svg");
-  width: 40px;
-  height: 40px;
-  background-size: contain;
-  background-repeat: no-repeat;
-  border: 0;
-}
-.favorite-button-clicked {
-  background-image: url("./images/favoriteButtonIconClicked.svg");
-  width: 40px;
-  height: 40px;
-  background-size: contain;
-  background-repeat: no-repeat;
-  border: 0;
-}
-.favorite-button:hover {
-  background-image: url("./images/favoriteButtonIconHover.svg");
-}
-
-.favorite-button:active {
-  background-image: url("./images/favoriteButtonIconClicked.svg");
+#favorite-button {
+  height: 50px;
+  width: auto;
+  background-color: rgb(230, 230, 230);
+  color: #4fbaba;
+  margin-bottom: 5px;
 }
 
 /* Recipes */
@@ -215,7 +184,7 @@ body {
   border-radius: 25px;
   background-color: white;
   padding: 5px;
-  margin: auto;
+  margin: 10px;
   grid-template-rows: [row1-start] 30px [row1-end];
 }
 
@@ -224,7 +193,7 @@ body {
   font-size: smaller;
 }
 
-.recipecard:hover + .recipeadditions {
+/* .recipecard:hover + .recipeadditions {
   display: flex;
   width: max-content;
   border: solid;
@@ -235,7 +204,7 @@ body {
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 175px;
   color: brown;
-}
+} */
 
 .add-button {
   border-radius: 15px;
@@ -307,6 +276,7 @@ body {
 .opinionbutton {
   display: flex;
   grid-column-start: 4;
+  grid-row-start: 4;
   flex-grow: 2;
   padding: 5px;
 }
@@ -320,7 +290,6 @@ body {
   transform-box: fill-box;
   justify-content: center;
   background: linear-gradient(0deg, rgba(34, 193, 195, 0) 0%, #39d3bd 100%);
-  border-top: solid 2px black;
   flex-wrap: wrap;
   flex-direction: row;
   font-size: 40px;
@@ -466,6 +435,7 @@ body {
 
 .diet {
   margin-bottom: 7%;
+  margin: auto;
 }
 
 .intolerance-list {
@@ -503,23 +473,68 @@ body {
 }
 
 .modal {
-  display: block; /* Hidden by default */
+  display: flex; /* Hidden by default */
   position: fixed; /* Stay in place */
   z-index: 1; /* Sit on top */
+  width: 100%;
+  height: 100%;
   left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
   overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0, 0, 0); /* Fallback color */
-  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
-}
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.4);
+  justify-content: center;
+  }
+
+#modal-logo {
+  justify-self: center;
+  align-self: center;
+  width: 200px;
+  height: auto;
+  }
 
 /* Modal Content/Box */
 .modal-content {
-  background-color: #fefefe;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-wrap: wrap;
+  flex-direction: column;
+  background-color: white;
   margin: 15% auto; /* 15% from the top and centered */
   padding: 20px;
   border: 1px solid #888;
-  width: 80%; /* Could be more or less, depending on screen size */
+  width: 30%; /* Could be more or less, depending on screen size */
+  height: auto;
+  text-align: center;
+}
+
+
+form {
+  width: 50%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+form * {
+  padding: 10px;
+  margin-top: 10px;
+}
+
+.modal #close {
+  align-self: flex-end;
+  width: 3%;
+  height: auto;
+  margin: 10px;
+  background-color: #4fbaba;
+}
+
+#login-container,
+#signup-container {
+  align-self: center;
+}
+
+#submit-button {
+  background-color: #4fbaba;
+  margin: 10px;
 }
