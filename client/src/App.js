@@ -75,6 +75,7 @@ class Main extends React.Component {
 
   getUser() {
     axios('/getUserInfo', {
+      headers: {Authorization: this.state.token},
       params: {
         'uid': this.state.user.uid
       }
@@ -233,6 +234,7 @@ class Main extends React.Component {
     let config = {
       method: 'put',
       url: '/updateIngredients',
+      headers: {Authorization: this.state.token},
       data: {
         uid: this.state.user.uid,
         ingredients: this.state.user.ingredients
@@ -264,6 +266,7 @@ class Main extends React.Component {
     let config = {
       method: 'put',
       url: '/updateNote',
+      headers: {Authorization: this.state.token},
       data: {
         uid: this.state.user.uid,
         note: this.state.user.notes
@@ -271,7 +274,7 @@ class Main extends React.Component {
     };
     switch (event.target.className) {
       case 'add-note':
-        config.data.note = this.state.user.notes.concat(', ', note.value);
+        config.data.note = this.state.user.notes.concat('\n', note.value, '\n');
         axios(config)
           .then( () => {this.getUser()})
           .catch(err => console.log(err))
@@ -374,7 +377,8 @@ class Main extends React.Component {
           {this.state.id === "my-ingredients" ? (
                <Ingredients user={this.state.user}
                handleIngredient={this.handleIngredient}
-               handleNote={this.handleNote}/>
+               handleNote={this.handleNote}
+               token={this.state.token}/>
           ) : (
             ""
           )}

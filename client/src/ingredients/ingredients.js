@@ -48,23 +48,26 @@ class Ingredients extends React.Component {
 
   render() {
     const ingredientsList = (this.props.user.ingredients === '') ? '' : this.props.user.ingredients;
-    const removeBtn = (this.props.user.ingredients === '') ? null : String.fromCodePoint(0x2715)
+    const removeBtn = (this.props.user.ingredients === '') ? ('Add ingredient above') : (ingredientsList.split(',').map(ing => <div className="one-ingredient">
+                                                                                          <li>{ing.trim()}</li>
+                                                                                          <button className="remove-ing-button" name={ing} onClick={this.props.handleIngredient}>{String.fromCodePoint(0x2715)}</button>
+                                                                                          </div>))
     return (
-      <div>
+      <div id="fridge">
         <div className="user-ingredients">
           <form onSubmit={this.props.handleIngredient} className="add-ingredient" name={this.state.ingredient}>
             <label>
-              Add ingredient:
+              Add ingredient: <br />
               <input type="text"  spellCheck="true" value={this.state.ingredient} onChange={this.setIngredient}/>
-            <input type="submit" value={String.fromCodePoint(0x22B9)} />&nbsp;&nbsp;Add
+            <input type="submit" value={String.fromCodePoint(0x22B9)} className="add-ing-button"/>
             </label>
           </form>
 
           <form onSubmit={this.props.handleNote} className="add-note" name={this.state.note}>
             <label>
-              Add note:
+              Add note: <br />
               <input type="text" name="name" spellCheck="true" value={this.state.note} onChange={this.setNote}/>
-            <input type="submit" value={String.fromCodePoint(0x22B9)} className="add-note"/>&nbsp;&nbsp;Add
+            <input type="submit" value={String.fromCodePoint(0x22B9)} className="add-note-button"/>
             </label>
           </form>
 
@@ -74,11 +77,8 @@ class Ingredients extends React.Component {
             <button className="remove-notes" name="notes" onClick={this.props.handleNote}>{String.fromCodePoint(0x2715)}</button>
           </div>
 
-          <ul className="ingredients-list"> My ingredient list:
-            {ingredientsList.split(',').map(ing => <div className="one-ingredient">
-                                                                <li>{ing.trim()}</li>
-                                                                <button className="remove-ing-button" name={ing} onClick={this.props.handleIngredient}>{removeBtn}</button>
-                                                                </div>)}
+          <ul className="ingredients-list"> My ingredient list: <br/>
+            {removeBtn}
           </ul>
         </div>
       </div>

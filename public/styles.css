@@ -314,21 +314,23 @@ color: black;
   Next section: ingredients
   */
 
-#fridge {
-  z-index: -3;
-  width: 700px;
-  height: 700px;
-}
+/* #fridge {
+  width: 100%;
+  justify-content: center;
+} */
 
 .user-ingredients {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
   grid-template-rows: 2fr;
+  justify-items: center;
+  width: 80%;
+  margin: auto
 }
 
 .ingredients-list {
   grid-row-start: 2;
-  grid-column-start: 2;
+  grid-column-start: 1;
 }
 
 .saved-notes {
@@ -337,7 +339,8 @@ color: black;
   background-size: cover;
   background-color: violet;
   padding: 5px;
-  grid-column-start: 3;
+  grid-column-start: 2;
+  grid-row-start: 2
 }
 
 .one-ingredient {
@@ -347,9 +350,33 @@ color: black;
 }
 
 .remove-ing-button {
-  border-radius: 15px;
-  background-color: #4fbaba;
+  border-radius: 50%;
+  border: none;
+  background-color: rgb(230, 230, 230);
+  color: #4fbaba;
 }
+
+.add-note-button {
+  border-radius: 50%;
+  border: none;
+  background-color: rgb(230, 230, 230);
+  color: #4fbaba;
+}
+
+.add-ing-button {
+  border-radius: 50%;
+  border: none;
+  background-color: rgb(230, 230, 230);
+  color: #4fbaba;
+}
+
+.remove-notes {
+  border-radius: 50%;
+  border: none;
+  background-color: rgb(230, 230, 230);
+  color: #4fbaba;
+}
+
 
 /*---------------------------------------------
                   PROFILE PAGE
