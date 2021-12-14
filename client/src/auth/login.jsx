@@ -1,8 +1,8 @@
 import React from "react";
 import { app } from "../../../firebase_config.js";
 import axios from "axios";
-import logo from '../../../public/images/BlueOceanLogo.svg'
-import Button from '@mui/material/Button';
+import logo from "../../../public/images/BlueOceanLogo.svg";
+import Button from "@mui/material/Button";
 
 import {
   getAuth,
@@ -95,8 +95,8 @@ class Auth extends React.Component {
     const auth = getAuth(app);
     signInWithEmailAndPassword(auth, this.state.email, this.state.password)
       .then((user) => {
+        console.log("signin");
         this.props.status(() => {
-          alert("Welcome Back");
           e.target.reset();
           this.setState({ click: false });
         });
@@ -133,14 +133,19 @@ class Auth extends React.Component {
         return (
           <div id="modal" className="modal">
             <div className="modal-content">
-              <Button variant='contained' id='close' onClick={() => {
-                document.getElementById('modal').style.display = 'none';
-                this.setState({
-                  click: false,
-                })
-              }}>
-                X</Button>
-              <img src={logo} className='logo' id='modal-logo' />
+              <Button
+                variant="contained"
+                id="close"
+                onClick={() => {
+                  document.getElementById("modal").style.display = "none";
+                  this.setState({
+                    click: false,
+                  });
+                }}
+              >
+                X
+              </Button>
+              <img src={logo} className="logo" id="modal-logo" />
               <form
                 onSubmit={
                   this.state.create === true ? this.createUser : this.signin
@@ -170,9 +175,11 @@ class Auth extends React.Component {
                   }}
                   placeholder="Password"
                 />
-                <Button id='submit-button' variant='contained' type="submit">Create</Button>
+                <Button id="submit-button" variant="contained" type="submit">
+                  Create
+                </Button>
               </form>
-              <div id='login-container'>
+              <div id="login-container">
                 Already have an account?{" "}
                 <Button id="login" onClick={this.click}>
                   Log In
@@ -183,16 +190,21 @@ class Auth extends React.Component {
         );
       } else {
         return (
-          <div id='modal' className="modal">
+          <div id="modal" className="modal">
             <div className="modal-content">
-            <Button variant='contained' id='close' onClick={() => {
-                document.getElementById('modal').style.display = 'none';
-                this.setState({
-                  click: false,
-                })
-              }}>
-                X</Button>
-            <img src={logo} className='logo' id='modal-logo' />
+              <Button
+                variant="contained"
+                id="close"
+                onClick={() => {
+                  document.getElementById("modal").style.display = "none";
+                  this.setState({
+                    click: false,
+                  });
+                }}
+              >
+                X
+              </Button>
+              <img src={logo} className="logo" id="modal-logo" />
               <form
                 onSubmit={
                   this.state.create === true ? this.createUser : this.signin
@@ -210,12 +222,14 @@ class Auth extends React.Component {
                   }}
                   placeholder="Password"
                 />
-                <Button id='submit-button' variant='contained' type="submit">Sign In</Button>
+                <Button id="submit-button" variant="contained" type="submit">
+                  Sign In
+                </Button>
               </form>
 
               <span> </span>
               <span>Forgot?</span>
-              <div id='signup-container'>
+              <div id="signup-container">
                 Don't have an account?{" "}
                 <Button id="signup" onClick={this.click}>
                   Sign Up
@@ -230,18 +244,20 @@ class Auth extends React.Component {
 
   render() {
     return (
-      <div >
+      <div>
         {this.props.login === false ? (
-          <div id='login-signup'>
-            <Button variant='contained' id="login" onClick={this.click}>
+          <div id="login-signup">
+            <Button variant="contained" id="login" onClick={this.click}>
               Log In
             </Button>
-            <Button variant='contained' id="signup" onClick={this.click}>
+            <Button variant="contained" id="signup" onClick={this.click}>
               Sign Up
             </Button>
           </div>
         ) : (
-          <Button variant='contained' id="sign-out" onClick={this.signout}>Sign Out</Button>
+          <Button variant="contained" id="sign-out" onClick={this.signout}>
+            Sign Out
+          </Button>
         )}
         {this.renderModal()}
       </div>

@@ -25,6 +25,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import FindRecipes from "./findRecipes/findRecipes.js";
+//import firebase from "firebase";
 
 class Main extends React.Component {
   constructor() {
@@ -51,8 +52,14 @@ class Main extends React.Component {
     this.getStatus(() => {
       this.getAuthentication(() => {
         if (this.state.authenticated === true) {
-          axios
-            .get("/getUserInfo")
+          let config = {
+            method: "get",
+            url: "/getUserInfo",
+            headers: {
+              authorization: this.state.token,
+            },
+          };
+          axios(config)
             .then((data) => {
               this.setInitialData(data);
             })
@@ -75,8 +82,8 @@ class Main extends React.Component {
 
   getUser() {
     axios("/getUserInfo", {
-      params: {
-        uid: this.state.user.uid,
+      headers: {
+        authorization: this.state.token,
       },
     }).then((data) => {
       this.setInitialData(data.data);
@@ -98,6 +105,9 @@ class Main extends React.Component {
     let config = {
       method: "put",
       url: "/updateFavorites",
+      headers: {
+        authorization: this.state.token,
+      },
       data: {
         recipeId: recipeId,
         uid: this.state.user.uid,
@@ -232,6 +242,9 @@ class Main extends React.Component {
     let config = {
       method: "put",
       url: "/updateIngredients",
+      headers: {
+        authorization: this.state.token,
+      },
       data: {
         uid: this.state.user.uid,
         ingredients: this.state.user.ingredients,
@@ -273,6 +286,9 @@ class Main extends React.Component {
     let config = {
       method: "put",
       url: "/updateNote",
+      headers: {
+        authorization: this.state.token,
+      },
       data: {
         uid: this.state.user.uid,
         note: this.state.user.notes,
@@ -309,7 +325,7 @@ class Main extends React.Component {
       axios
         .get("/authenticate", {
           headers: {
-            Authorization: this.state.token + " " + this.state.uid,
+            authorization: this.state.token,
           },
         })
         .then((response) => {

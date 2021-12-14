@@ -19,4 +19,26 @@ admin.initializeApp({
     client_x509_cert_url: process.env.FIREBASE_CLIENT_X509_CERT_URL,
   }),
 });
-module.exports = admin;
+
+var i = i || 0;
+
+async function verifyToken(req, res, next) {
+  console.log(req);
+  var idToken = req.headers.authorization;
+  console.log("look at this one", idToken);
+  admin
+    .auth()
+    .verifyIdToken(idToken)
+    .then((decodedToken) => {
+      req.body.uid = decodedToken.uid;
+      return next();
+    })
+    .catch((e) => {
+      console.log(e);
+      return res.status(401).send("You are not authorized!");
+    });
+}
+module.exports = {
+  admin: admin,
+  verifyToken: verifyToken,
+};
