@@ -406,7 +406,7 @@ class Main extends React.Component {
           ) : (
             ""
           )}
-          {this.state.id === "login-signup" ?
+          {this.state.id === "profile" ?
             <MyProfile
               userInfo={this.state.user}
               handleButtonPress={this.handleButtonPress}
