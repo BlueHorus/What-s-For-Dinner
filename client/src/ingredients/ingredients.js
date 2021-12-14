@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
-// import MyIngredients from './myIngredients.js'
+import { Card } from '@mui/material';
+import { CardContent } from '@mui/material';
 
 
 // add ingredient	"1. As a user, i want to upload ingredients
@@ -55,6 +56,8 @@ class Ingredients extends React.Component {
     return (
       <div id="fridge">
         <div className="user-ingredients">
+        <Card>
+          <CardContent>
           <form onSubmit={this.props.handleIngredient} className="add-ingredient" name={this.state.ingredient}>
             <label>
               Add ingredient: <br />
@@ -62,7 +65,11 @@ class Ingredients extends React.Component {
             <input type="submit" value={String.fromCodePoint(0x22B9)} className="add-ing-button"/>
             </label>
           </form>
+          </CardContent>
+        </Card>
 
+          <Card>
+            <CardContent>
           <form onSubmit={this.props.handleNote} className="add-note" name={this.state.note}>
             <label>
               Add note: <br />
@@ -70,6 +77,16 @@ class Ingredients extends React.Component {
             <input type="submit" value={String.fromCodePoint(0x22B9)} className="add-note-button"/>
             </label>
           </form>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardContent>
+            <ul className="ingredients-list"> My ingredient list: <br/>
+              {removeBtn}
+            </ul>
+            </CardContent>
+          </Card>
 
           <div className="saved-notes">
             My notes: <br/>
@@ -77,9 +94,6 @@ class Ingredients extends React.Component {
             <button className="remove-notes" name="notes" onClick={this.props.handleNote}>{String.fromCodePoint(0x2715)}</button>
           </div>
 
-          <ul className="ingredients-list"> My ingredient list: <br/>
-            {removeBtn}
-          </ul>
         </div>
       </div>
     )

@@ -314,18 +314,26 @@ color: black;
   Next section: ingredients
   */
 
-/* #fridge {
-  width: 100%;
+#fridge {
+  width: 150%;
   justify-content: center;
-} */
+  background-image: url('./images/fridge.svg');
+  height: inherit;
+  background-size: cover;
+  margin-left: 150px
+}
 
 .user-ingredients {
+  margin-top: 100px;
+  margin-left: auto;
+  margin-right: auto;
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 2fr;
-  justify-items: center;
-  width: 80%;
-  margin: auto
+  justify-items: stretch;
+  width: 40%;
+  grid-gap: 20px;
+  font-weight: bold
 }
 
 .ingredients-list {
@@ -340,13 +348,14 @@ color: black;
   background-color: violet;
   padding: 5px;
   grid-column-start: 2;
-  grid-row-start: 2
+  grid-row-start: 2;
+  width: 100%
 }
 
 .one-ingredient {
-  width: 100%;
   display: flex;
   justify-content: space-between;
+  padding-right: 80px
 }
 
 .remove-ing-button {
@@ -354,6 +363,9 @@ color: black;
   border: none;
   background-color: rgb(230, 230, 230);
   color: #4fbaba;
+  font-weight: bolder;
+  padding: 3px;
+  font-size: large;
 }
 
 .add-note-button {
@@ -361,6 +373,9 @@ color: black;
   border: none;
   background-color: rgb(230, 230, 230);
   color: #4fbaba;
+  font-weight: bolder;
+  padding: 3px;
+  font-size: large;
 }
 
 .add-ing-button {
@@ -368,6 +383,9 @@ color: black;
   border: none;
   background-color: rgb(230, 230, 230);
   color: #4fbaba;
+  font-weight: bolder;
+  padding: 3px;
+  font-size: large;
 }
 
 .remove-notes {
@@ -375,6 +393,9 @@ color: black;
   border: none;
   background-color: rgb(230, 230, 230);
   color: #4fbaba;
+  font-weight: bolder;
+  padding: 3px;
+  font-size: large;
 }
 
 

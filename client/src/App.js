@@ -250,10 +250,9 @@ class Main extends React.Component {
 
       case 'remove-ing-button':
         config.data.ingredients = this.state.user.ingredients.replace(ingredient, '');
-        config.data.ingredients = config.data.ingredients.replace(/,{2,}/, ',')
-        config.data.ingredients = config.data.ingredients.replace(/^,/, '')
-        config.data.ingredients = config.data.ingredients.replace(/,$/, '')
-        console.log('newlist: ', config.data.ingredients)
+        config.data.ingredients = config.data.ingredients.replace(/,{2,}/, ',');
+        config.data.ingredients = config.data.ingredients.replace(/^,/, '');
+        config.data.ingredients = config.data.ingredients.replace(/,$/, '');
         axios(config)
           .then( () => {this.getUser()})
           .catch(err => console.log(err))
