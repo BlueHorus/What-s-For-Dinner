@@ -2,7 +2,6 @@ import React from 'react';
 import PanGraphic from './panGraphic.js'
 import Recipe from '../shared/recipecard.js';
 import axios from 'axios'
-import Grow from '@mui/material/Grow';
 
 class Landing extends React.Component {
     constructor(props) {

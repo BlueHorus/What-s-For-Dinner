@@ -155,6 +155,9 @@ class Main extends React.Component {
         (() => {
           console.log('test updating diet: ', recipeId);
           let config = {
+            headers: {
+              Authorization: this.state.token,
+            },
             method: 'put',
             url: '/updateDiet',
             data: recipeId,
@@ -166,6 +169,9 @@ class Main extends React.Component {
         (() => {
           console.log('test updating intolerances: ', recipeId);
           let config = {
+            headers: {
+              Authorization: this.state.token,
+            },
             method: 'put',
             url: '/updateIntolerances',
             data: recipeId,
@@ -177,8 +183,25 @@ class Main extends React.Component {
         (() => {
           console.log('test updating profile pic: ', recipeId);
           let config = {
+            headers: {
+              Authorization: this.state.token,
+            },
             method: 'put',
             url: '/updateProfilePic',
+            data: recipeId,
+          }
+          axios(config)
+        })();
+        break;
+      case 'username-form':
+        (() => {
+          console.log('test updating username: ', recipeId);
+          let config = {
+            headers: {
+              Authorization: this.state.token,
+            },
+            method: 'put',
+            url: '/updateUsername',
             data: recipeId,
           }
           axios(config)
@@ -383,7 +406,7 @@ class Main extends React.Component {
           ) : (
             ""
           )}
-          {this.state.id === "login-signup" ?
+          {this.state.id === "profile" ?
             <MyProfile
               userInfo={this.state.user}
               handleButtonPress={this.handleButtonPress}
