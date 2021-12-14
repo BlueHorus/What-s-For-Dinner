@@ -153,16 +153,11 @@ class Main extends React.Component {
         (() => {
           console.log("test updating diet: ", recipeId);
           let config = {
-<<<<<<< HEAD
-            method: "put",
-            url: "/updateDiet",
-=======
             headers: {
               Authorization: this.state.token,
             },
-            method: 'put',
-            url: '/updateDiet',
->>>>>>> 5f6d11cd67fb6984527c6aa11a40595d0040294b
+            method: "put",
+            url: "/updateDiet",
             data: recipeId,
           };
           axios(config);
@@ -175,8 +170,8 @@ class Main extends React.Component {
             headers: {
               Authorization: this.state.token,
             },
-            method: 'put',
-            url: '/updateIntolerances',
+            method: "put",
+            url: "/updateIntolerances",
             data: recipeId,
           };
           axios(config);
@@ -186,36 +181,32 @@ class Main extends React.Component {
         (() => {
           console.log("test updating profile pic: ", recipeId);
           let config = {
-<<<<<<< HEAD
-            method: "put",
-            url: "/updateProfilePic",
-=======
             headers: {
               Authorization: this.state.token,
             },
-            method: 'put',
-            url: '/updateProfilePic',
->>>>>>> 5f6d11cd67fb6984527c6aa11a40595d0040294b
+            method: "put",
+            url: "/updateProfilePic",
             data: recipeId,
           };
           axios(config);
         })();
         break;
-      case 'username-form':
+      case "username-form":
         (() => {
-          console.log('test updating username: ', recipeId);
+          console.log("test updating username: ", recipeId);
           let config = {
             headers: {
               Authorization: this.state.token,
             },
-            method: 'put',
-            url: '/updateUsername',
+            method: "put",
+            url: "/updateUsername",
             data: recipeId,
-          }
-          axios(config)
+          };
+          axios(config);
         })();
         break;
-        default: console.log('test default');
+      default:
+        console.log("test default");
     }
   }
 
