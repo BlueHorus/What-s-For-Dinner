@@ -335,6 +335,8 @@ color: black;
 
 .one-ingredient {
   width: 100%;
+  display: flex;
+  justify-content: space-between;
 }
 
 .remove-ing-button {

@@ -80,10 +80,10 @@ class Ingredients extends React.Component {
 
       <ul className="ingredients-list"> My ingredient list:
         {/* {console.log(this.props.user.ingredients)}; */}
-        {this.props.user.ingredients.split(',').map(ing => <li className="one-ingredient">
-                                                            {ing}
+        {this.props.user.ingredients.split(',').map(ing => <div className="one-ingredient">
+                                                            <li>{ing.trim()}</li>
                                                             <button className="remove-ing-button" name={ing} onClick={this.props.handleIngredient}>{String.fromCodePoint(0x2715)}</button>
-                                                            </li>)}
+                                                            </div>)}
 
 
       </ul>
