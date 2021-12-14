@@ -115,11 +115,14 @@ class FindRecipes extends React.Component {
   handleIngredientSearch() {
     event.preventDefault();
     let ingredients = this.state.ingredients.toString();
-
+    let diet = this.state.diets.toString();
+    let intolerances = this.state.intolerances.toString();
     let config = {
        method: 'get',
        params: {
-         ingredients: ingredients
+         ingredients: ingredients,
+         intolerances: intolerances,
+         diet: diet
        },
        url: '/getRecipesFromIngredients'
      }
@@ -220,7 +223,7 @@ class FindRecipes extends React.Component {
       <div id='add-on-container'>
         <FormControl sx={{m: 1}} variant="standard">
           <InputLabel htmlFor='ingredient-form'></InputLabel>
-          <TextField autoComplete='on' spellCheck='true' onChange={this.onChange} id='ingredient-form' varient='filled' value={this.state.ingredientForm} label='ngredients'/>
+          <TextField autoComplete='on' spellCheck='true' onChange={this.onChange} id='ingredient-form' varient='filled' value={this.state.ingredientForm} label='Ingredients'/>
           <Button type='submit' onClick={this.handleIngredientSubmit} varient='filled'>Add Ingredient</Button>
         </FormControl>
         <FormControl sx={{m: 1}} variant="standard">

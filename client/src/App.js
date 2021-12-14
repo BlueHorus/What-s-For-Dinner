@@ -330,7 +330,7 @@ class Main extends React.Component {
         })
         .then((response) => {
           // response data is incorrect'
-          response.data === "successfully authenticated"
+          response.data === "Successfully authenticated user!"
             ? this.setState({ authenticated: true })
             : this.setState({ authenticated: false });
         })

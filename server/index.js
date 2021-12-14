@@ -274,6 +274,7 @@ app.get("/getRecipesFromIngredients", (req, res) => {
       )
       .then(({ data }) => {
         var parsedData = parseResponse(data);
+        console.log(parsedData)
         res.status(200).send(parsedData);
       })
       .catch((error) => {
