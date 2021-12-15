@@ -28,6 +28,7 @@ app.use(
     "/updateDownvote",
     "/getFeaturedRecipes",
     "/getRecipesFromIngredients"
+    "/favicon.ico"
   )
 );
 
