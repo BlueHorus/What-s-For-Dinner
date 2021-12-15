@@ -32,7 +32,7 @@ class Share extends React.Component {
         <a onClick={this.clickShare.bind(this)} href={this.state.twitter}>
           Twitter
         </a>
-        {/* <span></span> */}
+        <span> </span>
         <i class="fa-brands fa-facebook"></i>
         <a onClick={this.clickShare.bind(this)} href={this.state.facebook}>
           Facebook
