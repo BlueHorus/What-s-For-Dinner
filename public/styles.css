@@ -413,7 +413,10 @@ body {
   object-fit: cover;
   position: absolute;
 }
-#button-change-pic {
+<<<<<<<
+  HEAD
+  =======>>>>>>>3302c0e5f89dd5ce4bfb6a1810affc801d703faf
+  #button-change-pic {
   position: absolute;
   top: 75%;
   left: 77%;
@@ -424,7 +427,10 @@ body {
   background-color: white;
   color: black;
 }
-#button-edit-profile {
+<<<<<<<
+  HEAD
+  =======>>>>>>>3302c0e5f89dd5ce4bfb6a1810affc801d703faf
+  #button-edit-profile {
   position: relative;
   top: 95%;
   left: 20%;
@@ -433,7 +439,10 @@ body {
   background-color: cadetblue;
   color: snow;
 }
-#button-change-pw {
+<<<<<<<
+  HEAD
+  =======>>>>>>>3302c0e5f89dd5ce4bfb6a1810affc801d703faf
+  #button-change-pw {
   position: relative;
   height: 38px;
   width: 160px;
@@ -442,7 +451,10 @@ body {
   background-color: cadetblue;
   color: snow;
 }
-#button-change-name {
+<<<<<<<
+  HEAD
+  =======>>>>>>>3302c0e5f89dd5ce4bfb6a1810affc801d703faf
+  #button-change-name {
   position: relative;
   height: 38px;
   width: 160px;
@@ -608,4 +620,8 @@ form * {
 #submit-button {
   background-color: #4fbaba;
   margin: 10px;
+}
+
+.toggle-password {
+  cursor: pointer;
 }
