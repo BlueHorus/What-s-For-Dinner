@@ -105,13 +105,16 @@ class MyProfile extends React.Component {
     event.preventDefault();
     const auth = getAuth(app);
     const user = auth.currentUser;
-      updatePassword(user, this.state.newPass)
-        .then(() => {
-          console.log('password changed!');
-        })
-        .catch(err => {
-          console.log(err);
-        });
+    updatePassword(user, this.state.newPass)
+      .then(() => {
+        console.log('password changed!');
+      })
+      .catch(err => {
+        console.log(err);
+      });
+    this.setState({
+      changingPassword: false,
+    })
   }
 
   changeProfilePic() {
@@ -196,17 +199,15 @@ class MyProfile extends React.Component {
         <div className="profile-third">
           <div className="profile-pic-block">
             <img className="profile-pic" src={this.state.selectedFile} alt="profile-picture" />
-            <Button sx={{width: '40px'}} id="button-change-pic" startIcon={<FaceIcon />}  variant='contained' onClick={this.changeProfilePic}></Button>
+            <Button style={{width: '40px'}} id="button-change-pic" startIcon={<FaceIcon />}  variant='contained' onClick={this.changeProfilePic}></Button>
           </div>
           {changingProfilePic === true
-            ? <form className="url-form" onSubmit={this.uploadPic}>
-                <label>
-                  Please enter new photo URL
-                  <br />
-                  <input type="text" value={url} onChange={this.handleURLChange}/>
-                </label>
-                <input type="submit" value="Upload" />
-              </form>
+            ? <div className="url-form">
+                Please enter new photo URL
+                <br />
+                <input type="text" value={url} onChange={this.handleURLChange}/>
+                <button onClick={this.uploadPic}>Upload</button>
+              </div>
             : null
           }
 
@@ -224,7 +225,7 @@ class MyProfile extends React.Component {
                     <br />
                     <input type="text" value={newUsername} onChange={this.usernameInput} />
                   </label>
-                  <button className="username-form" onClick={this.uploadUsername}>Confirm!</button>
+                  <button className="change-username" onClick={this.uploadUsername}>Confirm!</button>
                 </div>
             )
             : null

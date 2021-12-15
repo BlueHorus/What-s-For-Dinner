@@ -193,7 +193,7 @@ class Main extends React.Component {
           axios(config)
         })();
         break;
-      case 'username-form':
+      case 'change-username':
         (() => {
           console.log('test updating username: ', recipeId);
           let config = {
