@@ -21,19 +21,21 @@ class Share extends React.Component {
       twitter: "https://twitter.com/intent/tweet?url=" + url,
     });
     this.setState({
-      facebook: "http://www.facebook.com/sharer.php",
+      facebook: "http://www.facebook.com/sharer.php?u=" + url,
     });
   }
 
   render() {
     return (
       <div>
+        <i class="fab fa-twitter"></i>
         <a onClick={this.clickShare.bind(this)} href={this.state.twitter}>
-          <i class="fab fa-twitter"></i>
+          Twitter
         </a>
-
+        {/* <span></span> */}
+        <i class="fa-brands fa-facebook"></i>
         <a onClick={this.clickShare.bind(this)} href={this.state.facebook}>
-          <i class="fa-brands fa-facebook"></i>
+          Facebook
         </a>
       </div>
     );
