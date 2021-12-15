@@ -324,7 +324,6 @@ body {
   background-color: rgb(230, 230, 230);
   color: #4fbaba;
   font-weight: bolder;
-  padding: 3px;
   font-size: large;
 }
 .add-note-button {
@@ -333,8 +332,8 @@ body {
   background-color: rgb(230, 230, 230);
   color: #4fbaba;
   font-weight: bolder;
-  padding: 3px;
   font-size: large;
+  padding: revert
 }
 .add-ing-button {
   border-radius: 50%;
@@ -342,8 +341,8 @@ body {
   background-color: rgb(230, 230, 230);
   color: #4fbaba;
   font-weight: bolder;
-  padding: 3px;
   font-size: large;
+  padding: revert;
 }
 .remove-notes {
   border-radius: 50%;
@@ -351,7 +350,6 @@ body {
   background-color: rgb(230, 230, 230);
   color: #4fbaba;
   font-weight: bolder;
-  padding: 3px;
   font-size: large;
 }
 /*---------------------------------------------
