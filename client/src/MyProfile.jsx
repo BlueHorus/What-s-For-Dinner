@@ -11,6 +11,13 @@ import {
   updatePassword,
   EmailAuthProvider,
 } from "firebase/auth";
+import Button from '@mui/material/Button';
+import FaceIcon from '@mui/icons-material/Face';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import DeleteIcon from '@mui/icons-material/Delete';
+import IconButton from '@mui/material/IconButton';
+import ListItemText from '@mui/material/ListItemText';
 
 class MyProfile extends React.Component {
   constructor(props) {
@@ -26,9 +33,9 @@ class MyProfile extends React.Component {
       url: "",
       changingPassword: false,
       changingUsername: false,
-      newPass: "",
-      newUsername: "",
-      // editingProfile: false,
+      newPass: '',
+      newUsername: '',
+      editingProfile: false,
     };
 
     this.setUserInfo = this.setUserInfo.bind(this);
@@ -41,11 +48,11 @@ class MyProfile extends React.Component {
     this.changeProfilePic = this.changeProfilePic.bind(this);
     this.uploadPic = this.uploadPic.bind(this);
     this.uploadUsername = this.uploadUsername.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleIntoleranceChange = this.handleIntoleranceChange.bind(this);
     this.changeDiet = this.changeDiet.bind(this);
-    this.handleDropdownChange = this.handleDropdownChange.bind(this);
+    this.handleDietChange = this.handleDietChange.bind(this);
     this.deleteFood = this.deleteFood.bind(this);
+    this.editProfile = this.editProfile.bind(this);
   }
 
   componentDidMount() {
@@ -58,21 +65,25 @@ class MyProfile extends React.Component {
       userInfo: info,
       // selectedFile: userInfo.profilePic ? userInfo.profilePic : defaultPic,
       selectedFile: defaultPic,
-      diet: userInfo.diet,
-      intolerances: userInfo.intolerances.split(", "),
-    });
+      diet: userInfo.diet ? userInfo.diet : 'No diet selected',
+      intolerances: userInfo.intolerances ? userInfo.intolerances.split(', ') : [],
+    })
   }
 
   handleUsernameChange() {
     this.setState({
       changingUsername: true,
-    });
+      changingPassword: false,
+      changingProfilePic: false,
+    })
   }
 
   handlePasswordChange() {
     this.setState({
       changingPassword: true,
-    });
+      changingUsername: false,
+      changingProfilePic: false,
+    })
   }
 
   passwordInput(e) {
@@ -104,16 +115,21 @@ class MyProfile extends React.Component {
     const user = auth.currentUser;
     updatePassword(user, this.state.newPass)
       .then(() => {
-        console.log("password changed!");
+        console.log('password changed!');
       })
-      .catch((err) => {
+      .catch(err => {
         console.log(err);
       });
+    this.setState({
+      changingPassword: false,
+    })
   }
 
   changeProfilePic() {
     this.setState({
       changingProfilePic: true,
+      changingPassword: false,
+      changingUsername: false,
     });
   }
 
@@ -134,19 +150,12 @@ class MyProfile extends React.Component {
     });
   }
 
-  handleChange(e) {
-    this.setState({
-      value: e.target.value,
-    });
-  }
-
-  handleSubmit(e) {
+  handleIntoleranceChange(e) {
     const { intolerances, value } = this.state;
-    event.preventDefault();
     this.setState({
-      intolerances: [...intolerances, value],
-      value: "",
-    });
+      intolerances: [...intolerances, e.target.value],
+      value: '',
+    })
   }
 
   changeDiet(e) {
@@ -161,19 +170,25 @@ class MyProfile extends React.Component {
     });
   }
 
-  handleDropdownChange(e) {
+  handleDietChange(e) {
     this.setState({
       diet: e.target.value,
     });
   }
 
-  deleteFood(e) {
+  deleteFood(inputFood) {
     const { intolerances } = this.state;
     this.setState({
-      intolerances: intolerances.filter((food) => {
-        return food !== e.target.value;
-      }),
-    });
+      intolerances: intolerances.filter(food => {
+        return food !== inputFood;
+      })
+    })
+  }
+
+  editProfile() {
+    this.setState({
+      editingProfile: true,
+    })
   }
 
   render() {
@@ -188,56 +203,58 @@ class MyProfile extends React.Component {
       changingUsername,
       newUsername,
       newPass,
+      editingProfile
     } = this.state;
 
     const intoleranceList = [
-      "dairy",
-      "egg",
-      "gluten",
-      "grain",
-      "peanut",
-      "seafood",
-      "sesame",
-      "shellfish",
-      "soy",
-      "sulfite",
-      "tree nut",
-      "wheat",
+      'dairy',
+      'egg',
+      'gluten',
+      'grain',
+      'peanut',
+      'seafood',
+      'sesame',
+      'shellfish',
+      'soy',
+      'sulfite',
+      'tree nut',
+      'wheat'
     ];
     const dietsList = [
-      "gluten free",
-      "ketogenic",
-      "vegetarian",
-      "lacto-vegetarian",
-      "obo-vegetarian",
-      "vegan",
-      "pescetarian",
-      "paleo",
-      "primal",
-      "whole30",
+      'gluten free',
+      'ketogenic',
+      'vegetarian',
+      'lacto-vegetarian',
+      'obo-vegetarian',
+      'vegan',
+      'pescetarian',
+      'paleo',
+      'primal',
+      'whole30'
     ];
+
     return (
       <div className="profile">
-        <div className="welcome-banner">
-          Welcome Back, <b>{userInfo.userName}!</b>
-        </div>
-        <div className="profile-left">
+        {editingProfile === true ? <EditProfile /> : null}
+        <div className="welcome-banner">Welcome Back, <b>{userInfo.userName}!</b></div>
+        <div className="profile-third">
           <div className="profile-pic-block">
             <img
               className="profile-pic"
               src={this.state.selectedFile}
               alt="profile-picture"
             />
-            <button
-              className="button-change-pic"
+            <Button
+              sx={{width: '20px', borderRadius: '50%'}} id="button-change-pic"
+              startIcon={<FaceIcon />}
+              variant='contained'
               onClick={this.changeProfilePic}
             >
-              x
-            </button>
+            </Button>
           </div>
-          {changingProfilePic === true ? (
-            <form className="url-form" onSubmit={this.uploadPic}>
-              <label>
+
+          {changingProfilePic === true
+            ? <div className="url-form">
                 Please enter new photo URL
                 <br />
                 <input
@@ -245,148 +262,148 @@ class MyProfile extends React.Component {
                   value={url}
                   onChange={this.handleURLChange}
                 />
-              </label>
-              <input type="submit" value="Upload" />
-            </form>
-          ) : null}
+                <button onClick={this.uploadPic}>Upload</button>
+              </div>
+            : null
+          }
 
-          <button
-            className="button-change-name"
-            onClick={this.handleUsernameChange}
-          >
+          <Button
+            style={{ fontSize: '12px' }}
+            id="button-edit-profile"
+            variant='contained'
+            disabled="disabled"
+            onClick={this.editProfile}>
+            I don't work yet!
+          </Button>
+
+          <Button
+            style={{ fontSize: '12px' }}
+            id="button-change-name"
+            variant='contained'
+            onClick={this.handleUsernameChange}>
             Change Username
-          </button>
+          </Button>
+
           <br />
-          <button
-            className="button-change-pw"
-            onClick={this.handlePasswordChange}
-          >
+
+          <Button
+            style={{ fontSize: '12px' }}
+            id="button-change-pw"
+            variant='contained'
+            onClick={this.handlePasswordChange}>
             Change Password
-          </button>
+          </Button>
 
-          {changingUsername === true ? (
-            <div className="username-form">
-              <label>
-                Please enter new username:
-                <br />
-                <input
-                  type="text"
-                  value={newUsername}
-                  onChange={this.usernameInput}
-                />
-              </label>
-              <button className="username-form" onClick={this.uploadUsername}>
-                Confirm!
-              </button>
-            </div>
-          ) : null}
-
-          {changingPassword === true ? (
-            <div className="password-form">
-              <label>
-                Please enter new password:
-                <br />
-                <input
-                  type="text"
-                  value={newPass}
-                  onChange={this.passwordInput}
-                />
-              </label>
-              <button onClick={this.changePassword}>Confirm!</button>
-            </div>
-          ) : null}
-
-          {changingPassword === true ? (
-            <div className="password-form">
-              <label>
-                Please enter new password:
-                <br />
-                <input
-                  type="text"
-                  value={newPass}
-                  onChange={this.passwordInput}
-                />
-              </label>
-              <input
-                type="submit"
-                value="Confirm"
-                onClick={this.changePassword}
-              />
-            </div>
-          ) : null}
-        </div>
-
-        <div className="profile-right">
-          {this.state.dietChanged ? (
-            <div style={{ color: "green" }}>
-              <b>Successfully saved new diet!</b>
-            </div>
-          ) : null}
-          <br />
-          <div className="diet">
-            My Current Diet: <b>{diet}</b>
-          </div>
-
-          <form className="update-diet" onSubmit={this.changeDiet}>
-            <label>
-              Change your diet in the dropdown below!
-              <br />
-              <select value={diet} onChange={this.handleDropdownChange}>
-                <option default> - </option>
-                {dietsList.map((diet) => {
-                  return <option value={diet}>{diet}</option>;
-                })}
-              </select>
-            </label>
-            <input type="submit" value="Confirm" />
-          </form>
-
-          <div className="intolerance-list">
-            My Current Intolerances:
-            {intolerances.map((food) => {
-              return (
-                <div className="intolerance-tile">
-                  <span className="intolerance">
-                    <b>{food}</b>
-                  </span>
+          {changingUsername === true
+            ? (
+              <div className="username-form">
+                  <label>
+                    Please enter new username:
+                    <br />
+                    <input
+                      type="text"
+                      value={newUsername}
+                      onChange={this.usernameInput}
+                    />
+                  </label>
                   <button
-                    className="button-delete-intolerance"
-                    value={food}
-                    onClick={this.deleteFood}
-                  >
-                    x
+                    className="change-username"
+                    onClick={this.uploadUsername}>
+                    Confirm!
                   </button>
                 </div>
-              );
+            )
+            : null
+          }
+
+          {changingPassword === true
+            ? (
+              <div className="password-form">
+                  <label>
+                    Please enter new password:
+                    <br />
+                    <input
+                      type="text"
+                      value={newPass}
+                      onChange={this.passwordInput}
+                    />
+                  </label>
+                  <button onClick={this.changePassword}>Confirm!</button>
+                </div>
+            )
+            : null
+          }
+        </div>
+
+        <div className="diet-third">
+          {this.state.dietChanged
+          ? <div
+              className="saved-diet-notif"
+              style={{color: "salmon"}}>
+            <b>Successfully saved new diet!</b>
+            </div>
+          : null}
+
+          <br />
+
+          <div className="diet-header">My Current Diet </div>
+          <div className="diet-name"><b>{diet.toUpperCase()}</b></div>
+
+          <form className="update-diet" onSubmit={this.changeDiet}>
+            <div className="change-diet-text">Select a new diet in the dropdown below</div>
+            <select value={diet} onChange={this.handleDietChange}>
+            <option default> - </option>
+            {dietsList.map(diet => {
+              return <option value={diet}>{diet}</option>
             })}
+          </select>
+            <input className="button-send-diet" type="submit" value="Confirm" />
+          </form>
+        </div>
+
+        <div className="intolerance-third">
+          <div className="intolerance-list">
+            My Current Intolerances
+            <List>
+              {intolerances.map(food => {
+                return (
+                  <ListItem id="intolerance-tile" value={food}
+                  secondaryAction={
+                    <IconButton edge='end' onClick={()=> this.deleteFood(food)}>
+                      <DeleteIcon />
+                    </IconButton>
+                  }
+                  >
+                    <ListItemText primary={food} required/>
+                  </ListItem>
+                )
+              })
+            }
+            </List>
           </div>
 
-          <form className="intolerance-form" onSubmit={this.handleSubmit}>
-            <label>
-              Enter any food intolerances below
-              <br />
-              <select value={value} onChange={this.handleChange}>
-                <option default> - </option>
-                {intoleranceList.map((intolerance) => {
-                  return <option value={intolerance}>{intolerance}</option>;
-                })}
-              </select>
-            </label>
-            <input type="submit" value="Add" />
+          <form className="intolerance-form">
+            Enter any food intolerances below
+            <br />
+            <select value={value} onChange={this.handleIntoleranceChange}>
+              <option default> - </option>
+              {intoleranceList.map(intolerance => {
+                return <option value={intolerance}>{intolerance}</option>
+              })}
+            </select>
           </form>
 
           <br />
-          <button
-            className="update-intolerances"
-            onClick={(e) =>
-              this.props.handleButtonPress({
-                // uid: userInfo.uid,
-                intolerances: intolerances.join(","),
-              })
-            }
+          <Button
+            variant="contained"
+            id="button-send-intolerances"
+            onClick={(e) => this.props.handleButtonPress({
+              // uid: userInfo.uid,
+              intolerances: intolerances.join(','),
+            })}
           >
-            Confirm Intolerance Changes!
-          </button>
+            Confirm Changes!
+          </Button>
         </div>
       </div>
     );
