@@ -190,7 +190,10 @@ class Main extends React.Component {
             url: "/updateUsername",
             data: recipeId,
           };
-          axios(config);
+          axios(config).then(() => {
+            this.getUser();
+          })
+          .catch((err) => console.log(err));
         })();
         break;
       case 'favorite-button':
