@@ -191,14 +191,6 @@ class Auth extends React.Component {
   renderModal() {
     if (this.state.click === true) {
       if (this.state.create === true) {
-        // window.onclick = function(event) {
-        //   if (event.target == modal) {
-        //     document.getElementById('modal').style.display = 'none';
-        //     this.setState({
-        //       click: false,
-        //     })
-        //   }
-        // }
         return (
           <div id="modal" className="modal">
             <div className="modal-content">
@@ -228,6 +220,14 @@ class Auth extends React.Component {
                 />
                 <input
                   onChange={(e) => {
+                    this.submit(e, "password");
+                  }}
+                  placeholder="Password"
+                  type="password"
+                  className="password"
+                />
+                <input
+                  onChange={(e) => {
                     this.submit(e, "username");
                   }}
                   placeholder="Username"
@@ -238,12 +238,7 @@ class Auth extends React.Component {
                   }}
                   placeholder="Photo URL"
                 />
-                <input
-                  onChange={(e) => {
-                    this.submit(e, "password");
-                  }}
-                  placeholder="Password"
-                />
+
                 <Button id="submit-button" variant="contained" type="submit">
                   Create
                 </Button>
@@ -293,7 +288,10 @@ class Auth extends React.Component {
                     this.submit(e, "password");
                   }}
                   placeholder="Password"
+                  type="password"
+                  className="password"
                 />
+
                 <Button id="submit-button" variant="contained" type="submit">
                   Sign In
                 </Button>
