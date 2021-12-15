@@ -610,11 +610,11 @@ color: black;
 }
 
 /* FIX ME! */
-.button-send-diet {
+#button-send-diet {
   background-color: cadetblue;
   color: snow;
-  border-radius: 8%;
-  border: white;
+  position: relative;
+  left: 25%;
 }
 
 .btn-confirm {

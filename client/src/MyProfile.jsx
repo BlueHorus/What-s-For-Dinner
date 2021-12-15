@@ -18,6 +18,8 @@ import ListItem from '@mui/material/ListItem';
 import DeleteIcon from '@mui/icons-material/Delete';
 import IconButton from '@mui/material/IconButton';
 import ListItemText from '@mui/material/ListItemText';
+import ToolTip from '@mui/material/ToolTip';
+
 
 class MyProfile extends React.Component {
   constructor(props) {
@@ -244,13 +246,15 @@ class MyProfile extends React.Component {
               src={this.state.selectedFile}
               alt="profile-picture"
             />
-            <Button
-              id="button-change-pic"
-              startIcon={<FaceIcon />}
-              variant='contained'
-              onClick={this.changeProfilePic}
-            >
-            </Button>
+            <ToolTip title="Edit photo" placement="right">
+              <Button
+                id="button-change-pic"
+                startIcon={<FaceIcon />}
+                variant='contained'
+                onClick={this.changeProfilePic}
+                >
+              </Button>
+            </ToolTip>
           </div>
 
           {changingProfilePic === true
@@ -262,7 +266,12 @@ class MyProfile extends React.Component {
                   value={url}
                   onChange={this.handleURLChange}
                 />
-                <button onClick={this.uploadPic}>Upload</button>
+                <Button
+                  variant="contained"
+                  id="button-change-url"
+                  onClick={this.uploadPic}>
+                    Upload
+                </Button>
               </div>
             : null
           }
@@ -307,7 +316,7 @@ class MyProfile extends React.Component {
                     />
                   </label>
                   <button
-                    className="change-username"
+                    id="change-username"
                     onClick={this.uploadUsername}>
                     Confirm!
                   </button>
@@ -328,7 +337,9 @@ class MyProfile extends React.Component {
                       onChange={this.passwordInput}
                     />
                   </label>
-                  <button onClick={this.changePassword}>Confirm!</button>
+                  <button onClick={this.changePassword}>
+                    Confirm!
+                  </button>
                 </div>
             )
             : null
@@ -349,7 +360,7 @@ class MyProfile extends React.Component {
           <div className="diet-header">My Current Diet </div>
           <div className="diet-name"><b>{diet.toUpperCase()}</b></div>
 
-          <form className="update-diet" onSubmit={this.changeDiet}>
+          <form className="update-diet">
             <div className="change-diet-text">Select a new diet in the dropdown below</div>
             <select value={diet} onChange={this.handleDietChange}>
             <option default> - </option>
@@ -357,8 +368,14 @@ class MyProfile extends React.Component {
               return <option value={diet}>{diet}</option>
             })}
           </select>
-            <input className="button-send-diet" type="submit" value="Confirm" />
           </form>
+          <Button
+            variant="contained"
+            id="button-send-diet"
+            onClick={this.changeDiet}
+          >
+            Confirm Changes!
+          </Button>
         </div>
 
         <div className="intolerance-third">
