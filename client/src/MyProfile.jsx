@@ -67,12 +67,16 @@ class MyProfile extends React.Component {
   handleUsernameChange() {
     this.setState({
       changingUsername: true,
+      changingPassword: false,
+      changingProfilePic: false,
     })
   }
 
   handlePasswordChange() {
     this.setState({
       changingPassword: true,
+      changingUsername: false,
+      changingProfilePic: false,
     })
   }
 
@@ -120,6 +124,8 @@ class MyProfile extends React.Component {
   changeProfilePic() {
     this.setState({
       changingProfilePic: true,
+      changingPassword: false,
+      changingUsername: false,
     });
   }
 
@@ -199,7 +205,7 @@ class MyProfile extends React.Component {
         <div className="profile-third">
           <div className="profile-pic-block">
             <img className="profile-pic" src={this.state.selectedFile} alt="profile-picture" />
-            <Button style={{width: '40px'}} id="button-change-pic" startIcon={<FaceIcon />}  variant='contained' onClick={this.changeProfilePic}></Button>
+            <Button sx={{width: '20px', borderRadius: '50%'}} id="button-change-pic" startIcon={<FaceIcon />}  variant='contained' onClick={this.changeProfilePic}></Button>
           </div>
           {changingProfilePic === true
             ? <div className="url-form">
@@ -211,7 +217,8 @@ class MyProfile extends React.Component {
             : null
           }
 
-          <Button style={{ fontSize: '12px' }} id="button-edit-profile" variant='contained' onClick={this.editProfile}>Edit Profile</Button>
+          <Button style={{ fontSize: '12px' }} id="button-edit-profile" variant='contained' disabled="disabled"
+           onClick={this.editProfile}>I don't work yet!</Button>
 
           <Button style={{ fontSize: '12px' }} id="button-change-name" variant='contained' onClick={this.handleUsernameChange}>Change Username</Button>
           <br />
