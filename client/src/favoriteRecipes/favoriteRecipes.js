@@ -54,7 +54,7 @@ class FavoriteRecipes extends React.Component {
 
   render() {
     return (
-      <div>
+      <div>My Recipes
         {this.renderView()}
       </div>
     )
