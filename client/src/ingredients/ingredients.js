@@ -29,7 +29,6 @@ class Ingredients extends React.Component {
 
   render() {
     const ingredientsList = (!this.props.user.ingredients) ? '' : this.props.user.ingredients;
-    console.log(this.props.user)
     const removeBtn = (this.props.user.ingredients === '') ? ('Add ingredient above') : (ingredientsList.split(',').map(ing => <div className="one-ingredient">
                                                                                           <li>{ing.trim()}</li>
                                                                                           <button className="remove-ing-button" name={ing} onClick={this.props.handleIngredient}>{String.fromCodePoint(0x2715)}</button>
