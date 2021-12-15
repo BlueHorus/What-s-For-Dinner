@@ -158,7 +158,11 @@ class FindRecipes extends React.Component {
       <div id='list-container' style={{width: '100%', display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly'}}>
         <Card style={{width: '30%', margin: '15px', padding:'15px', backgroundColor: 'eggshell'}}>
           <CardContent>
-            <List >Ingredients:
+            <List style={{
+              fontSize: '30px',
+              textDecoration: 'underline'
+            }}>
+              Ingredients:
             {this.state.ingredients.map((ingredient) => {
               return (
                 <ListItem id={ingredient}
@@ -167,6 +171,13 @@ class FindRecipes extends React.Component {
                     <DeleteIcon />
                   </IconButton>
                 }
+                style={{
+                  backgroundColor: 'rgb(230, 230, 230)',
+                  borderRadius: '15px',
+                  margin: '10px',
+                  padding: '10px',
+                  textDecoration: 'initial'
+                }}
                 >
                   <ListItemText primary={ingredient} required/>
                 </ListItem>
@@ -179,7 +190,10 @@ class FindRecipes extends React.Component {
 
         <Card style={{width: '30%', margin: '15px', padding:'15px', backgroundColor: 'eggshell'}}>
           <CardContent>
-            <List>
+            <List style={{
+              fontSize: '30px',
+              textDecoration: 'underline'
+            }}>
               Intolerances:
               {this.state.intolerances.map((intolerance) => {
                 return (
@@ -189,6 +203,14 @@ class FindRecipes extends React.Component {
                       <DeleteIcon />
                     </IconButton>
                   }
+
+                  style={{
+                    backgroundColor: 'rgb(230, 230, 230)',
+                    borderRadius: '15px',
+                    margin: '10px',
+                    padding: '10px',
+                    textDecoration: 'initial'
+                  }}
                   >
                     <ListItemText primary={intolerance} required/>
                   </ListItem>
@@ -200,7 +222,10 @@ class FindRecipes extends React.Component {
         </Card>
         <Card style={{width: '30%', margin: '15px', padding:'15px', backgroundColor: 'eggshell'}}>
           <CardContent>
-            <List>
+            <List style={{
+              fontSize: '30px',
+              textDecoration: 'underline'
+            }}>
               Diet:
               {this.state.diets.map((diet) => {
                 return (
@@ -210,6 +235,13 @@ class FindRecipes extends React.Component {
                       <DeleteIcon />
                     </IconButton>
                   }
+                  style={{
+                    backgroundColor: 'rgb(230, 230, 230)',
+                    borderRadius: '15px',
+                    margin: '10px',
+                    padding: '10px',
+                    textDecoration: 'initial'
+                  }}
                   >
                     <ListItemText primary={diet} required/>
                   </ListItem>
@@ -224,7 +256,7 @@ class FindRecipes extends React.Component {
         <FormControl sx={{m: 1}} variant="standard">
           <InputLabel htmlFor='ingredient-form'></InputLabel>
           <TextField autoComplete='on' spellCheck='true' onChange={this.onChange} id='ingredient-form' varient='filled' value={this.state.ingredientForm} label='Ingredients'/>
-          <Button type='submit' onClick={this.handleIngredientSubmit} varient='filled'>Add Ingredient</Button>
+          <Button type='submit' id='signup' onClick={this.handleIngredientSubmit} varient='filled'>Add Ingredient</Button>
         </FormControl>
         <FormControl sx={{m: 1}} variant="standard">
           <InputLabel htmlFor='intolerances-form'></InputLabel>
@@ -240,11 +272,11 @@ class FindRecipes extends React.Component {
             <MenuItem key='Soy' value='Soy'>Soy</MenuItem>
             <MenuItem key='Shellfish'value='Shellfish'>Shellfish</MenuItem>
           </TextField>
-          <Button type='submit' onClick={this.handleIntoleranceSubmit} varient='filled'>Add Intolerance</Button>
+          <Button type='submit' id='signup' onClick={this.handleIntoleranceSubmit} varient='filled'>Add Intolerance</Button>
         </FormControl>
-        <FormControl sx={{m: 1}} variant="standard">
+        <FormControl sx={{m: 1, display: 'flex'}} variant="standard">
           <InputLabel htmlFor='diets-form'></InputLabel>
-          <TextField select onChange={this.dietChange} id='diets-form' label='Diets' varient='filled' value={this.state.dietsFormValue}>
+          <TextField select style={{display: 'flex'}} onChange={this.dietChange} id='diets-form' label='Diets' varient='filled' value={this.state.dietsFormValue}>
             <MenuItem key='Gluten Free' value='Gluten Free'>Gluten Free</MenuItem>
             <MenuItem key='Ketogenic' value='Ketogenic'>Ketogenic</MenuItem>
             <MenuItem key='Vegetarian' value='Vegetarian'>Vegetarian</MenuItem>
@@ -256,7 +288,7 @@ class FindRecipes extends React.Component {
             <MenuItem key='Primal' value='Primal'>Primal</MenuItem>
             <MenuItem key='Low'value='Low'>Low</MenuItem>
           </TextField>
-          <Button type='submit' onClick={this.handleDietSubmit} varient='filled'>Add Diet</Button>
+          <Button type='submit' style={{marginRight: '0'}} id='signup' onClick={this.handleDietSubmit} varient='filled'>Add Diet</Button>
         </FormControl>
       </div>
     </Box>
