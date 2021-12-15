@@ -25,7 +25,6 @@ import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import FindRecipes from "./findRecipes/findRecipes.js";
-//import firebase from "firebase";
 
 class Main extends React.Component {
   constructor() {
@@ -33,7 +32,6 @@ class Main extends React.Component {
     this.state = {
       id: "landing",
       user: sampleUser,
-      uid: "",
       login: false,
       token: "",
       authenticated: false,
@@ -43,51 +41,41 @@ class Main extends React.Component {
     this.setInitialData = this.setInitialData.bind(this);
     this.getStatus = this.getStatus.bind(this);
     this.handleIngredient = this.handleIngredient.bind(this);
-    this.getUser = this.getUser.bind(this);
+    // this.getUser = this.getUser.bind(this);
     this.handleNote = this.handleNote.bind(this);
   }
 
   componentDidMount() {
     //need to send verifitcation before getting user info back from the server
     this.getStatus(() => {
-      this.getAuthentication(() => {
-        if (this.state.authenticated === true) {
-          let config = {
-            method: "get",
-            url: "/getUserInfo",
+      if (this.state.token != "") {
+        console.log("User logged in and can send the request to get the data");
+        axios
+          .get("/getUserInfo", {
             headers: {
-              authorization: this.state.token,
+              Authorization: this.state.token,
             },
-          };
-          axios(config)
-            .then((data) => {
-              this.setInitialData(data);
-            })
-            .catch((err) => {
-              console.log(err);
-            });
-        }
-      });
+          })
+          .then((data) => {
+            this.setInitialData(data);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
     });
-
-    // axios
-    //   .get("/getUsersInfo")
-    //   .then((data) => {
-    //     this.setInitialData(data);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
   }
 
   getUser() {
-    axios("/getUserInfo", {
-      headers: {
-        authorization: this.state.token,
-      },
-    }).then((data) => {
-      this.setInitialData(data.data);
-    });
+    axios
+      .get("/getUserInfo", {
+        headers: {
+          Authorization: this.state.token,
+        },
+      })
+      .then((data) => {
+        this.setInitialData(data.data);
+      });
   }
 
   setInitialData(obj) {
@@ -98,6 +86,7 @@ class Main extends React.Component {
 
   viewSwitch(e) {
     var value = e.target.id;
+    console.log(e.target.id);
     this.setState({ id: value });
   }
 
@@ -110,15 +99,18 @@ class Main extends React.Component {
       },
       data: {
         recipeId: recipeId,
-        uid: this.state.user.uid,
+        //  uid: this.state.user.uid,
+        token: this.state.token,
       },
     };
+
     axios(config).then((result) => {
       let newFavRecipes = this.state.recipes;
       newFavRecipes.push(recipeId);
       this.setState({
         user: {
-          uid: this.state.uid,
+          // uid: this.state.uid,
+          //need to update this funciton
           userName: this.state.userName,
           profilePic: this.state.profilePic,
           ingredients: this.state.ingredients,
@@ -164,6 +156,9 @@ class Main extends React.Component {
         (() => {
           console.log("test updating diet: ", recipeId);
           let config = {
+            headers: {
+              Authorization: this.state.token,
+            },
             method: "put",
             url: "/updateDiet",
             data: recipeId,
@@ -175,6 +170,9 @@ class Main extends React.Component {
         (() => {
           console.log("test updating intolerances: ", recipeId);
           let config = {
+            headers: {
+              Authorization: this.state.token,
+            },
             method: "put",
             url: "/updateIntolerances",
             data: recipeId,
@@ -186,8 +184,25 @@ class Main extends React.Component {
         (() => {
           console.log("test updating profile pic: ", recipeId);
           let config = {
+            headers: {
+              Authorization: this.state.token,
+            },
             method: "put",
             url: "/updateProfilePic",
+            data: recipeId,
+          };
+          axios(config);
+        })();
+        break;
+      case "username-form":
+        (() => {
+          console.log("test updating username: ", recipeId);
+          let config = {
+            headers: {
+              Authorization: this.state.token,
+            },
+            method: "put",
+            url: "/updateUsername",
             data: recipeId,
           };
           axios(config);
@@ -204,12 +219,12 @@ class Main extends React.Component {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         console.log(user);
-        this.setState({ uid: user.uid });
         this.setState({ login: true });
         auth.currentUser
           .getIdToken()
           .then((id) => {
             this.setState({ token: id });
+            console.log(this.state.token);
           })
           .then(func)
           .catch((err) => {
@@ -217,23 +232,9 @@ class Main extends React.Component {
           });
       } else {
         this.setState({ login: false });
-        // console.log("Not sign in");
+        console.log("Not sign in");
       }
     });
-  }
-  //run get token to get the ID token from firebase and sent them back to the server for
-  // verification
-  gettoken() {
-    if (this.state.uid !== "") {
-      currentUser
-        .getIdToken()
-        .then((id) => {
-          console.log(id);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
   }
 
   handleIngredient(event) {
@@ -243,13 +244,14 @@ class Main extends React.Component {
       method: "put",
       url: "/updateIngredients",
       headers: {
-        authorization: this.state.token,
+        Authorization: this.state.token,
       },
       data: {
-        uid: this.state.user.uid,
+        // uid: this.state.user.uid,
         ingredients: this.state.user.ingredients,
       },
     };
+
     switch (event.target.className) {
       case "add-ingredient":
         config.data.ingredients = this.state.user.ingredients.concat(
@@ -287,13 +289,14 @@ class Main extends React.Component {
       method: "put",
       url: "/updateNote",
       headers: {
-        authorization: this.state.token,
+        Authorization: this.state.token,
       },
       data: {
-        uid: this.state.user.uid,
+        //uid: this.state.user.uid,
         note: this.state.user.notes,
       },
     };
+
     switch (event.target.className) {
       case "add-note":
         config.data.note = this.state.user.notes.concat(", ", note.value);
@@ -318,25 +321,25 @@ class Main extends React.Component {
 
   // call this function to validate user request before going to "my recipt/ my incredient"
   //need to comeback to test this function with funcitonal api end points
-  getAuthentication(func) {
-    if (this.state.uid === "") {
-      console.log("Please Sign in first");
-    } else {
-      axios
-        .get("/authenticate", {
-          headers: {
-            authorization: this.state.token,
-          },
-        })
-        .then((response) => {
-          response.data === "successfully authenticated"
-            ? this.setState({ authenticated: true })
-            : this.setState({ authenticated: false });
-        })
-        .then(func)
-        .catch((err) => console.log(err.message));
-    }
-  }
+  // getAuthentication(func) {
+  //   if (this.state.uid === "") {
+  //     console.log("Please Sign in first");
+  //   } else {
+  //     axios
+  //       .get("/authenticate", {
+  //         headers: {
+  //           Authorization: this.state.token + " " + this.state.uid,
+  //         },
+  //       })
+  //       .then((response) => {
+  //         response.data === "successfully authenticated"
+  //           ? this.setState({ authenticated: true })
+  //           : this.setState({ authenticated: false });
+  //       })
+  //       .then(func)
+  //       .catch((err) => console.log(err.message));
+  //   }
+  // }
 
   render() {
     return (
@@ -469,7 +472,7 @@ class Main extends React.Component {
               ) : (
                 ""
               )}
-              {this.state.id === "login-signup" ? (
+              {this.state.id === "profile" ? (
                 <MyProfile
                   userInfo={this.state.user}
                   handleButtonPress={this.handleButtonPress}

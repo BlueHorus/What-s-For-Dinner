@@ -10,7 +10,17 @@ import {
   onAuthStateChanged,
   signInWithEmailAndPassword,
   signOut,
+  GoogleAuthProvider,
+  signInWithPopup,
+  getRedirectResult,
+  sendSignInLinkToEmail,
+  isSignInWithEmailLink,
+  signInWithEmailLink,
+  sendEmailVerification,
+  sendPasswordResetEmail,
+  reauthenticateWithCredential,
 } from "firebase/auth";
+import { LocalConvenienceStoreOutlined } from "@mui/icons-material";
 
 class Auth extends React.Component {
   constructor() {
@@ -22,8 +32,9 @@ class Auth extends React.Component {
       create: false,
       signin: false,
       click: false,
-      uid: "",
+      token: "",
       url: "",
+      sendPasswordResetEmail,
     };
     this.click = this.click.bind(this);
     this.submit = this.submit.bind(this);
@@ -31,6 +42,8 @@ class Auth extends React.Component {
     this.signin = this.signin.bind(this);
     this.signout = this.signout.bind(this);
     this.renderModal = this.renderModal.bind(this);
+    this.signinwihgoogle = this.signinwihgoogle.bind(this);
+    this.forgetPassword = this.forgetPassword.bind(this);
   }
 
   //logic to switch to different forms
@@ -55,6 +68,38 @@ class Auth extends React.Component {
     this.setState({ [item]: e.target.value });
   }
 
+  //use to verify email
+  verifyEmail() {
+    const auth = getAuth(app);
+    const actionCodeSetting = {
+      url: "http://localhost:3000",
+      handleCodeInApp: true,
+    };
+    sendEmailVerification(auth.currentUser, actionCodeSetting)
+      .then((res) => {
+        alert("Email verification sent!");
+      })
+
+      .catch((err) => {
+        console.log(err.message);
+      });
+  }
+
+  //logic for resetting a password
+  forgetPassword() {
+    let email = window.prompt("Please input you email");
+
+    const auth = getAuth();
+    console.log(auth);
+    sendPasswordResetEmail(auth, email)
+      .then(() => {
+        alert("Password reset email sent");
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  }
+
   //create an user
   //need to test the post request part
   createUser(e) {
@@ -62,7 +107,6 @@ class Auth extends React.Component {
       this.signout();
     } else {
       event.preventDefault();
-      console.log("invoking this");
       const auth = getAuth(app);
       createUserWithEmailAndPassword(
         auth,
@@ -70,20 +114,30 @@ class Auth extends React.Component {
         this.state.password
       )
         .then((info) => {
-          this.setState({ uid: info.user.uid });
-          console.log(this.state.uid);
+          this.setState({ token: info.user.accessToken });
 
-          // axios.post("/createUser", {
-          //   uid: this.state.uid,
-          //   username: this.state.username,
-          //   url: this.state.url,
-          // });
+          axios.post(
+            "/createUser",
+
+            {
+              username: this.state.username,
+              url: this.state.url,
+            },
+            {
+              headers: {
+                Authorization: this.state.token,
+              },
+            }
+          );
+        })
+        .then(() => {
           alert("Thanks you! ");
           e.target.reset();
           this.setState({ click: false });
+          this.verifyEmail();
         })
         .catch((err) => {
-          alert("Please try again!" + err);
+          alert("Please try again!");
           console.log(err.message);
         });
     }
@@ -95,16 +149,31 @@ class Auth extends React.Component {
     const auth = getAuth(app);
     signInWithEmailAndPassword(auth, this.state.email, this.state.password)
       .then((user) => {
-        console.log("signin");
-        this.props.status(() => {
-          e.target.reset();
-          this.setState({ click: false });
-        });
+        if (user.user.emailVerified === false) {
+          alert("Please verify your email first");
+          this.signout();
+        } else {
+          this.props.status(() => {
+            alert("Welcome Back");
+            e.target.reset();
+            this.setState({ click: false });
+          });
+        }
       })
       .catch((err) => {
         alert("Please try again");
         console.log(err.message);
       });
+  }
+
+  signinwihgoogle() {
+    const provider = new GoogleAuthProvider();
+    const auth = getAuth();
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        this.props.status();
+      })
+      .catch((err) => console.log(err.message));
   }
 
   //sign out
@@ -185,6 +254,9 @@ class Auth extends React.Component {
                   Log In
                 </Button>
               </div>
+              <div>
+                <img src="/images/google.png" onClick={this.signinwihgoogle} />
+              </div>
             </div>
           </div>
         );
@@ -228,12 +300,15 @@ class Auth extends React.Component {
               </form>
 
               <span> </span>
-              <span>Forgot?</span>
+              <span onClick={this.forgetPassword}>Forgot?</span>
               <div id="signup-container">
                 Don't have an account?{" "}
                 <Button id="signup" onClick={this.click}>
                   Sign Up
                 </Button>
+              </div>
+              <div>
+                <img src="/images/google.png" onClick={this.signinwihgoogle} />
               </div>
             </div>
           </div>
