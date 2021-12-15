@@ -1,19 +1,9 @@
 const admin = require("firebase-admin");
 
 const dotenv = require("dotenv");
-<<<<<<< HEAD
-
 dotenv.config({
   path: "./server/.env",
 });
-// dotenv.config({
-//   path: “./server/.env”,
-// });
-=======
-dotenv.config({
-  path: "./server/.env",
-});
->>>>>>> 9342943b987aef66cb429201c3425643c39fa77d
 
 admin.initializeApp({
   credential: admin.credential.cert({

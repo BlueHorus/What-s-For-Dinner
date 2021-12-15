@@ -13,11 +13,6 @@ const port = 3000;
 //402d8dc72e674fc39e43fbd4ecbd0e8e key 3
 //3a15e063e87b46579969ef7bb2d841e3 key 2
 //5eb864cd4c9b47b282c6ec757f5dd0b7 key 1
-<<<<<<< HEAD
-
-// console.log("this is our private key:", admin.private_key);
-=======
->>>>>>> 9342943b987aef66cb429201c3425643c39fa77d
 var unless = function (middleware, ...paths) {
   return function (req, res, next) {
     const pathCheck = paths.some((path) => path === req.path);
@@ -28,9 +23,6 @@ var unless = function (middleware, ...paths) {
 app.use(express.static(path.join(__dirname, "../public")));
 app.use(express.json());
 app.use(
-<<<<<<< HEAD
-  unless(verifyToken, "/updateUpvote", "/updateDownvote", "/getFeaturedRecipes")
-=======
   unless(
     admin.verifyToken,
     "/updateUpvote",
@@ -39,34 +31,10 @@ app.use(
     "/getRecipesFromIngredients",
     "/favicon.ico"
   )
->>>>>>> 9342943b987aef66cb429201c3425643c39fa77d
 );
 
 //might have to change req.query to req.body, might not work at all who knows
 
-<<<<<<< HEAD
-async function verifyToken(req, res, next) {
-  const idToken = req.headers.authorization;
-  console.log("🚀 ~ file: index.js ~ line 35 ~ verifyToken ~ idToken", idToken);
-
-  try {
-    const decodedToken = await admin.auth().verifyIdToken(idToken);
-
-    if (decodedToken) {
-      req.body.uid = decodedToken.uid;
-
-      return next();
-    } else {
-      return res.status(401).send("You are not authorized!");
-    }
-  } catch (e) {
-    console.log("what is this:", e);
-    return res.status(401).send("You are not authorized!");
-  }
-}
-
-=======
->>>>>>> 9342943b987aef66cb429201c3425643c39fa77d
 var parseResponse = function (response) {
   // parse response down to example object in team folder
   // return parsed response
@@ -291,10 +259,6 @@ app.get("/getRecipesFromIngredients", (req, res) => {
       )
       .then(({ data }) => {
         var parsedData = parseResponse(data);
-<<<<<<< HEAD
-        console.log(parsedData);
-=======
->>>>>>> 9342943b987aef66cb429201c3425643c39fa77d
         res.status(200).send(parsedData);
       })
       .catch((error) => {
@@ -426,11 +390,7 @@ app.get("/getUserInfo", (req, res) => {
   // request should include uid
   // queries database for user object
   // send user object back to front-end
-<<<<<<< HEAD
-  var userId = req.query.uid;
-=======
   var userId = req.body.uid;
->>>>>>> 9342943b987aef66cb429201c3425643c39fa77d
   Users.getUserById(userId)
     .then((response) => {
       res.status(200).send(response);
