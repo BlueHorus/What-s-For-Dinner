@@ -7,3 +7,4 @@ bundle.js.map
 package-lock.json
 firebase_config.js
 admin.env
+db_config.js
