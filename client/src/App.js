@@ -400,10 +400,10 @@ class Main extends React.Component {
         </div>
         <React.Fragment>
           <CssBaseline />
-          <Container maxWidth="lg">
+          <Container maxWidth="lg" >
             <Box
               sx={{
-                bgcolor: "white",
+                background: 'linear-gradient(0deg, rgba(255, 255, 255) 70%, #39d3bd 100%)',
                 minHeight: "100vh",
                 height: "100%",
                 width: "100%",
