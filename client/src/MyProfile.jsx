@@ -13,8 +13,6 @@ import IconButton from '@mui/material/IconButton';
 import ListItemText from '@mui/material/ListItemText';
 
 
-
-
 class MyProfile extends React.Component {
   constructor(props) {
     super(props);
@@ -31,7 +29,7 @@ class MyProfile extends React.Component {
       changingUsername: false,
       newPass: '',
       newUsername: '',
-      // editingProfile: false,
+      editingProfile: false,
     };
 
     this.setUserInfo = this.setUserInfo.bind(this);
@@ -48,6 +46,7 @@ class MyProfile extends React.Component {
     this.changeDiet = this.changeDiet.bind(this);
     this.handleDietChange = this.handleDietChange.bind(this);
     this.deleteFood = this.deleteFood.bind(this);
+    this.editProfile = this.editProfile.bind(this);
   }
 
   componentDidMount() {
@@ -177,8 +176,14 @@ class MyProfile extends React.Component {
     })
   }
 
+  editProfile() {
+    this.setState({
+      editingProfile: true,
+    })
+  }
+
   render() {
-    const { value, diet, intolerances, changingProfilePic, url, userInfo, changingPassword, changingUsername, newUsername, newPass } = this.state;
+    const { value, diet, intolerances, changingProfilePic, url, userInfo, changingPassword, changingUsername, newUsername, newPass, editingProfile } = this.state;
 
     const intoleranceList = ['dairy', 'egg', 'gluten', 'grain', 'peanut', 'seafood', 'sesame', 'shellfish', 'soy', 'sulfite', 'tree nut', 'wheat'];
     const dietsList = ['gluten free', 'ketogenic', 'vegetarian', 'lacto-vegetarian', 'obo-vegetarian', 'vegan', 'pescetarian', 'paleo', 'primal', 'whole30'];
@@ -186,6 +191,7 @@ class MyProfile extends React.Component {
 
     return (
       <div className="profile">
+        {editingProfile === true ? <EditProfile /> : null}
         <div className="welcome-banner">Welcome Back, <b>{userInfo.userName}!</b></div>
         <div className="profile-third">
           <div className="profile-pic-block">
@@ -203,6 +209,8 @@ class MyProfile extends React.Component {
               </form>
             : null
           }
+
+          <Button style={{ fontSize: '12px' }} id="button-edit-profile" variant='contained' onClick={this.editProfile}>Edit Profile</Button>
 
           <Button style={{ fontSize: '12px' }} id="button-change-name" variant='contained' onClick={this.handleUsernameChange}>Change Username</Button>
           <br />
@@ -238,21 +246,20 @@ class MyProfile extends React.Component {
         </div>
 
         <div className="diet-third">
-          {this.state.dietChanged ? <div className="saved-diet-notif" style={{color: "green"}}><b>Successfully saved new diet!</b></div> : null}
+          {this.state.dietChanged ? <div className="saved-diet-notif" style={{color: "salmon"}}><b>Successfully saved new diet!</b></div> : null}
           <br />
           <div className="diet-header">My Current Diet </div>
           <div className="diet-name"><b>{diet.toUpperCase()}</b></div>
 
           <form className="update-diet" onSubmit={this.changeDiet}>
-            <div className="change-diet-text">Change your diet in the dropdown below!</div>
-            <br />
+            <div className="change-diet-text">Select a new diet in the dropdown below</div>
           <select value={diet} onChange={this.handleDietChange}>
             <option default> - </option>
             {dietsList.map(diet => {
               return <option value={diet}>{diet}</option>
             })}
           </select>
-            <input type="submit" value="Confirm" />
+            <input className="button-send-diet" type="submit" value="Confirm" />
           </form>
         </div>
 
