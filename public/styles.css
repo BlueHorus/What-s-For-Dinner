@@ -8,7 +8,7 @@
   height: auto;
   width: 30%;
   margin-right: auto;
-  color: white;
+  color: #000000;
 }
 
 @media only screen and (max-width: 700px) {
@@ -21,7 +21,7 @@
 #content-break {
   height: 5px;
   width: 80%;
-  border-top: 2px solid grey;
+  border-top: 2px solid #7f7f7f;
 }
 
 #root {
@@ -57,8 +57,8 @@ body {
   width: 700px;
   height: 100%;
   margin-top: 2em;
-  border: solid 2px rgb(137, 137, 137);
-  background-color: #ffffff;
+  border: solid 2px #767676;
+  background-color: #000000;
 }
 
 .logo {
@@ -78,7 +78,7 @@ body {
 
 #tagline {
   font-family: "Josefin Sans";
-  color: tomato;
+  color: #009cb8;
   font-style: italic;
 }
 
@@ -93,14 +93,14 @@ body {
   display: flex;
   justify-self: flex-end;
   margin-right: 20px;
-  background-color: #e4eaea;
+  background-color: #1b1515;
   height: 40px;
   width: auto;
   align-items: center;
   text-align: center;
   font-size: 1vw;
   justify-content: center;
-  color: black;
+  color: #ffffff;
 }
 
 #my-ingredients,
@@ -110,21 +110,21 @@ body {
   display: flex;
   justify-self: flex-end;
   margin-right: 20px;
-  background-color: #e4eaea;
+  background-color: #1b1515;
   /* border-radius: 15px; */
   height: 40px;
   width: auto;
   align-items: center;
   text-align: center;
   font-size: 1vw;
-  color: black;
+  color: #ffffff;
 }
 
 #my-ingredients:disabled,
 #my-recipes:disabled,
 #profile:disabled,
 #find-recipes:disabled {
-  color: grey;
+  color: #7f7f7f;
 }
 
 #my-ingredients span,
@@ -135,7 +135,7 @@ body {
 }
 
 .navigation {
-  background-color: #39d3bd;
+  background-color: #c62c42;
   height: 70px;
   width: 100vw;
   display: flex;
@@ -151,31 +151,31 @@ body {
 #upvote-button {
   height: 50px;
   width: auto;
-  background-color: rgb(230, 230, 230);
-  color: #4fbaba;
+  background-color: #191919;
+  color: #b04545;
   margin-bottom: 5px;
 }
 
 #downvote-button {
   height: 50px;
   width: auto;
-  background-color: rgb(230, 230, 230);
-  color: #4fbaba;
+  background-color: #191919;
+  color: #b04545;
   margin-bottom: 5px;
 }
 
 #favorite-button {
   height: 50px;
   width: auto;
-  background-color: rgb(230, 230, 230);
-  color: #4fbaba;
+  background-color: #191919;
+  color: #b04545;
   margin-bottom: 5px;
 }
 #unfavorite-button {
   height: 50px;
   width: auto;
-  background-color: rgb(230, 230, 230);
-  color: #4fbaba;
+  background-color: #191919;
+  color: #b04545;
   margin-bottom: 5px;
 }
 
@@ -187,9 +187,9 @@ body {
   width: 90%;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  border: solid 2px #4fbaba;
+  border: solid 2px #b04545;
   border-radius: 25px;
-  background-color: white;
+  background-color: #000000;
   padding: 5px;
   margin: 10px;
   grid-template-rows: [row1-start] 30px [row1-end];
@@ -207,15 +207,15 @@ body {
   padding: 5px;
   margin: 5px;
   height: 150px;
-  background-color: burlywood;
+  background-color: #214778;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 175px;
-  color: brown;
+  color: #5ad5d5;
 } */
 
 .add-button {
   border-radius: 15px;
-  background-color: #4fbaba;
+  background-color: #b04545;
 }
 
 .recipetitle {
@@ -227,7 +227,7 @@ body {
   font-weight: bolder;
   margin-left: 10px;
   border-radius: 10px;
-  background-color: #e4eaea;
+  background-color: #1b1515;
 }
 
 .recipelink {
@@ -266,11 +266,11 @@ body {
 }
 
 .foundingredients {
-  color: green;
+  color: #ff7fff;
 }
 
 .missingingredients {
-  color: red;
+  color: #00ffff;
 }
 
 .summary {
@@ -296,7 +296,7 @@ body {
   transform-origin: center;
   transform-box: fill-box;
   justify-content: center;
-  background: linear-gradient(0deg, rgba(34, 193, 195, 0) 0%, #39d3bd 100%);
+  background: linear-gradient(0deg, #dd3e3c00 0%, #c62c42 100%);
   flex-wrap: wrap;
   flex-direction: row;
   font-size: 40px;
@@ -349,7 +349,7 @@ body {
   background-image: url("https://images.all-free-download.com/images/graphicwebp/sticky_note_pad_clip_art_12192.webp");
   background-repeat: no-repeat;
   background-size: cover;
-  background-color: violet;
+  background-color: #117d11;
   padding: 5px;
   grid-column-start: 2;
   grid-row-start: 2;
@@ -365,8 +365,8 @@ body {
 .remove-ing-button {
   border-radius: 50%;
   border: none;
-  background-color: rgb(230, 230, 230);
-  color: #4fbaba;
+  background-color: #191919;
+  color: #b04545;
   font-weight: bolder;
   padding: 3px;
   font-size: large;
@@ -375,8 +375,8 @@ body {
 .add-note-button {
   border-radius: 50%;
   border: none;
-  background-color: rgb(230, 230, 230);
-  color: #4fbaba;
+  background-color: #191919;
+  color: #b04545;
   font-weight: bolder;
   padding: 3px;
   font-size: large;
@@ -385,8 +385,8 @@ body {
 .add-ing-button {
   border-radius: 50%;
   border: none;
-  background-color: rgb(230, 230, 230);
-  color: #4fbaba;
+  background-color: #191919;
+  color: #b04545;
   font-weight: bolder;
   padding: 3px;
   font-size: large;
@@ -395,8 +395,8 @@ body {
 .remove-notes {
   border-radius: 50%;
   border: none;
-  background-color: rgb(230, 230, 230);
-  color: #4fbaba;
+  background-color: #191919;
+  color: #b04545;
   font-weight: bolder;
   padding: 3px;
   font-size: large;
@@ -414,7 +414,7 @@ body {
   column-gap: 3%;
   grid-template-rows: 25% 75%;
   padding: 5%;
-  border: solid 0.6px rgb(226, 132, 226);
+  border: solid 0.6px #1d7b1d;
 }
 
 .welcome-banner {
@@ -423,8 +423,8 @@ body {
   font-size: 45px;
   text-align: center;
   padding-top: 3%;
-  background-color: darkcyan;
-  color: mintcream;
+  background-color: #ff7474;
+  color: #0a0005;
   height: 70%;
 }
 
@@ -438,7 +438,7 @@ body {
 .diet-third {
   grid-row: 2;
   grid-column: 2;
-  border: 0.4px solid lightgrey;
+  border: 0.4px solid #2c2c2c;
   border-radius: 8px;
   align-content: center;
   padding-top: 5%;
@@ -447,7 +447,7 @@ body {
 .intolerance-third {
   grid-row: 2;
   grid-column: 3;
-  border: 0.4px solid lightgrey;
+  border: 0.4px solid #2c2c2c;
   border-radius: 8px;
   align-content: center;
   text-align: center;
@@ -479,8 +479,8 @@ body {
   width: 40px;
   justify-content: center;
   border-radius: 50%;
-  background-color: white;
-  color: black;
+  background-color: #000000;
+  color: #ffffff;
 }
 
 #button-edit-profile {
@@ -489,8 +489,8 @@ body {
   left: 20%;
   height: 38px;
   width: 160px;
-  background-color: cadetblue;
-  color: snow;
+  background-color: #a0615f;
+  color: #000505;
 }
 
 #button-change-pw {
@@ -499,8 +499,8 @@ body {
   width: 160px;
   top: 65%;
   left: 20%;
-  background-color: cadetblue;
-  color: snow;
+  background-color: #a0615f;
+  color: #000505;
 }
 
 #button-change-name {
@@ -509,8 +509,8 @@ body {
   width: 160px;
   top: 63%;
   left: 20%;
-  background-color: cadetblue;
-  color: snow;
+  background-color: #a0615f;
+  color: #000505;
 }
 
 .url-form {
@@ -570,8 +570,8 @@ body {
 #button-send-intolerances {
   position: relative;
   top: 15%;
-  background-color: cadetblue;
-  color: snow;
+  background-color: #a0615f;
+  color: #000505;
 }
 
 .diet-header {
@@ -582,7 +582,7 @@ body {
 }
 
 .diet-name {
-  color: violet;
+  color: #117d11;
   font-weight: bold;
   text-align: center;
   font-size: 26px;
@@ -598,10 +598,10 @@ body {
 
 /* FIX ME! */
 .button-send-diet {
-  background-color: cadetblue;
-  color: snow;
+  background-color: #a0615f;
+  color: #000505;
   border-radius: 8%;
-  border: white;
+  border: #000000;
 }
 
 .btn-confirm {
@@ -631,8 +631,8 @@ body {
   height: 100%;
   left: 0;
   overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0, 0, 0);
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: #ffffff;
+  background-color: #ffffff66;
   justify-content: center;
 }
 
@@ -651,10 +651,10 @@ body {
   align-content: center;
   flex-wrap: wrap;
   flex-direction: column;
-  background-color: white;
+  background-color: #000000;
   margin: 15% auto; /* 15% from the top and centered */
   padding: 20px;
-  border: 1px solid #888;
+  border: 1px solid #777777;
   width: 30%; /* Could be more or less, depending on screen size */
   height: auto;
   text-align: center;
@@ -677,7 +677,7 @@ form * {
   width: 3%;
   height: auto;
   margin: 10px;
-  background-color: #4fbaba;
+  background-color: #b04545;
 }
 
 #login-container,
@@ -689,6 +689,10 @@ form * {
 }
 
 #submit-button {
-  background-color: #4fbaba;
+  background-color: #b04545;
   margin: 10px;
+}
+
+#list-container {
+  background-color: #ffffff;
 }
