@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 
 // Page Imorts
+import FavoriteRecipes from './favoriteRecipes/favoriteRecipes.js'
 import Featured from "./featured/featured.js";
 import Recipe from "./shared/recipecard.js";
 import searchIcon from "./shared/SVGS/SearchIcon.svg";
@@ -25,7 +26,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import FindRecipes from "./findRecipes/findRecipes.js";
-
+import Share from "./shared/Share.jsx";
 class Main extends React.Component {
   constructor() {
     super();
@@ -48,6 +49,7 @@ class Main extends React.Component {
   componentDidMount() {
     //need to send verifitcation before getting user info back from the server
     this.getStatus(() => {
+      console.log("working");
       if (this.state.token != "") {
         axios
           .get("/getUserInfo", {
@@ -398,6 +400,7 @@ class Main extends React.Component {
             </Button>
           )}
           <Auth status={this.getStatus} login={this.state.login} />
+          {/* <Share /> */}
         </div>
         <React.Fragment>
           <CssBaseline />
@@ -448,7 +451,7 @@ class Main extends React.Component {
                 ""
               )}
               {this.state.id === "my-recipes" ? (
-                <h1>My Recipes Placeholder</h1>
+                <FavoriteRecipes user={this.state.user} token={this.state.token} handleButtonPress={this.handleButtonPress}/>
               ) : (
                 ""
               )}
