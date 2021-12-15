@@ -49,7 +49,6 @@ class Main extends React.Component {
     //need to send verifitcation before getting user info back from the server
     this.getStatus(() => {
       if (this.state.token != "") {
-        console.log("User logged in and can send the request to get the data");
         axios
           .get("/getUserInfo", {
             headers: {
@@ -57,7 +56,7 @@ class Main extends React.Component {
             },
           })
           .then((data) => {
-            this.setInitialData(data);
+            this.setInitialData(data.data);
           })
           .catch((err) => {
             console.log(err);
@@ -66,20 +65,14 @@ class Main extends React.Component {
     });
   }
 
-  // getUser() {
-  //   axios
-  //     .get("/getUserInfo", {
-  //       headers: {
-  //         Authorization: this.state.token,
-  //       },
-  //     })
-  //     .then((data) => {
-  //       let config = {
-  //         method: 'get',
-  //         url:
-  //       }
-  //     });
-  // }
+  getUser() {
+    axios('/getUserInfo', {
+      headers: {Authorization: this.state.token},
+    })
+      .then((data) => {
+        this.setInitialData(data.data);
+      });
+  }
 
   setInitialData(obj) {
     this.setState({
@@ -89,7 +82,6 @@ class Main extends React.Component {
 
   viewSwitch(e) {
     var value = e.target.id;
-    console.log(e.target.id);
     this.setState({ id: value });
   }
 
@@ -188,8 +180,6 @@ class Main extends React.Component {
         })();
         break;
       case 'favorite-button':
-        console.log(this.state.user.favRecipes);
-      if (this.state.user.favRecipes.indexOf(recipeId) === -1) {
         (() => {
         let config = {
           method: "post",
@@ -202,27 +192,27 @@ class Main extends React.Component {
           }
         };
         axios(config).then((result) => {
-          console.log('still needs to be figured out')
+          this.getUser()
         })
         .catch((err) => console.log(err));;
-       })()
-      } else {
-        (() => {
-          let config = {
-            method: "delete",
-            url: "/removeFromFavorites",
-            data: {
-              recipeId: recipeId,
-              token: this.state.token,
-            },
-          };
-          axios(config).then((result) => {
-          })
-          .catch((err) => console.log(err));;
-         })()
-      }
+       })();
        break;
-        default: console.log('test default');
+       case 'unfavorite-button':
+         let config = {
+           method: 'delete',
+           url: '/removeFromFavorites',
+           data: {
+             recipeId: recipeId
+           },
+           headers: {
+            Authorization: this.state.token,
+          }
+        }
+        axios(config)
+        .then((results) => {
+          this.getUser()
+        })
+        default: null;
     }
   }
 
@@ -232,13 +222,11 @@ class Main extends React.Component {
     const auth = getAuth(app);
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        console.log(user);
         this.setState({ login: true });
         auth.currentUser
           .getIdToken()
           .then((id) => {
             this.setState({ token: id });
-            console.log(this.state.token);
           })
           .then(func)
           .catch((err) => {
@@ -255,23 +243,23 @@ class Main extends React.Component {
     event.preventDefault();
     const ingredient = event.target.name;
     let config = {
-      method: "put",
-      url: "/updateIngredients",
-      headers: {
-        Authorization: this.state.token,
-      },
+      method: 'put',
+      url: '/updateIngredients',
+      headers: {Authorization: this.state.token},
       data: {
-        // uid: this.state.user.uid,
         ingredients: this.state.user.ingredients,
       },
     };
 
     switch (event.target.className) {
       case "add-ingredient":
-        config.data.ingredients = this.state.user.ingredients.concat(
-          ",",
+        if (!this.state.user.ingredients) {
+          config.data.ingredients = ingredient;
+        } else {
+          config.data.ingredients = this.state.user.ingredients.concat(
+          ',',
           ingredient
-        );
+        )};
         axios(config)
           .then(() => {
             this.getUser();
@@ -279,15 +267,11 @@ class Main extends React.Component {
           .catch((err) => console.log(err));
         break;
 
-      case "remove-ing-button":
-        config.data.ingredients = this.state.user.ingredients.replace(
-          ingredient,
-          ""
-        );
-        config.data.ingredients = config.data.ingredients.replace(/,{2,}/, ",");
-        config.data.ingredients = config.data.ingredients.replace(/^,/, "");
-        config.data.ingredients = config.data.ingredients.replace(/,$/, "");
-        console.log("newlist: ", config.data.ingredients);
+      case 'remove-ing-button':
+        config.data.ingredients = this.state.user.ingredients.replace(ingredient, '');
+        config.data.ingredients = config.data.ingredients.replace(/,{2,}/, ',');
+        config.data.ingredients = config.data.ingredients.replace(/^,/, '');
+        config.data.ingredients = config.data.ingredients.replace(/,$/, '');
         axios(config)
           .then(() => {
             this.getUser();
@@ -300,20 +284,21 @@ class Main extends React.Component {
     event.preventDefault();
     const note = event.target.name;
     let config = {
-      method: "put",
-      url: "/updateNote",
-      headers: {
-        Authorization: this.state.token,
-      },
+      method: 'put',
+      url: '/updateNote',
+      headers: {Authorization: this.state.token},
       data: {
-        //uid: this.state.user.uid,
         note: this.state.user.notes,
       },
     };
 
     switch (event.target.className) {
-      case "add-note":
-        config.data.note = this.state.user.notes.concat(", ", note.value);
+      case 'add-note':
+        if (!this.state.user.notes) {
+          config.data.note = note.value
+        } else {
+          config.data.note = this.state.user.notes.concat('\n', note.value, '\n');
+        }
         axios(config)
           .then(() => {
             this.getUser();

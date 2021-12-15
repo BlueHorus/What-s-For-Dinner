@@ -20,8 +20,6 @@ admin.initializeApp({
   }),
 });
 
-var i = i || 0;
-
 async function verifyToken(req, res, next) {
   var idToken = req.headers.authorization;
   admin
