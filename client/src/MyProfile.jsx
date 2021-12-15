@@ -382,16 +382,6 @@ class MyProfile extends React.Component {
           <div className="diet-header">My Current Diet </div>
           <div className="diet-name"><b>{diet.toUpperCase()}</b></div>
 
-          {/* <form className="update-diet">
-            <div className="change-diet-text">Select a new diet in the dropdown below</div>
-            <select value={diet} onChange={this.handleDietChange}>
-            <option default> - </option>
-            {dietsList.map(diet => {
-              return <option value={diet}>{diet}</option>
-            })}
-          </select>
-          </form> */}
-
           <div className="change-diet-text">Select a new diet in the dropdown below</div>
           <FormControl id="update-diet">
             <InputLabel id="diet-form-label">Diet</InputLabel>
@@ -436,16 +426,19 @@ class MyProfile extends React.Component {
             </List>
           </div>
 
-          <form className="intolerance-form">
-            Enter any food intolerances below
-            <br />
-            <select value={value} onChange={this.handleIntoleranceChange}>
-              <option default> - </option>
+          <div className="change-intol-text">Select more intolerances below</div>
+          <FormControl id="intolerance-form">
+            <InputLabel>Intolerance</InputLabel>
+            <Select
+              value={value}
+              label="Intolerance"
+              onChange={this.handleIntoleranceChange}
+            >
               {intoleranceList.map(intolerance => {
-                return <option value={intolerance}>{intolerance}</option>
+                return <MenuItem value={intolerance}>{intolerance}</MenuItem>
               })}
-            </select>
-          </form>
+            </Select>
+          </FormControl>
 
           <br />
           <Button

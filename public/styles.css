@@ -574,10 +574,20 @@ color: black;
   margin: auto;
 }
 
-.intolerance-form {
+.change-intol-text {
+  text-align: center;
+  width: 68%;
+  margin: auto;
+  margin-bottom: 2%;
+  position: relative;
+  top: 10%;
+}
+
+#intolerance-form {
   margin: auto;
   position: relative;
   top: 12%;
+  min-width: 65%;
 }
 
 #button-send-intolerances {
