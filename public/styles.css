@@ -418,7 +418,6 @@ color: black;
   column-gap: 3%;
   grid-template-rows: 25% 75%;
   padding: 5%;
-  border: solid .6px rgb(226, 132, 226);
 }
 
 .welcome-banner {
@@ -592,7 +591,7 @@ color: black;
 
 #button-send-intolerances {
   position: relative;
-  top: 15%;
+  top: 16%;
   background-color: cadetblue;
   color: snow;
 }

@@ -298,14 +298,13 @@ class MyProfile extends React.Component {
             : null
           }
 
-          {/* <Button
+          <Button
             style={{ fontSize: '12px' }}
             id="button-edit-profile"
             variant='contained'
-            disabled="disabled"
             onClick={this.editProfile}>
-            I don't work yet!
-          </Button> */}
+            Edit Profile
+          </Button>
 
           <Button
             style={{ fontSize: '12px' }}
