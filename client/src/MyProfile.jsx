@@ -65,7 +65,7 @@ class MyProfile extends React.Component {
       userInfo: info,
       // selectedFile: userInfo.profilePic ? userInfo.profilePic : defaultPic,
       selectedFile: defaultPic,
-      diet: userInfo.diet ? userInfo.diet : 'No diet selected',
+      diet: userInfo.diet ? userInfo.diet : '-',
       intolerances: userInfo.intolerances ? userInfo.intolerances.split(', ') : [],
     })
   }
@@ -236,7 +236,7 @@ class MyProfile extends React.Component {
     return (
       <div className="profile">
         {editingProfile === true ? <EditProfile /> : null}
-        <div className="welcome-banner">Welcome Back, <b>{userInfo.userName}!</b></div>
+        <div className="welcome-banner">Welcome Back, <b>{this.props.userInfo.userName}!</b></div>
         <div className="profile-third">
           <div className="profile-pic-block">
             <img
@@ -245,7 +245,7 @@ class MyProfile extends React.Component {
               alt="profile-picture"
             />
             <Button
-              sx={{width: '20px', borderRadius: '50%'}} id="button-change-pic"
+              id="button-change-pic"
               startIcon={<FaceIcon />}
               variant='contained'
               onClick={this.changeProfilePic}

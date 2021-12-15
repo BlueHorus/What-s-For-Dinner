@@ -476,17 +476,23 @@ color: black;
 }
 
 #button-change-pic {
+  height: 42px;
+  width: 42px;
   position: absolute;
+  display: flex;
+  min-width: 0px;
   top: 75%;
   left: 77%;
-  height: 40px;
-  width: 40px;
   justify-content: center;
+  align-items: center;
   border-radius: 50%;
   background-color: white;
   color: black;
 }
 
+#button-change-pic span {
+  margin: 0;
+}
 
 
 #button-edit-profile {
