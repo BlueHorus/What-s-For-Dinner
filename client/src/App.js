@@ -91,6 +91,9 @@ class Main extends React.Component {
     let config = {
       method: "put",
       url: "/updateFavorites",
+      headers: {
+        authorization: this.state.token,
+      },
       data: {
         recipeId: recipeId,
       },

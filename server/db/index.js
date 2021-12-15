@@ -7,7 +7,7 @@ let userSchema = mongoose.Schema({
   userName: { type: String },
   profilePic: { type: String },
   ingredients: { type: String },
-  favoriteRecipes: [String],
+  favoriteRecipes: [{ type: String, unique: true }],
   notes: { type: String },
   diet: { type: String },
   intolerances: { type: String },

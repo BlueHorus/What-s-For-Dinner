@@ -1,5 +1,3 @@
-
-
 * {
   font-family: "Raleway";
   text-size-adjust: auto;
@@ -10,7 +8,7 @@
   height: auto;
   width: 30%;
   margin-right: auto;
-  color: white;
+  color: #000000;
 }
 
 @media only screen and (max-width: 700px) {
@@ -59,8 +57,8 @@ body {
   width: 700px;
   height: 100%;
   margin-top: 2em;
-  border: solid 2px rgb(137, 137, 137);
-  background-color: #ffffff;
+  border: solid 2px rgb(118, 118, 118);
+  background-color: #000000;
 }
 
 .logo {
@@ -80,29 +78,29 @@ body {
 
 #tagline {
   font-family: "Josefin Sans";
-  color: tomato;
+  color: #009cb8;
   font-style: italic;
 }
 
 #login-signup {
   display: flex;
   flex-direction: row;
-  }
+}
 
 #sign-out,
 #login,
 #signup {
-display: flex;
-justify-self: flex-end;
-margin-right: 20px;
-background-color: #e4eaea;
-height: 40px;
-width: auto;
-align-items: center;
-text-align: center;
-font-size: 1vw;
-justify-content: center;
-color: black;
+  display: flex;
+  justify-self: flex-end;
+  margin-right: 20px;
+  background-color: #1b1515;
+  height: 40px;
+  width: auto;
+  align-items: center;
+  text-align: center;
+  font-size: 1vw;
+  justify-content: center;
+  color: #ffffff;
 }
 
 #my-ingredients,
@@ -112,21 +110,21 @@ color: black;
   display: flex;
   justify-self: flex-end;
   margin-right: 20px;
-  background-color: #e4eaea;
+  background-color: #1b1515;
   /* border-radius: 15px; */
   height: 40px;
   width: auto;
   align-items: center;
   text-align: center;
   font-size: 1vw;
-  color: black;
+  color: #ffffff;
 }
 
 #my-ingredients:disabled,
 #my-recipes:disabled,
 #profile:disabled,
 #find-recipes:disabled {
-  color: grey
+  color: grey;
 }
 
 #my-ingredients span,
@@ -137,7 +135,7 @@ color: black;
 }
 
 .navigation {
-  background-color: #39d3bd;
+  background-color: #c62c42;
   height: 70px;
   width: 100vw;
   display: flex;
@@ -153,31 +151,31 @@ color: black;
 #upvote-button {
   height: 50px;
   width: auto;
-  background-color: rgb(230, 230, 230);
-  color: #4fbaba;
+  background-color: rgb(25, 25, 25);
+  color: #b04545;
   margin-bottom: 5px;
 }
 
- #downvote-button {
+#downvote-button {
   height: 50px;
   width: auto;
-  background-color: rgb(230, 230, 230);
-  color: #4fbaba;
+  background-color: rgb(25, 25, 25);
+  color: #b04545;
   margin-bottom: 5px;
 }
 
 #favorite-button {
   height: 50px;
   width: auto;
-  background-color: rgb(230, 230, 230);
-  color: #4fbaba;
+  background-color: rgb(25, 25, 25);
+  color: #b04545;
   margin-bottom: 5px;
 }
 #unfavorite-button {
   height: 50px;
   width: auto;
-  background-color: rgb(230, 230, 230);
-  color: #4fbaba;
+  background-color: rgb(25, 25, 25);
+  color: #b04545;
   margin-bottom: 5px;
 }
 
@@ -189,9 +187,9 @@ color: black;
   width: 90%;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  border: solid 2px #4fbaba;
+  border: solid 2px #b04545;
   border-radius: 25px;
-  background-color: white;
+  background-color: #000000;
   padding: 5px;
   margin: 10px;
   grid-template-rows: [row1-start] 30px [row1-end];
@@ -209,15 +207,15 @@ color: black;
   padding: 5px;
   margin: 5px;
   height: 150px;
-  background-color: burlywood;
+  background-color: #214778;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 175px;
-  color: brown;
+  color: #5ad5d5;
 } */
 
 .add-button {
   border-radius: 15px;
-  background-color: #4fbaba;
+  background-color: #b04545;
 }
 
 .recipetitle {
@@ -229,7 +227,7 @@ color: black;
   font-weight: bolder;
   margin-left: 10px;
   border-radius: 10px;
-  background-color: #e4eaea;
+  background-color: #1b1515;
 }
 
 .recipelink {
@@ -268,11 +266,11 @@ color: black;
 }
 
 .foundingredients {
-  color: green;
+  color: #ff7fff;
 }
 
 .missingingredients {
-  color: red;
+  color: #00ffff;
 }
 
 .summary {
@@ -298,7 +296,7 @@ color: black;
   transform-origin: center;
   transform-box: fill-box;
   justify-content: center;
-  background: linear-gradient(0deg, rgba(34, 193, 195, 0) 0%, #39d3bd 100%);
+  background: linear-gradient(0deg, rgba(221, 62, 60, 0) 0%, #c62c42 100%);
   flex-wrap: wrap;
   flex-direction: row;
   font-size: 40px;
@@ -316,7 +314,6 @@ color: black;
   transform-box: fill-box;
 }
 
-
 /*
   Next section: ingredients
   */
@@ -324,10 +321,10 @@ color: black;
 #fridge {
   width: 150%;
   justify-content: center;
-  background-image: url('./images/fridge.svg');
+  background-image: url("./images/fridge.svg");
   height: inherit;
   background-size: cover;
-  margin-left: 150px
+  margin-left: 150px;
 }
 
 .user-ingredients {
@@ -340,7 +337,7 @@ color: black;
   justify-items: stretch;
   width: 40%;
   grid-gap: 20px;
-  font-weight: bold
+  font-weight: bold;
 }
 
 .ingredients-list {
@@ -352,24 +349,24 @@ color: black;
   background-image: url("https://images.all-free-download.com/images/graphicwebp/sticky_note_pad_clip_art_12192.webp");
   background-repeat: no-repeat;
   background-size: cover;
-  background-color: violet;
+  background-color: #117d11;
   padding: 5px;
   grid-column-start: 2;
   grid-row-start: 2;
-  width: 100%
+  width: 100%;
 }
 
 .one-ingredient {
   display: flex;
   justify-content: space-between;
-  padding-right: 80px
+  padding-right: 80px;
 }
 
 .remove-ing-button {
   border-radius: 50%;
   border: none;
-  background-color: rgb(230, 230, 230);
-  color: #4fbaba;
+  background-color: rgb(25, 25, 25);
+  color: #b04545;
   font-weight: bolder;
   padding: 3px;
   font-size: large;
@@ -378,8 +375,8 @@ color: black;
 .add-note-button {
   border-radius: 50%;
   border: none;
-  background-color: rgb(230, 230, 230);
-  color: #4fbaba;
+  background-color: rgb(25, 25, 25);
+  color: #b04545;
   font-weight: bolder;
   padding: 3px;
   font-size: large;
@@ -388,8 +385,8 @@ color: black;
 .add-ing-button {
   border-radius: 50%;
   border: none;
-  background-color: rgb(230, 230, 230);
-  color: #4fbaba;
+  background-color: rgb(25, 25, 25);
+  color: #b04545;
   font-weight: bolder;
   padding: 3px;
   font-size: large;
@@ -398,13 +395,12 @@ color: black;
 .remove-notes {
   border-radius: 50%;
   border: none;
-  background-color: rgb(230, 230, 230);
-  color: #4fbaba;
+  background-color: rgb(25, 25, 25);
+  color: #b04545;
   font-weight: bolder;
   padding: 3px;
   font-size: large;
 }
-
 
 /*---------------------------------------------
                   PROFILE PAGE
@@ -412,50 +408,26 @@ color: black;
 
 .profile {
   width: 100%;
-  height: 90vh;
-  display: grid;
-  grid-template-columns: 25% 34% 34%;
-  column-gap: 3%;
-  grid-template-rows: 25% 75%;
-  padding: 5%;
-  border: solid .6px rgb(226, 132, 226);
+  height: 70vh;
 }
 
 .welcome-banner {
-  grid-row: 1;
-  grid-column: 1 / span 3;
-  font-size: 45px;
+  width: 100%;
+  height: 120px;
+  font-size: 38px;
   text-align: center;
-  padding-top: 3%;
-  background-color: darkcyan;
-  color: mintcream;
-  height: 70%;
+  padding-top: 3.5%;
 }
 
-.profile-third {
-  grid-row: 2;
-  grid-column: 1;
+.profile-left {
   float: left;
+  top: 12%;
+  width: 240px;
+  height: 100%;
   justify-content: center;
-}
-
-.diet-third {
-  grid-row: 2;
-  grid-column: 2;
-  border: .4px solid lightgrey;
-  border-radius: 8px;
-  align-content: center;
-  padding-top: 5%;
-}
-
-.intolerance-third {
-  grid-row: 2;
-  grid-column: 3;
-  border: .4px solid lightgrey;
-  border-radius: 8px;
-  align-content: center;
-  text-align: center;
-  padding-top: 4%;
+  position: absolute;
+  margin-left: 3%;
+  display: block;
 }
 
 .profile-pic-block {
@@ -463,7 +435,7 @@ color: black;
   height: 240px;
   justify-content: center;
   position: absolute;
-  /* top: 15%; */
+  top: 15%;
 }
 
 .profile-pic {
@@ -475,7 +447,7 @@ color: black;
   position: absolute;
 }
 
-#button-change-pic {
+.button-change-pic {
   position: absolute;
   top: 75%;
   left: 77%;
@@ -483,151 +455,81 @@ color: black;
   width: 40px;
   justify-content: center;
   border-radius: 50%;
-  background-color: white;
-  color: black;
 }
 
-
-
-#button-edit-profile {
+.button-change-pw {
   position: relative;
-  top: 95%;
+  height: 35px;
+  width: 140px;
+  top: 58%;
+  justify-self: center;
   left: 20%;
-  height: 38px;
-  width: 160px;
-  background-color: cadetblue;
-  color: snow;
+  margin: auto;
 }
 
-#button-change-pw {
+.button-change-name {
   position: relative;
-  height: 38px;
-  width: 160px;
-  top: 65%;
+  height: 35px;
+  width: 140px;
+  top: 58%;
   left: 20%;
-  background-color: cadetblue;
-  color: snow;
-}
-
-#button-change-name {
-  position: relative;
-  height: 38px;
-  width: 160px;
-  top: 63%;
-  left: 20%;
-  background-color: cadetblue;
-  color: snow;
 }
 
 .url-form {
-  grid-row: 2;
-  grid-column: 1;
+  position: absolute;
+  top: 49%;
+  left: 10%;
   margin: auto;
-  position: relative;
-  top: 58%;
-  text-align: center;
 }
 
-.username-form {
-  grid-row: 2;
-  grid-column: 1;
-  margin: auto;
-  margin-top: 3%;
-  margin-bottom: 10%;
-  position: relative;
+.profile-right {
+  float: right;
+  width: 350px;
+  height: 100%;
+  justify-content: center;
+  position: absolute;
   top: 30%;
-  text-align: center;
+  left: 50%;
+  padding: auto;
 }
 
-.password-form {
-  grid-row: 2;
-  grid-column: 1;
+.diet {
+  margin-bottom: 7%;
   margin: auto;
-  position: relative;
-  top: 30%;
-  text-align: center;
 }
-
 
 .intolerance-list {
-  font-size: 18px;
-  margin: auto;
-  text-align: center;
-  position: relative;
-  top: 5%;
+  height: auto;
+  margin-bottom: 7%;
 }
 
-#intolerance-tile {
-  height: 27px;
-  width: 30%;
+.intolerance-tile {
+  height: 20px;
+  width: 25%;
+  margin-left: 12%;
   padding: 1%;
-  margin: auto;
 }
 
 .intolerance {
-  margin: auto;
+  padding-right: 3%;
+  float: left;
+}
+
+.button-delete-intolerance {
+  float: right;
 }
 
 .intolerance-form {
-  margin: auto;
-  position: relative;
-  top: 12%;
-}
-
-#button-send-intolerances {
-  position: relative;
-  top: 15%;
-  background-color: cadetblue;
-  color: snow;
-}
-
-.diet-header {
-  margin: auto;
-  font-size: 18px;
-  text-align: center;
-  margin-bottom: 2%;
-}
-
-.diet-name {
-  color: violet;
-  font-weight: bold;
-  text-align: center;
-  font-size: 26px;
-  margin-bottom: 3%;
+  margin-bottom: 6%;
 }
 
 .update-diet {
   margin: auto;
   margin-bottom: 10%;
-  width: 70%;
-  align-items: center;
-}
-
-/* FIX ME! */
-.button-send-diet {
-  background-color: cadetblue;
-  color: snow;
-  border-radius: 8%;
-  border: white;
 }
 
 .btn-confirm {
   margin: auto;
-}
-
-.change-diet-text {
-  grid-row: 2;
-  grid-column: 2;
-  text-align: center;
-  width: 100%;
-}
-
-.saved-diet-notif {
-  grid-row: 2;
-  grid-column: 2;
-  text-align: center;
-  position: relative;
-  top: 2%;
 }
 
 .modal {
@@ -638,10 +540,10 @@ color: black;
   height: 100%;
   left: 0;
   overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0);
-  background-color: rgba(0,0,0,0.4);
+  background-color: rgb(255, 255, 255);
+  background-color: rgba(255, 255, 255, 0.4);
   justify-content: center;
-  }
+}
 
 #modal-logo {
   margin-left: 0;
@@ -649,7 +551,7 @@ color: black;
   align-self: center;
   width: 200px;
   height: auto;
-  }
+}
 
 /* Modal Content/Box */
 .modal-content {
@@ -658,15 +560,14 @@ color: black;
   align-content: center;
   flex-wrap: wrap;
   flex-direction: column;
-  background-color: white;
+  background-color: #000000;
   margin: 15% auto; /* 15% from the top and centered */
   padding: 20px;
-  border: 1px solid #888;
+  border: 1px solid #777777;
   width: 30%; /* Could be more or less, depending on screen size */
   height: auto;
   text-align: center;
 }
-
 
 form {
   width: 50%;
@@ -685,7 +586,7 @@ form * {
   width: 3%;
   height: auto;
   margin: 10px;
-  background-color: #4fbaba;
+  background-color: #b04545;
 }
 
 #login-container,
@@ -697,6 +598,6 @@ form * {
 }
 
 #submit-button {
-  background-color: #4fbaba;
+  background-color: #b04545;
   margin: 10px;
 }
