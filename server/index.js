@@ -27,7 +27,7 @@ app.use(
     "/updateUpvote",
     "/updateDownvote",
     "/getFeaturedRecipes",
-    "/getRecipesFromIngredients"
+    "/getRecipesFromIngredients",
     "/favicon.ico"
   )
 );
