@@ -9,9 +9,10 @@ const admin = require("./foldername/admin.js");
 const port = 3000;
 
 //10b44c84b9192c1452635abd85a02bcf02482b02 key 4
-//5eb864cd4c9b47b282c6ec757f5dd0b7 key 3
+//cbcf06461ac54a15bd29e5696c16e605 key 3
 //3a15e063e87b46579969ef7bb2d841e3 key 2
-//5eb864cd4c9b47b282c6ec757f5dd0b7 key 1
+// cbcf06461ac54a15bd29e5696c16e605 key 1
+// cbcf06461ac54a15bd29e5696c16e605
 var unless = function (middleware, ...paths) {
   return function (req, res, next) {
     const pathCheck = paths.some((path) => path === req.path);
@@ -113,7 +114,7 @@ app.get("/getRecipesFromIngredients", (req, res) => {
   // send request to spoonacular
   // parse response into example object
   // send example object back to the front-end
-  // api url: https://api.spoonacular.com/recipes/complexSearch?fillIngredients=true&sort=max-used-ingredients&addRecipeNutrition=true&apiKey=5eb864cd4c9b47b282c6ec757f5dd0b7&sortDirection=desc&includeIngredients=garlic,tomato&diet=vegan
+  // api url: https://api.spoonacular.com/recipes/complexSearch?fillIngredients=true&sort=max-used-ingredients&addRecipeNutrition=true&apiKey=cbcf06461ac54a15bd29e5696c16e605&sortDirection=desc&includeIngredients=garlic,tomato&diet=vegan
   if (req.query.ingredients === undefined) {
     var ingredientsParam = null;
   } else {
@@ -142,7 +143,7 @@ app.get("/getRecipesFromIngredients", (req, res) => {
   ) {
     axios
       .get(
-        `https://api.spoonacular.com/recipes/complexSearch?fillIngredients=true&sort=max-used-ingredients&addRecipeNutrition=true&apiKey=5eb864cd4c9b47b282c6ec757f5dd0b7&sortDirection=desc`
+        `https://api.spoonacular.com/recipes/complexSearch?fillIngredients=true&sort=max-used-ingredients&addRecipeNutrition=true&apiKey=cbcf06461ac54a15bd29e5696c16e605&sortDirection=desc`
       )
       .then(({ data }) => {
         var parsedData = parseResponse(data);
@@ -158,7 +159,7 @@ app.get("/getRecipesFromIngredients", (req, res) => {
   ) {
     axios
       .get(
-        `https://api.spoonacular.com/recipes/complexSearch?fillIngredients=true&sort=max-used-ingredients&addRecipeNutrition=true&apiKey=5eb864cd4c9b47b282c6ec757f5dd0b7&sortDirection=desc${ingredientsParam}`
+        `https://api.spoonacular.com/recipes/complexSearch?fillIngredients=true&sort=max-used-ingredients&addRecipeNutrition=true&apiKey=cbcf06461ac54a15bd29e5696c16e605&sortDirection=desc${ingredientsParam}`
       )
       .then(({ data }) => {
         var parsedData = parseResponse(data);
@@ -174,7 +175,7 @@ app.get("/getRecipesFromIngredients", (req, res) => {
   ) {
     axios
       .get(
-        `https://api.spoonacular.com/recipes/complexSearch?fillIngredients=true&sort=max-used-ingredients&addRecipeNutrition=true&apiKey=5eb864cd4c9b47b282c6ec757f5dd0b7&sortDirection=desc${intolerancesParam}`
+        `https://api.spoonacular.com/recipes/complexSearch?fillIngredients=true&sort=max-used-ingredients&addRecipeNutrition=true&apiKey=cbcf06461ac54a15bd29e5696c16e605&sortDirection=desc${intolerancesParam}`
       )
       .then(({ data }) => {
         var parsedData = parseResponse(data);
@@ -190,7 +191,7 @@ app.get("/getRecipesFromIngredients", (req, res) => {
   ) {
     axios
       .get(
-        `https://api.spoonacular.com/recipes/complexSearch?fillIngredients=true&sort=max-used-ingredients&addRecipeNutrition=true&apiKey=5eb864cd4c9b47b282c6ec757f5dd0b7&sortDirection=desc${dietParam}`
+        `https://api.spoonacular.com/recipes/complexSearch?fillIngredients=true&sort=max-used-ingredients&addRecipeNutrition=true&apiKey=cbcf06461ac54a15bd29e5696c16e605&sortDirection=desc${dietParam}`
       )
       .then(({ data }) => {
         var parsedData = parseResponse(data);
@@ -206,7 +207,7 @@ app.get("/getRecipesFromIngredients", (req, res) => {
   ) {
     axios
       .get(
-        `https://api.spoonacular.com/recipes/complexSearch?fillIngredients=true&sort=max-used-ingredients&addRecipeNutrition=true&apiKey=5eb864cd4c9b47b282c6ec757f5dd0b7&sortDirection=desc${ingredientsParam}${intolerancesParam}`
+        `https://api.spoonacular.com/recipes/complexSearch?fillIngredients=true&sort=max-used-ingredients&addRecipeNutrition=true&apiKey=cbcf06461ac54a15bd29e5696c16e605&sortDirection=desc${ingredientsParam}${intolerancesParam}`
       )
       .then(({ data }) => {
         var parsedData = parseResponse(data);
@@ -238,7 +239,7 @@ app.get("/getRecipesFromIngredients", (req, res) => {
   ) {
     axios
       .get(
-        `https://api.spoonacular.com/recipes/complexSearch?fillIngredients=true&sort=max-used-ingredients&addRecipeNutrition=true&apiKey=5eb864cd4c9b47b282c6ec757f5dd0b7&sortDirection=desc${intolerancesParam}${dietParam}`
+        `https://api.spoonacular.com/recipes/complexSearch?fillIngredients=true&sort=max-used-ingredients&addRecipeNutrition=true&apiKey=cbcf06461ac54a15bd29e5696c16e605&sortDirection=desc${intolerancesParam}${dietParam}`
       )
       .then(({ data }) => {
         var parsedData = parseResponse(data);
@@ -254,7 +255,7 @@ app.get("/getRecipesFromIngredients", (req, res) => {
   ) {
     axios
       .get(
-        `https://api.spoonacular.com/recipes/complexSearch?fillIngredients=true&sort=max-used-ingredients&addRecipeNutrition=true&apiKey=5eb864cd4c9b47b282c6ec757f5dd0b7&sortDirection=desc${ingredientsParam}${intolerancesParam}${dietParam}`
+        `https://api.spoonacular.com/recipes/complexSearch?fillIngredients=true&sort=max-used-ingredients&addRecipeNutrition=true&apiKey=cbcf06461ac54a15bd29e5696c16e605&sortDirection=desc${ingredientsParam}${intolerancesParam}${dietParam}`
       )
       .then(({ data }) => {
         var parsedData = parseResponse(data);
@@ -284,7 +285,7 @@ app.get("/getUsersFavorites", (req, res) => {
       var recipeIdString = response.favoriteRecipes.toString();
       axios
         .get(
-          `https://api.spoonacular.com/recipes/${recipeIdString}/information?&includeNutrition=true&apiKey=5eb864cd4c9b47b282c6ec757f5dd0b7`
+          `https://api.spoonacular.com/recipes/${recipeIdString}/information?&includeNutrition=true&apiKey=cbcf06461ac54a15bd29e5696c16e605`
         )
         .then(({ data }) => {
           var array = [];
@@ -304,7 +305,7 @@ app.get("/getUsersFavorites", (req, res) => {
       var queryString = `&ids=${recipeIdString},`;
       axios
         .get(
-          `https://api.spoonacular.com/recipes/informationBulk?&includeNutrition=true&apiKey=5eb864cd4c9b47b282c6ec757f5dd0b7${queryString}`
+          `https://api.spoonacular.com/recipes/informationBulk?&includeNutrition=true&apiKey=cbcf06461ac54a15bd29e5696c16e605${queryString}`
         )
         .then(({ data }) => {
           var object = {
@@ -332,7 +333,7 @@ app.get("/getFeaturedRecipes", (req, res) => {
       var recipeIdString = array.toString();
       axios
         .get(
-          `https://api.spoonacular.com/recipes/${recipeIdString}/information?&includeNutrition=true&apiKey=5eb864cd4c9b47b282c6ec757f5dd0b7&sortDirection=desc`
+          `https://api.spoonacular.com/recipes/${recipeIdString}/information?&includeNutrition=true&apiKey=cbcf06461ac54a15bd29e5696c16e605&sortDirection=desc`
         )
         .then(({ data }) => {
           var array = [];
@@ -352,7 +353,7 @@ app.get("/getFeaturedRecipes", (req, res) => {
       var queryString = `&ids=${recipeIdString}`;
       axios
         .get(
-          `https://api.spoonacular.com/recipes/informationBulk?includeNutrition=true&apiKey=5eb864cd4c9b47b282c6ec757f5dd0b7&sortDirection=desc${queryString}`
+          `https://api.spoonacular.com/recipes/informationBulk?includeNutrition=true&apiKey=cbcf06461ac54a15bd29e5696c16e605&sortDirection=desc${queryString}`
         )
         .then(({ data }) => {
           var object = {
