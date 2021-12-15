@@ -1,6 +1,16 @@
 const mongoose = require("mongoose");
+const CONFIG = require("../../db_config.js");
 
-let db = mongoose.connect("mongodb://127.0.0.1:27017/oceanDB");
+// "mongodb://127.0.0.1:27017/oceanDB"
+
+let db = mongoose.connect(
+  "mongodb+srv://cluster0.lzfom.mongodb.net/oceandb?retryWrites=true&w=majority",
+  {
+    dbName: CONFIG.dbName,
+    user: CONFIG.user,
+    pass: CONFIG.pass,
+  }
+);
 
 let userSchema = mongoose.Schema({
   uid: { type: String },
@@ -21,14 +31,14 @@ let recipeSchema = mongoose.Schema({
 let Users = mongoose.model("Users", userSchema);
 let RecipesList = mongoose.model("RecipesList", recipeSchema);
 
-db.then(() =>
-  console.log(`Connected to: ${"mongodb://localhost:27017/oceanDB"}`)
-).catch((err) => {
-  console.log(
-    `There was a problem connecting to mongo at: ${"mongodb://localhost:27017/oceanDB"}`
-  );
-  console.log(err);
-});
+db.then(() => console.log(`Connected to: oceandb on Mongodb Atlas`)).catch(
+  (err) => {
+    console.log(
+      `There was a problem connecting to mongo at: ${"mongodb://localhost:27017/oceanDB"}`
+    );
+    console.log(err);
+  }
+);
 
 module.exports = {
   users: Users,

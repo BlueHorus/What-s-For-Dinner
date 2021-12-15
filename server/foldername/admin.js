@@ -1,4 +1,5 @@
 const admin = require("firebase-admin");
+
 const dotenv = require("dotenv");
 dotenv.config({
   path: "./server/.env",
@@ -23,7 +24,9 @@ admin.initializeApp({
 //comment
 
 async function verifyToken(req, res, next) {
+  //console.log(req);
   var idToken = req.headers.authorization;
+  console.log("id Token", idToken);
   admin
     .auth()
     .verifyIdToken(idToken)
