@@ -4,7 +4,16 @@ import defaultPic from './shared/SVGS/profileIcon.svg';
 import EditProfile from './EditProfile.js';
 import { app } from "../../firebase_config.js";
 import { getAuth, onAuthStateChanged, updateCurrentUser, reauthenticateWithCredential, updatePassword, EmailAuthProvider } from "firebase/auth";
-// import Grid from '@mui/material/Grid';
+import Button from '@mui/material/Button';
+import FaceIcon from '@mui/icons-material/Face';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import DeleteIcon from '@mui/icons-material/Delete';
+import IconButton from '@mui/material/IconButton';
+import ListItemText from '@mui/material/ListItemText';
+
+
+
 
 class MyProfile extends React.Component {
   constructor(props) {
@@ -35,10 +44,9 @@ class MyProfile extends React.Component {
     this.changeProfilePic = this.changeProfilePic.bind(this);
     this.uploadPic = this.uploadPic.bind(this);
     this.uploadUsername = this.uploadUsername.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleIntoleranceChange = this.handleIntoleranceChange.bind(this);
     this.changeDiet = this.changeDiet.bind(this);
-    this.handleDropdownChange = this.handleDropdownChange.bind(this);
+    this.handleDietChange = this.handleDietChange.bind(this);
     this.deleteFood = this.deleteFood.bind(this);
   }
 
@@ -132,17 +140,10 @@ class MyProfile extends React.Component {
     );
   }
 
-  handleChange(e) {
-    this.setState({
-      value: e.target.value,
-    })
-  }
-
-  handleSubmit(e) {
+  handleIntoleranceChange(e) {
     const { intolerances, value } = this.state;
-    event.preventDefault();
     this.setState({
-      intolerances: [...intolerances, value],
+      intolerances: [...intolerances, e.target.value],
       value: '',
     })
   }
@@ -161,17 +162,17 @@ class MyProfile extends React.Component {
     })
   }
 
-  handleDropdownChange(e) {
+  handleDietChange(e) {
     this.setState({
       diet: e.target.value,
     })
   }
 
-  deleteFood(e) {
+  deleteFood(inputFood) {
     const { intolerances } = this.state;
     this.setState({
       intolerances: intolerances.filter(food => {
-        return food !== e.target.value;
+        return food !== inputFood;
       })
     })
   }
@@ -189,7 +190,7 @@ class MyProfile extends React.Component {
         <div className="profile-third">
           <div className="profile-pic-block">
             <img className="profile-pic" src={this.state.selectedFile} alt="profile-picture" />
-            <button className="button-change-pic" onClick={this.changeProfilePic}>x</button>
+            <Button sx={{width: '40px'}} id="button-change-pic" startIcon={<FaceIcon />}  variant='contained' onClick={this.changeProfilePic}></Button>
           </div>
           {changingProfilePic === true
             ? <form className="url-form" onSubmit={this.uploadPic}>
@@ -203,9 +204,9 @@ class MyProfile extends React.Component {
             : null
           }
 
-          <button className="button-change-name" onClick={this.handleUsernameChange}>Change Username</button>
+          <Button style={{ fontSize: '12px' }} id="button-change-name" variant='contained' onClick={this.handleUsernameChange}>Change Username</Button>
           <br />
-          <button className="button-change-pw" onClick={this.handlePasswordChange}>Change Password</button>
+          <Button style={{ fontSize: '12px' }} id="button-change-pw" variant='contained' onClick={this.handlePasswordChange}>Change Password</Button>
 
           {changingUsername === true
             ? (
@@ -234,66 +235,70 @@ class MyProfile extends React.Component {
             )
             : null
           }
-
         </div>
 
         <div className="diet-third">
-          {this.state.dietChanged ? <div style={{color: "green"}}><b>Successfully saved new diet!</b></div> : null}
+          {this.state.dietChanged ? <div className="saved-diet-notif" style={{color: "green"}}><b>Successfully saved new diet!</b></div> : null}
           <br />
-          <div className="diet">
-            My Current Diet: <b>{diet}</b>
-          </div>
+          <div className="diet-header">My Current Diet </div>
+          <div className="diet-name"><b>{diet.toUpperCase()}</b></div>
 
           <form className="update-diet" onSubmit={this.changeDiet}>
-            <label>
-              Change your diet in the dropdown below!
+            <div className="change-diet-text">Change your diet in the dropdown below!</div>
             <br />
-          <select value={diet} onChange={this.handleDropdownChange}>
+          <select value={diet} onChange={this.handleDietChange}>
             <option default> - </option>
             {dietsList.map(diet => {
               return <option value={diet}>{diet}</option>
             })}
           </select>
-          </label>
             <input type="submit" value="Confirm" />
           </form>
         </div>
 
         <div className="intolerance-third">
           <div className="intolerance-list">
-            My Current Intolerances:
-            {intolerances.map(food => {
-              return (
-                <div className="intolerance-tile">
-                  <span className="intolerance"><b>{food}</b></span>
-                  <button className="button-delete-intolerance" value={food} onClick={this.deleteFood}>x</button>
-                </div>
-              );
-            })}
+            My Current Intolerances
+            <List>
+              {intolerances.map(food => {
+                return (
+                  <ListItem id="intolerance-tile" value={food}
+                  secondaryAction={
+                    <IconButton edge='end' onClick={()=> this.deleteFood(food)}>
+                      <DeleteIcon />
+                    </IconButton>
+                  }
+                  >
+                    <ListItemText primary={food} required/>
+                  </ListItem>
+                )
+              })
+            }
+            </List>
           </div>
 
-          <form className="intolerance-form" onSubmit={this.handleSubmit}>
+          <form className="intolerance-form">
             Enter any food intolerances below
             <br />
-            <select value={value} onChange={this.handleChange}>
+            <select value={value} onChange={this.handleIntoleranceChange}>
               <option default> - </option>
               {intoleranceList.map(intolerance => {
                 return <option value={intolerance}>{intolerance}</option>
               })}
             </select>
-            <input type="submit" value="Add" />
           </form>
 
           <br />
-          <button
-            className="update-intolerances"
+          <Button
+            variant="contained"
+            id="button-send-intolerances"
             onClick={(e) => this.props.handleButtonPress({
               // uid: userInfo.uid,
               intolerances: intolerances.join(','),
             })}
           >
-            Confirm Intolerance Changes!
-          </button>
+            Confirm Changes!
+          </Button>
         </div>
       </div>
     );

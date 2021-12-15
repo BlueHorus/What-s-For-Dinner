@@ -30,7 +30,7 @@ class Main extends React.Component {
   constructor() {
     super();
     this.state = {
-      id: "landing",
+      id: "profile",
       user: sampleUser,
       uid: "",
       login: false,
