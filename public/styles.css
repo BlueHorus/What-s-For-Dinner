@@ -611,3 +611,7 @@ form * {
   background-color: #4fbaba;
   margin: 10px;
 }
+
+.toggle-password {
+  cursor: pointer;
+}
