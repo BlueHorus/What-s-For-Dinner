@@ -11,11 +11,12 @@ class Share extends React.Component {
       twitter: "",
       facebook: "",
       Instagram: "",
+      //  default:document.location.href,
     };
   }
 
   clickShare() {
-    let url = document.location.href;
+    let url = this.props.recipe.spoonacularSourceUrl;
     this.setState({
       twitter: "https://twitter.com/intent/tweet?url=" + url,
     });
