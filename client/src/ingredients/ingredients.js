@@ -1,13 +1,7 @@
-<<<<<<< HEAD
 import React from 'react';
 import axios from 'axios';
 import { Card } from '@mui/material';
 import { CardContent } from '@mui/material';
-=======
-import React from "react";
-import axios from "axios";
-// import MyIngredients from './myIngredients.js'
->>>>>>> b189e238001855a1cf1289c61b9969b984775c15
 
 // add ingredient	"1. As a user, i want to upload ingredients
 // 2. As a user, i want the app to check if my input ingredient is valid
@@ -48,7 +42,8 @@ class Ingredients extends React.Component {
   }
 
   render() {
-    const ingredientsList = (this.props.user.ingredients === '') ? '' : this.props.user.ingredients;
+    const ingredientsList = (!this.props.user.ingredients) ? '' : this.props.user.ingredients;
+    console.log(this.props.user)
     const removeBtn = (this.props.user.ingredients === '') ? ('Add ingredient above') : (ingredientsList.split(',').map(ing => <div className="one-ingredient">
                                                                                           <li>{ing.trim()}</li>
                                                                                           <button className="remove-ing-button" name={ing} onClick={this.props.handleIngredient}>{String.fromCodePoint(0x2715)}</button>

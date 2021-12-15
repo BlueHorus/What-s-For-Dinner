@@ -57,7 +57,7 @@ class Main extends React.Component {
             },
           })
           .then((data) => {
-            this.setInitialData(data);
+            this.setInitialData(data.data);
           })
           .catch((err) => {
             console.log(err);
@@ -383,16 +383,6 @@ class Main extends React.Component {
               My Recipes
             </Button>
           )}
-          {this.state.id === "my-ingredients" ? (
-               <Ingredients user={this.state.user}
-               handleIngredient={this.handleIngredient}
-               handleNote={this.handleNote}
-               token={this.state.token}/>
-          ) : (
-            ""
-          )}
-          {this.state.id === "my-recipes" ? (
-            <h1>My Recipes Placeholder</h1>
 
           {this.state.login ? (
             <Button
