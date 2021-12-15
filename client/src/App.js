@@ -57,6 +57,7 @@ class Main extends React.Component {
             },
           })
           .then((data) => {
+            console.log("data:", data);
             this.setInitialData(data);
           })
           .catch((err) => {

@@ -5,7 +5,7 @@ const e = require("express");
 const app = express();
 const Recipes = require("./db/models/recipes.js");
 const Users = require("./db/models/users.js");
-// const admin = require("./foldername/admin.js");
+const admin = require("./foldername/admin.js");
 
 const port = 3000;
 
@@ -31,7 +31,8 @@ app.use(
 //might have to change req.query to req.body, might not work at all who knows
 
 async function verifyToken(req, res, next) {
-  const idToken = req.headers.Authorization;
+  const idToken = req.headers.authorization;
+  console.log("🚀 ~ file: index.js ~ line 35 ~ verifyToken ~ idToken", idToken);
 
   try {
     const decodedToken = await admin.auth().verifyIdToken(idToken);
@@ -44,6 +45,7 @@ async function verifyToken(req, res, next) {
       return res.status(401).send("You are not authorized!");
     }
   } catch (e) {
+    console.log("what is this:", e);
     return res.status(401).send("You are not authorized!");
   }
 }
