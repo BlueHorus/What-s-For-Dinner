@@ -50,7 +50,6 @@ class Main extends React.Component {
     //need to send verifitcation before getting user info back from the server
     this.getStatus(() => {
       if (this.state.token != "") {
-        console.log("User logged in and can send the request to get the data");
         axios
           .get("/getUserInfo", {
             headers: {
@@ -84,7 +83,6 @@ class Main extends React.Component {
 
   viewSwitch(e) {
     var value = e.target.id;
-    console.log(e.target.id);
     this.setState({ id: value });
   }
 
@@ -180,8 +178,6 @@ class Main extends React.Component {
         })();
         break;
       case 'favorite-button':
-        console.log(this.state.user.favRecipes);
-      if (this.state.user.favRecipes.indexOf(recipeId) === -1) {
         (() => {
         let config = {
           method: "post",
@@ -194,27 +190,27 @@ class Main extends React.Component {
           }
         };
         axios(config).then((result) => {
-          console.log('still needs to be figured out')
+          this.getUser()
         })
         .catch((err) => console.log(err));;
-       })()
-      } else {
-        (() => {
-          let config = {
-            method: "delete",
-            url: "/removeFromFavorites",
-            data: {
-              recipeId: recipeId,
-              token: this.state.token,
-            },
-          };
-          axios(config).then((result) => {
-          })
-          .catch((err) => console.log(err));;
-         })()
-      }
+       })();
        break;
-        default: console.log('test default');
+       case 'unfavorite-button':
+         let config = {
+           method: 'delete',
+           url: '/removeFromFavorites',
+           data: {
+             recipeId: recipeId
+           },
+           headers: {
+            Authorization: this.state.token,
+          }
+        }
+        axios(config)
+        .then((results) => {
+          this.getUser()
+        })
+        default: null;
     }
   }
 
@@ -224,13 +220,11 @@ class Main extends React.Component {
     const auth = getAuth(app);
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        console.log(user);
         this.setState({ login: true });
         auth.currentUser
           .getIdToken()
           .then((id) => {
             this.setState({ token: id });
-            console.log(this.state.token);
           })
           .then(func)
           .catch((err) => {
@@ -251,7 +245,6 @@ class Main extends React.Component {
       url: '/updateIngredients',
       headers: {Authorization: this.state.token},
       data: {
-        // uid: this.state.user.uid,
         ingredients: this.state.user.ingredients,
       },
     };
@@ -293,7 +286,6 @@ class Main extends React.Component {
       url: '/updateNote',
       headers: {Authorization: this.state.token},
       data: {
-        //uid: this.state.user.uid,
         note: this.state.user.notes,
       },
     };

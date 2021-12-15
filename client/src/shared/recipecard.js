@@ -78,11 +78,11 @@ function Recipe (props) {
           <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly'}}>
             <Typography paragraph>
                 Tags:
-                {recipe.dishTypes.map(type => <li>{type}</li>)}
+                {recipe.dishTypes.map(type => <li key={type}>{type}</li>)}
             </Typography>
             <Typography paragraph>
                 Diets:
-                {recipe.diets.map(type => <li>{type}</li>)}
+                {recipe.diets.map(type => <li key={type}>{type}</li>)}
             </Typography>
             {recipe.usedIngredients && recipe.missedIngredients ? <Typography>
               Ingredients:
