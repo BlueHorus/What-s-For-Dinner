@@ -36,6 +36,7 @@ class Landing extends React.Component {
           {this.state.featuredRecipes.map((recipe) => {
             return (
               <Recipe
+                key ={recipe.id}
                 handleButtonPress={this.props.handleButtonPress}
                 user={this.props.user}
                 recipe={recipe}

@@ -173,6 +173,13 @@ color: black;
   color: #4fbaba;
   margin-bottom: 5px;
 }
+#unfavorite-button {
+  height: 50px;
+  width: auto;
+  background-color: rgb(230, 230, 230);
+  color: #4fbaba;
+  margin-bottom: 5px;
+}
 
 /* Recipes */
 
