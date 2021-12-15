@@ -104,6 +104,7 @@ class MyProfile extends React.Component {
     event.preventDefault();
     this.setState({
       changingUsername: false,
+      newUsername: '',
     });
     this.props.handleButtonPress({
       // uid: 2,
@@ -124,6 +125,7 @@ class MyProfile extends React.Component {
       });
     this.setState({
       changingPassword: false,
+      newPass: '',
     })
   }
 
