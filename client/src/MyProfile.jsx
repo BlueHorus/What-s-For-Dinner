@@ -1,9 +1,16 @@
-import React from 'react';
-import axios from 'axios';
-import defaultPic from './shared/SVGS/profileIcon.svg';
-import EditProfile from './EditProfile.js';
+import React from "react";
+import axios from "axios";
+import defaultPic from "./shared/SVGS/profileIcon.svg";
+import EditProfile from "./EditProfile.js";
 import { app } from "../../firebase_config.js";
-import { getAuth, onAuthStateChanged, updateCurrentUser, reauthenticateWithCredential, updatePassword, EmailAuthProvider } from "firebase/auth";
+import {
+  getAuth,
+  onAuthStateChanged,
+  updateCurrentUser,
+  reauthenticateWithCredential,
+  updatePassword,
+  EmailAuthProvider,
+} from "firebase/auth";
 import Button from '@mui/material/Button';
 import FaceIcon from '@mui/icons-material/Face';
 import List from '@mui/material/List';
@@ -12,19 +19,18 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import IconButton from '@mui/material/IconButton';
 import ListItemText from '@mui/material/ListItemText';
 
-
 class MyProfile extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       userInfo: this.props.userInfo,
-      value: '',
-      diet: '',
+      value: "",
+      diet: "",
       dietChanged: false,
       intolerances: [],
       changingProfilePic: false,
       selectedFile: defaultPic,
-      url: '',
+      url: "",
       changingPassword: false,
       changingUsername: false,
       newPass: '',
@@ -83,13 +89,13 @@ class MyProfile extends React.Component {
   passwordInput(e) {
     this.setState({
       newPass: e.target.value,
-    })
+    });
   }
 
   usernameInput(e) {
     this.setState({
       newUsername: e.target.value,
-    })
+    });
   }
 
   uploadUsername(e) {
@@ -97,12 +103,10 @@ class MyProfile extends React.Component {
     this.setState({
       changingUsername: false,
     });
-    this.props.handleButtonPress(
-      {
-        // uid: 2,
-        newUsername: this.state.newUsername,
-      }
-    );
+    this.props.handleButtonPress({
+      // uid: 2,
+      newUsername: this.state.newUsername,
+    });
   }
 
   changePassword() {
@@ -132,7 +136,7 @@ class MyProfile extends React.Component {
   handleURLChange(e) {
     this.setState({
       url: e.target.value,
-    })
+    });
   }
 
   uploadPic(e) {
@@ -140,12 +144,10 @@ class MyProfile extends React.Component {
       selectedFile: this.state.url ? this.state.url : defaultPic,
       changingProfilePic: false,
     });
-    this.props.handleButtonPress(
-      {
-        // uid: 2,
-        newProfilePic: this.state.url,
-      }
-    );
+    this.props.handleButtonPress({
+      // uid: 2,
+      newProfilePic: this.state.url,
+    });
   }
 
   handleIntoleranceChange(e) {
@@ -159,21 +161,19 @@ class MyProfile extends React.Component {
   changeDiet(e) {
     const { diet, userInfo } = this.state;
     event.preventDefault();
-    this.props.handleButtonPress(
-      {
-        // uid: userInfo.uid,
-        diet: diet,
-      }
-    );
+    this.props.handleButtonPress({
+      // uid: userInfo.uid,
+      diet: diet,
+    });
     this.setState({
       dietChanged: true,
-    })
+    });
   }
 
   handleDietChange(e) {
     this.setState({
       diet: e.target.value,
-    })
+    });
   }
 
   deleteFood(inputFood) {
@@ -192,11 +192,46 @@ class MyProfile extends React.Component {
   }
 
   render() {
-    const { value, diet, intolerances, changingProfilePic, url, userInfo, changingPassword, changingUsername, newUsername, newPass, editingProfile } = this.state;
+    const {
+      value,
+      diet,
+      intolerances,
+      changingProfilePic,
+      url,
+      userInfo,
+      changingPassword,
+      changingUsername,
+      newUsername,
+      newPass,
+      editingProfile
+    } = this.state;
 
-    const intoleranceList = ['dairy', 'egg', 'gluten', 'grain', 'peanut', 'seafood', 'sesame', 'shellfish', 'soy', 'sulfite', 'tree nut', 'wheat'];
-    const dietsList = ['gluten free', 'ketogenic', 'vegetarian', 'lacto-vegetarian', 'obo-vegetarian', 'vegan', 'pescetarian', 'paleo', 'primal', 'whole30'];
-
+    const intoleranceList = [
+      'dairy',
+      'egg',
+      'gluten',
+      'grain',
+      'peanut',
+      'seafood',
+      'sesame',
+      'shellfish',
+      'soy',
+      'sulfite',
+      'tree nut',
+      'wheat'
+    ];
+    const dietsList = [
+      'gluten free',
+      'ketogenic',
+      'vegetarian',
+      'lacto-vegetarian',
+      'obo-vegetarian',
+      'vegan',
+      'pescetarian',
+      'paleo',
+      'primal',
+      'whole30'
+    ];
 
     return (
       <div className="profile">
@@ -204,25 +239,60 @@ class MyProfile extends React.Component {
         <div className="welcome-banner">Welcome Back, <b>{userInfo.userName}!</b></div>
         <div className="profile-third">
           <div className="profile-pic-block">
-            <img className="profile-pic" src={this.state.selectedFile} alt="profile-picture" />
-            <Button sx={{width: '20px', borderRadius: '50%'}} id="button-change-pic" startIcon={<FaceIcon />}  variant='contained' onClick={this.changeProfilePic}></Button>
+            <img
+              className="profile-pic"
+              src={this.state.selectedFile}
+              alt="profile-picture"
+            />
+            <Button
+              sx={{width: '20px', borderRadius: '50%'}} id="button-change-pic"
+              startIcon={<FaceIcon />}
+              variant='contained'
+              onClick={this.changeProfilePic}
+            >
+            </Button>
           </div>
+
           {changingProfilePic === true
             ? <div className="url-form">
                 Please enter new photo URL
                 <br />
-                <input type="text" value={url} onChange={this.handleURLChange}/>
+                <input
+                  type="text"
+                  value={url}
+                  onChange={this.handleURLChange}
+                />
                 <button onClick={this.uploadPic}>Upload</button>
               </div>
             : null
           }
 
-          <Button style={{ fontSize: '12px' }} id="button-edit-profile" variant='contained' disabled="disabled"
-           onClick={this.editProfile}>I don't work yet!</Button>
+          <Button
+            style={{ fontSize: '12px' }}
+            id="button-edit-profile"
+            variant='contained'
+            disabled="disabled"
+            onClick={this.editProfile}>
+            I don't work yet!
+          </Button>
 
-          <Button style={{ fontSize: '12px' }} id="button-change-name" variant='contained' onClick={this.handleUsernameChange}>Change Username</Button>
+          <Button
+            style={{ fontSize: '12px' }}
+            id="button-change-name"
+            variant='contained'
+            onClick={this.handleUsernameChange}>
+            Change Username
+          </Button>
+
           <br />
-          <Button style={{ fontSize: '12px' }} id="button-change-pw" variant='contained' onClick={this.handlePasswordChange}>Change Password</Button>
+
+          <Button
+            style={{ fontSize: '12px' }}
+            id="button-change-pw"
+            variant='contained'
+            onClick={this.handlePasswordChange}>
+            Change Password
+          </Button>
 
           {changingUsername === true
             ? (
@@ -230,9 +300,17 @@ class MyProfile extends React.Component {
                   <label>
                     Please enter new username:
                     <br />
-                    <input type="text" value={newUsername} onChange={this.usernameInput} />
+                    <input
+                      type="text"
+                      value={newUsername}
+                      onChange={this.usernameInput}
+                    />
                   </label>
-                  <button className="change-username" onClick={this.uploadUsername}>Confirm!</button>
+                  <button
+                    className="change-username"
+                    onClick={this.uploadUsername}>
+                    Confirm!
+                  </button>
                 </div>
             )
             : null
@@ -244,7 +322,11 @@ class MyProfile extends React.Component {
                   <label>
                     Please enter new password:
                     <br />
-                    <input type="text" value={newPass} onChange={this.passwordInput} />
+                    <input
+                      type="text"
+                      value={newPass}
+                      onChange={this.passwordInput}
+                    />
                   </label>
                   <button onClick={this.changePassword}>Confirm!</button>
                 </div>
@@ -254,14 +336,22 @@ class MyProfile extends React.Component {
         </div>
 
         <div className="diet-third">
-          {this.state.dietChanged ? <div className="saved-diet-notif" style={{color: "salmon"}}><b>Successfully saved new diet!</b></div> : null}
+          {this.state.dietChanged
+          ? <div
+              className="saved-diet-notif"
+              style={{color: "salmon"}}>
+            <b>Successfully saved new diet!</b>
+            </div>
+          : null}
+
           <br />
+
           <div className="diet-header">My Current Diet </div>
           <div className="diet-name"><b>{diet.toUpperCase()}</b></div>
 
           <form className="update-diet" onSubmit={this.changeDiet}>
             <div className="change-diet-text">Select a new diet in the dropdown below</div>
-          <select value={diet} onChange={this.handleDietChange}>
+            <select value={diet} onChange={this.handleDietChange}>
             <option default> - </option>
             {dietsList.map(diet => {
               return <option value={diet}>{diet}</option>

@@ -10,42 +10,44 @@ const admin = require("./admin.js");
 const port = 3000;
 
 //10b44c84b9192c1452635abd85a02bcf02482b02 key 4
-//93ee5206be4141f4a761b7f459af4c69 key 3
+//402d8dc72e674fc39e43fbd4ecbd0e8e key 3
 //3a15e063e87b46579969ef7bb2d841e3 key 2
 //5eb864cd4c9b47b282c6ec757f5dd0b7 key 1
 
 app.use(express.static(path.join(__dirname, "../public")));
 app.use(express.json());
 
-// app.get("/authenticate", (req, res) => {
-//   // request should include UID from firebase and token
-//   // query database to create a new user
-//   // send "successfully created new user"
-//   var joinedTokens = req.headers.Authorization;
-//   var arrayOfTokens = joinedTokens.split(" ");
-//   verifyToken(req.headers.Authorization);
-//   var userId = req.body.uid;
-//   var token = req.body.token;
-//   res.send("Successfully authenticated user!");
-// });
+// authenticate was commented out!!
 
-// async function verifyToken(token) {
-//   const idToken = token;
+app.get("/authenticate", (req, res) => {
+  // request should include UID from firebase and token
+  // query database to create a new user
+  // send "successfully created new user"
+  var joinedTokens = req.headers.Authorization;
+  var arrayOfTokens = joinedTokens.split(" ");
+  verifyToken(req.headers.Authorization);
+  var userId = req.body.uid;
+  var token = req.body.token;
+  res.send("Successfully authenticated user!");
+});
 
-//   try {
-//     const decodedToken = await admin.auth().verifyIdToken(idToken);
+async function verifyToken(token) {
+  const idToken = token;
 
-//     if (decodedToken) {
-//       var uid = decodedToken.uid;
+  try {
+    const decodedToken = await admin.auth().verifyIdToken(idToken);
 
-//       return uid;
-//     } else {
-//       return res.status(401).send("You are not authorized!");
-//     }
-//   } catch (err) {
-//     return res.status(401).send("You are not authorized!");
-//   }
-// }
+    if (decodedToken) {
+      var uid = decodedToken.uid;
+
+      return uid;
+    } else {
+      return res.status(401).send("You are not authorized!");
+    }
+  } catch (err) {
+    return res.status(401).send("You are not authorized!");
+  }
+}
 
 var parseResponse = function (response) {
   // parse response down to example object in team folder
@@ -156,7 +158,7 @@ app.get("/getRecipesFromIngredients", (req, res) => {
   ) {
     axios
       .get(
-        `https://api.spoonacular.com/recipes/complexSearch?fillIngredients=true&sort=max-used-ingredients&addRecipeNutrition=true&apiKey=93ee5206be4141f4a761b7f459af4c69&sortDirection=desc`
+        `https://api.spoonacular.com/recipes/complexSearch?fillIngredients=true&sort=max-used-ingredients&addRecipeNutrition=true&apiKey=402d8dc72e674fc39e43fbd4ecbd0e8e&sortDirection=desc`
       )
       .then(({ data }) => {
         var parsedData = parseResponse(data);
@@ -172,7 +174,7 @@ app.get("/getRecipesFromIngredients", (req, res) => {
   ) {
     axios
       .get(
-        `https://api.spoonacular.com/recipes/complexSearch?fillIngredients=true&sort=max-used-ingredients&addRecipeNutrition=true&apiKey=93ee5206be4141f4a761b7f459af4c69&sortDirection=desc${ingredientsParam}`
+        `https://api.spoonacular.com/recipes/complexSearch?fillIngredients=true&sort=max-used-ingredients&addRecipeNutrition=true&apiKey=402d8dc72e674fc39e43fbd4ecbd0e8e&sortDirection=desc${ingredientsParam}`
       )
       .then(({ data }) => {
         var parsedData = parseResponse(data);
@@ -188,7 +190,7 @@ app.get("/getRecipesFromIngredients", (req, res) => {
   ) {
     axios
       .get(
-        `https://api.spoonacular.com/recipes/complexSearch?fillIngredients=true&sort=max-used-ingredients&addRecipeNutrition=true&apiKey=93ee5206be4141f4a761b7f459af4c69&sortDirection=desc${intolerancesParam}`
+        `https://api.spoonacular.com/recipes/complexSearch?fillIngredients=true&sort=max-used-ingredients&addRecipeNutrition=true&apiKey=402d8dc72e674fc39e43fbd4ecbd0e8e&sortDirection=desc${intolerancesParam}`
       )
       .then(({ data }) => {
         var parsedData = parseResponse(data);
@@ -204,7 +206,7 @@ app.get("/getRecipesFromIngredients", (req, res) => {
   ) {
     axios
       .get(
-        `https://api.spoonacular.com/recipes/complexSearch?fillIngredients=true&sort=max-used-ingredients&addRecipeNutrition=true&apiKey=93ee5206be4141f4a761b7f459af4c69&sortDirection=desc${dietParam}`
+        `https://api.spoonacular.com/recipes/complexSearch?fillIngredients=true&sort=max-used-ingredients&addRecipeNutrition=true&apiKey=402d8dc72e674fc39e43fbd4ecbd0e8e&sortDirection=desc${dietParam}`
       )
       .then(({ data }) => {
         var parsedData = parseResponse(data);
@@ -220,7 +222,7 @@ app.get("/getRecipesFromIngredients", (req, res) => {
   ) {
     axios
       .get(
-        `https://api.spoonacular.com/recipes/complexSearch?fillIngredients=true&sort=max-used-ingredients&addRecipeNutrition=true&apiKey=93ee5206be4141f4a761b7f459af4c69&sortDirection=desc${ingredientsParam}${intolerancesParam}`
+        `https://api.spoonacular.com/recipes/complexSearch?fillIngredients=true&sort=max-used-ingredients&addRecipeNutrition=true&apiKey=402d8dc72e674fc39e43fbd4ecbd0e8e&sortDirection=desc${ingredientsParam}${intolerancesParam}`
       )
       .then(({ data }) => {
         var parsedData = parseResponse(data);
@@ -252,7 +254,7 @@ app.get("/getRecipesFromIngredients", (req, res) => {
   ) {
     axios
       .get(
-        `https://api.spoonacular.com/recipes/complexSearch?fillIngredients=true&sort=max-used-ingredients&addRecipeNutrition=true&apiKey=93ee5206be4141f4a761b7f459af4c69&sortDirection=desc${intolerancesParam}${dietParam}`
+        `https://api.spoonacular.com/recipes/complexSearch?fillIngredients=true&sort=max-used-ingredients&addRecipeNutrition=true&apiKey=402d8dc72e674fc39e43fbd4ecbd0e8e&sortDirection=desc${intolerancesParam}${dietParam}`
       )
       .then(({ data }) => {
         var parsedData = parseResponse(data);
@@ -268,10 +270,11 @@ app.get("/getRecipesFromIngredients", (req, res) => {
   ) {
     axios
       .get(
-        `https://api.spoonacular.com/recipes/complexSearch?fillIngredients=true&sort=max-used-ingredients&addRecipeNutrition=true&apiKey=93ee5206be4141f4a761b7f459af4c69&sortDirection=desc${ingredientsParam}${intolerancesParam}${dietParam}`
+        `https://api.spoonacular.com/recipes/complexSearch?fillIngredients=true&sort=max-used-ingredients&addRecipeNutrition=true&apiKey=402d8dc72e674fc39e43fbd4ecbd0e8e&sortDirection=desc${ingredientsParam}${intolerancesParam}${dietParam}`
       )
       .then(({ data }) => {
         var parsedData = parseResponse(data);
+        console.log(parsedData)
         res.status(200).send(parsedData);
       })
       .catch((error) => {
@@ -290,7 +293,7 @@ app.get("/getUsersFavorites", (req, res) => {
       var recipeIdString = response.favoriteRecipes.toString();
       axios
         .get(
-          `https://api.spoonacular.com/recipes/${recipeIdString}/information?&includeNutrition=true&apiKey=93ee5206be4141f4a761b7f459af4c69`
+          `https://api.spoonacular.com/recipes/${recipeIdString}/information?&includeNutrition=true&apiKey=402d8dc72e674fc39e43fbd4ecbd0e8e`
         )
         .then(({ data }) => {
           var array = [];
@@ -310,7 +313,7 @@ app.get("/getUsersFavorites", (req, res) => {
       var queryString = `&ids=${recipeIdString},`;
       axios
         .get(
-          `https://api.spoonacular.com/recipes/informationBulk?&includeNutrition=true&apiKey=93ee5206be4141f4a761b7f459af4c69${queryString}`
+          `https://api.spoonacular.com/recipes/informationBulk?&includeNutrition=true&apiKey=402d8dc72e674fc39e43fbd4ecbd0e8e${queryString}`
         )
         .then(({ data }) => {
           var object = {
@@ -338,7 +341,7 @@ app.get("/getFeaturedRecipes", (req, res) => {
       var recipeIdString = array.toString();
       axios
         .get(
-          `https://api.spoonacular.com/recipes/${recipeIdString}/information?&includeNutrition=true&apiKey=93ee5206be4141f4a761b7f459af4c69&sortDirection=desc`
+          `https://api.spoonacular.com/recipes/${recipeIdString}/information?&includeNutrition=true&apiKey=402d8dc72e674fc39e43fbd4ecbd0e8e&sortDirection=desc`
         )
         .then(({ data }) => {
           var array = [];
@@ -358,7 +361,7 @@ app.get("/getFeaturedRecipes", (req, res) => {
       var queryString = `&ids=${recipeIdString}`;
       axios
         .get(
-          `https://api.spoonacular.com/recipes/informationBulk?includeNutrition=true&apiKey=93ee5206be4141f4a761b7f459af4c69&sortDirection=desc${queryString}`
+          `https://api.spoonacular.com/recipes/informationBulk?includeNutrition=true&apiKey=402d8dc72e674fc39e43fbd4ecbd0e8e&sortDirection=desc${queryString}`
         )
         .then(({ data }) => {
           var object = {

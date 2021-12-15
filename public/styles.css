@@ -7,8 +7,8 @@
 
 #title {
   font-family: "Josefin Sans";
-  height: 80%;
-  width: auto;
+  height: auto;
+  width: 30%;
   margin-right: auto;
   color: white;
 }
@@ -315,20 +315,30 @@ color: black;
   */
 
 #fridge {
-  z-index: -3;
-  width: 700px;
-  height: 700px;
+  width: 150%;
+  justify-content: center;
+  background-image: url('./images/fridge.svg');
+  height: inherit;
+  background-size: cover;
+  margin-left: 150px
 }
 
 .user-ingredients {
+  margin-top: 100px;
+  margin-left: auto;
+  margin-right: auto;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
   grid-template-rows: 2fr;
+  justify-items: stretch;
+  width: 40%;
+  grid-gap: 20px;
+  font-weight: bold
 }
 
 .ingredients-list {
   grid-row-start: 2;
-  grid-column-start: 2;
+  grid-column-start: 1;
 }
 
 .saved-notes {
@@ -337,17 +347,57 @@ color: black;
   background-size: cover;
   background-color: violet;
   padding: 5px;
-  grid-column-start: 3;
+  grid-column-start: 2;
+  grid-row-start: 2;
+  width: 100%
 }
 
 .one-ingredient {
-  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding-right: 80px
 }
 
 .remove-ing-button {
-  border-radius: 15px;
-  background-color: #4fbaba;
+  border-radius: 50%;
+  border: none;
+  background-color: rgb(230, 230, 230);
+  color: #4fbaba;
+  font-weight: bolder;
+  padding: 3px;
+  font-size: large;
 }
+
+.add-note-button {
+  border-radius: 50%;
+  border: none;
+  background-color: rgb(230, 230, 230);
+  color: #4fbaba;
+  font-weight: bolder;
+  padding: 3px;
+  font-size: large;
+}
+
+.add-ing-button {
+  border-radius: 50%;
+  border: none;
+  background-color: rgb(230, 230, 230);
+  color: #4fbaba;
+  font-weight: bolder;
+  padding: 3px;
+  font-size: large;
+}
+
+.remove-notes {
+  border-radius: 50%;
+  border: none;
+  background-color: rgb(230, 230, 230);
+  color: #4fbaba;
+  font-weight: bolder;
+  padding: 3px;
+  font-size: large;
+}
+
 
 /*---------------------------------------------
                   PROFILE PAGE

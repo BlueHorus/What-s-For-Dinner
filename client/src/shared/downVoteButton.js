@@ -5,23 +5,16 @@ import ThumbDownIcon from '@mui/icons-material/ThumbDown';
 import Tooltip from '@mui/material/Tooltip';
 
 const DownVoteButton = (props) => {
-  if (props.user === null) {
-    return (
-
-      <IconButton id='downvote-button'  disabled>
-        <ThumbDownIcon/>
-      </IconButton>
-      )
-  } else {
   return (
     <Tooltip title="Downvote">
       <IconButton id='downvote-button' size='large' onClick={() => {
         props.handleButtonPress(props.recipe.id)
       }}>
-        <ThumbDownIcon />
+        <ThumbDownIcon id='downvote-button' style={{width: '20px', height: '20px'}} onClick={() => {
+        props.handleButtonPress(props.recipe.id)
+      }}/>
       </IconButton>
     </Tooltip>
     )
-  }
 }
 export default DownVoteButton
