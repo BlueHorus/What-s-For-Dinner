@@ -23,9 +23,7 @@ admin.initializeApp({
 var i = i || 0;
 
 async function verifyToken(req, res, next) {
-  console.log(req);
   var idToken = req.headers.authorization;
-  console.log("look at this one", idToken);
   admin
     .auth()
     .verifyIdToken(idToken)
@@ -34,7 +32,6 @@ async function verifyToken(req, res, next) {
       return next();
     })
     .catch((e) => {
-      console.log(e);
       return res.status(401).send("You are not authorized!");
     });
 }
