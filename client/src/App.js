@@ -31,7 +31,7 @@ class Main extends React.Component {
     super();
     this.state = {
       id: "landing",
-      user: sampleUser,
+      user: null,
       login: false,
       token: "",
       authenticated: false,
@@ -66,17 +66,20 @@ class Main extends React.Component {
     });
   }
 
-  getUser() {
-    axios
-      .get("/getUserInfo", {
-        headers: {
-          Authorization: this.state.token,
-        },
-      })
-      .then((data) => {
-        this.setInitialData(data.data);
-      });
-  }
+  // getUser() {
+  //   axios
+  //     .get("/getUserInfo", {
+  //       headers: {
+  //         Authorization: this.state.token,
+  //       },
+  //     })
+  //     .then((data) => {
+  //       let config = {
+  //         method: 'get',
+  //         url:
+  //       }
+  //     });
+  // }
 
   setInitialData(obj) {
     this.setState({
@@ -90,82 +93,60 @@ class Main extends React.Component {
     this.setState({ id: value });
   }
 
+
   addFavorite(recipeId) {
     let config = {
       method: "put",
       url: "/updateFavorites",
       data: {
         recipeId: recipeId,
-        //  uid: this.state.user.uid,
-        token: this.state.token,
+      },
+      headers: {
+        Authorization: this.state.token,
       },
     };
 
-    axios(config).then((result) => {
-      let newFavRecipes = this.state.recipes;
-      newFavRecipes.push(recipeId);
-      this.setState({
-        user: {
-          // uid: this.state.uid,
-          //need to update this funciton
-          userName: this.state.userName,
-          profilePic: this.state.profilePic,
-          ingredients: this.state.ingredients,
-          notes: this.state.notes,
-          diet: this.state.diet,
-          intolerances: this.state.intolerances,
-          favRecipes: newFavFecipes,
-        },
-      }).catch((err) => console.log(err));
-    });
   }
 
-  handleButtonPress(recipeId) {
-    let id = recipeId.toString();
-    switch (event.target.className) {
-      case "upvote-button":
-        console.log("test upvote");
-        (() => {
-          let config = {
-            method: "put",
-            url: "/updateUpvote",
-            data: {
-              recipeId: id,
-            },
-          };
-          axios(config);
-        })();
-        break;
+
+
+    handleButtonPress(recipeId) {
+      let Id = recipeId.toString();
+      switch (event.target.id) {
+        case 'upvote-button':
+          (() => {
+            let config = {
+              method: "put",
+              url: "/updateUpvote",
+              data: {
+                recipeId: Id
+              },
+              headers: {
+                Authorization: this.state.token
+              }
+            }
+            axios(config)
+          })();
+          break;
+
+      break;
       case "downvote-button":
         (() => {
-          console.log("test downvote");
           let config = {
             method: "put",
             url: "/updateDownvote",
             data: {
-              recipeId: id,
+              recipeId: Id
             },
-          };
-          axios(config);
-        })();
-        break;
-      case "update-diet":
-        (() => {
-          console.log("test updating diet: ", recipeId);
-          let config = {
             headers: {
-              Authorization: this.state.token,
-            },
-            method: "put",
-            url: "/updateDiet",
-            data: recipeId,
-          };
-          axios(config);
+              Authorization: this.state.token
+            }
+          }
+          axios(config)
         })();
         break;
       case "update-intolerances":
         (() => {
-          console.log("test updating intolerances: ", recipeId);
           let config = {
             headers: {
               Authorization: this.state.token,
@@ -179,7 +160,6 @@ class Main extends React.Component {
         break;
       case "url-form":
         (() => {
-          console.log("test updating profile pic: ", recipeId);
           let config = {
             headers: {
               Authorization: this.state.token,
@@ -193,7 +173,6 @@ class Main extends React.Component {
         break;
       case "username-form":
         (() => {
-          console.log("test updating username: ", recipeId);
           let config = {
             headers: {
               Authorization: this.state.token,
@@ -205,10 +184,45 @@ class Main extends React.Component {
           axios(config);
         })();
         break;
-      default:
-        console.log("test default");
+      case 'favorite-button':
+        console.log(this.state.user.favRecipes);
+      if (this.state.user.favRecipes.indexOf(recipeId) === -1) {
+        (() => {
+        let config = {
+          method: "post",
+          url: "/addToFavorites",
+          data: {
+            recipeId: recipeId,
+          },
+          headers: {
+            Authorization: this.state.token,
+          }
+        };
+        axios(config).then((result) => {
+          console.log('still needs to be figured out')
+        })
+        .catch((err) => console.log(err));;
+       })()
+      } else {
+        (() => {
+          let config = {
+            method: "delete",
+            url: "/removeFromFavorites",
+            data: {
+              recipeId: recipeId,
+              token: this.state.token,
+            },
+          };
+          axios(config).then((result) => {
+          })
+          .catch((err) => console.log(err));;
+         })()
+      }
+       break;
+        default: console.log('test default');
     }
   }
+
 
   //show whether user is login in or not
   getStatus(func) {
@@ -316,27 +330,6 @@ class Main extends React.Component {
     }
   }
 
-  // call this function to validate user request before going to "my recipt/ my incredient"
-  //need to comeback to test this function with funcitonal api end points
-  // getAuthentication(func) {
-  //   if (this.state.uid === "") {
-  //     console.log("Please Sign in first");
-  //   } else {
-  //     axios
-  //       .get("/authenticate", {
-  //         headers: {
-  //           Authorization: this.state.token + " " + this.state.uid,
-  //         },
-  //       })
-  //       .then((response) => {
-  //         response.data === "successfully authenticated"
-  //           ? this.setState({ authenticated: true })
-  //           : this.setState({ authenticated: false });
-  //       })
-  //       .then(func)
-  //       .catch((err) => console.log(err.message));
-  //   }
-  // }
 
   render() {
     return (
