@@ -66,6 +66,7 @@ class Main extends React.Component {
   }
 
   getUser() {
+<<<<<<< HEAD
     axios
       .get("/getUserInfo", {
         headers: {
@@ -76,6 +77,13 @@ class Main extends React.Component {
         this.setState({
           user: data.data
         })
+=======
+    axios('/getUserInfo', {
+      headers: {Authorization: this.state.token},
+    })
+      .then((data) => {
+        this.setInitialData(data.data);
+>>>>>>> 5cc25efc1623eb6157502a0e9a65d13c1d130aa4
       });
   }
 
@@ -245,11 +253,9 @@ class Main extends React.Component {
     event.preventDefault();
     const ingredient = event.target.name;
     let config = {
-      method: "put",
-      url: "/updateIngredients",
-      headers: {
-        Authorization: this.state.token,
-      },
+      method: 'put',
+      url: '/updateIngredients',
+      headers: {Authorization: this.state.token},
       data: {
         ingredients: this.state.user.ingredients,
       },
@@ -257,10 +263,13 @@ class Main extends React.Component {
 
     switch (event.target.className) {
       case "add-ingredient":
-        config.data.ingredients = this.state.user.ingredients.concat(
-          ",",
+        if (!this.state.user.ingredients) {
+          config.data.ingredients = ingredient;
+        } else {
+          config.data.ingredients = this.state.user.ingredients.concat(
+          ',',
           ingredient
-        );
+        )};
         axios(config)
           .then(() => {
             this.getUser();
@@ -268,6 +277,7 @@ class Main extends React.Component {
           .catch((err) => console.log(err));
         break;
 
+<<<<<<< HEAD
       case "remove-ing-button":
         config.data.ingredients = this.state.user.ingredients.replace(
           ingredient,
@@ -276,6 +286,13 @@ class Main extends React.Component {
         config.data.ingredients = config.data.ingredients.replace(/,{2,}/, ",");
         config.data.ingredients = config.data.ingredients.replace(/^,/, "");
         config.data.ingredients = config.data.ingredients.replace(/,$/, "");
+=======
+      case 'remove-ing-button':
+        config.data.ingredients = this.state.user.ingredients.replace(ingredient, '');
+        config.data.ingredients = config.data.ingredients.replace(/,{2,}/, ',');
+        config.data.ingredients = config.data.ingredients.replace(/^,/, '');
+        config.data.ingredients = config.data.ingredients.replace(/,$/, '');
+>>>>>>> 5cc25efc1623eb6157502a0e9a65d13c1d130aa4
         axios(config)
           .then(() => {
             this.getUser();
@@ -288,19 +305,21 @@ class Main extends React.Component {
     event.preventDefault();
     const note = event.target.name;
     let config = {
-      method: "put",
-      url: "/updateNote",
-      headers: {
-        Authorization: this.state.token,
-      },
+      method: 'put',
+      url: '/updateNote',
+      headers: {Authorization: this.state.token},
       data: {
         note: this.state.user.notes,
       },
     };
 
     switch (event.target.className) {
-      case "add-note":
-        config.data.note = this.state.user.notes.concat(", ", note.value);
+      case 'add-note':
+        if (!this.state.user.notes) {
+          config.data.note = note.value
+        } else {
+          config.data.note = this.state.user.notes.concat('\n', note.value, '\n');
+        }
         axios(config)
           .then(() => {
             this.getUser();
