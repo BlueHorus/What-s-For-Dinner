@@ -25,7 +25,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import FindRecipes from "./findRecipes/findRecipes.js";
-
+import Share from "./shared/Share.jsx";
 class Main extends React.Component {
   constructor() {
     super();
@@ -415,6 +415,7 @@ class Main extends React.Component {
             </Button>
           )}
           <Auth status={this.getStatus} login={this.state.login} />
+          <Share />
         </div>
         <React.Fragment>
           <CssBaseline />
