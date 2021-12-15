@@ -66,24 +66,11 @@ class Main extends React.Component {
   }
 
   getUser() {
-<<<<<<< HEAD
-    axios
-      .get("/getUserInfo", {
-        headers: {
-          Authorization: this.state.token,
-        },
-      })
-      .then((data) => {
-        this.setState({
-          user: data.data
-        })
-=======
     axios('/getUserInfo', {
       headers: {Authorization: this.state.token},
     })
       .then((data) => {
         this.setInitialData(data.data);
->>>>>>> 5cc25efc1623eb6157502a0e9a65d13c1d130aa4
       });
   }
 
@@ -277,22 +264,11 @@ class Main extends React.Component {
           .catch((err) => console.log(err));
         break;
 
-<<<<<<< HEAD
-      case "remove-ing-button":
-        config.data.ingredients = this.state.user.ingredients.replace(
-          ingredient,
-          ""
-        );
-        config.data.ingredients = config.data.ingredients.replace(/,{2,}/, ",");
-        config.data.ingredients = config.data.ingredients.replace(/^,/, "");
-        config.data.ingredients = config.data.ingredients.replace(/,$/, "");
-=======
       case 'remove-ing-button':
         config.data.ingredients = this.state.user.ingredients.replace(ingredient, '');
         config.data.ingredients = config.data.ingredients.replace(/,{2,}/, ',');
         config.data.ingredients = config.data.ingredients.replace(/^,/, '');
         config.data.ingredients = config.data.ingredients.replace(/,$/, '');
->>>>>>> 5cc25efc1623eb6157502a0e9a65d13c1d130aa4
         axios(config)
           .then(() => {
             this.getUser();
