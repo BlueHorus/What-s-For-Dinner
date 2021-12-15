@@ -26,7 +26,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import FindRecipes from "./findRecipes/findRecipes.js";
-
+import Share from "./shared/Share.jsx";
 class Main extends React.Component {
   constructor() {
     super();
@@ -49,6 +49,7 @@ class Main extends React.Component {
   componentDidMount() {
     //need to send verifitcation before getting user info back from the server
     this.getStatus(() => {
+      console.log("working");
       if (this.state.token != "") {
         axios
           .get("/getUserInfo", {
@@ -67,12 +68,11 @@ class Main extends React.Component {
   }
 
   getUser() {
-    axios('/getUserInfo', {
-      headers: {Authorization: this.state.token},
-    })
-      .then((data) => {
-        this.setInitialData(data.data);
-      });
+    axios("/getUserInfo", {
+      headers: { Authorization: this.state.token },
+    }).then((data) => {
+      this.setInitialData(data.data);
+    });
   }
 
   setInitialData(obj) {
@@ -85,7 +85,6 @@ class Main extends React.Component {
     var value = e.target.id;
     this.setState({ id: value });
   }
-
 
   addFavorite(recipeId) {
     let config = {
@@ -101,44 +100,41 @@ class Main extends React.Component {
         Authorization: this.state.token,
       },
     };
-
   }
 
+  handleButtonPress(recipeId) {
+    let Id = recipeId.toString();
+    switch (event.target.id) {
+      case "upvote-button":
+        (() => {
+          let config = {
+            method: "put",
+            url: "/updateUpvote",
+            data: {
+              recipeId: Id,
+            },
+            headers: {
+              Authorization: this.state.token,
+            },
+          };
+          axios(config);
+        })();
+        break;
 
-
-    handleButtonPress(recipeId) {
-      let Id = recipeId.toString();
-      switch (event.target.id) {
-        case 'upvote-button':
-          (() => {
-            let config = {
-              method: "put",
-              url: "/updateUpvote",
-              data: {
-                recipeId: Id
-              },
-              headers: {
-                Authorization: this.state.token
-              }
-            }
-            axios(config)
-          })();
-          break;
-
-      break;
+        break;
       case "downvote-button":
         (() => {
           let config = {
             method: "put",
             url: "/updateDownvote",
             data: {
-              recipeId: Id
+              recipeId: Id,
             },
             headers: {
-              Authorization: this.state.token
-            }
-          }
-          axios(config)
+              Authorization: this.state.token,
+            },
+          };
+          axios(config);
         })();
         break;
       case "update-intolerances":
@@ -180,43 +176,43 @@ class Main extends React.Component {
           axios(config);
         })();
         break;
-      case 'favorite-button':
+      case "favorite-button":
         (() => {
+          let config = {
+            method: "post",
+            url: "/addToFavorites",
+            data: {
+              recipeId: recipeId,
+            },
+            headers: {
+              Authorization: this.state.token,
+            },
+          };
+          axios(config)
+            .then((result) => {
+              this.getUser();
+            })
+            .catch((err) => console.log(err));
+        })();
+        break;
+      case "unfavorite-button":
         let config = {
-          method: "post",
-          url: "/addToFavorites",
+          method: "delete",
+          url: "/removeFromFavorites",
           data: {
             recipeId: recipeId,
           },
           headers: {
             Authorization: this.state.token,
-          }
+          },
         };
-        axios(config).then((result) => {
-          this.getUser()
-        })
-        .catch((err) => console.log(err));;
-       })();
-       break;
-       case 'unfavorite-button':
-         let config = {
-           method: 'delete',
-           url: '/removeFromFavorites',
-           data: {
-             recipeId: recipeId
-           },
-           headers: {
-            Authorization: this.state.token,
-          }
-        }
-        axios(config)
-        .then((results) => {
-          this.getUser()
-        })
-        default: null;
+        axios(config).then((results) => {
+          this.getUser();
+        });
+      default:
+        null;
     }
   }
-
 
   //show whether user is login in or not
   getStatus(func) {
@@ -244,9 +240,9 @@ class Main extends React.Component {
     event.preventDefault();
     const ingredient = event.target.name;
     let config = {
-      method: 'put',
-      url: '/updateIngredients',
-      headers: {Authorization: this.state.token},
+      method: "put",
+      url: "/updateIngredients",
+      headers: { Authorization: this.state.token },
       data: {
         ingredients: this.state.user.ingredients,
       },
@@ -258,9 +254,10 @@ class Main extends React.Component {
           config.data.ingredients = ingredient;
         } else {
           config.data.ingredients = this.state.user.ingredients.concat(
-          ',',
-          ingredient
-        )};
+            ",",
+            ingredient
+          );
+        }
         axios(config)
           .then(() => {
             this.getUser();
@@ -268,11 +265,14 @@ class Main extends React.Component {
           .catch((err) => console.log(err));
         break;
 
-      case 'remove-ing-button':
-        config.data.ingredients = this.state.user.ingredients.replace(ingredient, '');
-        config.data.ingredients = config.data.ingredients.replace(/,{2,}/, ',');
-        config.data.ingredients = config.data.ingredients.replace(/^,/, '');
-        config.data.ingredients = config.data.ingredients.replace(/,$/, '');
+      case "remove-ing-button":
+        config.data.ingredients = this.state.user.ingredients.replace(
+          ingredient,
+          ""
+        );
+        config.data.ingredients = config.data.ingredients.replace(/,{2,}/, ",");
+        config.data.ingredients = config.data.ingredients.replace(/^,/, "");
+        config.data.ingredients = config.data.ingredients.replace(/,$/, "");
         axios(config)
           .then(() => {
             this.getUser();
@@ -285,20 +285,24 @@ class Main extends React.Component {
     event.preventDefault();
     const note = event.target.name;
     let config = {
-      method: 'put',
-      url: '/updateNote',
-      headers: {Authorization: this.state.token},
+      method: "put",
+      url: "/updateNote",
+      headers: { Authorization: this.state.token },
       data: {
         note: this.state.user.notes,
       },
     };
 
     switch (event.target.className) {
-      case 'add-note':
+      case "add-note":
         if (!this.state.user.notes) {
-          config.data.note = note.value
+          config.data.note = note.value;
         } else {
-          config.data.note = this.state.user.notes.concat('\n', note.value, '\n');
+          config.data.note = this.state.user.notes.concat(
+            "\n",
+            note.value,
+            "\n"
+          );
         }
         axios(config)
           .then(() => {
@@ -318,7 +322,6 @@ class Main extends React.Component {
         break;
     }
   }
-
 
   render() {
     return (
@@ -397,6 +400,7 @@ class Main extends React.Component {
             </Button>
           )}
           <Auth status={this.getStatus} login={this.state.login} />
+          {/* <Share /> */}
         </div>
         <React.Fragment>
           <CssBaseline />
