@@ -8,7 +8,7 @@
   height: auto;
   width: 30%;
   margin-right: auto;
-  color: #000000;
+  color: white;
 }
 
 @media only screen and (max-width: 700px) {
@@ -57,8 +57,8 @@ body {
   width: 700px;
   height: 100%;
   margin-top: 2em;
-  border: solid 2px rgb(118, 118, 118);
-  background-color: #000000;
+  border: solid 2px rgb(137, 137, 137);
+  background-color: #ffffff;
 }
 
 .logo {
@@ -78,7 +78,7 @@ body {
 
 #tagline {
   font-family: "Josefin Sans";
-  color: #009cb8;
+  color: tomato;
   font-style: italic;
 }
 
@@ -93,14 +93,14 @@ body {
   display: flex;
   justify-self: flex-end;
   margin-right: 20px;
-  background-color: #1b1515;
+  background-color: #e4eaea;
   height: 40px;
   width: auto;
   align-items: center;
   text-align: center;
   font-size: 1vw;
   justify-content: center;
-  color: #ffffff;
+  color: black;
 }
 
 #my-ingredients,
@@ -110,14 +110,14 @@ body {
   display: flex;
   justify-self: flex-end;
   margin-right: 20px;
-  background-color: #1b1515;
+  background-color: #e4eaea;
   /* border-radius: 15px; */
   height: 40px;
   width: auto;
   align-items: center;
   text-align: center;
   font-size: 1vw;
-  color: #ffffff;
+  color: black;
 }
 
 #my-ingredients:disabled,
@@ -135,7 +135,7 @@ body {
 }
 
 .navigation {
-  background-color: #c62c42;
+  background-color: #39d3bd;
   height: 70px;
   width: 100vw;
   display: flex;
@@ -151,31 +151,31 @@ body {
 #upvote-button {
   height: 50px;
   width: auto;
-  background-color: rgb(25, 25, 25);
-  color: #b04545;
+  background-color: rgb(230, 230, 230);
+  color: #4fbaba;
   margin-bottom: 5px;
 }
 
 #downvote-button {
   height: 50px;
   width: auto;
-  background-color: rgb(25, 25, 25);
-  color: #b04545;
+  background-color: rgb(230, 230, 230);
+  color: #4fbaba;
   margin-bottom: 5px;
 }
 
 #favorite-button {
   height: 50px;
   width: auto;
-  background-color: rgb(25, 25, 25);
-  color: #b04545;
+  background-color: rgb(230, 230, 230);
+  color: #4fbaba;
   margin-bottom: 5px;
 }
 #unfavorite-button {
   height: 50px;
   width: auto;
-  background-color: rgb(25, 25, 25);
-  color: #b04545;
+  background-color: rgb(230, 230, 230);
+  color: #4fbaba;
   margin-bottom: 5px;
 }
 
@@ -187,9 +187,9 @@ body {
   width: 90%;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  border: solid 2px #b04545;
+  border: solid 2px #4fbaba;
   border-radius: 25px;
-  background-color: #000000;
+  background-color: white;
   padding: 5px;
   margin: 10px;
   grid-template-rows: [row1-start] 30px [row1-end];
@@ -207,15 +207,15 @@ body {
   padding: 5px;
   margin: 5px;
   height: 150px;
-  background-color: #214778;
+  background-color: burlywood;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 175px;
-  color: #5ad5d5;
+  color: brown;
 } */
 
 .add-button {
   border-radius: 15px;
-  background-color: #b04545;
+  background-color: #4fbaba;
 }
 
 .recipetitle {
@@ -227,7 +227,7 @@ body {
   font-weight: bolder;
   margin-left: 10px;
   border-radius: 10px;
-  background-color: #1b1515;
+  background-color: #e4eaea;
 }
 
 .recipelink {
@@ -266,11 +266,11 @@ body {
 }
 
 .foundingredients {
-  color: #ff7fff;
+  color: green;
 }
 
 .missingingredients {
-  color: #00ffff;
+  color: red;
 }
 
 .summary {
@@ -296,7 +296,7 @@ body {
   transform-origin: center;
   transform-box: fill-box;
   justify-content: center;
-  background: linear-gradient(0deg, rgba(221, 62, 60, 0) 0%, #c62c42 100%);
+  background: linear-gradient(0deg, rgba(34, 193, 195, 0) 0%, #39d3bd 100%);
   flex-wrap: wrap;
   flex-direction: row;
   font-size: 40px;
@@ -349,7 +349,7 @@ body {
   background-image: url("https://images.all-free-download.com/images/graphicwebp/sticky_note_pad_clip_art_12192.webp");
   background-repeat: no-repeat;
   background-size: cover;
-  background-color: #117d11;
+  background-color: violet;
   padding: 5px;
   grid-column-start: 2;
   grid-row-start: 2;
@@ -365,8 +365,8 @@ body {
 .remove-ing-button {
   border-radius: 50%;
   border: none;
-  background-color: rgb(25, 25, 25);
-  color: #b04545;
+  background-color: rgb(230, 230, 230);
+  color: #4fbaba;
   font-weight: bolder;
   padding: 3px;
   font-size: large;
@@ -375,8 +375,8 @@ body {
 .add-note-button {
   border-radius: 50%;
   border: none;
-  background-color: rgb(25, 25, 25);
-  color: #b04545;
+  background-color: rgb(230, 230, 230);
+  color: #4fbaba;
   font-weight: bolder;
   padding: 3px;
   font-size: large;
@@ -385,8 +385,8 @@ body {
 .add-ing-button {
   border-radius: 50%;
   border: none;
-  background-color: rgb(25, 25, 25);
-  color: #b04545;
+  background-color: rgb(230, 230, 230);
+  color: #4fbaba;
   font-weight: bolder;
   padding: 3px;
   font-size: large;
@@ -395,8 +395,8 @@ body {
 .remove-notes {
   border-radius: 50%;
   border: none;
-  background-color: rgb(25, 25, 25);
-  color: #b04545;
+  background-color: rgb(230, 230, 230);
+  color: #4fbaba;
   font-weight: bolder;
   padding: 3px;
   font-size: large;
@@ -408,26 +408,50 @@ body {
 
 .profile {
   width: 100%;
-  height: 70vh;
+  height: 90vh;
+  display: grid;
+  grid-template-columns: 25% 34% 34%;
+  column-gap: 3%;
+  grid-template-rows: 25% 75%;
+  padding: 5%;
+  border: solid 0.6px rgb(226, 132, 226);
 }
 
 .welcome-banner {
-  width: 100%;
-  height: 120px;
-  font-size: 38px;
+  grid-row: 1;
+  grid-column: 1 / span 3;
+  font-size: 45px;
   text-align: center;
-  padding-top: 3.5%;
+  padding-top: 3%;
+  background-color: darkcyan;
+  color: mintcream;
+  height: 70%;
 }
 
-.profile-left {
+.profile-third {
+  grid-row: 2;
+  grid-column: 1;
   float: left;
-  top: 12%;
-  width: 240px;
-  height: 100%;
   justify-content: center;
-  position: absolute;
-  margin-left: 3%;
-  display: block;
+}
+
+.diet-third {
+  grid-row: 2;
+  grid-column: 2;
+  border: 0.4px solid lightgrey;
+  border-radius: 8px;
+  align-content: center;
+  padding-top: 5%;
+}
+
+.intolerance-third {
+  grid-row: 2;
+  grid-column: 3;
+  border: 0.4px solid lightgrey;
+  border-radius: 8px;
+  align-content: center;
+  text-align: center;
+  padding-top: 4%;
 }
 
 .profile-pic-block {
@@ -435,7 +459,7 @@ body {
   height: 240px;
   justify-content: center;
   position: absolute;
-  top: 15%;
+  /* top: 15%; */
 }
 
 .profile-pic {
@@ -447,7 +471,7 @@ body {
   position: absolute;
 }
 
-.button-change-pic {
+#button-change-pic {
   position: absolute;
   top: 75%;
   left: 77%;
@@ -455,81 +479,148 @@ body {
   width: 40px;
   justify-content: center;
   border-radius: 50%;
+  background-color: white;
+  color: black;
 }
 
-.button-change-pw {
+#button-edit-profile {
   position: relative;
-  height: 35px;
-  width: 140px;
-  top: 58%;
-  justify-self: center;
+  top: 95%;
   left: 20%;
-  margin: auto;
+  height: 38px;
+  width: 160px;
+  background-color: cadetblue;
+  color: snow;
 }
 
-.button-change-name {
+#button-change-pw {
   position: relative;
-  height: 35px;
-  width: 140px;
-  top: 58%;
+  height: 38px;
+  width: 160px;
+  top: 65%;
   left: 20%;
+  background-color: cadetblue;
+  color: snow;
+}
+
+#button-change-name {
+  position: relative;
+  height: 38px;
+  width: 160px;
+  top: 63%;
+  left: 20%;
+  background-color: cadetblue;
+  color: snow;
 }
 
 .url-form {
-  position: absolute;
-  top: 49%;
-  left: 10%;
+  grid-row: 2;
+  grid-column: 1;
   margin: auto;
+  position: relative;
+  top: 58%;
+  text-align: center;
 }
 
-.profile-right {
-  float: right;
-  width: 350px;
-  height: 100%;
-  justify-content: center;
-  position: absolute;
+.username-form {
+  grid-row: 2;
+  grid-column: 1;
+  margin: auto;
+  margin-top: 3%;
+  margin-bottom: 10%;
+  position: relative;
   top: 30%;
-  left: 50%;
-  padding: auto;
+  text-align: center;
 }
 
-.diet {
-  margin-bottom: 7%;
+.password-form {
+  grid-row: 2;
+  grid-column: 1;
   margin: auto;
+  position: relative;
+  top: 30%;
+  text-align: center;
 }
 
 .intolerance-list {
-  height: auto;
-  margin-bottom: 7%;
+  font-size: 18px;
+  margin: auto;
+  text-align: center;
+  position: relative;
+  top: 5%;
 }
 
-.intolerance-tile {
-  height: 20px;
-  width: 25%;
-  margin-left: 12%;
+#intolerance-tile {
+  height: 27px;
+  width: 30%;
   padding: 1%;
+  margin: auto;
 }
 
 .intolerance {
-  padding-right: 3%;
-  float: left;
-}
-
-.button-delete-intolerance {
-  float: right;
+  margin: auto;
 }
 
 .intolerance-form {
-  margin-bottom: 6%;
+  margin: auto;
+  position: relative;
+  top: 12%;
+}
+
+#button-send-intolerances {
+  position: relative;
+  top: 15%;
+  background-color: cadetblue;
+  color: snow;
+}
+
+.diet-header {
+  margin: auto;
+  font-size: 18px;
+  text-align: center;
+  margin-bottom: 2%;
+}
+
+.diet-name {
+  color: violet;
+  font-weight: bold;
+  text-align: center;
+  font-size: 26px;
+  margin-bottom: 3%;
 }
 
 .update-diet {
   margin: auto;
   margin-bottom: 10%;
+  width: 70%;
+  align-items: center;
+}
+
+/* FIX ME! */
+.button-send-diet {
+  background-color: cadetblue;
+  color: snow;
+  border-radius: 8%;
+  border: white;
 }
 
 .btn-confirm {
   margin: auto;
+}
+
+.change-diet-text {
+  grid-row: 2;
+  grid-column: 2;
+  text-align: center;
+  width: 100%;
+}
+
+.saved-diet-notif {
+  grid-row: 2;
+  grid-column: 2;
+  text-align: center;
+  position: relative;
+  top: 2%;
 }
 
 .modal {
@@ -540,8 +631,8 @@ body {
   height: 100%;
   left: 0;
   overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(255, 255, 255);
-  background-color: rgba(255, 255, 255, 0.4);
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
   justify-content: center;
 }
 
@@ -560,10 +651,10 @@ body {
   align-content: center;
   flex-wrap: wrap;
   flex-direction: column;
-  background-color: #000000;
+  background-color: white;
   margin: 15% auto; /* 15% from the top and centered */
   padding: 20px;
-  border: 1px solid #777777;
+  border: 1px solid #888;
   width: 30%; /* Could be more or less, depending on screen size */
   height: auto;
   text-align: center;
@@ -586,7 +677,7 @@ form * {
   width: 3%;
   height: auto;
   margin: 10px;
-  background-color: #b04545;
+  background-color: #4fbaba;
 }
 
 #login-container,
@@ -598,6 +689,6 @@ form * {
 }
 
 #submit-button {
-  background-color: #b04545;
+  background-color: #4fbaba;
   margin: 10px;
 }

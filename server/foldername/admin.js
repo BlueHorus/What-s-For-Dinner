@@ -23,7 +23,9 @@ admin.initializeApp({
 //comment
 
 async function verifyToken(req, res, next) {
+  //console.log(req);
   var idToken = req.headers.authorization;
+  console.log("id Token", idToken);
   admin
     .auth()
     .verifyIdToken(idToken)
