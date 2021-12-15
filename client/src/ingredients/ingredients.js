@@ -3,20 +3,6 @@ import axios from 'axios';
 import { Card } from '@mui/material';
 import { CardContent } from '@mui/material';
 
-// add ingredient	"1. As a user, i want to upload ingredients
-// 2. As a user, i want the app to check if my input ingredient is valid
-// 3. As a user, i want to take notes for my ingredient "
-// delete ingredient	"1. As a user, i want to delete ingredients
-// 2. As a user, i want to take notes for my ingredient "
-
-// app.patch("/updateIngredients", (req, res) => {
-//   // request should contain ingredients
-//   // query database to update ingredients
-//   // send "successfully updated ingredients"
-//   res.send("updateIngredients");
-// });
-
-//receives ingredients as props?
 
 class Ingredients extends React.Component {
   constructor(props) {
