@@ -1,6 +1,7 @@
 const admin = require("firebase-admin");
 
 const dotenv = require("dotenv");
+<<<<<<< HEAD
 
 dotenv.config({
   path: "./server/.env",
@@ -8,6 +9,11 @@ dotenv.config({
 // dotenv.config({
 //   path: “./server/.env”,
 // });
+=======
+dotenv.config({
+  path: "./server/.env",
+});
+>>>>>>> 9342943b987aef66cb429201c3425643c39fa77d
 
 admin.initializeApp({
   credential: admin.credential.cert({
@@ -24,4 +30,25 @@ admin.initializeApp({
     client_x509_cert_url: process.env.FIREBASE_CLIENT_X509_CERT_URL,
   }),
 });
-module.exports = admin;
+
+//comment
+
+async function verifyToken(req, res, next) {
+  //console.log(req);
+  var idToken = req.headers.authorization;
+  console.log("id Token", idToken);
+  admin
+    .auth()
+    .verifyIdToken(idToken)
+    .then((decodedToken) => {
+      req.body.uid = decodedToken.uid;
+      return next();
+    })
+    .catch((e) => {
+      return res.status(401).send("You are not authorized!");
+    });
+}
+module.exports = {
+  admin: admin,
+  verifyToken: verifyToken,
+};

@@ -43,7 +43,7 @@ module.exports = {
   saveRecipeToUser: (uid, recipe_id) => {
     return db.users.findOneAndUpdate(
       { uid: uid },
-      { $push: { favoriteRecipes: recipe_id } },
+      { $addToSet: { favoriteRecipes: recipe_id } },
       { upsert: true }
     );
   },
