@@ -257,10 +257,13 @@ class Main extends React.Component {
 
     switch (event.target.className) {
       case "add-ingredient":
-        config.data.ingredients = this.state.user.ingredients.concat(
-          ",",
+        if (!this.state.user.ingredients) {
+          config.data.ingredients = ingredient;
+        } else {
+          config.data.ingredients = this.state.user.ingredients.concat(
+          ',',
           ingredient
-        );
+        )};
         axios(config)
           .then(() => {
             this.getUser();
@@ -296,7 +299,11 @@ class Main extends React.Component {
 
     switch (event.target.className) {
       case 'add-note':
-        config.data.note = this.state.user.notes.concat('\n', note.value, '\n');
+        if (!this.state.user.notes) {
+          config.data.note = note.value
+        } else {
+          config.data.note = this.state.user.notes.concat('\n', note.value, '\n');
+        }
         axios(config)
           .then(() => {
             this.getUser();
