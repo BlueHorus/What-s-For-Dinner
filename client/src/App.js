@@ -148,7 +148,10 @@ class Main extends React.Component {
             url: "/updateIntolerances",
             data: recipeId,
           };
-          axios(config);
+          axios(config).then(() => {
+            this.getUser();
+          })
+          .catch((err) => console.log(err));
         })();
         break;
       case "button-change-url":
@@ -162,7 +165,10 @@ class Main extends React.Component {
             url: "/updateProfilePic",
             data: recipeId,
           };
-          axios(config);
+          axios(config).then(() => {
+            this.getUser();
+          })
+          .catch((err) => console.log(err));
         })();
         break;
       case "button-send-diet":
@@ -176,7 +182,10 @@ class Main extends React.Component {
             url: "/updateDiet",
             data: recipeId,
           };
-          axios(config);
+          axios(config).then(() => {
+            this.getUser();
+          })
+          .catch((err) => console.log(err));
         })();
         break;
       case "change-username":
