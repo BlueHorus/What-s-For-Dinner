@@ -53,6 +53,17 @@ class FindRecipes extends React.Component {
     this.renderUserIntolerances = this.renderUserIntolerances.bind(this);
   }
 
+  componentDidMount() {
+    if (!this.props.user) {
+      return null
+    }
+
+    if (this.props.user.ingredients)
+    this.setState({
+      ingredients: this.props.user.ingredients
+    })
+  }
+
   renderUserIntolerances() {
     let intolerances = this.props.user.intolerances.split(',')
      return intolerances.map((intolerance) => {
@@ -79,7 +90,7 @@ class FindRecipes extends React.Component {
 
   renderUserIngredients() {
     let ingredients = this.props.user.ingredients.split(',')
-    return ingredients.map((ingredient) => {
+    return ingredients.map((ingredient, index) => {
       return (
         <ListItem id={ingredient}
         secondaryAction={
