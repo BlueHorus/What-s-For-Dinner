@@ -50,11 +50,11 @@ class Main extends React.Component {
   }
 
   darkMode() {
+    console.log('hello world inside dark world')
     let css = document.getElementById('styles')
     css.getAttribute('href') === 'styles.css' ? css.setAttribute('href', 'styles2.css') :
     css.setAttribute('href', 'styles.css')
-
-  }
+}
 
   componentDidMount() {
     //need to send verifitcation before getting user info back from the server
@@ -416,18 +416,7 @@ class Main extends React.Component {
         <React.Fragment>
           <CssBaseline />
           <Container maxWidth="lg" >
-            <Box
-              sx={{
-                background: 'linear-gradient(0deg, rgba(255, 255, 255) 70%, #39d3bd 100%)',
-                minHeight: "100vh",
-                height: "100%",
-                width: "100%",
-                marginTop: "10px",
-                alignItems: "center",
-                display: "flex",
-                flexDirection: "column",
-              }}
-            >
+            <Box id='content'>
               {this.state.id === "logo" ? (
                 <Featured
                   handleButtonPress={this.handleButtonPress}
