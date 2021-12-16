@@ -4,7 +4,7 @@ const CONFIG = require("../../db_config.js");
 // "mongodb://127.0.0.1:27017/oceanDB"
 
 let db = mongoose.connect(
-  "mongodb+srv://cluster0.lzfom.mongodb.net/oceandb?retryWrites=true&w=majority",
+  "mongodb+srv://cluster0.b88on.mongodb.net/oceandb?retryWrites=true&w=majority",
   {
     dbName: CONFIG.dbName,
     user: CONFIG.user,
@@ -17,7 +17,7 @@ let userSchema = mongoose.Schema({
   userName: { type: String },
   profilePic: { type: String },
   ingredients: { type: String },
-  favoriteRecipes: [{ type: String }],
+  favoriteRecipes: [String],
   notes: { type: String },
   diet: { type: String },
   intolerances: { type: String },

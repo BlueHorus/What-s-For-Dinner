@@ -361,7 +361,6 @@ app.get("/getFeaturedRecipes", (req, res) => {
           res.status(200).send(parsedData);
         })
         .catch((err) => {
-          console.log(err);
           res.status(500).send(err);
         });
     }
