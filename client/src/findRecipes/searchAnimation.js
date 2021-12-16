@@ -59,10 +59,10 @@ class Search extends React.Component {
   render() {
     return (
       <div style={{width: '400px', height:'400px', position: 'relative', margin:'40px', backgroundColor: 'rgb(230, 230, 230)', borderRadius: '15px'}}>
-        <Burger style={ {position: 'absolute', width: '70px', top: '25%', right: '0%', zIndex: '5'}} />
-        <Gyro style={ {position: 'absolute', width: '70px', top: '25%', right: '0%', zIndex: '5'}} />
-        <Cup style={ {position: 'absolute', width: '70px', top: '25%', right: '0%', zIndex: '5'}} />
-        <Person style={ {position: 'absolute', width: '400px', top: '0'}} />
+        <Burger style={ {position: 'absolute', width: '70px', top: '25%', right: '0%', zIndex: '1'}} />
+        <Gyro style={ {position: 'absolute', width: '70px', top: '25%', right: '0%', zIndex: '1'}} />
+        <Cup style={ {position: 'absolute', width: '70px', top: '25%', right: '0%', zIndex: '1'}} />
+        <Person style={ {position: 'absolute', width: '400px', top: '0', zIndex: '0'}} />
       </div>
     )
     }

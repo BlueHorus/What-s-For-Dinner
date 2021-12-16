@@ -54,9 +54,14 @@ class FavoriteRecipes extends React.Component {
 
   render() {
     return (
-      <div>My Recipes
+      <>
+      <div id='my-recipes-banner'>
+        My Recipes
+      </div>
+      <div>
         {this.renderView()}
       </div>
+      </>
     )
   }
 }

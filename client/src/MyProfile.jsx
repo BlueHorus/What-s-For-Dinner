@@ -275,6 +275,8 @@ class MyProfile extends React.Component {
             Please enter your new {changingUsername ? 'username' : 'password'} below.
             <br />
             Click 'Confirm' to save your changes, or 'Cancel' to exit out.
+            <br/>
+            <br/>
           </DialogContentText>
           <TextField
             autoFocus
@@ -296,9 +298,10 @@ class MyProfile extends React.Component {
     );
 
     return (
+      <>
+      <div className="welcome-banner">Welcome Back,  <b>{this.props.userInfo.userName}!</b></div>
       <div className="profile">
         {editingProfile ? profileModal : null}
-        <div className="welcome-banner">Welcome Back, <b>{this.props.userInfo.userName}!</b></div>
         <div className="profile-third">
           <div className="profile-pic-block">
             <img
@@ -444,6 +447,7 @@ class MyProfile extends React.Component {
           </Button>
         </div>
       </div>
+      </>
     );
   }
 }

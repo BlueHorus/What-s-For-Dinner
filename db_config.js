@@ -1,5 +1,5 @@
 module.exports = {
   dbName: "oceandb",
-  user: "ocean",
+  user: "blueocean",
   pass: "blue",
 };
