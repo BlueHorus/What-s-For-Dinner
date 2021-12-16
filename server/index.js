@@ -277,7 +277,7 @@ app.get("/getUsersFavorites", (req, res) => {
   // request body should include uid
   var userId = req.body.uid;
   Users.getUserById(userId).then((response) => {
-    if (response.favoriteRecipes.length < 1) {
+    if (!response) {
       res.status(400).send("User doesn't have any favorites");
     } else if (response.favoriteRecipes.length === 1) {
       var recipeIdString = response.favoriteRecipes.toString();
@@ -372,14 +372,17 @@ app.post("/createUser", (req, res) => {
   // request should include UID, profile picture url, and username
   // query database to create a new user
   // send "successfully created new user"
+  console.log("invoking create user");
   var userId = req.body.uid;
   var profilePicUrl = req.body.profilePic;
   var username = req.body.username;
+
   Users.createUser(userId, username, profilePicUrl)
     .then((response) => {
       res.status(201).send(response);
     })
     .catch((err) => {
+      console.log(err);
       res.status(500).send(err);
     });
 });
