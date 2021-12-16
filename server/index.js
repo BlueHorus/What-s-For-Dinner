@@ -277,7 +277,7 @@ app.get("/getUsersFavorites", (req, res) => {
   // request body should include uid
   var userId = req.body.uid;
   Users.getUserById(userId).then((response) => {
-    if (response.favoriteRecipes.length < 1) {
+    if (!response.favoriteRecipes.length) {
       res.status(400).send("User doesn't have any favorites");
     } else if (response.favoriteRecipes.length === 1) {
       var recipeIdString = response.favoriteRecipes.toString();
