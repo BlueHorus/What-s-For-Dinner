@@ -49,100 +49,23 @@ class FindRecipes extends React.Component {
     this.intoleranceChange = this.intoleranceChange.bind(this);
     this.dietChange = this.dietChange.bind(this);
     this.handleDietSubmit = this.handleDietSubmit.bind(this);
-    this.renderUserIngredients = this.renderUserIngredients.bind(this);
-    this.renderUserIntolerances = this.renderUserIntolerances.bind(this);
-    this.renderUserDiet = this.renderUserDiet.bind(this);
   }
 
-  renderUserDiet() {
+  componentDidMount() {
     if (!this.props.user) {
-      return null;
+      return null
     }
 
-    if (!this.props.user.diet) {
-      return null;
-  }
-  return (<ListItem id={this.props.user.diet}
-                  secondaryAction={
-                    <IconButton edge='end' onClick={() => this.handleRemoveDiet(this.props.user.diet)}>
-                      <DeleteIcon />
-                    </IconButton>
-                  }
-                  style={{
-                    backgroundColor: 'rgb(230, 230, 230)',
-                    borderRadius: '15px',
-                    margin: '10px',
-                    padding: '10px',
-                    textDecoration: 'initial'
-                  }}
-                  >
-                    <ListItemText primary={this.props.user.diet} required/>
-                  </ListItem>)
-  }
-
-  renderUserIntolerances() {
-    if (!this.props.user) {
-      return null;
-    }
-    if (!this.props.user.intolerances) {
-      return null;
-    }
-    let intolerances = this.props.user.intolerances.split(',')
-     return intolerances.map((intolerance) => {
-       return (
-        <ListItem id={intolerance}
-        secondaryAction={
-          <IconButton edge='end' onClick={() => this.handleRemoveIntolerance(intolerance)}>
-            <DeleteIcon />
-          </IconButton>
-        }
-        style={{
-          backgroundColor: 'rgb(230, 230, 230)',
-          borderRadius: '15px',
-          margin: '10px',
-          padding: '10px',
-          textDecoration: 'initial'
-        }}
-        >
-          <ListItemText primary={intolerance} required/>
-        </ListItem>
-      )
-     })
-  }
-
-  renderUserIngredients() {
-    if (!this.props.user) {
-      return null;
-    }
-    if (!this.props.user.ingredients) {
-      return null;
-    }
-    let ingredients = this.props.user.ingredients.split(',')
-    return ingredients.map((ingredient) => {
-      return (
-        <ListItem id={ingredient}
-        secondaryAction={
-          <IconButton edge='end' onClick={() => this.handleRemoveIngredient(ingredient)}>
-            <DeleteIcon />
-          </IconButton>
-        }
-        style={{
-          backgroundColor: 'rgb(230, 230, 230)',
-          borderRadius: '15px',
-          margin: '10px',
-          padding: '10px',
-          textDecoration: 'initial'
-        }}
-        >
-          <ListItemText primary={ingredient} required/>
-        </ListItem>
-      )
+    if (this.props.user.ingredients)
+    this.setState({
+      ingredients: this.props.user.ingredients ? this.props.user.ingredients.split(',') : [],
+      intolerances: this.props.user.intolerances ? this.props.user.intolerances.split(',') : [],
+      diets: this.props.user.diet ? [this.props.user.diet] : []
     })
   }
 
   onChange(event) {
-
-    if (event.target.id === 'ingredient-form') {
+   if (event.target.id === 'ingredient-form') {
       this.setState({
         ingredientForm: event.target.value
       })
@@ -219,6 +142,8 @@ class FindRecipes extends React.Component {
        url: '/getRecipesFromIngredients'
      }
 
+     console.log(config)
+
      axios(config)
      .then((data) => {
        console.log(data);
@@ -229,18 +154,29 @@ class FindRecipes extends React.Component {
      .catch((err) => console.log(err))
   }
 
-  handleRemoveIngredient(ingredient) {
-    let element = document.getElementById(`${ingredient}`)
-    element.remove();
-
+  handleRemoveIngredient(inputingredient) {
+    const { ingredients } = this.state;
+    this.setState({
+      ingredients: ingredients.filter(ingredient => {
+        return ingredient !== inputingredient;
+      })
+    })
+}
+  handleRemoveIntolerance(inputintolerance) {
+    const { intolerances } = this.state;
+    this.setState({
+      intolerances: intolerances.filter(intolerance => {
+        return intolerance !== inputintolerance;
+      })
+    })
   }
-  handleRemoveIntolerance(intolerance) {
-    let element = document.getElementById(`${intolerance}`)
-    element.remove();
-  }
-  handleRemoveDiet(diet) {
-    let element = document.getElementById(`${diet}`)
-    element.remove();
+  handleRemoveDiet(inputdiet) {
+    const { diets } = this.state;
+    this.setState({
+      diets: diets.filter(diet => {
+        return diet !== inputdiet;
+      })
+    })
   }
 
   render() {
@@ -255,7 +191,6 @@ class FindRecipes extends React.Component {
               textDecoration: 'underline'
             }}>
               Ingredients:
-            {this.renderUserIngredients()}
             {this.state.ingredients.map((ingredient) => {
               return (
                 <ListItem id={ingredient}
@@ -288,7 +223,6 @@ class FindRecipes extends React.Component {
               textDecoration: 'underline'
             }}>
               Intolerances:
-              { this.renderUserIntolerances()}
               {this.state.intolerances.map((intolerance) => {
                 return (
                   <ListItem id={intolerance}
@@ -321,7 +255,6 @@ class FindRecipes extends React.Component {
               textDecoration: 'underline'
             }}>
               Diet:
-              { this.renderUserDiet() }
               {this.state.diets.map((diet) => {
                 return (
                   <ListItem id={diet}
