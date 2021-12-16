@@ -1,43 +1,9 @@
-
-/**
- * "As a user, i want to see featured recipes:
-1. I want to see maximum three recipes
-2. i want to see the featured recipe as the most upvoted recipe"
-
-Title
-Hyperlink to recipe
-Thumbnail
-Show ingredients that you have in your ‘pantry’ in green
-Maybe eventually show ingredients you don’t have in red?
-Tags (breakfast, lunch, dinner, etc.)
-
-Recipe
-
- */
-
-//featured recipes should be handled by landing page??
-
 import React from 'react';
 import axios from 'axios';
 import Recipe from '../shared/recipecard.js'
 
 
-// data request:
-// Purpose: render the top 3 most upvoted recipes based on our user activity
-// Step 1): Query our database for the three largest upvote recipes
-// Step 2): Use returned recipe IDs from db query to send API request for those three recipes
-// Step 3): Combine each recipe's vote value with the returned recipe data from the API
-// Step 4): Send to client in format:
-//     {'votes': number,
-//       'recipe': {api results}}
-
-
-
 function Featured (props) {
-
-  // axios.get('/featuredorsomething', (req, res) => {
-  //   console.log(req)
-  // })
   return (
     <div className="featuredrecipes">
         <h3>Community favorites:</h3>
