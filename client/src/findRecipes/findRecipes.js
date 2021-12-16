@@ -142,6 +142,8 @@ class FindRecipes extends React.Component {
        url: '/getRecipesFromIngredients'
      }
 
+     console.log(config)
+
      axios(config)
      .then((data) => {
        console.log(data);
@@ -152,18 +154,29 @@ class FindRecipes extends React.Component {
      .catch((err) => console.log(err))
   }
 
-  handleRemoveIngredient(ingredient) {
-    let element = document.getElementById(`${ingredient}`)
-    element.remove();
-
+  handleRemoveIngredient(inputingredient) {
+    const { ingredients } = this.state;
+    this.setState({
+      ingredients: ingredients.filter(ingredient => {
+        return ingredient !== inputingredient;
+      })
+    })
+}
+  handleRemoveIntolerance(inputintolerance) {
+    const { intolerances } = this.state;
+    this.setState({
+      intolerances: intolerances.filter(intolerance => {
+        return intolerance !== inputintolerance;
+      })
+    })
   }
-  handleRemoveIntolerance(intolerance) {
-    let element = document.getElementById(`${intolerance}`)
-    element.remove();
-  }
-  handleRemoveDiet(diet) {
-    let element = document.getElementById(`${diet}`)
-    element.remove();
+  handleRemoveDiet(inputdiet) {
+    const { diets } = this.state;
+    this.setState({
+      diets: diets.filter(diet => {
+        return diet !== inputdiet;
+      })
+    })
   }
 
   render() {
