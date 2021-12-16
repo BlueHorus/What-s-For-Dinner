@@ -10,10 +10,9 @@ const { Aggregate } = require("mongoose");
 const port = 3000;
 
 //10b44c84b9192c1452635abd85a02bcf02482b02 key 4
-//cbcf06461ac54a15bd29e5696c16e605 key 3
+//2b1cf5ed792a45c1b500b83deabba6bc key 3
 //3a15e063e87b46579969ef7bb2d841e3 key 2
-// cbcf06461ac54a15bd29e5696c16e605 key 1
-// cbcf06461ac54a15bd29e5696c16e605
+//2b1cf5ed792a45c1b500b83deabba6bc key 1
 var unless = function (middleware, ...paths) {
   return function (req, res, next) {
     const pathCheck = paths.some((path) => path === req.path);
@@ -222,7 +221,7 @@ app.get("/getRecipesFromIngredients", (req, res) => {
   ) {
     axios
       .get(
-        `https://api.spoonacular.com/recipes/complexSearch?fillIngredients=true&sort=max-used-ingredients&addRecipeNutrition=true&apiKey=5eb864cd4c9b47b282c6ec757f5dd0b7&sortDirection=desc${ingredientsParam}${dietParam}`
+        `https://api.spoonacular.com/recipes/complexSearch?fillIngredients=true&sort=max-used-ingredients&addRecipeNutrition=true&apiKey=2b1cf5ed792a45c1b500b83deabba6bc&sortDirection=desc${ingredientsParam}${dietParam}`
       )
       .then(({ data }) => {
         var parsedData = parseResponse(data);
@@ -278,7 +277,7 @@ app.get("/getUsersFavorites", (req, res) => {
   // request body should include uid
   var userId = req.body.uid;
   Users.getUserById(userId).then((response) => {
-    if (response.favoriteRecipes.length < 1) {
+    if (!response) {
       res.status(400).send("User doesn't have any favorites");
     } else if (response.favoriteRecipes.length === 1) {
       var recipeIdString = response.favoriteRecipes.toString();
@@ -362,7 +361,6 @@ app.get("/getFeaturedRecipes", (req, res) => {
           res.status(200).send(parsedData);
         })
         .catch((err) => {
-          console.log(err);
           res.status(500).send(err);
         });
     }
@@ -373,6 +371,7 @@ app.post("/createUser", (req, res) => {
   // request should include UID, profile picture url, and username
   // query database to create a new user
   // send "successfully created new user"
+  console.log("invoking create user");
   var userId = req.body.uid;
   var profilePicUrl = req.body.profilePic;
   var username = req.body.username;
@@ -381,6 +380,7 @@ app.post("/createUser", (req, res) => {
       res.status(201).send(response);
     })
     .catch((err) => {
+      console.log(err);
       res.status(500).send(err);
     });
 });
