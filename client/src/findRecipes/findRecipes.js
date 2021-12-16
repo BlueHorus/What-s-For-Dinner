@@ -51,9 +51,42 @@ class FindRecipes extends React.Component {
     this.handleDietSubmit = this.handleDietSubmit.bind(this);
     this.renderUserIngredients = this.renderUserIngredients.bind(this);
     this.renderUserIntolerances = this.renderUserIntolerances.bind(this);
+    this.renderUserDiet = this.renderUserDiet.bind(this);
+  }
+
+  renderUserDiet() {
+    if (!this.props.user) {
+      return null;
+    }
+
+    if (!this.props.user.diet) {
+      return null;
+  }
+  return (<ListItem id={this.props.user.diet}
+                  secondaryAction={
+                    <IconButton edge='end' onClick={() => this.handleRemoveDiet(this.props.user.diet)}>
+                      <DeleteIcon />
+                    </IconButton>
+                  }
+                  style={{
+                    backgroundColor: 'rgb(230, 230, 230)',
+                    borderRadius: '15px',
+                    margin: '10px',
+                    padding: '10px',
+                    textDecoration: 'initial'
+                  }}
+                  >
+                    <ListItemText primary={this.props.user.diet} required/>
+                  </ListItem>)
   }
 
   renderUserIntolerances() {
+    if (!this.props.user) {
+      return null;
+    }
+    if (!this.props.user.intolerances) {
+      return null;
+    }
     let intolerances = this.props.user.intolerances.split(',')
      return intolerances.map((intolerance) => {
        return (
@@ -78,6 +111,12 @@ class FindRecipes extends React.Component {
   }
 
   renderUserIngredients() {
+    if (!this.props.user) {
+      return null;
+    }
+    if (!this.props.user.ingredients) {
+      return null;
+    }
     let ingredients = this.props.user.ingredients.split(',')
     return ingredients.map((ingredient) => {
       return (
@@ -216,7 +255,7 @@ class FindRecipes extends React.Component {
               textDecoration: 'underline'
             }}>
               Ingredients:
-            {this.props.user.ingredients ?  this.renderUserIngredients() : null}
+            {this.renderUserIngredients()}
             {this.state.ingredients.map((ingredient) => {
               return (
                 <ListItem id={ingredient}
@@ -249,7 +288,7 @@ class FindRecipes extends React.Component {
               textDecoration: 'underline'
             }}>
               Intolerances:
-              {this.props.user.intolerances ? this.renderUserIntolerances() : null}
+              { this.renderUserIntolerances()}
               {this.state.intolerances.map((intolerance) => {
                 return (
                   <ListItem id={intolerance}
@@ -282,25 +321,7 @@ class FindRecipes extends React.Component {
               textDecoration: 'underline'
             }}>
               Diet:
-              {
-              this.props.user.diet ? <ListItem id={this.props.user.diet}
-                  secondaryAction={
-                    <IconButton edge='end' onClick={() => this.handleRemoveDiet(this.props.user.diet)}>
-                      <DeleteIcon />
-                    </IconButton>
-                  }
-                  style={{
-                    backgroundColor: 'rgb(230, 230, 230)',
-                    borderRadius: '15px',
-                    margin: '10px',
-                    padding: '10px',
-                    textDecoration: 'initial'
-                  }}
-                  >
-                    <ListItemText primary={this.props.user.diet} required/>
-                  </ListItem> :
-                  null
-                }
+              { this.renderUserDiet() }
               {this.state.diets.map((diet) => {
                 return (
                   <ListItem id={diet}
