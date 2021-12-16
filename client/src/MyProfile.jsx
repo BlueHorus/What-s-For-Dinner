@@ -23,6 +23,12 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import TextField from '@mui/material/TextField';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
 
 
 class MyProfile extends React.Component {
@@ -42,6 +48,8 @@ class MyProfile extends React.Component {
       newPass: "",
       newUsername: "",
       editingProfile: false,
+      // FOR MODAL
+      modalValue: '',
     };
 
     this.setUserInfo = this.setUserInfo.bind(this);
@@ -60,6 +68,8 @@ class MyProfile extends React.Component {
     this.handleDietChange = this.handleDietChange.bind(this);
     this.deleteFood = this.deleteFood.bind(this);
     this.editProfile = this.editProfile.bind(this);
+    this.handleClose = this.handleClose.bind(this);
+    this.modalTextChange = this.modalTextChange.bind(this);
   }
 
   componentDidMount() {
@@ -81,6 +91,7 @@ class MyProfile extends React.Component {
       changingUsername: true,
       changingPassword: false,
       changingProfilePic: false,
+      editingProfile: true,
     })
   }
 
@@ -89,6 +100,7 @@ class MyProfile extends React.Component {
       changingPassword: true,
       changingUsername: false,
       changingProfilePic: false,
+      editingProfile: true,
     })
   }
 
@@ -214,6 +226,18 @@ class MyProfile extends React.Component {
     })
   }
 
+  handleClose() {
+    this.setState({
+      editingProfile: false,
+    })
+  }
+
+  modalTextChange(e) {
+    this.setState({
+      modalValue: e.target.value,
+    })
+  }
+
   render() {
     const {
       value,
@@ -227,7 +251,8 @@ class MyProfile extends React.Component {
       changingUsername,
       newUsername,
       newPass,
-      editingProfile
+      editingProfile,
+      modalValue
     } = this.state;
 
     const intoleranceList = [
@@ -257,9 +282,38 @@ class MyProfile extends React.Component {
       'whole30'
     ];
 
+    const profileModal = (
+      <Dialog open={editingProfile} onClose={this.handleClose}>
+        <DialogTitle>Edit Profile</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            Please enter your new {changingUsername ? 'username' : 'password'} below.
+            <br />
+            Click 'Confirm' to save your changes, or 'Cancel' to exit out.
+          </DialogContentText>
+          <TextField
+            autoFocus
+            margin="dense"
+            id="name"
+            label={changingUsername ? "Username" : "Password"}
+            type="text"
+            fullWidth
+            variant="standard"
+            value={modalValue}
+            onChange={this.modalTextChange}
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={this.handleClose}>Cancel</Button>
+          <Button onClick={this.handleClose}>Confirm</Button>
+        </DialogActions>
+      </Dialog>
+    );
+
     return (
       <div className="profile">
-        {editingProfile === true ? <EditProfile /> : null}
+        {editingProfile ? profileModal : null}
+        {/* {editingProfile === true ? <EditProfile /> : null} */}
         <div className="welcome-banner">Welcome Back, <b>{this.props.userInfo.userName}!</b></div>
         <div className="profile-third">
           <div className="profile-pic-block">
@@ -300,17 +354,10 @@ class MyProfile extends React.Component {
 
           <Button
             style={{ fontSize: '12px' }}
-            id="button-edit-profile"
-            variant='contained'
-            onClick={this.editProfile}>
-            Edit Profile
-          </Button>
-
-          <Button
-            style={{ fontSize: '12px' }}
             id="button-change-name"
             variant='contained'
-            onClick={this.handleUsernameChange}>
+            onClick={this.handleUsernameChange}
+          >
             Change Username
           </Button>
 
@@ -320,7 +367,8 @@ class MyProfile extends React.Component {
             style={{ fontSize: '12px' }}
             id="button-change-pw"
             variant='contained'
-            onClick={this.handlePasswordChange}>
+            onClick={this.handlePasswordChange}
+          >
             Change Password
           </Button>
 

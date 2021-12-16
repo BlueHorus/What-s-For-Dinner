@@ -493,7 +493,6 @@ color: black;
   margin: 0;
 }
 
-
 #button-edit-profile {
   position: relative;
   top: 95%;
@@ -508,8 +507,8 @@ color: black;
   position: relative;
   height: 38px;
   width: 160px;
-  top: 65%;
-  left: 20%;
+  top: 70%;
+  left: 18%;
   background-color: cadetblue;
   color: snow;
 }
@@ -518,8 +517,8 @@ color: black;
   position: relative;
   height: 38px;
   width: 160px;
-  top: 63%;
-  left: 20%;
+  top: 67%;
+  left: 18%;
   background-color: cadetblue;
   color: snow;
 }

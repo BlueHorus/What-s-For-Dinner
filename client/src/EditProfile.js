@@ -12,17 +12,10 @@ class EditProfile extends React.Component {
     super(props);
     this.state = {
       value: '',
-      isOpen: false,
+      isOpen: true,
     }
-    this.handleClickOpen = this.handleClickOpen.bind(this);
     this.handleClose = this.handleClose.bind(this);
   }
-
-  handleClickOpen() {
-    this.setState({
-      isOpen: true,
-    })
-  };
 
   handleClose() {
     this.setState({
@@ -34,14 +27,13 @@ class EditProfile extends React.Component {
     const { isOpen } = this.state;
     return (
       <div>
-        <Button variant="outlined" onClick={this.handleClickOpen}>
-          Open form dialog
-        </Button>
         <Dialog open={isOpen} onClose={this.handleClose}>
           <DialogTitle>Edit Profile</DialogTitle>
           <DialogContent>
             <DialogContentText>
-              Please enter your new [ WHATEVER FIELD ] below. Click 'Confirm' to save your changes, or 'Cancel' to exit out.
+              Please enter your new [ WHATEVER FIELD ] below.
+              <br />
+              Click 'Confirm' to save your changes, or 'Cancel' to exit out.
             </DialogContentText>
             <TextField
               autoFocus
