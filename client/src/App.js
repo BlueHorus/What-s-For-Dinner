@@ -28,6 +28,8 @@ import Container from "@mui/material/Container";
 import FindRecipes from "./findRecipes/findRecipes.js";
 import Share from "./shared/Share.jsx";
 import Switch from '@mui/material/Switch';
+import FormGroup from '@mui/material/FormGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
 
 class Main extends React.Component {
   constructor() {
@@ -50,10 +52,10 @@ class Main extends React.Component {
   }
 
   darkMode() {
-    console.log('hello world inside dark world')
     let css = document.getElementById('styles')
     css.getAttribute('href') === 'styles.css' ? css.setAttribute('href', 'styles2.css') :
     css.setAttribute('href', 'styles.css')
+
 }
 
   componentDidMount() {
@@ -411,8 +413,10 @@ class Main extends React.Component {
           )}
           <Auth status={this.getStatus} login={this.state.login} />
           {/* <Share /> */}
-          <Switch onChange={this.darkMode} defaultChecked/>
-        </div>
+          <FormGroup>
+             <FormControlLabel id='dark-mode-switch' control={<Switch onChange={this.darkMode} defaultChecked/>} label='DarkMode/LightMode' labelPlacement='top' />
+          </FormGroup>
+      </div>
         <React.Fragment>
           <CssBaseline />
           <Container maxWidth="lg" >
