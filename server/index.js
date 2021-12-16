@@ -33,8 +33,6 @@ app.use(
   )
 );
 
-//might have to change req.query to req.body, might not work at all who knows
-
 var parseResponse = function (response) {
   // parse response down to example object in team folder
   // return parsed response
