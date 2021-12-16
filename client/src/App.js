@@ -27,6 +27,8 @@ import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import FindRecipes from "./findRecipes/findRecipes.js";
 import Share from "./shared/Share.jsx";
+import Switch from '@mui/material/Switch';
+
 class Main extends React.Component {
   constructor() {
     super();
@@ -44,6 +46,14 @@ class Main extends React.Component {
     this.handleIngredient = this.handleIngredient.bind(this);
     // this.getUser = this.getUser.bind(this);
     this.handleNote = this.handleNote.bind(this);
+    this.darkMode = this.darkMode.bind(this);
+  }
+
+  darkMode() {
+    let css = document.getElementById('styles')
+    css.getAttribute('href') === 'styles.css' ? css.setAttribute('href', 'styles2.css') :
+    css.setAttribute('href', 'styles.css')
+
   }
 
   componentDidMount() {
@@ -401,6 +411,7 @@ class Main extends React.Component {
           )}
           <Auth status={this.getStatus} login={this.state.login} />
           {/* <Share /> */}
+          <Switch onChange={this.darkMode} defaultChecked/>
         </div>
         <React.Fragment>
           <CssBaseline />
