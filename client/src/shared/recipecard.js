@@ -57,6 +57,7 @@ function Recipe(props) {
 
   return (
     <Card
+      id='card-background'
       sx={{
         maxWidth: 900,
         margin: "15px",
@@ -70,9 +71,9 @@ function Recipe(props) {
         image={recipe.image}
         alt="Paella dish"
       />
-      <CardContent>
+      <CardContent id='card-content'>
         <CardHeader title={recipe.title} />
-        <Typography variant="body2" color="black">
+        <Typography id='card-text' variant="body2">
           {recipe.summary.replace(/<[^>]+>/g, "").slice(0, 240)}
         </Typography>
         <Typography className="recipelink">
