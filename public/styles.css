@@ -1,13 +1,13 @@
 * {
-  font-family: "Raleway";
+  font-family: “Raleway”;
   text-size-adjust: auto;
 }
 #title {
-  font-family: "Josefin Sans";
+  font-family: “Josefin Sans”;
   height: auto;
   width: 30%;
   margin-right: auto;
-  color: #000000;
+  color: white;
 }
 @media only screen and (max-width: 700px) {
   #title {
@@ -18,7 +18,7 @@
 #content-break {
   height: 5px;
   width: 80%;
-  border-top: 2px solid #7f7f7f;
+  border-top: 2px solid grey;
 }
 #root {
   display: flex;
@@ -51,8 +51,8 @@ body {
   width: 700px;
   height: 100%;
   margin-top: 2em;
-  border: solid 2px #767676;
-  background-color: #000000;
+  border: solid 2px rgb(137, 137, 137);
+  background-color: #ffffff;
 }
 .logo {
   margin-left: 20px;
@@ -68,8 +68,8 @@ body {
   padding: 5px;
 }
 #tagline {
-  font-family: "Josefin Sans";
-  color: #009cb8;
+  font-family: “Josefin Sans”;
+  color: tomato;
   font-style: italic;
 }
 #login-signup {
@@ -82,14 +82,14 @@ body {
   display: flex;
   justify-self: flex-end;
   margin-right: 20px;
-  background-color: #1b1515;
+  background-color: #e4eaea;
   height: 40px;
   width: auto;
   align-items: center;
   text-align: center;
   font-size: 1vw;
   justify-content: center;
-  color: #ffffff;
+  color: black;
 }
 #my-ingredients,
 #my-recipes,
@@ -98,20 +98,20 @@ body {
   display: flex;
   justify-self: flex-end;
   margin-right: 20px;
-  background-color: #1b1515;
+  background-color: #e4eaea;
   /* border-radius: 15px; */
   height: 40px;
   width: auto;
   align-items: center;
   text-align: center;
   font-size: 1vw;
-  color: #ffffff;
+  color: black;
 }
 #my-ingredients:disabled,
 #my-recipes:disabled,
 #profile:disabled,
 #find-recipes:disabled {
-  color: #7f7f7f;
+  color: grey;
 }
 #my-ingredients span,
 #my-recipes span,
@@ -120,7 +120,7 @@ body {
   justify-self: center;
 }
 .navigation {
-  background-color: #c62c42;
+  background-color: #39d3bd;
   height: 70px;
   width: 100vw;
   display: flex;
@@ -134,29 +134,29 @@ body {
 #upvote-button {
   height: 50px;
   width: auto;
-  background-color: #191919;
-  color: #b04545;
+  background-color: rgb(230, 230, 230);
+  color: #4fbaba;
   margin-bottom: 5px;
 }
 #downvote-button {
   height: 50px;
   width: auto;
-  background-color: #191919;
-  color: #b04545;
+  background-color: rgb(230, 230, 230);
+  color: #4fbaba;
   margin-bottom: 5px;
 }
 #favorite-button {
   height: 50px;
   width: auto;
-  background-color: #191919;
-  color: #b04545;
+  background-color: rgb(230, 230, 230);
+  color: #4fbaba;
   margin-bottom: 5px;
 }
 #unfavorite-button {
   height: 50px;
   width: auto;
-  background-color: #191919;
-  color: #b04545;
+  background-color: rgb(230, 230, 230);
+  color: #4fbaba;
   margin-bottom: 5px;
 }
 /* Recipes */
@@ -166,9 +166,9 @@ body {
   width: 90%;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  border: solid 2px #b04545;
+  border: solid 2px #4fbaba;
   border-radius: 25px;
-  background-color: #000000;
+  background-color: white;
   padding: 5px;
   margin: 10px;
   grid-template-rows: [row1-start] 30px [row1-end];
@@ -184,14 +184,14 @@ body {
   padding: 5px;
   margin: 5px;
   height: 150px;
-  background-color: #214778;
+  background-color: burlywood;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 175px;
-  color: #5ad5d5;
+  color: brown;
 } */
 .add-button {
   border-radius: 15px;
-  background-color: #b04545;
+  background-color: #4fbaba;
 }
 .recipetitle {
   grid-column-start: 2;
@@ -202,7 +202,7 @@ body {
   font-weight: bolder;
   margin-left: 10px;
   border-radius: 10px;
-  background-color: #1b1515;
+  background-color: #e4eaea;
 }
 .recipelink {
   grid-column-start: 1;
@@ -235,10 +235,10 @@ body {
   padding: 5px;
 }
 .foundingredients {
-  color: #ff7fff;
+  color: green;
 }
 .missingingredients {
-  color: #00ffff;
+  color: red;
 }
 .summary {
   grid-row-start: 2;
@@ -261,11 +261,11 @@ body {
   transform-origin: center;
   transform-box: fill-box;
   justify-content: center;
-  background: linear-gradient(0deg, #dd3e3c00 0%, #c62c42 100%);
+  background: linear-gradient(0deg, rgba(34, 193, 195, 0) 0%, #39d3bd 100%);
   flex-wrap: wrap;
   flex-direction: row;
   font-size: 40px;
-  font-family: "Josefin Sans";
+  font-family: “Josefin Sans”;
 }
 .wrp img {
   margin-left: 0;
@@ -307,7 +307,7 @@ body {
   background-image: url("https://images.all-free-download.com/images/graphicwebp/sticky_note_pad_clip_art_12192.webp");
   background-repeat: no-repeat;
   background-size: cover;
-  background-color: #117d11;
+  background-color: violet;
   padding: 5px;
   grid-column-start: 2;
   grid-row-start: 2;
@@ -321,8 +321,8 @@ body {
 .remove-ing-button {
   border-radius: 50%;
   border: none;
-  background-color: #191919;
-  color: #b04545;
+  background-color: rgb(230, 230, 230);
+  color: #4fbaba;
   font-weight: bolder;
   padding: 3px;
   font-size: large;
@@ -330,8 +330,8 @@ body {
 .add-note-button {
   border-radius: 50%;
   border: none;
-  background-color: #191919;
-  color: #b04545;
+  background-color: rgb(230, 230, 230);
+  color: #4fbaba;
   font-weight: bolder;
   padding: 3px;
   font-size: large;
@@ -339,8 +339,8 @@ body {
 .add-ing-button {
   border-radius: 50%;
   border: none;
-  background-color: #191919;
-  color: #b04545;
+  background-color: rgb(230, 230, 230);
+  color: #4fbaba;
   font-weight: bolder;
   padding: 3px;
   font-size: large;
@@ -348,8 +348,8 @@ body {
 .remove-notes {
   border-radius: 50%;
   border: none;
-  background-color: #191919;
-  color: #b04545;
+  background-color: rgb(230, 230, 230);
+  color: #4fbaba;
   font-weight: bolder;
   padding: 3px;
   font-size: large;
@@ -365,7 +365,7 @@ body {
   column-gap: 3%;
   grid-template-rows: 25% 75%;
   padding: 5%;
-  border: solid 0.6px #1d7b1d;
+  border: solid 0.6px rgb(226, 132, 226);
 }
 .welcome-banner {
   grid-row: 1;
@@ -373,8 +373,8 @@ body {
   font-size: 45px;
   text-align: center;
   padding-top: 3%;
-  background-color: #ff7474;
-  color: #0a0005;
+  background-color: darkcyan;
+  color: mintcream;
   height: 70%;
 }
 .profile-third {
@@ -386,7 +386,7 @@ body {
 .diet-third {
   grid-row: 2;
   grid-column: 2;
-  border: 0.4px solid #2c2c2c;
+  border: 0.4px solid lightgrey;
   border-radius: 8px;
   align-content: center;
   padding-top: 5%;
@@ -394,7 +394,7 @@ body {
 .intolerance-third {
   grid-row: 2;
   grid-column: 3;
-  border: 0.4px solid #2c2c2c;
+  border: 0.4px solid lightgrey;
   border-radius: 8px;
   align-content: center;
   text-align: center;
@@ -415,8 +415,7 @@ body {
   object-fit: cover;
   position: absolute;
 }
-
-  #button-change-pic {
+#button-change-pic {
   position: absolute;
   top: 75%;
   left: 77%;
@@ -424,38 +423,35 @@ body {
   width: 40px;
   justify-content: center;
   border-radius: 50%;
-  background-color: #000000;
-  color: #ffffff;
+  background-color: white;
+  color: black;
 }
-
-
-  #button-edit-profile {
+#button-edit-profile {
   position: relative;
   top: 95%;
   left: 20%;
   height: 38px;
   width: 160px;
-  background-color: #a0615f;
-  color: #000505;
+  background-color: cadetblue;
+  color: snow;
 }
-  #button-change-pw {
+#button-change-pw {
   position: relative;
   height: 38px;
   width: 160px;
   top: 65%;
   left: 20%;
-  background-color: #a0615f;
-  color: #000505;
+  background-color: cadetblue;
+  color: snow;
 }
-  HEAD
-  #button-change-name {
+#button-change-name {
   position: relative;
   height: 38px;
   width: 160px;
   top: 63%;
   left: 20%;
-  background-color: #a0615f;
-  color: #000505;
+  background-color: cadetblue;
+  color: snow;
 }
 .url-form {
   grid-row: 2;
@@ -507,8 +503,8 @@ body {
 #button-send-intolerances {
   position: relative;
   top: 15%;
-  background-color: #a0615f;
-  color: #000505;
+  background-color: cadetblue;
+  color: snow;
 }
 .diet-header {
   margin: auto;
@@ -517,7 +513,7 @@ body {
   margin-bottom: 2%;
 }
 .diet-name {
-  color: #117d11;
+  color: violet;
   font-weight: bold;
   text-align: center;
   font-size: 26px;
@@ -531,10 +527,10 @@ body {
 }
 /* FIX ME! */
 .button-send-diet {
-  background-color: #a0615f;
-  color: #000505;
+  background-color: cadetblue;
+  color: snow;
   border-radius: 8%;
-  border: #000000;
+  border: white;
 }
 .btn-confirm {
   margin: auto;
@@ -560,8 +556,8 @@ body {
   height: 100%;
   left: 0;
   overflow: auto; /* Enable scroll if needed */
-  background-color: #ffffff;
-  background-color: #ffffff66;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
   justify-content: center;
 }
 #modal-logo {
@@ -578,10 +574,10 @@ body {
   align-content: center;
   flex-wrap: wrap;
   flex-direction: column;
-  background-color: #000000;
+  background-color: white;
   margin: 15% auto; /* 15% from the top and centered */
   padding: 20px;
-  border: 1px solid #777777;
+  border: 1px solid #888;
   width: 30%; /* Could be more or less, depending on screen size */
   height: auto;
   text-align: center;
@@ -602,7 +598,7 @@ form * {
   width: 3%;
   height: auto;
   margin: 10px;
-  background-color: #b04545;
+  background-color: #4fbaba;
 }
 #login-container,
 #signup-container {
@@ -612,14 +608,6 @@ form * {
   justify-content: center;
 }
 #submit-button {
-  background-color: #b04545;
+  background-color: #4fbaba;
   margin: 10px;
-}
-
-#list-container {
-  background-color: #ffffff;
-}
-
-.toggle-password {
-  cursor: pointer;
 }
