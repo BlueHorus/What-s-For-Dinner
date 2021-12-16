@@ -55,11 +55,11 @@ class FindRecipes extends React.Component {
   }
 
   renderUserDiet() {
-    if (!this.user) {
+    if (!this.props.user) {
       return null;
     }
 
-    if (!this.user.diet) {
+    if (!this.props.user.diet) {
       return null;
   }
   return (<ListItem id={this.props.user.diet}
