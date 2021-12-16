@@ -387,6 +387,7 @@ class MyProfile extends React.Component {
               label="Diet"
               onChange={this.handleDietChange}
             >
+              <MenuItem value="">No diet</MenuItem>
               {dietsList.map(diet => {
                 return <MenuItem value={diet}>{diet}</MenuItem>
               })}
