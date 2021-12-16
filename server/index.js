@@ -361,7 +361,6 @@ app.get("/getFeaturedRecipes", (req, res) => {
           res.status(200).send(parsedData);
         })
         .catch((err) => {
-          console.log(err);
           res.status(500).send(err);
         });
     }
@@ -372,6 +371,7 @@ app.post("/createUser", (req, res) => {
   // request should include UID, profile picture url, and username
   // query database to create a new user
   // send "successfully created new user"
+  console.log(req);
   var userId = req.body.uid;
   var profilePicUrl = req.body.profilePic;
   var username = req.body.username;
@@ -380,6 +380,7 @@ app.post("/createUser", (req, res) => {
       res.status(201).send(response);
     })
     .catch((err) => {
+      console.log(err);
       res.status(500).send(err);
     });
 });
