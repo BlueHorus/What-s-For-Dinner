@@ -12,14 +12,14 @@
 Yaowarat is an e-Commerce website that deliver products to the users.
 
 ### ✨ Demo
-#### Overview
+#### Landing Page
 ![](https://i.ibb.co/1Z7SrXH/Screen-Shot-2021-11-12-at-4-42-18-PM.png)
 
-#### Related Products
+#### Find Recipes
 ![](https://i.ibb.co/ryVJzgg/Related-Products.png)
 
-#### Rating & Reviews
-![](https://i.ibb.co/QdVy7Yg/ratings-reviews.png)
+#### My Ingredients
+![]()
 
 ### 🧪 Technologies
 * Animejs
