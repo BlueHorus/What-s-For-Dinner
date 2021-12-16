@@ -425,7 +425,7 @@ body {
   border-radius: 8px;
   align-content: center;
   text-align: center;
-
+  padding-top: 11%;
 }
 .profile-pic-block {
   width: 240px;
@@ -461,39 +461,32 @@ body {
   margin: 0;
 }
 
-#button-edit-profile {
-  position: relative;
-  top: 95%;
-  left: 20%;
-  height: 38px;
-  width: 160px;
-  background-color: cadetblue;
-  color: snow;
-}
 #button-change-pw {
   position: relative;
   height: 38px;
   width: 160px;
-  top: 30%;
+  top: 295px;
   left: 18%;
   background-color: cadetblue;
   color: snow;
 }
+
 #button-change-name {
   position: relative;
   height: 38px;
   width: 160px;
-  top: 44%;
+  top: 275px;
   left: 18%;
   background-color: cadetblue;
   color: snow;
 }
+
 .url-form {
   grid-row: 2;
   grid-column: 1;
   margin: auto;
   position: relative;
-  top: 32%;
+  top: 260px;
   text-align: center;
 }
 
@@ -508,7 +501,7 @@ body {
   margin: auto;
   text-align: center;
   position: relative;
-  top: 5%;
+  /* top: 5%; */
 }
 #intolerance-tile {
   height: 27px;
@@ -535,9 +528,11 @@ body {
   top: 12%;
   min-width: 65%;
 }
+
 #button-send-intolerances {
   position: relative;
-  top: 16%;
+  top: 94px;
+  margin: auto;
   background-color: cadetblue;
   color: snow;
 }
@@ -576,7 +571,7 @@ body {
   color: snow;
   position: relative;
   left: -30%;
-  top: 16%;
+  top: 120px;
 }
 .btn-confirm {
   margin: auto;
