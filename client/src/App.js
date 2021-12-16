@@ -26,6 +26,7 @@ import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import FindRecipes from "./findRecipes/findRecipes.js";
 import Share from "./shared/Share.jsx";
+import { ContactSupportOutlined } from "@mui/icons-material";
 class Main extends React.Component {
   constructor() {
     super();
@@ -216,6 +217,7 @@ class Main extends React.Component {
   //show whether user is login in or not
   getStatus(func) {
     const auth = getAuth(app);
+    console.log("current auth is", auth);
     onAuthStateChanged(auth, (user) => {
       if (user) {
         this.setState({ login: true });
@@ -223,6 +225,7 @@ class Main extends React.Component {
           .getIdToken()
           .then((id) => {
             this.setState({ token: id });
+            console.log("id", this.state.token);
           })
           .then(func)
           .catch((err) => {
