@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 
 // Page Imorts
+import FavoriteRecipes from "./favoriteRecipes/favoriteRecipes.js";
 import Featured from "./featured/featured.js";
 import Recipe from "./shared/recipecard.js";
 import searchIcon from "./shared/SVGS/SearchIcon.svg";
@@ -450,7 +451,11 @@ class Main extends React.Component {
                 ""
               )}
               {this.state.id === "my-recipes" ? (
-                <h1>My Recipes Placeholder</h1>
+                <FavoriteRecipes
+                  user={this.state.user}
+                  token={this.state.token}
+                  handleButtonPress={this.handleButtonPress}
+                />
               ) : (
                 ""
               )}
