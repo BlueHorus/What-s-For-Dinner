@@ -137,7 +137,8 @@ class Main extends React.Component {
           axios(config);
         })();
         break;
-      case "update-intolerances":
+      case "button-send-intolerances":
+        console.log('testing intolerances! ', recipeId);
         (() => {
           let config = {
             headers: {
@@ -147,11 +148,15 @@ class Main extends React.Component {
             url: "/updateIntolerances",
             data: recipeId,
           };
-          axios(config);
+          axios(config).then(() => {
+            this.getUser();
+          })
+          .catch((err) => console.log(err));;
         })();
         break;
-      case "url-form":
+      case "button-change-url":
         (() => {
+          console.log('testing profile pic URL! ', recipeId);
           let config = {
             headers: {
               Authorization: this.state.token,
@@ -160,10 +165,31 @@ class Main extends React.Component {
             url: "/updateProfilePic",
             data: recipeId,
           };
-          axios(config);
+          axios(config).then(() => {
+            this.getUser();
+          })
+          .catch((err) => console.log(err));
         })();
         break;
-      case "username-form":
+      case "button-send-diet":
+        (() => {
+          console.log('testing change DIET! ', recipeId);
+          let config = {
+            headers: {
+              Authorization: this.state.token,
+            },
+            method: "put",
+            url: "/updateDiet",
+            data: recipeId,
+          };
+          axios(config).then(() => {
+            this.getUser();
+          })
+          .catch((err) => console.log(err));
+        })();
+        break;
+      case "change-username":
+        console.log('testing update username!! ', recipeId);
         (() => {
           let config = {
             headers: {
@@ -173,7 +199,10 @@ class Main extends React.Component {
             url: "/updateUsername",
             data: recipeId,
           };
-          axios(config);
+          axios(config).then(() => {
+            this.getUser();
+          })
+          .catch((err) => console.log(err));
         })();
         break;
       case "favorite-button":
