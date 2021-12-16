@@ -27,7 +27,7 @@ import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import FindRecipes from "./findRecipes/findRecipes.js";
 import Share from "./shared/Share.jsx";
-import Switch from '@mui/material/Switch';
+import Switch from "@mui/material/Switch";
 
 class Main extends React.Component {
   constructor() {
@@ -50,11 +50,12 @@ class Main extends React.Component {
   }
 
   darkMode() {
-    console.log('hello world inside dark world')
-    let css = document.getElementById('styles')
-    css.getAttribute('href') === 'styles.css' ? css.setAttribute('href', 'styles2.css') :
-    css.setAttribute('href', 'styles.css')
-}
+    console.log("hello world inside dark world");
+    let css = document.getElementById("styles");
+    css.getAttribute("href") === "styles.css"
+      ? css.setAttribute("href", "styles2.css")
+      : css.setAttribute("href", "styles.css");
+  }
 
   componentDidMount() {
     //need to send verifitcation before getting user info back from the server
@@ -148,7 +149,7 @@ class Main extends React.Component {
         })();
         break;
       case "button-send-intolerances":
-        console.log('testing intolerances! ', recipeId);
+        console.log("testing intolerances! ", recipeId);
         (() => {
           let config = {
             headers: {
@@ -158,15 +159,16 @@ class Main extends React.Component {
             url: "/updateIntolerances",
             data: recipeId,
           };
-          axios(config).then(() => {
-            this.getUser();
-          })
-          .catch((err) => console.log(err));;
+          axios(config)
+            .then(() => {
+              this.getUser();
+            })
+            .catch((err) => console.log(err));
         })();
         break;
       case "button-change-url":
         (() => {
-          console.log('testing profile pic URL! ', recipeId);
+          console.log("testing profile pic URL! ", recipeId);
           let config = {
             headers: {
               Authorization: this.state.token,
@@ -175,15 +177,16 @@ class Main extends React.Component {
             url: "/updateProfilePic",
             data: recipeId,
           };
-          axios(config).then(() => {
-            this.getUser();
-          })
-          .catch((err) => console.log(err));
+          axios(config)
+            .then(() => {
+              this.getUser();
+            })
+            .catch((err) => console.log(err));
         })();
         break;
       case "button-send-diet":
         (() => {
-          console.log('testing change DIET! ', recipeId);
+          console.log("testing change DIET! ", recipeId);
           let config = {
             headers: {
               Authorization: this.state.token,
@@ -192,14 +195,15 @@ class Main extends React.Component {
             url: "/updateDiet",
             data: recipeId,
           };
-          axios(config).then(() => {
-            this.getUser();
-          })
-          .catch((err) => console.log(err));
+          axios(config)
+            .then(() => {
+              this.getUser();
+            })
+            .catch((err) => console.log(err));
         })();
         break;
       case "change-username":
-        console.log('testing update username!! ', recipeId);
+        console.log("testing update username!! ", recipeId);
         (() => {
           let config = {
             headers: {
@@ -209,10 +213,11 @@ class Main extends React.Component {
             url: "/updateUsername",
             data: recipeId,
           };
-          axios(config).then(() => {
-            this.getUser();
-          })
-          .catch((err) => console.log(err));
+          axios(config)
+            .then(() => {
+              this.getUser();
+            })
+            .catch((err) => console.log(err));
         })();
         break;
       case "favorite-button":
@@ -256,6 +261,7 @@ class Main extends React.Component {
   //show whether user is login in or not
   getStatus(func) {
     const auth = getAuth(app);
+    console.log("current auth is", auth);
     onAuthStateChanged(auth, (user) => {
       if (user) {
         this.setState({ login: true });
@@ -263,6 +269,7 @@ class Main extends React.Component {
           .getIdToken()
           .then((id) => {
             this.setState({ token: id });
+            console.log("id", this.state.token);
           })
           .then(func)
           .catch((err) => {
@@ -440,12 +447,12 @@ class Main extends React.Component {
           )}
           <Auth status={this.getStatus} login={this.state.login} />
           {/* <Share /> */}
-          <Switch onChange={this.darkMode} defaultChecked/>
+          <Switch onChange={this.darkMode} defaultChecked />
         </div>
         <React.Fragment>
           <CssBaseline />
-          <Container maxWidth="lg" >
-            <Box id='content'>
+          <Container maxWidth="lg">
+            <Box id="content">
               {this.state.id === "logo" ? (
                 <Featured
                   handleButtonPress={this.handleButtonPress}

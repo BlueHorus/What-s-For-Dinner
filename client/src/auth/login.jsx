@@ -20,7 +20,11 @@ import {
   sendPasswordResetEmail,
   reauthenticateWithCredential,
 } from "firebase/auth";
-import { LocalConvenienceStoreOutlined } from "@mui/icons-material";
+import {
+  ConstructionOutlined,
+  LocalConvenienceStoreOutlined,
+  QrCodeScannerOutlined,
+} from "@mui/icons-material";
 
 class Auth extends React.Component {
   constructor() {
@@ -121,7 +125,7 @@ class Auth extends React.Component {
 
             {
               username: this.state.username,
-              url: this.state.url,
+              profilePic: this.state.url,
             },
             {
               headers: {
@@ -171,8 +175,27 @@ class Auth extends React.Component {
     const auth = getAuth();
     signInWithPopup(auth, provider)
       .then((result) => {
+        console.log(result.user);
+        console.log(result.user.accessToken);
+        console.log(result.user.displayName);
+        axios.post(
+          "/createUser",
+
+          {
+            username: result.user.displayName,
+            profilePic: result.user.photoURL,
+          },
+          {
+            headers: {
+              Authorization: result.user.accessToken,
+            },
+          }
+        );
+      })
+      .then(() => {
         this.props.status();
       })
+
       .catch((err) => console.log(err.message));
   }
 
