@@ -270,7 +270,7 @@ class MyProfile extends React.Component {
 
     const profileModal = (
       <Dialog open={editingProfile} onClose={this.handleClose}>
-        <DialogTitle>Edit Profile {EditIcon}</DialogTitle>
+        <DialogTitle>Edit Profile</DialogTitle>
         <DialogContent>
           <DialogContentText>
             Please enter your new {changingUsername ? 'username' : 'password'} below.
