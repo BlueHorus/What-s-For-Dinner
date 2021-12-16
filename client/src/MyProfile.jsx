@@ -275,6 +275,8 @@ class MyProfile extends React.Component {
             Please enter your new {changingUsername ? 'username' : 'password'} below.
             <br />
             Click 'Confirm' to save your changes, or 'Cancel' to exit out.
+            <br/>
+            <br/>
           </DialogContentText>
           <TextField
             autoFocus
