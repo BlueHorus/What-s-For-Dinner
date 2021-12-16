@@ -28,6 +28,7 @@ import Container from "@mui/material/Container";
 import FindRecipes from "./findRecipes/findRecipes.js";
 import Share from "./shared/Share.jsx";
 import Switch from "@mui/material/Switch";
+import { ThreeSixty } from "@mui/icons-material";
 
 class Main extends React.Component {
   constructor() {
@@ -445,7 +446,11 @@ class Main extends React.Component {
               Profile
             </Button>
           )}
-          <Auth status={this.getStatus} login={this.state.login} />
+          <Auth
+            status={this.getStatus}
+            login={this.state.login}
+            view={this.viewSwitch}
+          />
           {/* <Share /> */}
           <Switch onChange={this.darkMode} defaultChecked />
         </div>
@@ -461,7 +466,7 @@ class Main extends React.Component {
               ) : (
                 ""
               )}
-              {this.state.id === "landing" ? (
+              {this.state.id === "landing" || this.state.id === "sign-out" ? (
                 <Landing
                   handleButtonPress={this.handleButtonPress}
                   user={this.state.user}

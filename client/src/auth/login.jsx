@@ -200,11 +200,12 @@ class Auth extends React.Component {
   }
 
   //sign out
-  signout() {
+  signout(e) {
     const auth = getAuth(app);
     signOut(auth)
       .then(() => {
         console.log("sign out");
+        this.props.view(e);
       })
       .catch((err) => {
         console.log(err);
