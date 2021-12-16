@@ -299,7 +299,7 @@ class MyProfile extends React.Component {
 
     return (
       <>
-      <div className="welcome-banner">Welcome Back,  <b>{this.props.userInfo.userName}!</b></div>
+      <div className="welcome-banner">Welcome Back,&nbsp;<b>{this.props.userInfo.userName}!</b></div>
       <div className="profile">
         {editingProfile ? profileModal : null}
         <div className="profile-third">
@@ -387,6 +387,7 @@ class MyProfile extends React.Component {
               label="Diet"
               onChange={this.handleDietChange}
             >
+              <MenuItem value="">No diet</MenuItem>
               {dietsList.map(diet => {
                 return <MenuItem value={diet}>{diet}</MenuItem>
               })}

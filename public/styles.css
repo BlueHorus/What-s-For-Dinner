@@ -432,7 +432,6 @@ body {
   height: 240px;
   justify-content: center;
   position: absolute;
-  /* top: 15%; */
 }
 .profile-pic {
   width: 100%;
@@ -441,6 +440,8 @@ body {
   border-radius: 50%;
   object-fit: cover;
   position: absolute;
+  box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+  border: 0.4px solid lightgrey;
 }
 #button-change-pic {
   height: 42px;
