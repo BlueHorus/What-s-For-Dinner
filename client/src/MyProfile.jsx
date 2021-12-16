@@ -1,7 +1,6 @@
 import React from "react";
 import axios from "axios";
 import defaultPic from "./shared/SVGS/profileIcon.svg";
-import EditProfile from "./EditProfile.js";
 import { app } from "../../firebase_config.js";
 import {
   getAuth,
@@ -45,8 +44,6 @@ class MyProfile extends React.Component {
       photo: "",
       changingPassword: false,
       changingUsername: false,
-      newPass: "",
-      newUsername: "",
       editingProfile: false,
       // FOR MODAL
       modalValue: '',
@@ -56,12 +53,9 @@ class MyProfile extends React.Component {
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
     this.handleURLChange = this.handleURLChange.bind(this);
-    this.changePassword = this.changePassword.bind(this);
-    this.passwordInput = this.passwordInput.bind(this);
-    this.usernameInput = this.usernameInput.bind(this);
+    this.changeProfile = this.changeProfile.bind(this);
     this.changeProfilePic = this.changeProfilePic.bind(this);
     this.uploadPic = this.uploadPic.bind(this);
-    this.uploadUsername = this.uploadUsername.bind(this);
     this.handleIntoleranceChange = this.handleIntoleranceChange.bind(this);
     this.sendIntolerances = this.sendIntolerances.bind(this);
     this.changeDiet = this.changeDiet.bind(this);
@@ -104,53 +98,44 @@ class MyProfile extends React.Component {
     })
   }
 
-  passwordInput(e) {
-    this.setState({
-      newPass: e.target.value,
-    });
-  }
-
-  usernameInput(e) {
-    this.setState({
-      newUsername: e.target.value,
-    });
-  }
-
-  uploadUsername(e) {
+  changeProfile() {
     event.preventDefault();
-    if (this.state.newUsername === '') {
-      alert('Please enter a valid username');
+    if (this.state.modalValue === '') {
+      alert(`Please enter a valid ${this.state.changingPassword ? 'password' : 'username'}`);
     } else {
+      if (this.state.changingPassword === true) {
+        const auth = getAuth(app);
+        const user = auth.currentUser;
+        updatePassword(user, this.state.modalValue)
+          .then(() => {
+            console.log('password changed!');
+          })
+          .catch(err => {
+            console.log(err);
+          });
+        this.setState({
+          changingPassword: false,
+          newPass: '',
+          modalValue: '',
+        });
+        alert('Password changed!');
+      }
+      if (this.state.changingUsername === true) {
+        this.setState({
+          changingUsername: false,
+          newUsername: '',
+        });
+        this.props.handleButtonPress({
+          newUsername: this.state.modalValue,
+        });
+        alert('Username changed!');
+      }
       this.setState({
         changingUsername: false,
-        newUsername: '',
-      });
-      this.props.handleButtonPress({
-        newUsername: this.state.newUsername,
-      });
-      alert('Username changed!');
-    }
-  }
-
-  changePassword() {
-    event.preventDefault();
-    if (this.state.newPass === '') {
-      alert('Please enter a valid password');
-    } else {
-      const auth = getAuth(app);
-      const user = auth.currentUser;
-      updatePassword(user, this.state.newPass)
-        .then(() => {
-          console.log('password changed!');
-        })
-        .catch(err => {
-          console.log(err);
-        });
-      this.setState({
         changingPassword: false,
-        newPass: '',
-      });
-      alert('Password changed!');
+        modalValue: '',
+        editingProfile: false,
+      })
     }
   }
 
@@ -305,7 +290,7 @@ class MyProfile extends React.Component {
         </DialogContent>
         <DialogActions>
           <Button onClick={this.handleClose}>Cancel</Button>
-          <Button onClick={this.handleClose}>Confirm</Button>
+          <Button id="change-username" onClick={this.changeProfile}>Confirm</Button>
         </DialogActions>
       </Dialog>
     );
@@ -313,7 +298,6 @@ class MyProfile extends React.Component {
     return (
       <div className="profile">
         {editingProfile ? profileModal : null}
-        {/* {editingProfile === true ? <EditProfile /> : null} */}
         <div className="welcome-banner">Welcome Back, <b>{this.props.userInfo.userName}!</b></div>
         <div className="profile-third">
           <div className="profile-pic-block">
@@ -337,8 +321,13 @@ class MyProfile extends React.Component {
             ? <div className="url-form">
                 Please enter new photo URL
                 <br />
-                <input
+                <TextField
+                  autoFocus
+                  margin="dense"
+                  label="Profile URL"
                   type="text"
+                  fullWidth
+                  variant="standard"
                   value={url}
                   onChange={this.handleURLChange}
                 />
@@ -371,48 +360,6 @@ class MyProfile extends React.Component {
           >
             Change Password
           </Button>
-
-          {changingUsername === true
-            ? (
-              <div className="username-form">
-                  <label>
-                    Please enter new username:
-                    <br />
-                    <input
-                      type="text"
-                      value={newUsername}
-                      onChange={this.usernameInput}
-                    />
-                  </label>
-                  <button
-                    id="change-username"
-                    onClick={this.uploadUsername}>
-                    Confirm!
-                  </button>
-                </div>
-            )
-            : null
-          }
-
-          {changingPassword === true
-            ? (
-              <div className="password-form">
-                  <label>
-                    Please enter new password:
-                    <br />
-                    <input
-                      type="text"
-                      value={newPass}
-                      onChange={this.passwordInput}
-                    />
-                  </label>
-                  <button onClick={this.changePassword}>
-                    Confirm!
-                  </button>
-                </div>
-            )
-            : null
-          }
         </div>
 
         <div className="diet-third">

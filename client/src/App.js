@@ -151,7 +151,7 @@ class Main extends React.Component {
           axios(config).then(() => {
             this.getUser();
           })
-          .catch((err) => console.log(err));
+          .catch((err) => console.log(err));;
         })();
         break;
       case "button-change-url":
