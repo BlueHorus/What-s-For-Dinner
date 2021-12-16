@@ -27,6 +27,8 @@ import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import FindRecipes from "./findRecipes/findRecipes.js";
 import Share from "./shared/Share.jsx";
+import Switch from '@mui/material/Switch';
+
 class Main extends React.Component {
   constructor() {
     super();
@@ -44,7 +46,15 @@ class Main extends React.Component {
     this.handleIngredient = this.handleIngredient.bind(this);
     // this.getUser = this.getUser.bind(this);
     this.handleNote = this.handleNote.bind(this);
+    this.darkMode = this.darkMode.bind(this);
   }
+
+  darkMode() {
+    console.log('hello world inside dark world')
+    let css = document.getElementById('styles')
+    css.getAttribute('href') === 'styles.css' ? css.setAttribute('href', 'styles2.css') :
+    css.setAttribute('href', 'styles.css')
+}
 
   componentDidMount() {
     //need to send verifitcation before getting user info back from the server
@@ -137,7 +147,8 @@ class Main extends React.Component {
           axios(config);
         })();
         break;
-      case "update-intolerances":
+      case "button-send-intolerances":
+        console.log('testing intolerances! ', recipeId);
         (() => {
           let config = {
             headers: {
@@ -147,11 +158,15 @@ class Main extends React.Component {
             url: "/updateIntolerances",
             data: recipeId,
           };
-          axios(config);
+          axios(config).then(() => {
+            this.getUser();
+          })
+          .catch((err) => console.log(err));;
         })();
         break;
-      case "url-form":
+      case "button-change-url":
         (() => {
+          console.log('testing profile pic URL! ', recipeId);
           let config = {
             headers: {
               Authorization: this.state.token,
@@ -160,10 +175,31 @@ class Main extends React.Component {
             url: "/updateProfilePic",
             data: recipeId,
           };
-          axios(config);
+          axios(config).then(() => {
+            this.getUser();
+          })
+          .catch((err) => console.log(err));
         })();
         break;
-      case "username-form":
+      case "button-send-diet":
+        (() => {
+          console.log('testing change DIET! ', recipeId);
+          let config = {
+            headers: {
+              Authorization: this.state.token,
+            },
+            method: "put",
+            url: "/updateDiet",
+            data: recipeId,
+          };
+          axios(config).then(() => {
+            this.getUser();
+          })
+          .catch((err) => console.log(err));
+        })();
+        break;
+      case "change-username":
+        console.log('testing update username!! ', recipeId);
         (() => {
           let config = {
             headers: {
@@ -173,7 +209,10 @@ class Main extends React.Component {
             url: "/updateUsername",
             data: recipeId,
           };
-          axios(config);
+          axios(config).then(() => {
+            this.getUser();
+          })
+          .catch((err) => console.log(err));
         })();
         break;
       case "favorite-button":
@@ -401,22 +440,12 @@ class Main extends React.Component {
           )}
           <Auth status={this.getStatus} login={this.state.login} />
           {/* <Share /> */}
+          <Switch onChange={this.darkMode} defaultChecked/>
         </div>
         <React.Fragment>
           <CssBaseline />
-          <Container maxWidth="lg">
-            <Box
-              sx={{
-                bgcolor: "white",
-                minHeight: "100vh",
-                height: "100%",
-                width: "100%",
-                marginTop: "10px",
-                alignItems: "center",
-                display: "flex",
-                flexDirection: "column",
-              }}
-            >
+          <Container maxWidth="lg" >
+            <Box id='content'>
               {this.state.id === "logo" ? (
                 <Featured
                   handleButtonPress={this.handleButtonPress}
