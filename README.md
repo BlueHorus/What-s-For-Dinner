@@ -1,5 +1,8 @@
+# BlueHorus Ocean
 
-# Team Yaowarat.
+This website enables users to store, track, and search recipes based on the ingredients in their own homes.
+
+
 ### Table of Contents
 1. [General Info](#🌴-General-Info)
 2. [Demo](#✨-Demo)
@@ -8,18 +11,22 @@
 5. [Contributors](#🤝-Contributors)
 
 
-### General Info
-Yaowarat is an e-Commerce website that deliver products to the users.
+### 🌴 General Info
+BlueHorus Ocean allows users to craft custom recipe lists with detailed nutrional information from Spoonacular's extensive API.  Recipe lists are curated based on the user's own household ingredients, dietary requirements, and any other personal restrictions or allergies.  The app saves a user's account information in a modern, secure cloud storage solution.
 
 ### ✨ Demo
-#### Landing Page
-![](https://i.ibb.co/1Z7SrXH/Screen-Shot-2021-11-12-at-4-42-18-PM.png)
+#### Landing page
+![](https://freeimage.host/i/landingpage.76KJRf)
 
-#### Find Recipes
-![](https://i.ibb.co/ryVJzgg/Related-Products.png)
+#### Find recipes
+![](https://freeimage.host/i/76KFx2)
 
-#### My Ingredients
-![]()
+#### My ingredients
+![](https://freeimage.host/i/76KKVS)
+
+#### My recipes
+#### My profile
+
 
 ### 🧪 Technologies
 * Animejs
@@ -43,12 +50,14 @@ $ npm install
 $ npm run react-dev
 $ npm start
 ```
-Set up a github.config.js with the following:
-
-* TOKEN (from GitHub):
-
-
-### FAQs
+* Set up a db_config.js with the following:
+```
+module.exports = {
+  dbName: "<your DB name here>",
+  user: "<your username here>",
+  pass: "<your password here>",
+};
+```
 
 
 ### 🤝 Contributors
@@ -58,4 +67,3 @@ Set up a github.config.js with the following:
 - [Darron McIntyre](https://github.com/dmcin003)
 - [James Plier](https://github.com/Jplier)
 - [Anna Yan](https://github.com/annnna02)
-
