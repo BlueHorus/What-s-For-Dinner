@@ -16,13 +16,13 @@ BlueHorus Ocean allows users to craft custom recipe lists with detailed nutriona
 
 ### ✨ Demo
 #### Landing page
-![](https://freeimage.host/i/landingpage.76KJRf)
+![](https://iili.io/76KJRf.png)
 
 #### Find recipes
-![](https://freeimage.host/i/76KFx2)
+![](https://iili.io/76KFx2.png)
 
 #### My ingredients
-![](https://freeimage.host/i/76KKVS)
+![](https://iili.io/76KKVS.png)
 
 #### My recipes
 #### My profile
