@@ -28,6 +28,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+import EditIcon from '@mui/icons-material/Edit';
 
 
 class MyProfile extends React.Component {
@@ -269,12 +270,14 @@ class MyProfile extends React.Component {
 
     const profileModal = (
       <Dialog open={editingProfile} onClose={this.handleClose}>
-        <DialogTitle>Edit Profile</DialogTitle>
+        <DialogTitle>Edit Profile {EditIcon}</DialogTitle>
         <DialogContent>
           <DialogContentText>
             Please enter your new {changingUsername ? 'username' : 'password'} below.
             <br />
             Click 'Confirm' to save your changes, or 'Cancel' to exit out.
+            <br/>
+            <br/>
           </DialogContentText>
           <TextField
             autoFocus
