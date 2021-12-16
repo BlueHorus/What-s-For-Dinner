@@ -21,7 +21,7 @@
 #content-break {
   height: 5px;
   width: 80%;
-  border-top: 2px solid grey;
+  border-top: 2px solid white;
 }
 
 #root {
@@ -34,10 +34,21 @@
 }
 
 body {
-  background-image: url("./images/Backgroundpattern.png");
+  background-image: url("./images/BackgroundpatternDark.png");
   background-size: cover;
   background-repeat: repeat;
   margin: 0;
+}
+
+#content {
+  background: linear-gradient(0deg, rgba(0, 0, 0) 70%, #c62c42 100%);
+  min-height: 100vh;
+  height: 100%;
+  width: 100%;
+  margin-top: 10px;
+  align-items: center;
+  display: flex;
+  flex-direction: column
 }
 
 .main {
@@ -78,7 +89,7 @@ body {
 
 #tagline {
   font-family: "Josefin Sans";
-  color: #009cb8;
+  color: white;
   font-style: italic;
 }
 
@@ -600,4 +611,12 @@ form * {
 #submit-button {
   background-color: #b04545;
   margin: 10px;
+}
+
+#card-content {
+  color: white;
+}
+
+#card-background {
+  background-color: black;
 }

@@ -6,6 +6,7 @@ import StarIcon from "@mui/icons-material/Star";
 
 const FavoriteButton = (props) => {
   let recipeId = props.recipe.id.toString();
+  console.log(props.user);
   if (props.user === null) {
     return (
       <IconButton
@@ -20,10 +21,22 @@ const FavoriteButton = (props) => {
       </IconButton>
     );
   }
-  if (
-    props.user.favoriteRecipes.indexOf(recipeId) === -1 ||
-    props.user.favoriteRecipes === undefined
-  ) {
+  if (props.user.favoriteRecipes === undefined) {
+    return (
+      <IconButton
+        id="favorite-button"
+        onClick={() => alert("please sign up or login to use this feature")}
+        size="large"
+      >
+        <StarOutlineIcon
+          style={{ width: "20px", height: "20px" }}
+          nClick={() => alert("please sign up or login to use this feature")}
+        />
+      </IconButton>
+    );
+  }
+
+  if (props.user.favoriteRecipes.indexOf(recipeId) === -1) {
     return (
       <Tooltip title="Add to Favorites">
         <IconButton

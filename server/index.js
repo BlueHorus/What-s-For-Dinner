@@ -376,7 +376,6 @@ app.post("/createUser", (req, res) => {
   var userId = req.body.uid;
   var profilePicUrl = req.body.profilePic;
   var username = req.body.username;
-
   Users.createUser(userId, username, profilePicUrl)
     .then((response) => {
       res.status(201).send(response);
