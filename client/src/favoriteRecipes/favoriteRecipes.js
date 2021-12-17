@@ -1,6 +1,7 @@
 import * as React from 'react'
 import Recipe from '../shared/recipecard.js'
 import axios from 'axios'
+import Fridge from './sadFridge.js'
 
 class FavoriteRecipes extends React.Component {
   constructor(props) {
@@ -34,12 +35,11 @@ class FavoriteRecipes extends React.Component {
 
   renderView() {
     if (!this.props.user) {
-      return null
+      return <Fridge width='500px' height='500px' style={{marginTop: '100px'}}/>
     }
-    if (this.state.recipes === null) {
-      return null;
+    if (this.state.recipes === null || this.state.recipes.length === 0) {
+      return <Fridge width='500px' height='500px' style={{marginTop: '100px'}}/>;
     }
-    console.log(this.state.recipes)
     return (
       <div>
         {this.state.recipes.map((recipe) => {
